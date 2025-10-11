@@ -1,3 +1,5 @@
+import btnImgAdicionar from "../assets/img/imgBtns/adicionar.png";
+
 const FormularioLinkYoutube = () => {
   return (
     <div>
@@ -8,7 +10,7 @@ const FormularioLinkYoutube = () => {
           <input type="text" className="inputLinkYoutube" name="link" />
         </div>
         <button className="buttonSubmit" type="submit">
-            <img src="../assents/img/imgBtns/adicionar.png" alt="adicionar"/>
+            <img src={btnImgAdicionar} alt="adicionar"/>
         </button>
       </form>
     </div>
