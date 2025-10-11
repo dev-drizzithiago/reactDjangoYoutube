@@ -5,13 +5,13 @@ const EventsBtns = () => {
     const [mostrarLink, setMostrarLink] = useState(false)
 
     const eventoBtn = () => {
-        setMostrarLink(true)
-    }
+       setMostrarLink(!mostrarLink);
+    };
 
     return (
         <div>
-            <button onClick={eventoBtn}>aplicar</button>     
-            {mostrarLink && <LinkBancoDados/>}       
+            <button onClick={eventoBtn}>{mostrarLink ? 'Remover' : 'Aplicar'}</button>     
+            {mostrarLink && <LinkBancoDados/>}
         </div>
     );    
 };
