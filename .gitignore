@@ -4,3 +4,4 @@
 *.pyc
 *.json
 /React/youtube/node_modules
+/React/node_modules
