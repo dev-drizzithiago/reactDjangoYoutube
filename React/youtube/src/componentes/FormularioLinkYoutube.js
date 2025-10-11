@@ -7,7 +7,9 @@ const FormularioLinkYoutube = () => {
           <label className="label labelLink" htmlFor="link">Cole o Link do Video:</label>
           <input type="text" className="inputLinkYoutube" name="link" />
         </div>
-        <button className="buttonSubmit" type="submit">Enviar</button>
+        <button className="buttonSubmit" type="submit">
+            <img src="../assents/img/imgBtns/adicionar.png" alt="adicionar"/>
+        </button>
       </form>
     </div>
   );
