@@ -1,2 +1,6 @@
 *.xml
 *.iml
+*.sqlite3
+*.pyc
+*.json
+/React/youtube/node_modules
