@@ -8,7 +8,6 @@ import LinkBancoDados from './componentes/LinkBancoDados';
 function App() {
   return (
     <div className="App">
-
       <div className='logoPrincipal'>
         <LogoYoutube />
       </div>
