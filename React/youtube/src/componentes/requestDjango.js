@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react"
+import getCookies from "./getCookies"
 
-const requestDjango = (urlDjango, payload) => {  
+const requestDjango = (urlDjango ,payload) => {
+    
     const [dado, setDados] = useState([])
-    const [carregando, setCarregando] = useState(false)
-    const urlDjango = null
+    const [carregando, setCarregando] = useState(true)
 
-    useEffect(() => {                
+    useEffect(() => {
+        const {getCookie} = getCookies('csrftoken');
+
         fetch(urlDjango, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'),
+                'X-CSRFToken': getCookie,
             },
             credentials: 'include',
             body: JSON.stringify(payload),
