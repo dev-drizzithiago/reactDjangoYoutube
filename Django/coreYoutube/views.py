@@ -11,7 +11,7 @@ def index(request):
 def requestBaseDados(request):
     if request.method == 'POST':
         dados_json = json.loads(request.body)
-
+        print(dados_json)
         return JsonResponse({
             'mensagem': 'Teste Django'
         })
