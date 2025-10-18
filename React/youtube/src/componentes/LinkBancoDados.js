@@ -1,30 +1,21 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import { useState } from "react";
+import requestDjango from "./requestDjango";
 
 const LinkBancoDados = () => {
 
-    const [meuNome] = useState([
-        {
-        'link_tube': 'https://www.google.com',
-        'autor_link': 'Phil Collins - Topic',
-        'titulo_link': 'Another Day in Paradise (2016 Remaster)',
-        'duracao': '322',
-        'miniatura': 'https://i.ytimg.com/vi/qkDVozHVeM8/sddefault.jpg'
-        }, 
+    const {dados, carregando} = requestDjango("http://localhost:8000/requestBaseDados/")
 
-        {
-        'link_tube': 'https://www.google.com',
-        'autor_link': 'Phil Collins - Topic',
-        'titulo_link': 'Another Day in Paradise (2016 Remaster)',
-        'duracao': '322',
-        'miniatura': 'https://i.ytimg.com/vi/qkDVozHVeM8/sddefault.jpg'
-        }
+    if (carregando) <p>Carregando...</p>
+
+    const [listaDados] = useState([
+        dados
     ])
 
     return (
         <div>
             <div className="divLinkYoutube">
-                {meuNome.map((item) => (
+                {listaDados.map((item) => (
                     <div><p>
                         <a href={item.link_tube} target="_blank" rel="noopener noreferrer">
                             <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" />
