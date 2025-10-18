@@ -5,3 +5,4 @@
 *.json
 /React/youtube/node_modules
 /React/node_modules
+Django/coreYoutube/migrations/__init__.py
