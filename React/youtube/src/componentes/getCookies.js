@@ -1,7 +1,6 @@
-import React from 'react'
+
 
 const getCookies = () => {
-
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -16,10 +15,6 @@ const getCookies = () => {
         }
         return cookieValue;
     }
-    
-  return (
-    <div>getCookies</div>
-  )
 }
 
-export default getCookies
+export default getCookies;
