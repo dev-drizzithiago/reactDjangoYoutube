@@ -1,13 +1,20 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from rest import api_view
+
+
+
 import json
 
 # Create your views here.
 
+@ensure_csrf_cookie
 def index(request):
     return render(request, 'index.html')
 
+@csrf_exempt
 def requestBaseDados(request):
     if request.method == 'POST':
         dados_json = json.loads(request.body)
