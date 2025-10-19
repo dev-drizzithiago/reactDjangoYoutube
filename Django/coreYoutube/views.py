@@ -1,29 +1,22 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from rest import api_view
-
-
-
 import json
 
-# Create your views here.
+from .models import DadosYoutube
 
-@ensure_csrf_cookie
 def index(request):
     return render(request, 'index.html')
 
-@csrf_exempt
 def requestBaseDados(request):
-    if request.method == 'POST':
-        dados_json = json.loads(request.body)
-        print(dados_json)
-        return JsonResponse({
-            'mensagem': 'Teste Django'
-        })
-    else:
-        return JsonResponse({
-            'mensagem': 'O method precisa ser POST',
-        })
+    print(request.method == 'POST')
+    dados_json = json.loads(request.body)
+
+    query_dados_youtube = DadosYoutube.objects.all()
+
+    return JsonResponse({
+        'mensagem': 'Teste Django',
+        'dados_retorn': query_dados_youtube,
+    })
+
 
