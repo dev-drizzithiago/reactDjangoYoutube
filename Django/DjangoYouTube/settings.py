@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-psz9i3ugl9ce1vfvim5h5j^i)pao!y^o*17$*v+v(cu1260&8x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.15.250', 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'coreYoutube',
     'corsheaders',
     'rest_framework',
 ]
@@ -55,6 +56,14 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'X-CSRFToken',
+]
+
+# Para testes
+CORS_ALLOW_ALL_ORIGINS = False
 
 
 ROOT_URLCONF = "DjangoYouTube.urls"
