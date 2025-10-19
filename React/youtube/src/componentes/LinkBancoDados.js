@@ -3,7 +3,7 @@ import useRequestDjango from "./useRequestDjango";
 
 const LinkBancoDados = () => {
     
-    const {dados, carregando} = useRequestDjango("http://localhost:3000/requestBaseDados/", {action: 'listar'})
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", {action: 'listar'})
    
     if (carregando) return <p>Carregando...</p>;
 
