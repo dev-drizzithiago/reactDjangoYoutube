@@ -3,9 +3,9 @@ import getCookies from "./getCookies"
 
 const useRequestDjango = (urlDjango, payload) => {
     const payloadString = JSON.stringify(payload)
+    console.log(payloadString)
 
-    const [dado, setDados] = useState([])
-
+    const [dados, setDados] = useState([])
     const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
@@ -17,12 +17,11 @@ const useRequestDjango = (urlDjango, payload) => {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie,
             },
-            credentials: 'include',
             body: payloadString,
         })
         .then(response => response.json())
         .then(data => {
-            setDados(data);
+            setDados(data.dados_django);
             setCarregando(false);
         })
         .catch (error => {
@@ -31,7 +30,7 @@ const useRequestDjango = (urlDjango, payload) => {
         })
     }, [urlDjango, payloadString]);
 
-    return {dado, carregando}
+    return {dados, carregando}
 }
 
 export default useRequestDjango
