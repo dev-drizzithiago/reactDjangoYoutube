@@ -3,7 +3,7 @@ import { useState } from "react";
 import useRequestDjango from "./useRequestDjango";
 
 const LinkBancoDados = () => {
-    const {dados, carregando} = <useRequestDjango urlDjango="http://localhost:8000/requestBaseDados/" payload='Listar' />
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar')
 
     if (carregando) return <p>Carregando...</p>;
 
