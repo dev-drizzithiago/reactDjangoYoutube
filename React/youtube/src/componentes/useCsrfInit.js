@@ -19,7 +19,11 @@ const useCsrfInit = () => {
         })
     })
 
-    return 0
+    return (
+    <div>
+
+    </div>
+    )
     }
 
 
