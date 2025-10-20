@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import { useEffect } from "react"
 
 const useRequesicaoTesteApi = () => {
+
     const urlDjango =" http://localhost:8000/requestBaseDados/"
+    
+    useEffect( () => {                
+        fetch(urlDjango, {
+            method: 'GET',
+            credentials: 'include',
+        })
+    }, [])
+    
+    
+
     return (
         <div>
-            useEffect(() => {                
-                    fatch(urlDjango, {
-                        method: 'GET',
-                        credentials: 'include',
-                    })                
-            }, [])
+           teste
         </div>
     )
 }
 
-export default useRequesicaoTesteApi
+export default useRequesicaoTesteApi;
