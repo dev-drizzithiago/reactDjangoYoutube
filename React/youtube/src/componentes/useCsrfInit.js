@@ -4,8 +4,7 @@ const useCsrfInit = () => {
 
     const urlDjango =" http://localhost:8000/csrf_token_view/"
     
-    useEffect(() => {             
-        
+    useEffect(()=>{
         fetch(urlDjango, {
             method: 'GET',
             credentials: 'include', // Recebe o cookies do django
@@ -17,14 +16,12 @@ const useCsrfInit = () => {
         .catch(err => {
             console.error("Erro ao obter CSRF cookie: ", err)
         
-        }), []);
+        })
+    })
 
-    return (
-        <div>
-           teste
-        </div>
-        )
+    return 0
     }
+
 
 
 export default useCsrfInit;
