@@ -8,7 +8,6 @@ const useRequestDjango = (urlDjango, payload) => {
     const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
-
         fetch(urlDjango, {
             method: 'POST',
             headers: {
@@ -16,6 +15,7 @@ const useRequestDjango = (urlDjango, payload) => {
                 'X-CSRFToken':  getCookies('csrftoken'),
             },
             body: payloadString,
+            credentials: 'include',
         })
         .then(response => response.json())
         .then(data => {
