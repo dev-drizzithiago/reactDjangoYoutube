@@ -3,19 +3,17 @@ import getCookies from "./getCookies"
 
 const useRequestDjango = (urlDjango, payload) => {
     const payloadString = JSON.stringify(payload)
-    console.log(payloadString)
 
     const [dados, setDados] = useState([])
     const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
-        const getCookie = getCookies('csrftoken');
 
         fetch(urlDjango, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie,
+                'X-CSRFToken':  getCookies('csrftoken'),
             },
             body: payloadString,
         })
