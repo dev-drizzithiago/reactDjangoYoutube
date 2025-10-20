@@ -1,6 +1,15 @@
 .App {
   text-align: center;
   background-color: #61dafb;
+
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+  width: 50%;
+  height: 45rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1px solid #000;
 }
 
 .App-logo {
@@ -58,16 +67,27 @@
   border: 2px solid #282c34;
   padding: 20px;
 }
-.imgBtn {
-  width: 60px;
-  height: 60px;
-  margin: 10px;
+  .imgBtn {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+  }
+
+.linksYoutube{  
+  border: var(--bord_teste);    
+  display: grid;  /* Estilo de grade */
+  grid-template-rows: repeat(2, 1fr); /* 4 linhas de altura igual */
+  max-height: 405px; /* altura máxima */
+  gap: 15px;  /* espaçamento entre os itens */
+  padding: 10px;  /* preenchimento interno  */
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
 }
 
-.containePrincipal{
-  display: inline-flex;
-}
-
-.viewLinksyoutube{
+.divLinkYoutube{
+  border: 2px solid black;
   display: inline-block;
+}
+.content {
+  border: 2px solid black;
+  display: grid;
 }
