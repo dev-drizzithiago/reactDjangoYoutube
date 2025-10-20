@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
+
 
 import json
 
@@ -10,7 +11,13 @@ from .models import DadosYoutube
 def index(request):
     return render(request, 'index.html')
 
-# @csrf_exempt
+@ensure_csrf_cookie
+def csrf_token_view(request):
+    return JsonResponse({
+        'mensagem': 'Token CSRF enviado',
+    })
+
+@csrf_protect
 def requestBaseDados(request):
     lista_dados_django = []
     if request.method == "POST":
@@ -34,7 +41,7 @@ def requestBaseDados(request):
             'mensagem': 'error',
         }, status=400)
 
-#@csrf_exempt
+@csrf_protect
 def requestAddLinks(request):
     if request.method == 'POST':
         dados_json = json.loads(request.body)
