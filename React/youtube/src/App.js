@@ -3,16 +3,15 @@ import './App.css';
 import LogoYoutube from './componentes/LogoYoutube'
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
-import useRequesicaoTesteApi from './componentes/useRequesicaoTesteApi';
+import useCsrfInit from './componentes/useCsrfInit';
 
 function App() {
   return (
     <div className="App">
+      useCsrfInit()
 
 
-      <useRequesicaoTesteApi />
 
-      
       <div className='logoPrincipal'>
         <LogoYoutube />
         
