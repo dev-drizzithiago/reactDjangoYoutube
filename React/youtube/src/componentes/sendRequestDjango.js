@@ -1,17 +1,17 @@
 import getCookies from "./getCookies";
 
-async function sendRequestDjango(linkSendRequest, payload) {
-    
+async function sendRequestDjango(linkSendRequest, payload) {    
     const payloadString = JSON.stringify(payload)
-    console.log(linkSendRequest, payloadString)
+    
     try {
         const response = await fetch(linkSendRequest, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookies('csrftoken'),
-            },
-            body: JSON.stringify(payloadString),
+            },            
+            body: payloadString,
+            credentials: 'include',
         });
 
         const data = await response.json();
