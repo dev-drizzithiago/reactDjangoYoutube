@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import getCookies from "./getCookies"
 
-const useRequestDjango = (urlDjango, payload) => {
-    const payloadString = JSON.stringify(payload)
+const useRequestDjango = (props) => {
+    const payloadString = JSON.stringify(props.payload)
     console.log(payloadString)
 
     const [dados, setDados] = useState([])
@@ -11,7 +11,7 @@ const useRequestDjango = (urlDjango, payload) => {
     useEffect(() => {
         const getCookie = getCookies('csrftoken');
 
-        fetch(urlDjango, {
+        fetch(props.urlDjango, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const useRequestDjango = (urlDjango, payload) => {
             console.error('Erro na requisição: ', error)
             setCarregando(false)
         })
-    }, [urlDjango, payloadString]);
+    }, [props.urlDjango, payloadString]);
 
     return {dados, carregando}
 }
