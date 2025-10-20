@@ -53,9 +53,16 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+# - Permitir que navegadores façam requisições cross-origin
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+# - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'content-type',
