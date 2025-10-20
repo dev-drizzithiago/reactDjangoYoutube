@@ -39,7 +39,6 @@ def requestBaseDados(request):
 def requestAddLinks(request):
     if request.method == 'POST':
         dados_json = json.loads(request.body)
-        print(dados_json)
 
         return JsonResponse({
             'mensagem': 'Links Salvo na Base de Dados com Sucesso.'
