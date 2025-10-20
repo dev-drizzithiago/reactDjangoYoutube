@@ -8,7 +8,7 @@ const FormularioLinkYoutube = () => {
     const useDefGravandoLink = async () => {
       const linkYoutube = refLink.current.value
 
-      const responseDados = await sendRequestDjango({urlDjango: "http://localhost:8000/requestAddLinks/", payload: {'link': linkYoutube}})
+      const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
       setDados(responseDados)
   }
 
