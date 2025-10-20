@@ -6,15 +6,17 @@ import LinkBancoDados from './componentes/LinkBancoDados';
 import useCsrfInit from './componentes/useCsrfInit';
 
 function App() {
+  {/**- Tudo fora do return (dentro da função do componente) 
+    é onde você coloca lógica, hooks, variáveis, chamadas de API, etc.
+ */}
+
+  useCsrfInit();
+  {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
+  
   return (
     <div className="App">
-      useCsrfInit()
-
-
-
       <div className='logoPrincipal'>
-        <LogoYoutube />
-        
+        <LogoYoutube />        
       </div>
 
       <div className='divPgPrincipal formsInputLink'>
