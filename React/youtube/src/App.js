@@ -18,7 +18,7 @@ function App() {
 
       <div className='containePrincipal'>
         <div className='divPgPrincipal viewLinksyoutube'>
-          <LinkBancoDados/>
+          <LinkBancoDados />
         </div>
       </div>
     </div>
