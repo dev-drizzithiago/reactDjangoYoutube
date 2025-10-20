@@ -1,12 +1,15 @@
-import { useRef } from "react";
-import useRequestDjango from "./useRequestDjango";
+import { useRef, useState } from "react";
+import sendRequestDjango from "./sendRequestDjango";
 
 const FormularioLinkYoutube = () => {
-  const refLink = useRef();
-  const useDefGravandoLink = () => {
-    const linkYoutube = refLink.current.value    
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
-    if (carregando) {<h1>carregando...</h1>}
+    const [responseDados, setDados] = useState(null)
+    const refLink = useRef();
+
+    const useDefGravandoLink = async () => {
+      const linkYoutube = refLink.current.value
+
+      const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
+      setDados(responseDados)
   }
 
   return (
