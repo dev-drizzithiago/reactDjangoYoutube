@@ -1,18 +1,16 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
+import { useState } from "react";
 import useRequestDjango from "./useRequestDjango";
 
 const LinkBancoDados = () => {
-    
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", {'action': 'listar'})
-    console.log(dados)
-
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", {'action': 'Listar Base de Dados'})
     if (carregando) return <p>Carregando...</p>;
 
     return (
         <div>
             <h1>teste</h1>   
             <div className="divLinkYoutube">              
-                {dados.map((item) => (
+                {dados.map((item, index) => (
                     <div>
                         <p>
                             <a href="/" target="_blank" rel="noopener noreferrer">
