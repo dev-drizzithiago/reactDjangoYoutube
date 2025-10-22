@@ -1,15 +1,6 @@
 .App {
   text-align: center;
   background-color: #61dafb;
-
-  display: block;
-  margin-left: auto; 
-  margin-right: auto;
-  width: 50%;
-  height: 45rem;
-  justify-content: center;
-  align-items: center;
-  margin: 1px solid #000;
 }
 
 .App-logo {
@@ -47,47 +38,3 @@
   }
 }
 
-.divLabelInput {
-  display: grid;
-}
-
-.inputText {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  width: 50%;
-  height: 10px;
-  border: none;
-  padding: 15px;
-  box-shadow: #00000062;
-  border-radius: 15px;
-}
-
-.btnLinksConteiner {
-  border: 2px solid #282c34;
-  padding: 20px;
-}
-  .imgBtn {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-  }
-
-.linksYoutube{  
-  border: var(--bord_teste);    
-  display: grid;  /* Estilo de grade */
-  grid-template-rows: repeat(2, 1fr); /* 4 linhas de altura igual */
-  max-height: 405px; /* altura máxima */
-  gap: 15px;  /* espaçamento entre os itens */
-  padding: 10px;  /* preenchimento interno  */
-  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
-}
-
-.divLinkYoutube{
-  border: 2px solid black;
-  display: inline-block;
-}
-.content {
-  border: 2px solid black;
-  display: grid;
-}
