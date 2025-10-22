@@ -1,0 +1,31 @@
+
+.returnFormsLink {
+    /*border: 1px solid black;*/
+    margin: auto;
+    width: 80%;
+    background-color: aquamarine;
+
+}
+.divBtnImgAdd {
+    margin: auto;
+    display: flex;
+    width: 50%;
+    justify-content: right;
+    border: 1px solid black;
+}
+
+.divLabelInput {
+  display: grid;
+}
+
+.inputText {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+  height: 10px;
+  border: none;
+  padding: 15px;
+  box-shadow: #00000062;
+  border-radius: 15px;
+}
