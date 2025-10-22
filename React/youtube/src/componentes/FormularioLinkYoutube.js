@@ -8,6 +8,7 @@ const FormularioLinkYoutube = () => {
     const refLink = useRef();
 
     const useDefGravandoLink = async () => {
+      console.log('Adicionando o link')
       const linkYoutube = refLink.current.value
 
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
@@ -15,8 +16,9 @@ const FormularioLinkYoutube = () => {
     }
 
     const useDefBtnLimparInput = () => {
+      console.log('Limpando o input')
       if (refLink.current) {
-        refLink.value = '';
+        refLink.current.value = '';
         setLimparForms('');
       }
     }
