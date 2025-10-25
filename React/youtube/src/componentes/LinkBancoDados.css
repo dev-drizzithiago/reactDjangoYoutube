@@ -1,6 +1,5 @@
 
 .btnLinksConteiner {
-  border: 2px solid #282c34;
   padding: 20px;
 }
   .imgBtn {
@@ -10,7 +9,6 @@
   }
 
 .linksYoutube{  
-  border: var(--bord_teste);    
   display: grid;  /* Estilo de grade */
   grid-template-rows: repeat(2, 1fr); /* 4 linhas de altura igual */
   max-height: 405px; /* altura máxima */
@@ -20,10 +18,8 @@
 }
 
 .divLinkYoutube{
-  border: 2px solid black;
   display: inline-block;
 }
 .content {
-  border: 2px solid black;
   display: grid;
 }
