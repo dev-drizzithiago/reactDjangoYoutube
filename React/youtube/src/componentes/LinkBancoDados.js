@@ -1,5 +1,4 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
-import { useState } from "react";
 import useRequestDjango from "./useRequestDjango";
 import "./LinkBancoDados.css"
 
