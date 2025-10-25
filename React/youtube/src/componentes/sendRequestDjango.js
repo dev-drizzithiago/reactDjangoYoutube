@@ -15,8 +15,6 @@ async function sendRequestDjango(linkSendRequest, payload) {
         });
 
         const data = await response.json();
-        console.log(data);
-
         return data
     } catch (error) {
         console.error("Erro ao enviar os dados para o Django.", error);
