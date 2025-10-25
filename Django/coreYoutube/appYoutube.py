@@ -114,10 +114,10 @@ class YouTubeDownload:
         try:
             dados_link.save()
             logging.info('Link salvo na base de dados com sucesso')
-            return 'Link salvo na base de dados com sucesso'
+            return True
         except Exception as error:
             logging.error(f'Não foi possível registrar o link: [{link}]')
-            return f'Dados não foram salvos: {error}'
+            return False
 
     def removendo_link_base_dados(self, id_link: int):
         """
