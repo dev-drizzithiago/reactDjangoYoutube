@@ -3,6 +3,8 @@ from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 
+from appYoutube import YouTubeDownload
+obj_app_youtube = YouTubeDownload()
 
 import json
 
@@ -13,6 +15,11 @@ def index(request):
 
 @ensure_csrf_cookie
 def csrf_token_view(request):
+    """
+    Função para enviar cookies com o csrf
+    :param request:
+    :return: Retorna um aviso para o react.
+    """
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
     })
@@ -44,12 +51,27 @@ def requestBaseDados(request):
 @csrf_protect
 def requestAddLinks(request):
     if request.method == 'POST':
-        dados_json = json.loads(request.body)
-
-        return JsonResponse({
-            'mensagem': 'Links Salvo na Base de Dados com Sucesso.'
-        })
-    else:
         return JsonResponse({
             'mensagem': 'É valido apenas POST'
         })
+    dados_json = json.loads(request.body)
+
+    link_entrada = dados_json['link']
+    response_validacao_link = obj_app_youtube.validar_link_youtube(link_entrada)
+
+    if response_validacao_link:
+        print(dados_json)
+
+        mansagem_processo = 'Links Salvo na Base de Dados com Sucesso.'
+        erro_processo = 0
+    else:
+        mansagem_processo = 'Link não é válido.'
+        erro_processo = 1
+
+
+    return JsonResponse({
+        'mensagem': mansagem_processo,
+        'erro_processo': erro_processo,
+    })
+
+
