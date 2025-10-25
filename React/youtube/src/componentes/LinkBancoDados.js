@@ -26,7 +26,9 @@ const LinkBancoDados = () => {
                         <img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink" />
                     </a>
                     </p>
-                    <h6>{item.autor_link} - {item.titulo_link}</h6>
+                    <ul>
+                        <li key={index}>{item.autor_link} - {item.titulo_link}</li>
+                    </ul>
                     </div>                                
                 ))}                
             </div>
