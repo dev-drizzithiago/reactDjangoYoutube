@@ -2,24 +2,24 @@ import { useRef, useState } from "react";
 import sendRequestDjango from "./sendRequestDjango";
 import "./FormularioLinkYoutube.css"
 const FormularioLinkYoutube = () => {
-    const [responseDados, setDados] = useState(null)
     const [btnLimparForms, setLimparForms] = useState(null)
+    const [responseAlertaDjango, setresponseAlertaDjango] = useState(null)
 
     const refLink = useRef();
 
     const useDefGravandoLink = async () => {
-      console.log('Adicionando o link')
+      
       const linkYoutube = refLink.current.value
 
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
-      setDados(responseDados)
+      setresponseAlertaDjango(responseDados.mensagem)
     }
 
     const useDefBtnLimparInput = () => {
-      console.log('Limpando o input')
       if (refLink.current) {
         refLink.current.value = '';
         setLimparForms('');
+        setresponseAlertaDjango('')
       }
     }
 
@@ -30,6 +30,11 @@ const FormularioLinkYoutube = () => {
           <label className="label labelLink" htmlFor="link">Cole o Link do Video:</label>
           <input type="text" className="inputText inputLinkYoutube" name="link" ref={refLink}/>
         </div>
+
+        <div>
+          <h3 className="mensagemAlerta">{responseAlertaDjango}</h3>
+        </div>
+        
         <div className="divBtnImgAdd">
           <img src="/img/imgBtns/adicionar.png" alt="adicionar" className="imgBtn btnAdd" onClick={useDefGravandoLink}/>
           <img src="/img/imgBtns/limpar.png" alt="adicionar" className="imgBtn btnLimpar" onClick={useDefBtnLimparInput}/>
