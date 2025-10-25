@@ -32,7 +32,7 @@ def requestBaseDados(request):
         }, status=400)
 
     dados_json = json.loads(request.body)
-    query_dados_youtube = DadosYoutube.objects.all().values()
+    query_dados_youtube = DadosYoutube.objects.all().order_by('-id_dados').values()
 
     for item in query_dados_youtube:
         lista_dados_django.append({
