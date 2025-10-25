@@ -1,6 +1,5 @@
 
 .returnFormsLink {
-    /*border: 1px solid black;*/
     margin: auto;
     width: 80%;
     background-color: aquamarine;
@@ -11,7 +10,6 @@
     display: flex;
     width: 50%;
     justify-content: right;
-    border: 1px solid black;
 }
 
 .divLabelInput {
