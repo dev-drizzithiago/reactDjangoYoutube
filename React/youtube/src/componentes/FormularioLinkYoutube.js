@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import sendRequestDjango from "./sendRequestDjango";
 import "./FormularioLinkYoutube.css"
+
+
 const FormularioLinkYoutube = () => {
     const [btnLimparForms, setLimparForms] = useState(null)
     const [responseAlertaDjango, setresponseAlertaDjango] = useState(null)
@@ -8,14 +10,19 @@ const FormularioLinkYoutube = () => {
     const refLink = useRef();
 
     const useDefGravandoLink = async () => {
-      
-      const linkYoutube = refLink.current.value
 
+      const linkYoutube = refLink.current.value
+      setLimparForms('responseDados');
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
-      setresponseAlertaDjango(responseDados.mensagem)
+      setresponseAlertaDjango(responseDados.mensagem);
+      console.log(responseDados)
+      
+      setTimeout(() => {
+          setresponseAlertaDjango('')
+        }, 15000);        
     }
 
-    const useDefBtnLimparInput = () => {
+    const useDefBtnLimparInput = () => {      
       if (refLink.current) {
         refLink.current.value = '';
         setLimparForms('');
