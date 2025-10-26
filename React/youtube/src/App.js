@@ -2,7 +2,7 @@ import './App.css';
 
 import LogoYoutube from './componentes/LogoYoutube'
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
-import useRequestDjango from './componentes/useRequestDjango';
+import LinkBancoDados from './componentes/LinkBancoDados';
 import useCsrfInit from './componentes/useCsrfInit';
 
 import { useState } from 'react';
@@ -16,7 +16,6 @@ function App() {
   useCsrfInit();
   {/** - Tudo dentro do return é JSX, ou seja, a 
     estrutura visual que será renderizada na tela.*/}
-  const linkDjangoRequest = "http://localhost:8000/requestBaseDados/" 
 
   const [responseFormulario, setResponseFormulario] = useState(0)
   return (
@@ -26,7 +25,9 @@ function App() {
       </div>
 
       <div className='containePrincipal'>
-        <useRequestDjango linkDjango={linkDjangoRequest} />
+        <div className='divPgPrincipal viewLinksyoutube'>
+          <LinkBancoDados atualizar={responseFormulario} />
+        </div>
       </div>
     </div>
   );
