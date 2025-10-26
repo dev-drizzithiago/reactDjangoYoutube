@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react"
 import getCookies from "./getCookies"
 
-const useRequestDjango = (urlDjango, payload) => {
-    const payloadString = JSON.stringify(payload)
+const useRequestDjango = (props) => {
+
+    console.log('teste')
+
+    const payloadString = JSON.stringify(props.msg)
 
     const [dados, setDados] = useState([])
     const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
-        fetch(urlDjango, {
+        fetch(props.linkDjango, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +29,7 @@ const useRequestDjango = (urlDjango, payload) => {
             console.error('Erro na requisição: ', error)
             setCarregando(false)
         })
-    }, [urlDjango, payloadString]);
+    }, [props.linkDjango, payloadString]);
 
     return {dados, carregando}
 }
