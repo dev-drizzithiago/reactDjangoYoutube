@@ -2,10 +2,9 @@
 import useRequestDjango from "./useRequestDjango";
 import "./LinkBancoDados.css"
 
-const LinkBancoDados = ({ atualizar }) => {
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizar)
+const LinkBancoDados = ({ dados }) => {
 
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+    //if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     return (
         <div>
@@ -31,7 +30,6 @@ const LinkBancoDados = ({ atualizar }) => {
                     </div>                                
                 ))}                
             </div>
-            
         </div>
     );
 };
