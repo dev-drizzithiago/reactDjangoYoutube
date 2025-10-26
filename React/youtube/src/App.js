@@ -1,11 +1,12 @@
 import './App.css';
 
-import LogoYoutube from './componentes/LogoYoutube'
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import useCsrfInit from './componentes/useCsrfInit';
 
-import { useState } from 'react';
+import { useEffect, useState} from 'react';
+
+import useRequestDjango from './componentes/useRequestDjango';
 
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) 
@@ -17,18 +18,15 @@ function App() {
   {/** - Tudo dentro do return é JSX, ou seja, a 
     estrutura visual que será renderizada na tela.*/}
 
-  const [responseFormulario, setResponseFormulario] = useState(0)
+  const [dadosRequestLinks, setDadosRequestLinks] = useState(null);
+  const linksBaseDados = "http://localhost:8000/requestBaseDados/";
+  
+  const dados = useRequestDjango(linksBaseDados, {dados: 'Listar links'})
+  setDadosRequestLinks(dados)
   return (
     <div className="App">
-      <div className='divPgPrincipal formsInputLink'>
-        <FormularioLinkYoutube  onLinkAdicionado={() => setResponseFormulario(prev => prev + 1)} />
-      </div>
-
-      <div className='containePrincipal'>
-        <div className='divPgPrincipal viewLinksyoutube'>
-          <LinkBancoDados atualizar={responseFormulario} />
-        </div>
-      </div>
+        <FormularioLinkYoutube />      
+        <LinkBancoDados dados={dadosRequestLinks}/>
     </div>
   );
 }
