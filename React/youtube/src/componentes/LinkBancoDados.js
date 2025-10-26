@@ -2,11 +2,12 @@
 import useRequestDjango from "./useRequestDjango";
 import "./LinkBancoDados.css"
 
-const LinkBancoDados = ({ atualizar }) => {
-    
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizar)
+const LinkBancoDados = ({ props }) => {
+    const dados = props.dadosLink
+    console.log(dados)
 
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+    //const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizar)
+    //if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     return (
         <div>
