@@ -18,6 +18,7 @@ function App() {
     estrutura visual que será renderizada na tela.*/}
 
   const [responseFormulario, setResponseFormulario] = useState(0)
+  console.log(responseFormulario)
   
   return (
     <div className="App">
@@ -28,6 +29,7 @@ function App() {
       <div className='containePrincipal'>
         <div className='divPgPrincipal viewLinksyoutube'>
           <LinkBancoDados atualizar={responseFormulario} />
+          {console.log(responseFormulario)}
         </div>
       </div>
     </div>
