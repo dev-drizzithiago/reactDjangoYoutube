@@ -6,7 +6,7 @@ import "./FormularioLinkYoutube.css"
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     const [btnLimparForms, setLimparForms] = useState(null)
-    const [responseAlertaDjango, setresponseAlertaDjango] = useState(null)
+    const [responseAlertaDjango, setResponseAlertaDjango] = useState(null)
     const [carregando, setCarregando] = useState(null)
     const [atualizarLinks, setAtualizeLinks] = useState(false)
 
@@ -15,21 +15,25 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     /** FUNÇÃO PARA ADICIONAR LINK */
     const useDefGravandoLink = async () => {
       const linkYoutube = refLink.current.value
-      setLimparForms('responseDados');
+      setLimparForms('');
       setCarregando(true)
 
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
       
-      setresponseAlertaDjango(responseDados.mensagem);
+      setResponseAlertaDjango(responseDados.mensagem);
       console.log(responseDados)
       setCarregando(false)
 
+      console.log(atualizarLinks)
+      {atualizarLinks && <LinkBancoDados />}
+
       if (responseDados.erro_processo === 0){
+
         onLinkAdicionado() /** Comunica o app.js que deve atualizar os links. */
       }
       
       setTimeout(() => {
-          setresponseAlertaDjango('')
+          setResponseAlertaDjango('')
         }, 15000);        
     }
     
@@ -38,7 +42,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
       if (refLink.current) {
         refLink.current.value = '';
         setLimparForms('');
-        setresponseAlertaDjango('')
+        setResponseAlertaDjango('')
       }
     }
 
