@@ -5,8 +5,6 @@ import LinkBancoDados from './componentes/LinkBancoDados';
 import useCsrfInit from './componentes/useCsrfInit';
 import { useEffect, useState} from 'react';
 
-import useRequestDjango from './componentes/useRequestDjango';
-
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) 
     é onde você coloca lógica, hooks, variáveis, chamadas de API, etc.
@@ -16,15 +14,13 @@ function App() {
   useCsrfInit();
   {/** - Tudo dentro do return é JSX, ou seja, a 
     estrutura visual que será renderizada na tela.*/}
-
-  const [linkAdicionado, setLinkAdicionado] = useState(0)
+  
+  const [atualizarBanco, setAtualizarBanco] = useState(0);
 
   return (
     <div className="App">
-        <FormularioLinkYoutube onLinkAdicionado={() => setLinkAdicionado(prev => prev + 1)} />
-
-        {console.log(linkAdicionado)}
-        {linkAdicionado && <LinkBancoDados />}
+        <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
+        <LinkBancoDados triggerAtualizacao={atualizarBanco} />
     </div>
   );
 }
