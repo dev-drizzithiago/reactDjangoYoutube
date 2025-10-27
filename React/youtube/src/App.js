@@ -17,10 +17,13 @@ function App() {
   {/** - Tudo dentro do return é JSX, ou seja, a 
     estrutura visual que será renderizada na tela.*/}
 
+  const [mostrar, setMostrar] = useState(true)
+
   return (
     <div className="App">
         <FormularioLinkYoutube />
-        <LinkBancoDados />
+
+        {mostrar && <LinkBancoDados />}
     </div>
   );
 }
