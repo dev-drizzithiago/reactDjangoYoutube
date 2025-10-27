@@ -8,7 +8,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     const [btnLimparForms, setLimparForms] = useState(null)
     const [responseAlertaDjango, setresponseAlertaDjango] = useState(null)
     const [carregando, setCarregando] = useState(null)
-    const [atualizarLinks, setAtualizeLinks] = useState(0)
+    const [atualizarLinks, setAtualizeLinks] = useState(false)
 
     const refLink = useRef();
 
