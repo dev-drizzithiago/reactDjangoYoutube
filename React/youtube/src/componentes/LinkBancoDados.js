@@ -2,7 +2,7 @@
 import useRequestDjango from "./useRequestDjango";
 import "./LinkBancoDados.css"
 
-const LinkBancoDados = () => {    
+const LinkBancoDados = () => {
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar')
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
