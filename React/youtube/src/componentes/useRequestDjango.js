@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react"
 import getCookies from "./getCookies"
 
-const useRequestDjango = () => {
-    const urlDjango = "http://localhost:8000/requestBaseDados/";
-    const payload = 'Listando...'
-    
+const useRequestDjango = (urlDjango, payload, trigger) => {
+   
     const payloadString = JSON.stringify(payload)
 
     const [dados, setDados] = useState([])
@@ -29,7 +27,14 @@ const useRequestDjango = () => {
             console.error('Erro na requisição: ', error)
             setCarregando(false)
         })
-    }, [urlDjango, payloadString]);
+    }, [urlDjango, payloadString, trigger]);  
+    // "Execute o código dentro do useEffect sempre que qualquer um desses valores mudar."
+    /** Se você deixar a lista vazia ([]), o useEffect só roda uma vez, quando o componente é montado. */
+    /**
+     * [] Só uma montagem
+     * [a, b] Quando a ou b mudam
+     * (sem lista) Toda renderização Se você não passar lista nenhuma, ele roda toda vez que o componente renderiza — o que pode causar loops indesejados.
+     */
 
     return {dados, carregando}
 }
