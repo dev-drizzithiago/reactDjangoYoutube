@@ -18,10 +18,13 @@ function App() {
     estrutura visual que será renderizada na tela.*/}
 
   const [mostrar, setMostrar] = useState(true)
+  const [linkAdicionado, setLinkAdicionado] = useState(false)
 
   return (
     <div className="App">
-        <FormularioLinkYoutube />
+        <FormularioLinkYoutube onLinkAdicionado={() => setLinkAdicionado(prev => prev + 1)} />
+
+        {console.log(linkAdicionado)}
 
         {mostrar && <LinkBancoDados />}
     </div>
