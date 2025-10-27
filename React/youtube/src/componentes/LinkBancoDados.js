@@ -1,9 +1,11 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import useRequestDjango from "./useRequestDjango";
 import "./LinkBancoDados.css"
+import { useEffect } from "react";
 
-const LinkBancoDados = () => {
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar')
+const LinkBancoDados = ({triggerAtualizacao}) => {
+
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', triggerAtualizacao)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     return (
