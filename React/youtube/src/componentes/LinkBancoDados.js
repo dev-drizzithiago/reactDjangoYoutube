@@ -7,7 +7,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', triggerAtualizacao)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
-
+    console.log(dados)
     return (
         <div>
             <h1> Links para download </h1>            
@@ -16,6 +16,10 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                     <div className="linksYoutube" key={index}>         
                         <div>
                             <p>{item.autor_link}</p> <p>{item.titulo_link}</p>
+                        </div>
+
+                        <div className="divImgMiniatura">
+                            <img className="imgMiniatura" src={item.miniatura} alt="miniatura" />
                         </div>
                         
                         <p className="paragraphTitulos">
