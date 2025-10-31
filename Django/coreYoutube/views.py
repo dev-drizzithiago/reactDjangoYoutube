@@ -39,6 +39,7 @@ def requestBaseDados(request):
             'link_tube': item['link_tube'],
             'autor_link': item['autor_link'],
             'titulo_link': item['titulo_link'],
+            'miniatura': item['miniatura'],
         })
 
     return JsonResponse({
