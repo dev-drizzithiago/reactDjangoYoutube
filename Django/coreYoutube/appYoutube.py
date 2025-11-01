@@ -216,7 +216,8 @@ class YouTubeDownload:
         :return: Mensagem de sucesso quando finalizar o download do vídeo.
         """
         logging.info(f'Baixando mídia em MP4...')
-
+        print(self.PATH_MIDIA_MOVIES)
+        print(self.PATH_MIDIA_MOVIES_URL)
         # Busca o link na base de dados.
         query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
         for item in query_validador_dados:
