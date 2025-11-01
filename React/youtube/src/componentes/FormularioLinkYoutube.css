@@ -1,21 +1,11 @@
 
 .returnFormsLink {
-    margin: auto;
-    width: 50%;
-    background-color: #cecece;
-    border-radius: 14px;
-    box-shadow: 5px 5px 5px rgba(136, 136, 136, 0.151);
-
-}
-.divBtnImgAdd {
-    margin: auto;
-    display: flex;
-    width: 50%;
-    justify-content: right;
-}
-
-.divLabelInput {
-  display: grid;
+  margin: auto;
+  width: 50%;
+  height: 275px;
+  background-color: #cecece;
+  border-radius: 14px;
+  box-shadow: 5px 5px 5px rgba(136, 136, 136, 0.151);
 }
 
 .inputText {
@@ -26,6 +16,43 @@
   height: 10px;
   border: none;
   padding: 15px;
-  box-shadow: #00000062;
-  border-radius: 15px;
+  border-radius: 14px;
+}
+
+.imgBtn{  
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}
+.divBtnImgAdd {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  display: flex;
+  width: 50%;
+  padding: 5px;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}
+.divImgLoading{
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}
+.imgLoading{
+  width: 55px;
+  height: 55px;
+  margin: auto;
+}
+
+.mensagemAlerta{ 
+  font-size: 16pt;
 }
