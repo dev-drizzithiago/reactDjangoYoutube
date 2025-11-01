@@ -79,11 +79,13 @@ def requestAddLinks(request):
     }, status=400)
 
 
-def download_music_videos(request):
+def download_videos(request):
     dados_json = json.loads(request.body)
 
-    mensagem_processo = 'Mensagem retorno'
+    retorno_processpo = YouTubeDownload.download_movie(dados_json['id_dados'])
+    print(retorno_processpo)
 
+    mensagem_processo = 'Mensagem retorno'
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
     })
