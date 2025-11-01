@@ -10,8 +10,7 @@
 
 .content {
  /*border: 1px solid black;*/
-  display: grid;  /* Estilo de grade */     
-  padding: 5px;  /* preenchimento interno  */
+  display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   margin: auto;
   width: 100%;
