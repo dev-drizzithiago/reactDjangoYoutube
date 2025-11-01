@@ -19,8 +19,8 @@ function App() {
 
   return (
     <div className="App">
-        <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
-        <LinkBancoDados triggerAtualizacao={atualizarBanco} />
+      <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
+      <LinkBancoDados triggerAtualizacao={atualizarBanco} />   
     </div>
   );
 }
