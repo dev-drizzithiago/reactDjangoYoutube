@@ -98,9 +98,10 @@ def download_link(request):
 
 def remove_link(request):
     dados_json = json.loads(request.body)
-    print(dados_json)
     id_link = int(dados_json['id_dados'])
-    retorno_processo = YouTubeDownload.removendo_link_base_dados(id_link)
+
+    inicio_obj_yt_delete = YouTubeDownload()
+    retorno_processo = inicio_obj_yt_delete.removendo_link_base_dados(id_link)
 
     mensagem_processo = retorno_processo
     return JsonResponse({
