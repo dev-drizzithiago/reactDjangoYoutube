@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import index, requestBaseDados, requestAddLinks, csrf_token_view, download_link
+from .views import (
+    index, requestBaseDados, requestAddLinks, csrf_token_view, download_link, remove_link,
+)
 
 urlpatterns = [
     path('index', index, name='index'),
@@ -7,4 +9,5 @@ urlpatterns = [
     path('requestBaseDados/', requestBaseDados, name='requestBaseDados'),
     path('requestAddLinks/', requestAddLinks, name='requestAddLinks'),
     path('download_link/', download_link, name='download_link'),
+    path('remove_link/', remove_link, name='remove_link'),
 ]
