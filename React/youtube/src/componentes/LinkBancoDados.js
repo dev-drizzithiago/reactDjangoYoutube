@@ -3,16 +3,19 @@ import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from "./sendRequestDjango";
 import "./LinkBancoDados.css"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const LinkBancoDados = ({triggerAtualizacao}) => {
-    console.log(triggerAtualizacao)
-    const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(false)
+const LinkBancoDados = ({triggerAtualizacao}) => {    
+    
+
+    const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0)    
     const [downloadMidias, setdownloadMidias] = useState(null)
 
-    const {dados, carregando} = useRequestDjango(
-        "http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks ? atualizacaoBaseLinks : triggerAtualizacao 
-    )
+    useEffect(()=>{
+        setAtualizacaoBaseLinks(setAtualizacaoBaseLinks)
+    }, [triggerAtualizacao])
+
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
@@ -32,13 +35,12 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     const removeLinkBaseDados = async (id_dados) => {
         setdownloadMidias(id_dados)
-        const dadosDelete = {
-            id_dados: id_dados,
-        }
+        const dadosDelete = {id_dados: id_dados}
         const djangoUrlDownloads = "http://localhost:8000/remove_link/";
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
         console.log(responseDjangoDownload);
-        setAtualizacaoBaseLinks(true);
+
+        setAtualizacaoBaseLinks(prev => prev + 1);
         setdownloadMidias(false);
     }
 
