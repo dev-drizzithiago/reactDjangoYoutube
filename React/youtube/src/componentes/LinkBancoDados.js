@@ -6,7 +6,7 @@ import "./LinkBancoDados.css"
 import { useState } from "react";
 
 const LinkBancoDados = ({triggerAtualizacao}) => {
-    const [downloadMidias, setdownloadMidias] = useState(false)
+    const [downloadMidias, setdownloadMidias] = useState(null)
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', triggerAtualizacao)
 
@@ -18,7 +18,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
             id_dados: id_dados,
             midia: 'MP3',
         }
-        setdownloadMidias(true)
+        setdownloadMidias(id_dados)
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
@@ -43,7 +43,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                 
                 {dados.map((item) => (
                     <div className="linksYoutube" key={item.id_dados}>         
-                        <div>
+                        <div className="paragraphTitulos">
                             <p>{item.autor_link}</p> <p>{item.titulo_link}</p>
                         </div>
 
@@ -51,18 +51,14 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                             <img className="imgMiniatura" src={item.miniatura} alt="miniatura" />
                         </div>
                         
-                        <p className="paragraphTitulos">                            
-                            
-                        <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)}  />
-                    
-                        <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
-
-                        <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>                        
-                            
+                        <p className="btnsAcao">                            
+                            <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)}  />                    
+                            <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
+                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>                            
                         </p>
-                        {downloadMidias && <div className="imgLoading"><img src="/img/imgBtns/loading.gif" alt="Carregando..."/></div>}
-                    </div>                                
-                ))}                
+                        {downloadMidias == item.id_dados && (<div className="imgLoading"><img src="/img/imgBtns/loading.gif" alt="Carregando..."/></div>)}
+                    </div>
+                ))}
             </div>
         </div>
     );
