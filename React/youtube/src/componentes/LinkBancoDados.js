@@ -13,12 +13,12 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     const downloadVideoAndMusic = async (link_tube, id_dados) => {
         const dadosDownload = {
-            link_tube: link_tube,
             id_dados: id_dados,
+            midia: 'MP4',
         }
 
         console.log(dadosDownload)
-        const djangoUrlDownloads = "http://localhost:8000/download_music_videos/"
+        const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         console.log(responseDjangoDownload)
