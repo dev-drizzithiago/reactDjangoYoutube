@@ -14,11 +14,11 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados) => {
+        setdownloadMidias(id_dados)
         const dadosDownload = {
             id_dados: id_dados,
             midia: 'MP3',
-        }
-        setdownloadMidias(id_dados)
+        }        
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
@@ -27,13 +27,15 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     }
 
     const removeLinkBaseDados = async (id_dados) => {
-        const dadosDownload = {
+        setdownloadMidias(id_dados)
+        const dadosDelete = {
             id_dados: id_dados,            
         }
         const djangoUrlDownloads = "http://localhost:8000/remove_link/"
-        const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
+        const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete)
 
         console.log(responseDjangoDownload)
+        setdownloadMidias(false)
     }
 
     return (
@@ -54,13 +56,14 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                         <p className="btnsAcao">                            
                             <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)}  />                    
                             <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
+
                             <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>
 
                             {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
                             {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
                                *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
-                               
+
                             {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)}
                         </p>
                         
