@@ -73,6 +73,13 @@
   border: 1px solid black;
 }
 
+.imgLoading{
+  width: 45px;
+  height: 45px;
+  margin: auto;
+  border-radius: 10px;
+  justify-content: right;
+}
 
 
   
