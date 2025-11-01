@@ -46,8 +46,9 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     return (
         <div>
-            <h1> Links para download </h1>            
+    <h3> Links para download </h3>
             <div className="content">
+                
                 
                 {dados.map((item) => (
                     <div className="linksYoutube" key={item.id_dados}>         
