@@ -18,8 +18,10 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         }
 
         console.log(dadosDownload)
-        const djangoUrlDownloads = "http://localhost:8000/requestBaseDados/"
+        const djangoUrlDownloads = "http://localhost:8000/download_music_videos/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
+
+        console.log(responseDjangoDownload)
     }
 
     const removeLinkBaseDados = (link_tube) => {
