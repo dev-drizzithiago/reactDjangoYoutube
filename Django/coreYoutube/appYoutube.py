@@ -125,7 +125,7 @@ class YouTubeDownload:
         :param id_link: Recebe o valor do número do id do link.
         :return: Retorna a confirmação que o link foi deletado.
         """
-
+        print(id_link)
         query_remocao_link = DadosYoutube.objects.get(id_link=id_link)
         query_remocao_link.delete()
 
