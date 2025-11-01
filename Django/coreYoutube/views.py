@@ -79,13 +79,20 @@ def requestAddLinks(request):
     }, status=400)
 
 
-def download_videos(request):
+def download_link(request):
     dados_json = json.loads(request.body)
 
-    retorno_processpo = YouTubeDownload.download_movie(dados_json['id_dados'])
-    print(retorno_processpo)
+    # Separa as informações que irão para o app de download
+    id_dados = dados_json['id_dados']
+    midia_down = dados_json['midia']
 
-    mensagem_processo = 'Mensagem retorno'
+    inicio_obj_yt_registro = YouTubeDownload()
+
+    if midia_down == 'MP3':
+        resultado_download = inicio_obj_yt_registro.download_music(id_dados)
+    elif midia_down == 'MP4':
+        resultado_download = inicio_obj_yt_registro.download_movie(id_dados)
+
     return JsonResponse({
-        'mensagem_processo': mensagem_processo,
+        'mensagem': resultado_download,
     })
