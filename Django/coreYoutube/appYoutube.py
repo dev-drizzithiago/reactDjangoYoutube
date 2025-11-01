@@ -270,7 +270,6 @@ class YouTubeDownload:
             logging.info(f"Download do vídeo {self._nome_validado} realizado com sucesso")
             return "Download do vídeo realizado com sucesso"
 
-
     # Processo para transformar o arquivo de mp4 em mp3
     # Esse problema não tem nenhum não pode ser chamado pelo usuário, apenas para uso internet do app
     def mp4_to_mp3(self, nome_midia):
