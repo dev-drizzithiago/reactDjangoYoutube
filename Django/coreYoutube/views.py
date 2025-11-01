@@ -78,7 +78,6 @@ def requestAddLinks(request):
         'erro_processo': erro_processo,
     }, status=400)
 
-
 def download_link(request):
     dados_json = json.loads(request.body)
 
@@ -95,4 +94,12 @@ def download_link(request):
 
     return JsonResponse({
         'mensagem': resultado_download,
+    })
+
+def remove_link(request):
+    dados_json = json.loads(request.body)
+
+    mensagem_processo = 'Mensagem teste'
+    return JsonResponse({
+        'mensagem_processo': mensagem_processo
     })
