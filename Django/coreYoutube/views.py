@@ -36,6 +36,7 @@ def requestBaseDados(request):
 
     for item in query_dados_youtube:
         lista_dados_django.append({
+            'id_dados': item['id_dados'],
             'link_tube': item['link_tube'],
             'autor_link': item['autor_link'],
             'titulo_link': item['titulo_link'],
@@ -46,7 +47,6 @@ def requestBaseDados(request):
         'mensagem': 'Teste Django',
         'dados_django': lista_dados_django,
     })
-
 
 # @csrf_protect
 def requestAddLinks(request):
@@ -79,3 +79,11 @@ def requestAddLinks(request):
     }, status=400)
 
 
+def download_music_videos(request):
+    dados_json = json.loads(request.body)
+
+    mensagem_processo = 'Mensagem retorno'
+
+    return JsonResponse({
+        'mensagem_processo': mensagem_processo,
+    })
