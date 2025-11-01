@@ -25,6 +25,7 @@
   justify-content: center;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  margin-left: 15px;
 }
 .divBtnImgAdd {
   margin-right: auto;
