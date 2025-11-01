@@ -12,7 +12,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     const [downloadMidias, setdownloadMidias] = useState(null)
 
     useEffect(()=>{
-        setAtualizacaoBaseLinks(setAtualizacaoBaseLinks)
+        setAtualizacaoBaseLinks(triggerAtualizacao)
     }, [triggerAtualizacao])
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
