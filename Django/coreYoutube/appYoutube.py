@@ -285,10 +285,14 @@ class YouTubeDownload:
             return False
         else:
             logging.info('Analisando arquivo de mídia para conversão...')
+
             for arquivo_m4a in listdir(self.PATH_MIDIA_TEMP):
                 if search(f"{nome_midia}", arquivo_m4a):
+                    print('----', arquivo_m4a)
                     m4a_file_abs = path.join(self.PATH_MIDIA_TEMP, arquivo_m4a)
+                    print('----', m4a_file_abs)
                     mp3_file = path.join(self.PATH_MIDIA_MUSICS, f"{arquivo_m4a.replace('m4a', 'mp3')}")
+                    print('----', mp3_file)
 
                     """#### Processa o MP4 para MP3"""
                     novo_mp3 = AudioFileClip(m4a_file_abs)
