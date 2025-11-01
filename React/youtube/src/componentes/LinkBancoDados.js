@@ -54,9 +54,13 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                         <p className="btnsAcao">                            
                             <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)}  />                    
                             <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
-                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>                            
+                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>
+
+                            <img src="/img/imgBtns/spinner.gif"  className="imgLoading" alt="Carregando..."/>
+
+                            {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/loading.gif" alt="Carregando..."/></div>)}
                         </p>
-                        {downloadMidias == item.id_dados && (<div className="imgLoading"><img src="/img/imgBtns/loading.gif" alt="Carregando..."/></div>)}
+                        
                     </div>
                 ))}
             </div>
