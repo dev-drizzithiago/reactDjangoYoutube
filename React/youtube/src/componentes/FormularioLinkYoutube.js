@@ -21,10 +21,8 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
       
       setResponseAlertaDjango(responseDados.mensagem);
-      console.log(responseDados)
       setCarregando(false)
 
-      console.log(atualizarLinks)
       {atualizarLinks && <LinkBancoDados />}
 
       if (responseDados.erro_processo === 0){
@@ -40,7 +38,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     /** FUNÇÃO PARA LIMPAR O CAMPO DE LINK */
     const useDefBtnLimparInput = () => {      
       if (refLink.current) {
-        refLink.current.value = '';
+        //refLink.current.value = '';
         setLimparForms('');
         setResponseAlertaDjango('')
       }
