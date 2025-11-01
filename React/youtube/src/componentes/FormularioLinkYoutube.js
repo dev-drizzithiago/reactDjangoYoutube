@@ -5,18 +5,24 @@ import "./FormularioLinkYoutube.css"
 
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
-    const [btnLimparForms, setLimparForms] = useState(null)
+    const [btnLimparForms, setLimparForms] = useState(false)
     const [responseAlertaDjango, setResponseAlertaDjango] = useState(null)
     const [carregando, setCarregando] = useState(null)
     const [atualizarLinks, setAtualizeLinks] = useState(false)
 
     const refLink = useRef();
 
+    
     /** FUNÇÃO PARA ADICIONAR LINK */
+
     const useDefGravandoLink = async () => {
-      const linkYoutube = refLink.current.value
-      setLimparForms('');
+      setLimparForms(true)
       setCarregando(true)
+      const linkYoutube = refLink.current.value
+
+      if (btnLimparForms) {
+        refLink.current.value = '';     
+       }
 
       const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
       
@@ -38,8 +44,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     /** FUNÇÃO PARA LIMPAR O CAMPO DE LINK */
     const useDefBtnLimparInput = () => {      
       if (refLink.current) {
-        //refLink.current.value = '';
-        setLimparForms('');
+        refLink.current.value = '';
         setResponseAlertaDjango('')
       }
     }
