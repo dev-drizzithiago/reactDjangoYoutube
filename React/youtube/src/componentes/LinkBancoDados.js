@@ -56,9 +56,12 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                             <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
                             <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>
 
-                            <img src="/img/imgBtns/spinner.gif"  className="imgLoading" alt="Carregando..."/>
+                            {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
-                            {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/loading.gif" alt="Carregando..."/></div>)}
+                            {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
+                               *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
+                               
+                            {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)}
                         </p>
                         
                     </div>
