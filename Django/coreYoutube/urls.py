@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    index, requestBaseDados, requestAddLinks, csrf_token_view, download_link, remove_link,
+    index, requestBaseDados, requestAddLinks, csrf_token_view, download_link, remove_link, listagem_midias
 )
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('requestAddLinks/', requestAddLinks, name='requestAddLinks'),
     path('download_link/', download_link, name='download_link'),
     path('remove_link/', remove_link, name='remove_link'),
+    path('listagem_midias/', listagem_midias, name='listagem_midias'),
 ]
