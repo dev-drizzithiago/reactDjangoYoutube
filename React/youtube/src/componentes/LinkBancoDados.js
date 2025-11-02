@@ -38,6 +38,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         const dadosDelete = {id_dados: id_dados}
         const djangoUrlDownloads = "http://localhost:8000/remove_link/";
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
+        
         console.log(responseDjangoDownload);
 
         setAtualizacaoBaseLinks(prev => prev + 1);
