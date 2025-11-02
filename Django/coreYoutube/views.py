@@ -107,3 +107,13 @@ def remove_link(request):
     return JsonResponse({
         'mensagem_processo': mensagem_processo
     })
+
+def listagem_midias(request):
+    dados_json = json.loads(request.body)
+
+    mensagem_processo = 'Processo de teste'
+    erro_processo = 0
+    return JsonResponse({
+        'mensagem_processo': mensagem_processo,
+        'erro_processo': erro_processo,
+    })
