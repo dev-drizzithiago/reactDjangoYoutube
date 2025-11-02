@@ -32,7 +32,7 @@ function App() {
           <LinkBancoDados triggerAtualizacao={atualizarBanco} />   
         </div>
         <div>
-            <PlayerMidiasMp3 />
+          <PlayerMidiasMp3 />
         </div>
       
       
