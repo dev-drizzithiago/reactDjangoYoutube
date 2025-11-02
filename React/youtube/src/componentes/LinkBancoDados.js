@@ -25,7 +25,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         const dadosDownload = {
             id_dados: id_dados,
             midia: 'MP3',
-        }        
+        }
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
@@ -61,7 +61,8 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                         </div>
                         
                         <p className="btnsAcao">                            
-                            <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)}  />                    
+                            <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)} 
+                            aria-label={`Baixar mídia de ${item.titulo_link}`} />                    
                             <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
 
                             <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>
