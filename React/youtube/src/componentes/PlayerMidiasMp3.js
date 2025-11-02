@@ -1,20 +1,24 @@
 /**  key= só utilizando que a lista não possui uma chave. */
 
-import { useState } from "react";
 import useRequestDjango from "./useRequestDjango";
 
 const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
-    const urlDjango = "/listagem_midias/"
+    
     const payload = {
         tipoMidia: 'MP3',
     }
-    const [dadosDjango, setDadosDjango] = useRequestDjango(urlDjango, payload, effectAtualizacao)
+
+    const {responseDjango, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, effectAtualizacao)
+
+    console.log(responseDjango)
+
+    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
   return (
     <div>
-        {dadosMidiasLista.map((item) => (
-            <div className="paragraphTitulos">
-                <p>{item.autor_link}</p> <p>{item.titulo_link}</p>
+        {responseDjango.map((item, index) => (
+            <div className="paragraphTitulos" key={index.id_music}>
+                <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
             </div>
         ))}
     </div>
