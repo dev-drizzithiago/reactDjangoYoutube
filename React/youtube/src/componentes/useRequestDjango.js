@@ -20,14 +20,14 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         })
         .then(response => response.json())
         .then(data => {
-            setDados(data.dados_django);
+            setDados(data.lista_midias_django);
             setCarregando(false);
         })
-        .catch (error => {
+        .catch (error => {            
             console.error('Erro na requisição: ', error)
             setCarregando(false)
         })
-    }, [urlDjango, payloadString, trigger]);  
+    }, [urlDjango, payloadString, trigger]);
     // "Execute o código dentro do useEffect sempre que qualquer um desses valores mudar."
     /** Se você deixar a lista vazia ([]), o useEffect só roda uma vez, quando o componente é montado. */
     /**
