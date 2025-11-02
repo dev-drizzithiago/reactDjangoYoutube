@@ -139,5 +139,5 @@ def listagem_midias(request):
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
-        'lista_midias_django': lista_midias_django,
+        'dados_django': lista_midias_django,
     })
