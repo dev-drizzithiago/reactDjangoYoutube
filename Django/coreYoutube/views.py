@@ -7,7 +7,7 @@ from .appYoutube import YouTubeDownload
 
 import json
 
-from .models import DadosYoutube
+from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
 def index(request):
     return render(request, 'index.html')
@@ -109,11 +109,36 @@ def remove_link(request):
     })
 
 def listagem_midias(request):
-    dados_json = json.loads(request.body)
+    lista_midias_django = []
 
-    mensagem_processo = 'Processo de teste'
+    mensagem_processo = None
     erro_processo = 0
+
+    dados_json = json.loads(request.body)
+    print(dados_json)
+
+    if dados_json['tipoMidia'] == 'MP4':
+        query_dados_midias = MoviesSalvasServidor.objects.all().order_by('-id_movies').values()
+        key_midia = 'id_movies'
+    elif dados_json['tipoMidia'] == 'MP3':
+        query_dados_midias = MusicsSalvasServidor.objects.all().order_by('-id_music').values()
+        key_midia = 'id_music'
+    else:
+        mensagem_processo = 'Tipo de mídia não existe'
+        erro_processo = 1
+
+    for item in query_dados_midias:
+        lista_midias_django.append({
+            key_midia: key_midia,
+            'nome_arquivo': item['nome_arquivo'],
+            'duracao_midia': item['duracao_midia'],
+            'path_arquivo': item['path_arquivo'],
+            'path_miniatura': item['path_miniatura'],
+        })
+    print(lista_midias_django)
+
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
+        'lista_midias_django': lista_midias_django,
     })
