@@ -20,10 +20,10 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         })
         .then(response => response.json())
         .then(data => {
-            setDados(data.lista_midias_django);
+            setDados(data.dados_django);
             setCarregando(false);
         })
-        .catch (error => {            
+        .catch (error => {
             console.error('Erro na requisição: ', error)
             setCarregando(false)
         })
