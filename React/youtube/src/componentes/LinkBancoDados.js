@@ -48,8 +48,6 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         <div>
     <h3> Links para download </h3>
             <div className="content">
-                
-                
                 {dados.map((item) => (
                     <div className="linksYoutube" key={item.id_dados}>         
                         <div className="paragraphTitulos">
@@ -73,8 +71,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
                                *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
 
                             {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)}
-                        </p>
-                        
+                        </p>                        
                     </div>
                 ))}
             </div>
