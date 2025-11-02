@@ -1,9 +1,11 @@
 import './App.css';
+import useCsrfInit from './componentes/useCsrfInit';
+import { useState } from 'react';
 
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
-import useCsrfInit from './componentes/useCsrfInit';
-import { useEffect, useState} from 'react';
+import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
+
 
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) 
@@ -23,10 +25,17 @@ function App() {
       <img src="/img/imgBtns/mp3.png" alt="adicionar" className="imgBtn btnLimpar" />   
       <img src="/img/imgBtns/mp4.png" alt="adicionar" className="imgBtn btnLimpar" />  */}
         
-
-
-      <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
-      <LinkBancoDados triggerAtualizacao={atualizarBanco} />   
+        <div>
+          <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
+        </div>
+        <div>
+          <LinkBancoDados triggerAtualizacao={atualizarBanco} />   
+        </div>
+        <div>
+            <PlayerMidiasMp3 />
+        </div>
+      
+      
     </div>
   );
 }
