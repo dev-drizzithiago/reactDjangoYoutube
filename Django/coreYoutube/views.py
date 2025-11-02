@@ -135,7 +135,6 @@ def listagem_midias(request):
             'path_arquivo': item['path_arquivo'],
             'path_miniatura': item['path_miniatura'],
         })
-    print(lista_midias_django)
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
