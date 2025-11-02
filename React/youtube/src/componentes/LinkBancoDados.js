@@ -38,7 +38,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         const dadosDelete = {id_dados: id_dados}
         const djangoUrlDownloads = "http://localhost:8000/remove_link/";
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
-        
+
         console.log(responseDjangoDownload);
 
         setAtualizacaoBaseLinks(prev => prev + 1);
@@ -47,7 +47,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
 
     return (
         <div>
-    <h3> Links para download </h3>
+            <h3> Links para download </h3>
             <div className="content">
                 {dados.map((item) => (
                     <div className="linksYoutube" key={item.id_dados}>         
