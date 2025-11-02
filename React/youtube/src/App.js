@@ -19,10 +19,10 @@ function App() {
 
   return (
     <div className="App">
-
-      <img src="/img/imgBtns/pasta_links.png" alt="links" className="imgBtn btnAdd" />
+      {/**<img src="/img/imgBtns/pasta_links.png" alt="links" className="imgBtn btnAdd" />
       <img src="/img/imgBtns/mp3.png" alt="adicionar" className="imgBtn btnLimpar" />   
-      <img src="/img/imgBtns/mp4.png" alt="adicionar" className="imgBtn btnLimpar" />   
+      <img src="/img/imgBtns/mp4.png" alt="adicionar" className="imgBtn btnLimpar" />  */}
+        
 
 
       <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
