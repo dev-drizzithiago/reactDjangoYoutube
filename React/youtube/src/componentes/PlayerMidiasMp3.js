@@ -1,10 +1,14 @@
 /**  key= só utilizando que a lista não possui uma chave. */
 
 import { useState } from "react";
+import useRequestDjango from "./useRequestDjango";
 
-const PlayerMidiasMp3 = () => {
-    const [dadosMidiasLista, setDados] = useState([])
-
+const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
+    const urlDjango = "/listagem_midias/"
+    const payload = {
+        tipoMidia: 'MP3',
+    }
+    const [dadosDjango, setDadosDjango] = useRequestDjango(urlDjango, payload, effectAtualizacao)
 
   return (
     <div>
