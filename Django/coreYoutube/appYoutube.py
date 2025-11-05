@@ -333,3 +333,49 @@ class YouTubeDownload:
             return True
 
 
+"""
+Claro, Thiago! Aqui está um script em **Python** que você pode usar para **normalizar os nomes dos arquivos** em uma pasta, removendo ou substituindo caracteres especiais e garantindo que os nomes fiquem seguros para requisições GET em um servidor web como Django:
+
+### 🧰 Script: Normalizador de nomes de arquivos
+
+```python
+import os
+import urllib.parse
+
+# Caminho da pasta onde estão os arquivos
+pasta = r"H:\Estudos\reactDJangoyoutube\Django\media\miniaturas"
+
+# Função para normalizar nomes de arquivos
+def normalizar_nome(nome):
+    # Remove espaços extras e codifica caracteres especiais
+    nome_sem_espacos = nome.strip().replace(" ", "_")
+    nome_codificado = urllib.parse.quote(nome_sem_espacos, safe="_-.")
+    return nome_codificado
+
+# Renomeia os arquivos na pasta
+for nome_arquivo in os.listdir(pasta):
+    caminho_antigo = os.path.join(pasta, nome_arquivo)
+    nome_normalizado = normalizar_nome(nome_arquivo)
+    caminho_novo = os.path.join(pasta, nome_normalizado)
+
+    # Evita renomear se o nome já estiver normalizado
+    if nome_arquivo != nome_normalizado:
+        os.rename(caminho_antigo, caminho_novo)
+        print(f"Renomeado: {nome_arquivo} → {nome_normalizado}")
+    else:
+        print(f"Já normalizado: {nome_arquivo}")
+```
+
+### ✅ O que esse script faz:
+- Substitui espaços por `_`
+- Codifica acentos e caracteres especiais com `urllib.parse.quote`
+- Renomeia os arquivos diretamente na pasta
+- Evita renomear arquivos que já estão normalizados
+
+### ⚠️ Cuidados:
+- Faça um **backup da pasta** antes de rodar o script.
+- Verifique se o servidor Django está apontando corretamente para `MEDIA_ROOT` e `MEDIA_URL`.
+- Se estiver usando thumbnails ou links em templates, atualize os caminhos conforme os novos nomes.
+
+Se quiser, posso adaptar esse script para rodar dentro de um comando Django ou para gerar um log com os arquivos renomeados. Quer que eu faça isso também?
+"""
