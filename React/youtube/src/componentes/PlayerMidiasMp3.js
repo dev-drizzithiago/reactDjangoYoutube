@@ -22,8 +22,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
                             <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
                         </div>
                         <div>
-                            <p>{`${urlMiniatura}${item.path_miniatura}`}</p>
-                            <img src={`${urlMiniatura}${item.path_miniatura}`} alt="" />
+                            <img src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura" />
                         </div>
                     </div>                     
                 ))}            
