@@ -13,9 +13,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
   return (
-    <div className="divPrincipal">        
+    <div className="divPrincipal">
+        <h3>Lista MP3</h3>
         <div className="content">
-            <h3>Lista MP3</h3>
                 {dados.map((item) => (
                     <div>
                         <div className="paragraphTitulos" key={item.id_music}>
