@@ -9,12 +9,12 @@
 } 
 
 .content {
- /*border: 1px solid black;*/
+ border: 1px solid black;
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   margin: auto;
-  width: 40%;
-  max-width: 80%; 
+  width: 100%;
+  max-width: 50%; 
   height: 625px;
   max-height: 5%; /* altura máxima */  
   pointer-events: auto;
