@@ -13,7 +13,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     return (
-        <div className="divPrincipal">
+        <div>
             <h3>Lista MP3</h3>
             <div className="content">
                     {dados.map((item) => (
@@ -21,6 +21,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
                             <div className="paragraphTitulos">
                                 <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
                             </div>
+
                             <div>
                                 <img className="imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                             </div>
