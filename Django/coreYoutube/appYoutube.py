@@ -68,7 +68,7 @@ def validacao_nome_arquivo(filename):
     :param filename: recebe o nome do arquivo, caso tenha erro, arquivo será corrigido.
     :return:
     """
-    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_]', '', filename)
+    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_ ]', '', filename)
 
 def data_hora_certa():
     """
