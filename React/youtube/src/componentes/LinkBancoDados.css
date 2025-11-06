@@ -13,12 +13,12 @@
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   margin: auto;
-  width: 100%;
+  width: 40%;
   max-width: 80%; 
   height: 625px;
   max-height: 5%; /* altura máxima */  
   pointer-events: auto;
-  grid-template-columns: repeat(4, 1fr); /* 4 linhas de altura igual */
+  grid-template-columns: repeat(2, 1fr); /* 4 linhas de altura igual */
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
