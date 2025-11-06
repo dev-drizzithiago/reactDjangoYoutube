@@ -11,14 +11,14 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, effectAtualizacao)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
-    console.log(dados)
+
     return (
         <div className="divPrincipal">
             <h3>Lista MP3</h3>
             <div className="content">
                     {dados.map((item) => (
-                        <div className="linksYoutube" key={item.id_dados}>
-                            <div className="paragraphTitulos" key={item.id_music}>
+                        <div className="playMidias"  key={item.id_music}>
+                            <div className="paragraphTitulos">
                                 <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
                             </div>
                             <div>
