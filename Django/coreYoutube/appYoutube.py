@@ -36,6 +36,7 @@ from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 from django.conf import settings
 from django.core.files.base import ContentFile
 
+import urllib.parse
 import requests
 import logging
 from pathlib import Path
@@ -334,7 +335,9 @@ class YouTubeDownload:
 
 
 """
-Claro, Thiago! Aqui está um script em **Python** que você pode usar para **normalizar os nomes dos arquivos** em uma pasta, removendo ou substituindo caracteres especiais e garantindo que os nomes fiquem seguros para requisições GET em um servidor web como Django:
+Claro, Thiago! Aqui está um script em **Python** que você pode usar para **normalizar os nomes dos arquivos** em uma 
+pasta, removendo ou substituindo caracteres especiais e garantindo que os nomes fiquem seguros para requisições GET 
+em um servidor web como Django:
 
 ### 🧰 Script: Normalizador de nomes de arquivos
 
