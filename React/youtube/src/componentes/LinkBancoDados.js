@@ -24,7 +24,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         setdownloadMidias(id_dados)
         const dadosDownload = {
             id_dados: id_dados,
-            midia: 'MP3',
+            midia: 'MP4',
         }
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
