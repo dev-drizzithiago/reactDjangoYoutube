@@ -1,7 +1,6 @@
 /**  key= só utilizando que a lista não possui uma chave. */
 
 import useRequestDjango from "./useRequestDjango";
-import './PlayerMidiasMp3';
 
 const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
