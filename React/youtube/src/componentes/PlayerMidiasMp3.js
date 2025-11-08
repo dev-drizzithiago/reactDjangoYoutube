@@ -1,11 +1,13 @@
 /**  key= só utilizando que a lista não possui uma chave. */
+import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
+
 
 const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
     const payload = {
-        tipoMidia: 'MP3',
+        tipoMidia: 'MP4',
     }
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, effectAtualizacao)
@@ -14,6 +16,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     return (
         <div>
             <h3>Lista MP3</h3>
+            <img src="/img/imgBtns/mp3.png" alt="player" className="imgBtn imgBtnMp3" />
+            <img src="/img/imgBtns/mp4.png" alt="player" className="imgBtn imgBtnMp4" />
             <div className="content">
                     {dados.map((item) => (
                         <div className="playMidias"  key={item.id_music}>
