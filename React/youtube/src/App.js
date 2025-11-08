@@ -5,6 +5,7 @@ import { useState } from 'react';
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
+import PlayerMidiasMp4 from './componentes/PlayerMidiasMp4';
 
 
 function App() {
@@ -34,8 +35,9 @@ function App() {
         <div>
           <PlayerMidiasMp3 />
         </div>
-      
-      
+         <div>
+          <PlayerMidiasMp4 />
+        </div>
     </div>
   );
 }
