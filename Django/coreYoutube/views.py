@@ -115,7 +115,6 @@ def listagem_midias(request):
     erro_processo = 0
 
     dados_json = json.loads(request.body)
-    print(dados_json)
 
     if dados_json['tipoMidia'] == 'MP4':
         query_dados_midias = MoviesSalvasServidor.objects.all().order_by('-id_movies').values()
