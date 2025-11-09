@@ -64,8 +64,8 @@
   border: 1px solid black;
 }
   .linkBancoDados-imgMiniatura{
-      width: 350px;
-      height: 250px;
+      width: 150px;
+      height: 100px;
       display: flex;
       margin: auto;
       border-radius: 10px;
