@@ -13,12 +13,14 @@
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   justify-self: right;
   width: 100%;
-  height: 625px;
+  height: 350px;
+  margin: auto;
+  margin-left: 5px;
   pointer-events: auto;
   grid-template-columns: repeat(2, 1fr); /* 4 linhas de altura igual */
+  box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
-  box-sizing: border-box;
 }
 
 .playerMidiasMp3-content::-webkit-scrollbar {
@@ -36,11 +38,12 @@
   align-items: center; /* Centraliza o conteúdo ao meio da DIV X*/
   max-width: 80%;
   width: 100%;
-  height: 85%;
+  height: 315px;
 
   margin-left: auto;
-  margin-right: auto; 
-  margin-top: 70px;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
 
   box-sizing: border-box;
   
