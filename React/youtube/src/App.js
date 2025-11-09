@@ -25,15 +25,18 @@ function App() {
       <img src="/img/imgBtns/mp3.png" alt="adicionar" className="imgBtn btnLimpar" />   
       <img src="/img/imgBtns/mp4.png" alt="adicionar" className="imgBtn btnLimpar" />  */}
         
-        <div>
+       
           <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
-        </div>
-        <div>
-          <LinkBancoDados triggerAtualizacao={atualizarBanco} />   
-        </div>
-        <div>
-          <PlayerMidiasMp3 />
-        </div>
+
+
+          <img src="/img/imgBtns/mp3.png" alt="player" className="playerMidiasMp3-imgBtn" />
+          <img src="/img/imgBtns/mp4.png" alt="player" className="playerMidiasMp3-imgBtn" />
+          <div className='app-divLinksMidias'>
+            <LinkBancoDados triggerAtualizacao={atualizarBanco} />
+            <PlayerMidiasMp3 />
+          </div>
+          
+       
     </div>
   );
 }
