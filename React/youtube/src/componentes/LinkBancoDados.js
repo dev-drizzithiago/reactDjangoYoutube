@@ -1,13 +1,13 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from "./sendRequestDjango";
+
 import "./LinkBancoDados.css"
 
 import { useState, useEffect } from "react";
 
 const LinkBancoDados = ({triggerAtualizacao}) => {    
     
-
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0)    
     const [downloadMidias, setdownloadMidias] = useState(null)
 
@@ -48,30 +48,33 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     return (
         <div>
             <h3> Links para download </h3>
-            <div className="content">
+            <div className="linkBancoDados-content">
                 {dados.map((item) => (
-                    <div className="linksYoutube" key={item.id_dados}>         
-                        <div className="paragraphTitulos">
+                    <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
+                        <div className="linkBancoDados-paragraphTitulos">
                             <p>{item.autor_link}</p> <p>{item.titulo_link}</p>
                         </div>
 
-                        <div className="divImgMiniatura">
-                            <img className="imgMiniatura" src={item.miniatura} alt="miniatura" />
+                        <div className="linkBancoDados-divImgMiniatura">
+                            <img className="linkBancoDados-imgMiniatura" src={item.miniatura} alt="miniatura" />
                         </div>
                         
-                        <p className="btnsAcao">                            
-                            <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" onClick={() => downloadVideoAndMusic(item.id_dados)} 
-                            aria-label={`Baixar mídia de ${item.titulo_link}`} />                    
-                            <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
+                        <p className="linkBancoDados-btnsAcao">
+                            
 
-                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="imgBtn imgBtnLink"/></a>
+                            <img src="/img/imgBtns/download.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            onClick={() => downloadVideoAndMusic(item.id_dados)} aria-label={`Baixar mídia de ${item.titulo_link}`} />
+
+                            <img src="/img/imgBtns/remover.png" alt="remover" className="linkBancoDados-imgBtn linkBancoDados-imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
+
+                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="linkBancoDados-imgBtn linkBancoDados-imgBtnLink"/></a>
 
                             {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
                             {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
                                *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
 
-                            {downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)}
+                            {downloadMidias == item.id_dados && (<div className="linkBancoDados-divImgLoading"><img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)}
                         </p>                        
                     </div>
                 ))}
