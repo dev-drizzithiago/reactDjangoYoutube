@@ -27,7 +27,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
                                 <img className="playerMidiasMp3-imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                             </div>
 
-                            <p className="btnsAcao">
+                            <p className="playerMidiasMp3-btnsAcao">
                                 <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" />
                                 <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" />                    
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" />
