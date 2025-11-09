@@ -24,7 +24,7 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         setdownloadMidias(id_dados)
         const dadosDownload = {
             id_dados: id_dados,
-            midia: 'MP4',
+            midia: 'MP3',
         }
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
@@ -51,8 +51,9 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
             <div className="linkBancoDados-content">
                 {dados.map((item) => (
                     <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
-                        <div className="linkBancoDados-paragraphTitulos">
-                            <p>{item.autor_link}</p> <p>{item.titulo_link}</p>
+                        <div className="linkBancoDados-div_paragraphTitulos">
+                            <p className='linkBancoDados-paragraphs'>{item.autor_link}</p> 
+                            <p>{item.titulo_link}</p>
                         </div>
 
                         <div className="linkBancoDados-divImgMiniatura">
