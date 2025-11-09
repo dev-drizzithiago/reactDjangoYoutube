@@ -19,8 +19,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
             <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
                         <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
-                            <div className="playerMidiasMp3-paragraphTitulos">
-                                <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
+                            <div className="playerMidiasMp3-div_paragraphTitulos">
+                                <p className='playerMidiasMp3-paragraphs'>{item.nome_arquivo}</p> 
+                                <p>{item.duracao_midia}</p>
                             </div>
 
                             <div>
