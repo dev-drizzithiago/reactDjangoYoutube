@@ -1,5 +1,5 @@
 
-.imgBtn {
+.linkBancoDados-imgBtn {
   margin: auto;
   width: 50px;
   height: 50px;
@@ -8,30 +8,28 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 } 
 
-.content {
- border: 1px solid black;
+.linkBancoDados-content {
+  border: 1px solid black;
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
-  margin: auto;
+  justify-self: left;
   width: 100%;
-  max-width: 50%; 
   height: 625px;
-  max-height: 5%; /* altura máxima */  
   pointer-events: auto;
   grid-template-columns: repeat(2, 1fr); /* 4 linhas de altura igual */
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 
-.content::-webkit-scrollbar {
+.linkBancoDados-content::-webkit-scrollbar {
     width: 0px; /* Largura da barra de rolagem */
 }
 
-.content::-webkit-scrollbar-thumb {
+.linkBancoDados-content::-webkit-scrollbar-thumb {
     background: darkgrey; /* Cor da parte que pode ser arrastada */
 }
 
-.linksYoutube {
+.linkBancoDados-linksYoutube {
   /*border: 1px solid black;*/
   display: grid;    
   justify-content: center; /* Centraliza o conteúdo ao meio da DIV Y*/
@@ -51,7 +49,7 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 
-.paragraphTitulos{
+.linkBancoDados-paragraphTitulos{
   width: 100%;
   height: 125px;
   margin-bottom: 10px;
@@ -59,12 +57,12 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 
-.divImgMiniatura {
+.linkBancoDados-divImgMiniatura {
   margin: auto;
   border-radius: 10px;
   border: 1px solid black;
 }
-  .imgMiniatura{
+  .linkBancoDados-imgMiniatura{
       width: 350px;
       height: 250px;
       display: flex;
@@ -73,13 +71,13 @@
       box-shadow: 1px 1px 1px black;
     }
 
-.btnsAcao {
+.linkBancoDados-btnsAcao {
   display: flex;  
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }  
 
-.divImgLoading{
+.linkBancoDados-divImgLoading{
   width: 50px;
   height: 50px;
   margin-top: 5px;
@@ -87,7 +85,7 @@
   margin-right: 15px;  
   border-radius: 10px;  
 } 
- .imgLoading{
+ .linkBancoDados-imgLoading{
     border-radius: 10px;
     justify-content: center;
     align-items: center;
