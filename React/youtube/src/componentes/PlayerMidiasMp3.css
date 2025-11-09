@@ -1,7 +1,7 @@
 .playerMidiasMp3-imgBtn {
-  margin: auto;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
+  
   margin: 5px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
@@ -71,8 +71,8 @@
 }
   .playerMidiasMp3-imgMiniatura{
     box-sizing: border-box;
-      width: 350px;
-      height: 250px;
+      width: 150px;
+      height: 100px;
       display: flex;
       margin: auto;
       border-radius: 10px;
