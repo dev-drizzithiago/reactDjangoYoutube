@@ -18,6 +18,7 @@
   grid-template-columns: repeat(2, 1fr); /* 4 linhas de altura igual */
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  box-sizing: border-box;
 }
 
 .playerMidiasMp3-content::-webkit-scrollbar {
@@ -40,6 +41,8 @@
   margin-left: auto;
   margin-right: auto; 
   margin-top: 70px;
+
+  box-sizing: border-box;
   
   padding: 10px;
   flex-direction: column;
@@ -56,15 +59,18 @@
   margin: auto;
   margin-bottom: 10px;
   border-radius: 10px;
+  box-sizing: border-box;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 
 .playerMidiasMp3-divImgMiniatura {
+  box-sizing: border-box;
   margin: auto;
   border-radius: 10px;
   border: 1px solid black;
 }
   .playerMidiasMp3-imgMiniatura{
+    box-sizing: border-box;
       width: 350px;
       height: 250px;
       display: flex;
@@ -74,6 +80,7 @@
     }
 
 .playerMidiasMp3-btnsAcao {
+  box-sizing: border-box;
   display: flex;  
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
@@ -86,6 +93,7 @@
   margin-left: auto;
   margin-right: 15px;  
   border-radius: 10px;  
+  box-sizing: border-box;
 } 
  .playerMidiasMp3-imgLoading{
     border-radius: 10px;
