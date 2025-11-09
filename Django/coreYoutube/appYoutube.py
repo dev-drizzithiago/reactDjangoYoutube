@@ -68,7 +68,7 @@ def validacao_nome_arquivo(filename):
     :param filename: recebe o nome do arquivo, caso tenha erro, arquivo será corrigido.
     :return:
     """
-    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_ ]', '', filename)
+    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_]', '', filename)
 
 def data_hora_certa():
     """
@@ -167,7 +167,6 @@ class YouTubeDownload:
         path_url_midia = str(Path(self.PATH_MIDIA_MUSICS_URL, self.nome_validado)).replace('\\', '/')
         nome_m4a_to_mp3 = str(self.nome_validado).replace('.mp3', '.m4a')
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
-        nome_codificado = urllib.parse.quote(nome_miniatura_png, safe="_-.")
 
         # Valida se o nome do arquivo é muito extenso; nome é baseado do "C:/" até o último carectere.
         if int(len(path.join(self.PATH_MIDIA_TEMP, self.nome_validado)) > 254):
@@ -205,7 +204,7 @@ class YouTubeDownload:
 
                 # Salva a miniatura em uma pasta especifica.
                 musica.path_miniatura.save(
-                    nome_codificado,
+                    nome_miniatura_png,
                     ContentFile(response.content),
                     save=False  # **
                 )
