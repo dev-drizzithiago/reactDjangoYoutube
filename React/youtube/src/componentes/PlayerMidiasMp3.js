@@ -7,7 +7,7 @@ import useRequestDjango from "./useRequestDjango";
 const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
     const payload = {
-        tipoMidia: 'MP4',
+        tipoMidia: 'MP3',
     }
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, effectAtualizacao)
@@ -16,23 +16,21 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     return (
         <div>
             <h3>Lista MP3</h3>
-            <img src="/img/imgBtns/mp3.png" alt="player" className="imgBtn imgBtnMp3" />
-            <img src="/img/imgBtns/mp4.png" alt="player" className="imgBtn imgBtnMp4" />
-            <div className="content">
+            <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
-                        <div className="playMidias"  key={item.id_music}>
-                            <div className="paragraphTitulos">
+                        <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
+                            <div className="playerMidiasMp3-paragraphTitulos">
                                 <p>{item.nome_arquivo}</p> <p>{item.duracao_midia}</p>
                             </div>
 
                             <div>
-                                <img className="imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
+                                <img className="playerMidiasMp3-imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                             </div>
 
                             <p className="btnsAcao">
-                                <img src="/img/imgBtns/botao-play.png" alt="player" className="imgBtn imgBtnLink" />
-                                <img src="/img/imgBtns/download.png" alt="download" className="imgBtn imgBtnDownload" />                    
-                                <img src="/img/imgBtns/remover.png" alt="remover" className="imgBtn imgBtnRemover" />
+                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" />
+                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" />                    
+                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" />
 
                                 {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
