@@ -28,9 +28,12 @@ function App() {
        
           <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
+          <div className='app-divBtnImg'>
+            <img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" />
+            <img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" />
+          </div>
+          
 
-          <img src="/img/imgBtns/mp3.png" alt="player" className="playerMidiasMp3-imgBtn" />
-          <img src="/img/imgBtns/mp4.png" alt="player" className="playerMidiasMp3-imgBtn" />
           <div className='app-divLinksMidias'>
             <LinkBancoDados triggerAtualizacao={atualizarBanco} />
             <PlayerMidiasMp3 />
