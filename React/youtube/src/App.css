@@ -37,13 +37,24 @@
     transform: rotate(360deg);
   }
 }
+.app-divBtnImg{
+  border: 1 solid black;
+  width: 100%;
+  height: 200px;
+  margin-top: 1%;
+}
+.app-imgBtn {
+  width: 80px;
+  height: 80px;
+}
 
 .app-divLinksMidias{
-  /*border: 1px solid black;*/
+  border: 1px solid black;
   display: flex;
   width: 100%;
   height: 100%;
   padding: 15px;
+  margin: auto;
 
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
