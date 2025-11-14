@@ -9,7 +9,7 @@
 
 /* bloco principal dos links */
 .linkBancoDados-content {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   justify-self: left;
@@ -64,15 +64,14 @@
 } 
 
 .linkBancoDados-divImgMiniatura {
-  /*box-sizing: border-box;*/
+  /*border: 1px solid black;*/
+  box-sizing: border-box;
   margin: auto;
+  width: 100%;
   border-radius: 10px;
-  border: 1px solid black;
 }
   .linkBancoDados-imgMiniatura{
-      /*box-sizing: border-box;*/
       width: 75%;
-      height: 75%;
       display: flex;
       margin: auto;
       border-radius: 10px;
@@ -81,7 +80,6 @@
 
 .linkBancoDados-btnsAcao {
   box-sizing: border-box;
-  border: 1px solid black;
   width: 100%;
   display: flex;  
   border-radius: 10px;
@@ -89,14 +87,16 @@
 }  
 
 .linkBancoDados-divImgLoading{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   margin-top: 5px;
   margin-left: auto;
   margin-right: 15px;  
   border-radius: 10px;  
 } 
  .linkBancoDados-imgLoading{
+    width: 30px;
+    height: 30px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
