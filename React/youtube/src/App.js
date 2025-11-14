@@ -18,22 +18,30 @@ function App() {
     estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
+  const [elementoSelecionado, setElementoSelecionado] = useState(false)
+
+  const linksSalvos = () => {
+    console.log('Links')
+  }
+  const midiasMp3 = () => {
+    console.log('MP3')
+  }
+  const midiasMp4 = () => {
+    console.log('MP4')
+  }
 
   return (
     <div className="App">
-      {/**<img src="/img/imgBtns/pasta_links.png" alt="links" className="imgBtn btnAdd" />
-      <img src="/img/imgBtns/mp3.png" alt="adicionar" className="imgBtn btnLimpar" />   
-      <img src="/img/imgBtns/mp4.png" alt="adicionar" className="imgBtn btnLimpar" />  */}
-        
        
           <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
           <div className='app-divBtnImg'>
-            <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" />
-            <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" />
-            <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" />
+            <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos} />
+            <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}   />
+            <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}   />
           </div>
           
+
           <LinkBancoDados triggerAtualizacao={atualizarBanco} />
           <PlayerMidiasMp3 />
           
