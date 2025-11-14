@@ -7,13 +7,14 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 } 
 
+/* bloco principal dos links */
 .linkBancoDados-content {
   border: 1px solid black;
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   justify-self: left;
   width: 100%;
-  height: 400px;
+  height: 500px;
   margin: auto;
   margin-right: 5px;
   pointer-events: auto;
@@ -31,6 +32,7 @@
     background: darkgrey; /* Cor da parte que pode ser arrastada */
 }
 
+/* bloco interno dos links */
 .linkBancoDados-linksYoutube {
   /*border: 1px solid black;*/
   display: grid;    
@@ -38,7 +40,7 @@
   align-items: center; /* Centraliza o conteúdo ao meio da DIV X*/
   max-width: 80%;
   width: 100%;
-  height: 325px;
+  height: 425px;
 
   margin-left: auto;
   margin-right: auto; 
@@ -62,15 +64,15 @@
 } 
 
 .linkBancoDados-divImgMiniatura {
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
   margin: auto;
   border-radius: 10px;
   border: 1px solid black;
 }
   .linkBancoDados-imgMiniatura{
-      box-sizing: border-box;
-      width: 225px;
-      height: 125px;
+      /*box-sizing: border-box;*/
+      width: 75%;
+      height: 75%;
       display: flex;
       margin: auto;
       border-radius: 10px;
