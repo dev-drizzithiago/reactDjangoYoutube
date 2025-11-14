@@ -1,4 +1,5 @@
 /**  key= só utilizando que a lista não possui uma chave. */
+import { useEffect, useState } from 'react';
 import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
@@ -9,8 +10,13 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     const payload = {
         tipoMidia: 'MP3',
     }
+    
+    const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
+    useEffect(()=>{
+        setAtualizacaoMidiaMp3(effectAtualizacao)
+    }, [effectAtualizacao])
 
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, effectAtualizacao)
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     return (
