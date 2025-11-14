@@ -6,7 +6,6 @@ import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
 
-
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) 
     é onde você coloca lógica, hooks, variáveis, chamadas de API, etc.
@@ -18,16 +17,19 @@ function App() {
     estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
-  const [elementoSelecionado, setElementoSelecionado] = useState(false)
+  const [elementoSelecionado, setElementoSelecionado] = useState(0)
 
   const linksSalvos = () => {
     console.log('Links')
+    setElementoSelecionado(1)
   }
   const midiasMp3 = () => {
     console.log('MP3')
+    setElementoSelecionado(2)
   }
   const midiasMp4 = () => {
     console.log('MP4')
+    setElementoSelecionado(3)
   }
 
   return (
@@ -40,10 +42,12 @@ function App() {
             <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}   />
             <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}   />
           </div>
-          
 
-          <LinkBancoDados triggerAtualizacao={atualizarBanco} />
-          <PlayerMidiasMp3 />
+          {elementoSelecionado === 1 && <LinkBancoDados triggerAtualizacao={atualizarBanco} />}
+          {elementoSelecionado === 2 && <PlayerMidiasMp3 />}
+
+          
+          
           
           
        
