@@ -1,6 +1,7 @@
 import './App.css';
 import useCsrfInit from './componentes/useCsrfInit';
 import { useState } from 'react';
+import { Route, BrowserRouter, Link } from 'react-router-dom';
 
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
@@ -35,18 +36,17 @@ function App() {
   return (
     <div className="App">
 
-          
-          <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
-          <div className='app-divBtnImg'>
-            <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos} />
-            <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}   />
-            <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}   />
-          </div>
+      <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
-          {elementoSelecionado === 1 && <LinkBancoDados triggerAtualizacao={atualizarBanco} />}
-          {elementoSelecionado === 2 && <PlayerMidiasMp3 />}
-       
+      <div className='app-divBtnImg'>
+        <Link to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" /></Link>
+        <Link to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" /></Link>
+        <Link to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" /></Link>
+      </div>
+
+      {elementoSelecionado === 1 && <LinkBancoDados triggerAtualizacao={atualizarBanco} />}
+      {elementoSelecionado === 2 && <PlayerMidiasMp3 />}
     </div>
   );
 }
