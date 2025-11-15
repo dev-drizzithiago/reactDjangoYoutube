@@ -46,11 +46,6 @@ function App() {
 
           {elementoSelecionado === 1 && <LinkBancoDados triggerAtualizacao={atualizarBanco} />}
           {elementoSelecionado === 2 && <PlayerMidiasMp3 />}
-
-          
-          
-          
-          
        
     </div>
   );
