@@ -4,8 +4,11 @@
   height: 40px;
   margin: 5px;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);  
 } 
+  .linkBancoDados-imgBtn:active {
+    transform: translateY(4px);
+}
 
 /* bloco principal dos links */
 .linkBancoDados-content {
