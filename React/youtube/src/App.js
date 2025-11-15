@@ -36,7 +36,6 @@ function App() {
   return (
     <div className="App">
 
-
       <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
       <div className='app-divBtnImg'>
