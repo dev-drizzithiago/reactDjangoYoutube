@@ -53,6 +53,10 @@
     width: 80px;
     height: 80px;  
   }
+  .app-imgBtn:active {
+    transform: translateY(4px);
+    border-bottom: 5px solid black;
+}
 
 .app-divLinksMidias{
   /*border: 1px solid black;*/
