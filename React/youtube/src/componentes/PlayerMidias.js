@@ -1,12 +1,13 @@
-import { useState } from "react";
 
-export const PlayerMidias = ({linkMidia, tipoMidia}) => {
+export const PlayerMidias = ({executandoMidia}) => {
+
+    console.log(executandoMidia)
 
   return (
     <div>
         <h1> PLAYER DE MIDIAS</h1>
         <video width="500px" height="600px">
-            <source src={linkMidia} type={tipoMidia}/>
+            <source src={executandoMidia[0]} type={executandoMidia[1]}/>
         </video>        
     </div>
   )
