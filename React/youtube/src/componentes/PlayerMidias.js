@@ -1,11 +1,9 @@
 import './PlayerMidias.css'
 export const PlayerMidias = ({executandoMidia, fecharPlayer}) => {
 
-    console.log(executandoMidia)
-
     const fecharPlayerMidia = () => {
       console.log('Fechar Player')
-      fecharPlayer(0)
+      fecharPlayer()
     }
 
   return (
