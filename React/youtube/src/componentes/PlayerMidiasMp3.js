@@ -4,8 +4,7 @@ import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
 
-
-const PlayerMidiasMp3 = ({ effectAtualizacao }) => {    
+const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
     const payload = {
         tipoMidia: 'MP3',
@@ -16,13 +15,14 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
         setAtualizacaoMidiaMp3(effectAtualizacao)
     }, [effectAtualizacao])
 
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3)
-    console.log(dados)
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+    const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
+    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
 
-
-    const processoPlayerMidia = () => {
+    const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia..')
+
+        /** Envia os dados para o elemento principal (app) */
+        executaMidia(linkMidia, 'mp3');
     }
 
     const downloadMidia = () => {
@@ -51,7 +51,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
 
                             <p className="playerMidiasMp3-btnsAcao">
                                 <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
-                                onClick={() => processoPlayerMidia(item.path_arquivo)} />
+                                onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
                                 <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
