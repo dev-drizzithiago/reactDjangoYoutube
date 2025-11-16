@@ -45,6 +45,10 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
         setdownloadMidias(false);
     }
 
+    const playerMidiaSelecionada = () => {
+        
+    }
+
     return (
         <div>
             <h3> Links para download </h3>
