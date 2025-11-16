@@ -49,7 +49,7 @@ function App() {
 
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
-          <Route path='midiasMp3' element={<PlayerMidiasMp3 playMidia={() => setLinkMidia()} />}/>
+          <Route path='midiasMp3' element={<PlayerMidiasMp3 executaMidia={() => setLinkMidia()} />}/>
         </Routes>
       </BrowserRouter>
       
