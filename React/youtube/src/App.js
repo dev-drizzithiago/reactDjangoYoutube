@@ -1,6 +1,6 @@
 import './App.css';
 import useCsrfInit from './componentes/useCsrfInit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
@@ -20,13 +20,14 @@ function App() {
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
-  const [linkMidia, setLinkMidia] = useState([null, null])
-  const [ativarPlayer, setAtivarPlayer] = useState(false)
+  const [linkMidia, setLinkMidia] = useState([])
+  const [ativarPlayer, setAtivarPlayer] = useState(0)
 
-  if (linkMidia[0] !== null) {
-    console.log(linkMidia)
-    setAtivarPlayer(true)
-  }
+  useEffect(() => {
+    setAtivarPlayer(1)
+  }, [linkMidia])
+
+  console.log(ativarPlayer, linkMidia)
 
   const linksSalvos = () => {
     console.log('Links')
@@ -59,8 +60,8 @@ function App() {
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
           <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
         </Routes>
+
       </BrowserRouter>
-      
     </div>
   );
 }
