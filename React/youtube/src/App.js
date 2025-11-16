@@ -1,7 +1,7 @@
 import './App.css';
 import useCsrfInit from './componentes/useCsrfInit';
 import { useState } from 'react';
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
@@ -39,9 +39,9 @@ function App() {
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
         <div className='app-divBtnImg'>
-          <Link to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" /></Link>
-          <Link to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" /></Link>
-          <Link to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" /></Link>
+          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" /></NavLink>
+          <NavLink to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" /></NavLink>
+          <NavLink to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" /></NavLink>
         </div>
 
         <Routes>
