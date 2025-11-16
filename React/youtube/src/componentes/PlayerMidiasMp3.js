@@ -17,7 +17,22 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
     }, [effectAtualizacao])
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3)
+    console.log(dados)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+
+
+    const processoPlayerMidia = () => {
+        console.log('Executando mídia..')
+    }
+
+    const downloadMidia = () => {
+        console.log('Download da mídia..')
+    }
+
+    const removeDeleteMidia = () => {
+        console.log('Removendo a mídia..')
+    }
+
 
     return (
         <div>
@@ -35,9 +50,14 @@ const PlayerMidiasMp3 = ({ effectAtualizacao }) => {
                             </div>
 
                             <p className="playerMidiasMp3-btnsAcao">
-                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" />
-                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" />                    
-                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" />
+                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
+                                onClick={() => processoPlayerMidia(item.path_arquivo)} />
+
+                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
+                                onClick={() => downloadMidia(item.path_arquivo)} />  
+
+                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
+                                onClick={() => removeDeleteMidia(item.path_arquivo)} />
 
                                 {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
