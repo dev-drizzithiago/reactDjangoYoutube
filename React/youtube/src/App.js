@@ -21,12 +21,11 @@ function App() {
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
-  const [ativarPlayer, setAtivarPlayer] = useState(0)
+  const [ativarPlayer, setAtivarPlayer] = useState(false)
 
-  console.log(linkMidia)
-
-  if (linkMidia[1] === 'mp3') {
+  if (linkMidia[0] !== null) {
     console.log(linkMidia)
+    setAtivarPlayer(true)
   }
 
   const linksSalvos = () => {
@@ -49,9 +48,9 @@ function App() {
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
         <div className='app-divBtnImg'>
-          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos} /></NavLink>
-          <NavLink to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" onClick={midiasMp3} /></NavLink>
-          <NavLink to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" onClick={midiasMp4} /></NavLink>
+          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  /></NavLink>
+          <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    /></NavLink>
+          <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
         </div>
 
         {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} />}
