@@ -20,11 +20,13 @@ function App() {
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
-  const [linkMidia, setLinkMidia] = useState([])
+  const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(0)
 
   useEffect(() => {
-    setAtivarPlayer(1)
+    if (linkMidia[0] !== null) {
+      setAtivarPlayer(1)
+    }
   }, [linkMidia])
 
   const linksSalvos = () => {
