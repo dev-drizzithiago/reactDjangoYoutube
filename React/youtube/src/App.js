@@ -9,14 +9,12 @@ import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
 import PlayerMidias from "./componentes/PlayerMidias"
 
 function App() {
-  {/**- Tudo fora do return (dentro da função do componente) 
-    é onde você coloca lógica, hooks, variáveis, chamadas de API, etc.
- */}
+  {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */}
 
   /** Recebe um GET do django com o cookies */
   useCsrfInit();
-  {/** - Tudo dentro do return é JSX, ou seja, a 
-    estrutura visual que será renderizada na tela.*/}
+  
+  {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
@@ -54,7 +52,7 @@ function App() {
           <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
         </div>
 
-        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} />}
+        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={(desativarPlayer)=> setAtivarPlayer(desativarPlayer)} />}
 
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
