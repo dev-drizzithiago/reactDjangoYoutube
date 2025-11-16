@@ -13,19 +13,24 @@ function App() {
 
   /** Recebe um GET do django com o cookies */
   useCsrfInit();
-  
+
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
-  const [ativarPlayer, setAtivarPlayer] = useState(0)
+  const [ativarPlayer, setAtivarPlayer] = useState(false)
 
   useEffect(() => {
     if (linkMidia[0] !== null) {
-      setAtivarPlayer(1)
+      setAtivarPlayer(true)
     }
   }, [linkMidia])
+
+  const fecharPlayerMidia = () => {
+    setAtivarPlayer(false)
+    setLinkMidia([null, null])
+  }
 
   const linksSalvos = () => {
     console.log('Links')
@@ -52,7 +57,7 @@ function App() {
           <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
         </div>
 
-        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={(desativarPlayer)=> setAtivarPlayer(desativarPlayer)} />}
+        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
