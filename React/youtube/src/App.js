@@ -27,8 +27,6 @@ function App() {
     setAtivarPlayer(1)
   }, [linkMidia])
 
-  console.log(ativarPlayer, linkMidia)
-
   const linksSalvos = () => {
     console.log('Links')
     setElementoSelecionado(1)
