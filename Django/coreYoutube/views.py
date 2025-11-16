@@ -151,7 +151,7 @@ def download_midias(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
-    
+
     print(dados_json)
 
     return JsonResponse({
