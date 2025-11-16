@@ -26,11 +26,11 @@ function App() {
   }
   const midiasMp3 = () => {
     console.log('MP3')
-    setElementoSelecionado(2)
+    setElementoSelecionado(1)
   }
   const midiasMp4 = () => {
     console.log('MP4')
-    setElementoSelecionado(3)
+    setElementoSelecionado(1)
   }
 
   return (
@@ -39,9 +39,9 @@ function App() {
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
         <div className='app-divBtnImg'>
-          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" /></NavLink>
-          <NavLink to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" /></NavLink>
-          <NavLink to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" /></NavLink>
+          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos} /></NavLink>
+          <NavLink to="/midiasMp3"><img src="/img/imgBtns/mp3.png" alt="player" className="app-imgBtn" onClick={midiasMp3} /></NavLink>
+          <NavLink to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" onClick={midiasMp4} /></NavLink>
         </div>
 
         <Routes>
