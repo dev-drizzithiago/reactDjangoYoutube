@@ -140,3 +140,21 @@ def listagem_midias(request):
         'erro_processo': erro_processo,
         'dados_django': lista_midias_django,
     })
+
+def download_midias(request):
+    if request.method != "POST":
+        return JsonResponse({
+            'mensagem_processo': 'Apenas POST é permitido',
+            'erro_processo': 1
+        })
+    mensagem_erro = None
+    erro_processo = None
+
+    dados_json = json.loads(request.body)
+    
+    print(dados_json)
+
+    return JsonResponse({
+        'mensagem_erro': mensagem_erro,
+        'erro_processo': erro_processo
+    })
