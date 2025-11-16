@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
+import sendRequestDjango from './sendRequestDjango'
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
@@ -32,7 +33,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             'linkDownload': midiaDownload,
             'tipoDownload': 'mp3',
         }
-        const {dados, carregando} = useRequestDjango("http://localhost:8000/download_midias/", payload);
+        const {dados, carregando} = sendRequestDjango("http://localhost:8000/download_midias/", payload);
         if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
         console.log(dados)
     }
