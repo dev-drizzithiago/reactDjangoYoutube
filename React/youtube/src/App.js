@@ -6,6 +6,7 @@ import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
+import PlayerMidias from "./componentes/PlayerMidias"
 
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) 
@@ -19,6 +20,7 @@ function App() {
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
+  const [linkMidia, setLinkMidia] = useState(null)
 
   const linksSalvos = () => {
     console.log('Links')
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <PlayerMidias />
       <BrowserRouter>
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
@@ -46,9 +49,8 @@ function App() {
 
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
-          <Route path='midiasMp3' element={<PlayerMidiasMp3 />}/>
+          <Route path='midiasMp3' element={<PlayerMidiasMp3 playMidia={() => setLinkMidia()} />}/>
         </Routes>
-        
       </BrowserRouter>
       
     </div>
