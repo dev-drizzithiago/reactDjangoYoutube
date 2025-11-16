@@ -21,8 +21,13 @@ function App() {
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
+  const [ativarPlayer, setAtivarPlayer] = useState(0)
 
   console.log(linkMidia)
+
+  if (linkMidia[1] === 'mp3') {
+    console.log(linkMidia)
+  }
 
   const linksSalvos = () => {
     console.log('Links')
@@ -39,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <PlayerMidias />
+      
       <BrowserRouter>
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
@@ -49,9 +54,10 @@ function App() {
           <NavLink to="/midiasMp4"><img src="/img/imgBtns/mp4.png" alt="player" className="app-imgBtn" onClick={midiasMp4} /></NavLink>
         </div>
 
+        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} />}
+
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
-
           <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
         </Routes>
       </BrowserRouter>
