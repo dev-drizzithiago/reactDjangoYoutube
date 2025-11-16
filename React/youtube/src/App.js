@@ -20,7 +20,9 @@ function App() {
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
-  const [linkMidia, setLinkMidia] = useState(null)
+  const [linkMidia, setLinkMidia] = useState([null, null])
+
+  console.log(linkMidia)
 
   const linksSalvos = () => {
     console.log('Links')
@@ -49,7 +51,8 @@ function App() {
 
         <Routes>
           <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
-          <Route path='midiasMp3' element={<PlayerMidiasMp3 executaMidia={() => setLinkMidia()} />}/>
+
+          <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
         </Routes>
       </BrowserRouter>
       
