@@ -35,9 +35,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             'linkDownload': midiaDownload,
         }
 
-        const {dados, carregando} = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
-        console.log(carregando, dados)
-        if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
+        const dados = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
+        console.log(dados)
    }
 
     const removeDeleteMidia = () => {
