@@ -82,9 +82,11 @@ def data_hora_certa():
 class YouTubeDownload:
 
     PATH_MIDIA_MOVIES = path.join(settings.MEDIA_ROOT, 'movies')
-    PATH_MIDIA_MOVIES_URL = path.join(settings.MEDIA_URL, 'movies')
+    PATH_MIDIA_MOVIES_URL = 'movies'
+
     PATH_MIDIA_MUSICS = path.join(settings.MEDIA_ROOT, 'musics')
-    PATH_MIDIA_MUSICS_URL = path.join(settings.MEDIA_URL, 'musics')
+    PATH_MIDIA_MUSICS_URL = 'musics'
+
     PATH_MIDIA_TEMP = path.join(settings.MEDIA_ROOT, 'temp')
 
     def __init__(self):
