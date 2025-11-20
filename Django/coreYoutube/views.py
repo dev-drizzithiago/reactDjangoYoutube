@@ -7,6 +7,7 @@ from urllib.parse import quote
 from django.core.cache import cache
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth import authenticate, login, logout
 
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from DjangoYouTube import settings
@@ -52,6 +53,11 @@ def requestBaseDados(request):
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
         }, status=400)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            'user_deslogado': 0
+        })
 
     dados_json = json.loads(request.body)
     query_dados_youtube = DadosYoutube.objects.all().order_by('-id_dados').values()
