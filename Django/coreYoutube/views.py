@@ -149,6 +149,7 @@ def preparar_midias_to_download(request):
             'mensagem_processo': 'Apenas POST é permitido',
             'erro_processo': 1
         })
+
     mensagem_erro = None
     erro_processo = None
 
@@ -157,7 +158,8 @@ def preparar_midias_to_download(request):
 
     if dados_json['tipoDownload'] == 'mp3':
         caminho_relativo = dados_json['linkDownload']
-        caminho_abs_midia = os.path.join(settings.MEDIA_ROOT, caminho_relativo)
+        caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
+        print(caminho_abs_midia)
 
 
     elif dados_json['tipoDownload'] == 'mp4':
@@ -167,3 +169,6 @@ def preparar_midias_to_download(request):
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo
     })
+
+def download_da_midia(request):
+    return
