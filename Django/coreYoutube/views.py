@@ -159,7 +159,10 @@ def preparar_midias_to_download(request):
     if dados_json['tipoDownload'] == 'mp3':
         caminho_relativo = dados_json['linkDownload']
         caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
+        nome_da_midia = os.path.basename(caminho_abs_midia)
         print(caminho_abs_midia)
+        print(nome_da_midia)
+        
 
 
     elif dados_json['tipoDownload'] == 'mp4':
