@@ -2,9 +2,11 @@ import os.path
 import uuid
 import json
 
+from urllib.parse import quote
+
 from django.core.cache import cache
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from DjangoYouTube import settings
@@ -156,18 +158,13 @@ def preparar_midias_to_download(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
-    print(dados_json)
 
-    if dados_json['tipoDownload'] == 'mp3':
-        caminho_relativo = dados_json['linkDownload']
-        caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
-        nome_da_midia = os.path.basename(caminho_abs_midia)
-        token = str(uuid.uuid4())
-        cache.set(token, caminho_abs_midia, timeout=300)
-        download_url = f"/download_da_midia/?token{token}"
-        print(download_url)
-    elif dados_json['tipoDownload'] == 'mp4':
-        print('Download mp4')
+    caminho_relativo = dados_json['linkDownload']
+    caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
+    nome_da_midia = os.path.basename(caminho_abs_midia)
+    token = str(uuid.uuid4())
+    cache.set(token, caminho_abs_midia, timeout=300)
+    download_url = f"/download_da_midia/?token={token}"
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
@@ -176,8 +173,18 @@ def preparar_midias_to_download(request):
     })
 
 def download_da_midia(request):
-    return
+    token = request.GET.get('token')
+    caminho_arquivo = cache.get(token)
 
+    if not caminho_arquivo or not os.path.exists(caminho_arquivo):
+        return JsonResponse({
+            'mensagem_erro': 'Token invalido ou expirado.',
+            'erro_processo': 1,
+        })
+    with open(caminho_arquivo, 'rb') as file:
+        response = HttpResponse(file.read(), content_type='application/octet-stream')
+        response['Content-Disposition'] = f'attachment; filename="{quote(os.path.basename(caminho_arquivo))}"'
+    return response
 
 def consultar_progresso(request):
     token = request.GET.get('token')
