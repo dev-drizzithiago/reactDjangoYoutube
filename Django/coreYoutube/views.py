@@ -161,9 +161,14 @@ def preparar_midias_to_download(request):
 
     caminho_relativo = dados_json['linkDownload']
     caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
+
+    print('Caminho abs', settings.MEDIA_ROOT)
+
     nome_da_midia = os.path.basename(caminho_abs_midia)
+
     token = str(uuid.uuid4())
-    cache.set(token, caminho_abs_midia, timeout=300)
+
+    cache.set(token, caminho_abs_midia, timeout=600)
     download_url = f"/download_da_midia/?token={token}"
 
     return JsonResponse({
@@ -175,6 +180,8 @@ def preparar_midias_to_download(request):
 def download_da_midia(request):
     token = request.GET.get('token')
     caminho_arquivo = cache.get(token)
+
+    print(caminho_arquivo)
 
     if not caminho_arquivo or not os.path.exists(caminho_arquivo):
         return JsonResponse({
