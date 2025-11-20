@@ -2,7 +2,6 @@ import getCookies from "./getCookies";
 
 async function sendRequestDjango(linkSendRequest, payload) {    
     const payloadString = JSON.stringify(payload)
-    
     try {
         const response = await fetch(linkSendRequest, {
             method: 'POST',
@@ -14,7 +13,9 @@ async function sendRequestDjango(linkSendRequest, payload) {
             credentials: 'include',
         });
 
-        const responseDjango = await response.json();    
+        const responseDjango = await response.json();  
+        console.log(responseDjango)  
+
         return responseDjango
         
     } catch (error) {
