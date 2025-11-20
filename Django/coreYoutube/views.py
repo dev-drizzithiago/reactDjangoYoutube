@@ -151,8 +151,13 @@ def download_midias(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
-
     print(dados_json)
+
+    if dados_json['tipoDownload'] == 'mp3':
+        print('Download mp3')
+
+    elif dados_json['tipoDownload'] == 'mp4':
+        print('Download mp4')
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
