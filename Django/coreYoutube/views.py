@@ -29,6 +29,22 @@ def csrf_token_view(request):
         'mensagem': 'Token CSRF enviado',
     })
 
+def login(request):
+    if request.method != "POST":
+        return JsonResponse({
+            'mensagem': 'É valido apenas POST',
+        }, status=400)
+
+    mensagem_erro = None
+    erro_processo = None
+
+    dados_json = json.loads(request.body)
+
+    return JsonResponse({
+        'mensagem_erro': mensagem_erro,
+        'erro_processo': erro_processo,
+    })
+
 # @csrf_protect
 def requestBaseDados(request):
     lista_dados_django = []
