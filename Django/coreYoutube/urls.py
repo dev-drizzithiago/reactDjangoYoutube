@@ -8,6 +8,7 @@ from .views import (
     remove_link,
     listagem_midias,
     preparar_midias_to_download,
+    download_da_midia,
 )
 
 from django.conf import settings
@@ -22,6 +23,7 @@ urlpatterns = [
     path('remove_link/', remove_link, name='remove_link'),
     path('listagem_midias/', listagem_midias, name='listagem_midias'),
     path('preparar_midias_to_download/', preparar_midias_to_download, name='preparar_midias_to_download'),
+    path('download_da_midia/', download_da_midia, name='download_da_midia'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
