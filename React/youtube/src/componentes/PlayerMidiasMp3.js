@@ -26,7 +26,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         executaMidia(linkMidia, 'mp3');
     }
 
-    const downloadMidia = (midiaDownload) => {
+    /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
+    const downloadMidia = async (midiaDownload) => {
         console.log('Download da mídia..')
 
         const payload = {
@@ -34,11 +35,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             'linkDownload': midiaDownload,
         }
 
-        const {dados, carregando} = sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
+        const {dados, carregando} = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
+        console.log(carregando, dados)
         if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
-
-        console.log(dados)
-    }
+   }
 
     const removeDeleteMidia = () => {
         console.log('Removendo a mídia..')
