@@ -36,7 +36,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         }
 
         const response = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
-        if (response && response.download_url)
+        if (response && response.download_url) {
+            const url = `http://localhost:8000${response.download_url}`
+            window.open(url, "_blank");
+        }
    }
 
     const removeDeleteMidia = () => {
