@@ -49,7 +49,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         console.log('Removendo a mídia..')
     }
 
-
     return (
         <div>
             <h3>Lista MP3</h3>
