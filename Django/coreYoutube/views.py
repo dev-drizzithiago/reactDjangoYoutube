@@ -1,5 +1,8 @@
 import os.path
+import uuid
+import json
 
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -9,7 +12,6 @@ from DjangoYouTube import settings
 from .appYoutube import YouTubeDownload
 from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
-import json
 
 def index(request):
     return render(request, 'index.html')
@@ -160,18 +162,26 @@ def preparar_midias_to_download(request):
         caminho_relativo = dados_json['linkDownload']
         caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
         nome_da_midia = os.path.basename(caminho_abs_midia)
-        print(caminho_abs_midia)
-        print(nome_da_midia)
-        
-
-
+        token = str(uuid.uuid4())
+        cache.set(token, caminho_abs_midia, timeout=300)
+        download_url = f"/download_da_midia/?token{token}"
+        print(download_url)
     elif dados_json['tipoDownload'] == 'mp4':
         print('Download mp4')
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
-        'erro_processo': erro_processo
+        'erro_processo': erro_processo,
+        'download_url': download_url,
     })
 
 def download_da_midia(request):
     return
+
+
+def consultar_progresso(request):
+    token = request.GET.get('token')
+    progresso = cache.get(f"Progresso_{token}", 0)
+    return JsonResponse({
+        'progresso': progresso
+    })
