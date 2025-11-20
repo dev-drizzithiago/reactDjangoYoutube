@@ -33,8 +33,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             'linkDownload': midiaDownload,
             'tipoDownload': 'mp3',
         }
-        const {dados, carregando} = sendRequestDjango("http://localhost:8000/download_midias/", payload);
+
+        const {dados, carregando} = sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
         if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
+
         console.log(dados)
     }
 
