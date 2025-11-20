@@ -14,8 +14,6 @@ async function sendRequestDjango(linkSendRequest, payload) {
         });
 
         const responseDjango = await response.json();  
-        console.log(responseDjango)  
-
         return responseDjango
         
     } catch (error) {
