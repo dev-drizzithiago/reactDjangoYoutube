@@ -1,13 +1,15 @@
+import os.path
+
 from django.shortcuts import render
 from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
+from DjangoYouTube import settings
 
 from .appYoutube import YouTubeDownload
+from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
 import json
-
-from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
 def index(request):
     return render(request, 'index.html')
@@ -141,7 +143,7 @@ def listagem_midias(request):
         'dados_django': lista_midias_django,
     })
 
-def download_midias(request):
+def preparar_midias_to_download(request):
     if request.method != "POST":
         return JsonResponse({
             'mensagem_processo': 'Apenas POST é permitido',
@@ -154,7 +156,9 @@ def download_midias(request):
     print(dados_json)
 
     if dados_json['tipoDownload'] == 'mp3':
-        print('Download mp3')
+        caminho_relativo = dados_json['linkDownload']
+        caminho_abs_midia = os.path.join(settings.MEDIA_ROOT, caminho_relativo)
+
 
     elif dados_json['tipoDownload'] == 'mp4':
         print('Download mp4')
