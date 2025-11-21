@@ -56,7 +56,7 @@ def requestBaseDados(request):
 
     if not request.user.is_authenticated:
         return JsonResponse({
-            'user_deslogado': 0
+            'user_deslogado': 1
         })
 
     dados_json = json.loads(request.body)
@@ -84,6 +84,12 @@ def requestAddLinks(request):
         return JsonResponse({
             'mensagem': 'É valido apenas POST'
         })
+
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            'user_deslogado': 1
+        })
+
     dados_json = json.loads(request.body)
 
     link_entrada = dados_json['link']
@@ -107,6 +113,7 @@ def requestAddLinks(request):
     }, status=400)
 
 def download_link(request):
+
     dados_json = json.loads(request.body)
 
     # Separa as informações que irão para o app de download
