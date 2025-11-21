@@ -57,7 +57,7 @@ function App() {
 
   return (
     <div className="App">
-      {statusLogin && <LoginUsuario />}
+      {!statusLogin && <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}  />}
 
       <BrowserRouter>
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
