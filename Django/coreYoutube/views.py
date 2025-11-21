@@ -54,10 +54,10 @@ def requestBaseDados(request):
             'mensagem': 'É valido apenas POST',
         }, status=400)
 
-    if not request.user.is_authenticated:
-        return JsonResponse({
-            'user_deslogado': 1
-        })
+    # if not request.user.is_authenticated:
+    #     return JsonResponse({
+    #         'user_deslogado': 1
+    #     })
 
     dados_json = json.loads(request.body)
     query_dados_youtube = DadosYoutube.objects.all().order_by('-id_dados').values()
