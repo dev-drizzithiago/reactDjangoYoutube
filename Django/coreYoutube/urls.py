@@ -9,6 +9,7 @@ from .views import (
     listagem_midias,
     preparar_midias_to_download,
     download_da_midia,
+    credenciais_login,
 )
 
 from django.conf import settings
@@ -16,6 +17,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('index', index, name='index'),
+    path('credenciais_login', credenciais_login, name='credenciais_login'),
     path('csrf_token_view/', csrf_token_view, name='csrf_token_view'),
     path('requestBaseDados/', requestBaseDados, name='requestBaseDados'),
     path('requestAddLinks/', requestAddLinks, name='requestAddLinks'),
