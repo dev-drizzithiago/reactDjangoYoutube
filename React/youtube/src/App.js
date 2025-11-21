@@ -21,22 +21,15 @@ function App() {
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
-  const [statusLogin, setStatusLogin] = useState(false)
+  const [statusLogin, setStatusLogin] = useState(true)
 
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
-  
-  useEffect(() => {
-    
-  }, [])
-  
-  const statusUserLogado = () => {
-  
-  }
 
+  
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
     setLinkMidia([null, null])
@@ -57,28 +50,22 @@ function App() {
 
   return (
     <div className="App">
-      {!statusLogin && <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}  />}
-
-      {statusLogin &&
+      <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
         <BrowserRouter>
-          <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
-
           <div className='app-divBtnImg'>
             <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  /></NavLink>
             <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    /></NavLink>
             <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
           </div>
-
           {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
+          {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
           <Routes>
             <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
             <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
-          </Routes>
+          </Routes>}
 
         </BrowserRouter>
-       }
-      
     </div>
   );
 }
