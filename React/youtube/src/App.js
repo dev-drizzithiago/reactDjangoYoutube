@@ -21,7 +21,7 @@ function App() {
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
-  const [statusLogin, setStatusLogin] = useState(true)
+  const [statusLogin, setStatusLogin] = useState(false)
 
   useEffect(() => {
     if (linkMidia[0] !== null) {
