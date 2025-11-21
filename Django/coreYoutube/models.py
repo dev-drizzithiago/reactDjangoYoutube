@@ -31,3 +31,9 @@ class MusicsSalvasServidor(Base):
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
     dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+
+class cadastro_usuarios(Base):
+    numero_registro = models.IntegerField(primary_key=True, default=0)
+    nome_usuario = models.CharField(max_length=255, default='<blank>')
+    email_usuario = models.CharField(max_length=255, default='email@teste.com')
+    senha_usuario = models.CharField(max_length=255, default='**********')
