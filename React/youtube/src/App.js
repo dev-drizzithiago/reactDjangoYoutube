@@ -7,6 +7,7 @@ import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
 import PlayerMidias from "./componentes/PlayerMidias"
+import LoginUsuario from './componentes/LoginUsuario';
 
 function App() {
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */}
@@ -20,12 +21,21 @@ function App() {
   const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
+  const [statusLogin, setStatusLogin] = useState(false)
 
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
+  
+  useEffect(() => {
+    
+  }, [])
+  
+  const statusUserLogado = () => {
+  
+  }
 
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
@@ -47,7 +57,8 @@ function App() {
 
   return (
     <div className="App">
-      
+      {statusLogin && <LoginUsuario />}
+
       <BrowserRouter>
         <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
 
