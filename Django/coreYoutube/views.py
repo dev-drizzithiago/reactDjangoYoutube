@@ -30,7 +30,7 @@ def csrf_token_view(request):
         'mensagem': 'Token CSRF enviado',
     })
 
-def login(request):
+def credenciais_login(request):
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
