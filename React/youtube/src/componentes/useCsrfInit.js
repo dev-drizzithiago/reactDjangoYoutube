@@ -10,12 +10,10 @@ const useCsrfInit = () => {
             credentials: 'include', // Recebe o cookies do django
         })
         .then(() => {
-            console.log('CSRF cookie recebido');
-
+            //console.log('CSRF cookie recebido');
         })
         .catch(err => {
             console.error("Erro ao obter CSRF cookie: ", err)
-        
         })
     })
 
