@@ -6,8 +6,10 @@ from urllib.parse import quote
 
 from django.core.cache import cache
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import authenticate, login, logout
+
 
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from DjangoYouTube import settings
@@ -40,6 +42,16 @@ def credenciais_login(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
+
+    USER = ''
+    PASS = ''
+    mail = ''
+
+    usuario = User.objects.create_user(
+        username='',
+        email='',
+        password='',
+    )
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
