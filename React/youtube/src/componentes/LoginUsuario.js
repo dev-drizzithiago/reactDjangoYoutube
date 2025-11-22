@@ -2,6 +2,9 @@ import './LoginUsuario.css'
 
 const LoginUsuario = () => {
 
+  const criarNovoUsuario = () => {
+    
+  }
 
   return (
     <div>
@@ -24,8 +27,6 @@ const LoginUsuario = () => {
             <img className="login-btnNewUser" src="/img/imgBtns/verificar.png" alt="" />
           </a>
         </div>
-        
-        
     </div>
   )
 }
