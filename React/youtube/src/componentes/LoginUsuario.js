@@ -6,11 +6,13 @@ const LoginUsuario = () => {
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
 
   const criarNovoUsuario = () => {
+    setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
   }
-
+  
   const salvarNovoUser = () => {
-     if (criarUser) {
+    setBtnCriarNovoUserAtivo(true)
+    if (criarUser) {
       setCriarUser(false)
     }
   }
