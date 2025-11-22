@@ -15,6 +15,7 @@
     width: 100%;
 }
 
+/*DIV PRINCIPAL*/
 .login-divInputs{
   box-sizing: border-box;
   border: 1px solid black;
@@ -23,7 +24,7 @@
   align-items: center;
   margin: auto;
   width: 75%;
-  height: 350px;
+  height: 500px;
   gap: 50px;
   padding: 15px;
 }
