@@ -5,7 +5,7 @@ const LoginUsuario = () => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
 
-  const [dadosUser, setDadosUser] = useState([])
+  const [dadosNovoUser, setDadosNovoUser] = useState([])
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -13,6 +13,7 @@ const LoginUsuario = () => {
   }
   
   const salvarNovoUser = () => {
+    console.log(dadosNovoUser)
     const PAYLOAD = {
       'tipoRequest': 'salvarCadastro',
       'dadosNovaCredencia': ''
@@ -32,7 +33,10 @@ const LoginUsuario = () => {
             <h3>Cadastro</h3>
             <label htmlFor="nomeCompleto: ">
               Nome Completo
-              <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' />
+              <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' 
+              value={dadosNovoUser.nomeCompleto}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
+              />
             </label>
 
             <label htmlFor='email'>
