@@ -13,7 +13,6 @@ const LoginUsuario = () => {
   }
   
   const salvarNovoUser = () => {
-    console.log(dadosNovoUser)
     const PAYLOAD = {
       'tipoRequest': 'salvarCadastro',
       'dadosNovaCredencia': ''
@@ -41,18 +40,29 @@ const LoginUsuario = () => {
 
             <label htmlFor='email'>
               E-mail
-              <input type="email" name='email' className='login-input login-inputEmail' />
+              <input type="email" name='email' className='login-input login-inputEmail' 
+              value={dadosNovoUser.novoEmail}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
+              />
             </label>
 
             <label htmlFor='senha'>
               Password
-              <input type="password" name='senha' className='login-input login-inputSenha' />
+              <input type="password" name='senha' className='login-input login-inputSenha'
+              value={dadosNovoUser.primeiraSenha}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              />
+              
             </label>
 
             <label htmlFor='confirm-senha'>
               Confirmar Password
-              <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' />
+              <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
+              value={dadosNovoUser.primeiraSenha}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              />
             </label>
+            
             <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="" onClick={salvarNovoUser}/>
           </div>}
 
