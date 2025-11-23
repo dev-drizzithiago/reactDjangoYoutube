@@ -10,10 +10,8 @@ const LoginUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
   }
-  
-  const salvarNovoUser = () => {
-    console.log(dadosNovoUser)
 
+  const salvarNovoUser = () => {
     const PAYLOAD = {
       'tipoRequest': 'salvarCadastro',
       'dadosNovaCredencia': ''
@@ -57,7 +55,6 @@ const LoginUsuario = () => {
               value={dadosNovoUser.primeiraSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
               />
-              
             </label>
 
             <label htmlFor='confirm-senha'>
