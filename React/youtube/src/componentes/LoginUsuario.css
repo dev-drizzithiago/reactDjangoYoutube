@@ -10,33 +10,35 @@
     transform: translateY(4px);
 }
 
-.input{
-    border: 1px solid black;
-    width: 100%;
-}
-
 /*DIV PRINCIPAL*/
 .login-divInputs{
+  /*border: 1px solid black;*/
   box-sizing: border-box;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 25%;
+  width: 50%;
   height: 500px;
+  padding: 20px;
   gap: 50px;
-  padding: 15px;
 
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 
+.login-divGridInputs{
+  display: grid;
+  margin-top: 2%;
+}
+
 .login-input {
   box-sizing: border-box;
-  width: 99%;
+  width: 75%;
   height: 50px;
   padding: 5px;
+  margin: auto;
+  border: none;
   font-size: 18pt;
   text-align: center;
 
@@ -45,16 +47,16 @@
 }
 
 .login-divCriarLogin{
+  /*border: 1px solid black;*/
+  width: 100%;
   border-radius: 10px;
   box-sizing: border-box;
-  border: 1px solid black;
-  width: 100%;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 .login-divLogin{
+  /*border: 1px solid black;*/
   width: 100%;
   border-radius: 10px;
   box-sizing: border-box;
-  border: 1px solid black;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
