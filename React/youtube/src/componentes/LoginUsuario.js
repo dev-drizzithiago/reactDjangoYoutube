@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 const LoginUsuario = () => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
-
   const [dadosNovoUser, setDadosNovoUser] = useState([])
 
   const criarNovoUsuario = () => {
@@ -13,14 +12,20 @@ const LoginUsuario = () => {
   }
   
   const salvarNovoUser = () => {
+    console.log(dadosNovoUser)
+
     const PAYLOAD = {
       'tipoRequest': 'salvarCadastro',
       'dadosNovaCredencia': ''
     }
 
-    setBtnCriarNovoUserAtivo(true)
-    if (criarUser) {
-      setCriarUser(false)
+    if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
+      setBtnCriarNovoUserAtivo(true)
+      if (criarUser) {
+        setCriarUser(false)
+      }
+    } else {
+      console.log('As senhas não confere!')
     }
   }
   
@@ -58,11 +63,11 @@ const LoginUsuario = () => {
             <label htmlFor='confirm-senha'>
               Confirmar Password
               <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
-              value={dadosNovoUser.primeiraSenha}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              value={dadosNovoUser.confirmSenha}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
               />
             </label>
-            
+
             <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="" onClick={salvarNovoUser}/>
           </div>}
 
