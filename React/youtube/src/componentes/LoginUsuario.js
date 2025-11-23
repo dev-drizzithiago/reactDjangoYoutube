@@ -33,51 +33,56 @@ const LoginUsuario = () => {
         <div className='login-divInputs'>          
           {criarUser && <div className='login-divCriarLogin'>
             <h3>Cadastro</h3>
-            <label htmlFor="nomeCompleto: ">
-              Nome Completo
+
+            <div className='login-divGridInputs'>
+              <label htmlFor="nomeCompleto">Nome Completo</label>              
               <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' 
               value={dadosNovoUser.nomeCompleto}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
               />
-            </label>
-
-            <label htmlFor='email'>
-              E-mail
+            </div>
+            
+            <div className='login-divGridInputs'>
+              <label htmlFor='email'>E-mail</label>              
               <input type="email" name='email' className='login-input login-inputEmail' 
               value={dadosNovoUser.novoEmail}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
               />
-            </label>
-
-            <label htmlFor='senha'>
-              Password
+            </div>
+            
+            <div className='login-divGridInputs'>
+              <label htmlFor='senha'>Password</label>
               <input type="password" name='senha' className='login-input login-inputSenha'
               value={dadosNovoUser.primeiraSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
-              />
-            </label>
-
-            <label htmlFor='confirm-senha'>
-              Confirmar Password
-              <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
-              value={dadosNovoUser.confirmSenha}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
-              />
-            </label>
+              />              
+            </div>
+            
+            
+            <div className='login-divGridInputs'>
+              <label htmlFor='confirm-senha'>Confirmar Password</label>                
+                <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
+                value={dadosNovoUser.confirmSenha}
+                onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
+                />              
+              </div>            
 
             <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="" onClick={salvarNovoUser}/>
           </div>}
 
           {!criarUser && <div className='login-divLogin'>
-            <h3>Login</h3>
-            <label htmlFor="usuario: ">
-              Usuário
-              <input type="text" name='usuario' className='login-input login-inputUsuario'/>
-            </label>
-            <label htmlFor="senha: ">
-              Senha
-              <input type="password" name='senha' className='login-input login-inputSenha'/>
-            </label>          
+              <h3>Login</h3>
+
+              <div className='login-divGridInputs'>
+                <label htmlFor="usuario">Usuário</label>              
+                <input type="text" name='usuario' className='login-input login-inputUsuario'/>            
+              </div>
+              
+              <div className='login-divGridInputs'>
+                <label htmlFor="senha">Senha</label>
+                <input type="password" name='senha' className='login-input login-inputSenha'/>
+              </div>
+                     
               <img className="login-btnNewUser login-btnVerificar" src="/img/imgBtns/verificar.png" alt="" />
               {
                 btnCriarNovoUserAtivo &&
