@@ -23,11 +23,11 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 75%;
+  width: 25%;
   height: 500px;
   gap: 50px;
   padding: 15px;
-  
+
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
@@ -52,9 +52,9 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 .login-divLogin{
+  width: 100%;
   border-radius: 10px;
   box-sizing: border-box;
   border: 1px solid black;
-  width: 100%;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
