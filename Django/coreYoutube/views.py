@@ -43,17 +43,18 @@ def credenciais_login(request):
 
     dados_json = json.loads(request.body)
 
-    print(dados_json)
-
-    USER = ''
-    PASS = ''
-    mail = ''
-
-    usuario = User.objects.create_user(
-        username='',
-        email='',
-        password='',
-    )
+    tipo_requisicao = dados_json['tipoRequest']
+    if tipo_requisicao == 'salvarCadastro':
+        dados_novo_cadastro = dados_json['dadosNovaCredencia']
+        USER = dados_novo_cadastro['nomeUsuario']
+        MAIL = dados_novo_cadastro['emailUsuario']
+        PASS = dados_novo_cadastro['passUsuario']
+        print(MAIL)
+        # usuario = User.objects.create_user(
+        #     username='',
+        #     email='',
+        #     password='',
+        # )
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
