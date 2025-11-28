@@ -42,7 +42,7 @@ const LoginUsuario = () => {
   }
   
   return (
-    <div>
+    <div className='login-divPrincipal'>
         <h1>Cadastro</h1>        
         <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
@@ -53,6 +53,14 @@ const LoginUsuario = () => {
               <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' 
               value={dadosNovoUser.nomeCompleto}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
+              />
+            </div>
+
+            <div className='login-divGridInputs'>
+              <label htmlFor="nomeUserLogin">Usuário Login</label>              
+              <input type="text" name='nomeUserLogin' className='login-input login-inputUserLogin' 
+              value={dadosNovoUser.UserLogin}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, UserLogin: e.target.value})}
               />
             </div>
             
