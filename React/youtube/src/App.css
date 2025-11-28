@@ -47,11 +47,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  background-color: #cecece3f;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
   .app-imgBtn {
     width: 80px;
-    height: 80px;  
+    height: 80px;
+    border-radius: 10px;
   }
   .app-imgBtn:active {
     transform: translateY(4px);
