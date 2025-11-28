@@ -43,6 +43,8 @@ def credenciais_login(request):
 
     dados_json = json.loads(request.body)
 
+    print(dados_json)
+
     USER = ''
     PASS = ''
     mail = ''
