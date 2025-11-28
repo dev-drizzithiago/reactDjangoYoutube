@@ -49,12 +49,12 @@ def credenciais_login(request):
         USER = dados_novo_cadastro['nomeUsuario']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
-        print(MAIL)
-        # usuario = User.objects.create_user(
-        #     username='',
-        #     email='',
-        #     password='',
-        # )
+
+        usuario = User.objects.create_user(
+            username=MAIL,
+            email=MAIL,
+            password=PASS,
+        )
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
