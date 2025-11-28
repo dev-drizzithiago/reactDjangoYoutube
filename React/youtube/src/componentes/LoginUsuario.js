@@ -27,6 +27,7 @@ const LoginUsuario = () => {
         'tipoRequest': 'salvarCadastro',
         'dadosNovaCredencia': {
           'nomeUsuario': dadosNovoUser.nomeCompleto,
+          'userLogin': dadosNovoUser.UserLogin,
           'emailUsuario': dadosNovoUser.novoEmail,
           'passUsuario': dadosNovoUser.confirmSenha, 
         },
