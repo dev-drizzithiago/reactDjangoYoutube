@@ -1,5 +1,6 @@
 import './LoginUsuario.css'
 import { useState, useEffect } from 'react'
+import sendRequestDjango from './sendRequestDjango'
 
 const LoginUsuario = () => {
   const [criarUser, setCriarUser] = useState(false)
@@ -11,26 +12,41 @@ const LoginUsuario = () => {
     setCriarUser(true)
   }
 
-  const salvarNovoUser = () => {
-    const PAYLOAD = {
-      'tipoRequest': 'salvarCadastro',
-      'dadosNovaCredencia': ''
-    }
+  const salvarNovoUser = async () => {    
 
     if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
-      setBtnCriarNovoUserAtivo(true)
+      setBtnCriarNovoUserAtivo(true)      
+
       if (criarUser) {
         setCriarUser(false)
       }
+
+      const linkSendRequest = `http://localhost:8000/credenciais_login/`;
+
+      const PAYLOAD = {
+        'tipoRequest': 'salvarCadastro',
+        'dadosNovaCredencia': {
+          'nomeUsuario': dadosNovoUser.nomeCompleto,
+          'emailUsuario': dadosNovoUser.novoEmail,
+          'password': dadosNovoUser.confirmSenha, 
+        },
+      }
+      
+      console.log(PAYLOAD)
+      const responseDjango = sendRequestDjango(linkSendRequest, PAYLOAD)
+      console.log(responseDjango)
+
     } else {
       console.log('As senhas não confere!')
     }
   }
+
+ 
   
   return (
     <div>
         <h1>Cadastro</h1>        
-        <div className='login-divInputs'>          
+        <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
             <h3>Cadastro</h3>
 
