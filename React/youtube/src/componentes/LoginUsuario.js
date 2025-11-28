@@ -28,20 +28,18 @@ const LoginUsuario = () => {
         'dadosNovaCredencia': {
           'nomeUsuario': dadosNovoUser.nomeCompleto,
           'emailUsuario': dadosNovoUser.novoEmail,
-          'password': dadosNovoUser.confirmSenha, 
+          'passUsuario': dadosNovoUser.confirmSenha, 
         },
       }
       
       console.log(PAYLOAD)
-      const responseDjango = sendRequestDjango(linkSendRequest, PAYLOAD)
+      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
       console.log(responseDjango)
 
     } else {
       console.log('As senhas não confere!')
     }
   }
-
- 
   
   return (
     <div>
