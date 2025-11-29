@@ -42,21 +42,31 @@ def credenciais_login(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
-
     tipo_requisicao = dados_json['tipoRequest']
+
     if tipo_requisicao == 'salvarCadastro':
-        dados_novo_cadastro = dados_json['dadosNovaCredencia']
+        dados_novo_cadastro = dados_json['dadosCredencial']
         NAME = dados_novo_cadastro['nomeUsuario']
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
-
-        usuario = User.objects.create_user(
-            firstname=NAME,
-            username=MAIL,
-            email=MAIL,
-            password=PASS,
-        )
+        try:
+            usuario = User.objects.create_user(
+                first_name=NAME,
+                username=MAIL,
+                email=MAIL,
+                password=PASS,
+            )
+            mensagem_erro = 'Cadastro realizado com sucesso.'
+            erro_processo = 0
+        except Exception as error:
+            print('Erro ao cadastrar usuário')
+            mensagem_erro = 'Erro ao cadastrar usuário.'
+            erro_processo = 1
+    elif tipo_requisicao == 'logar':
+        dados_novo_cadastro = dados_json['dadosCredencial']
+        USER = dados_novo_cadastro['userLogin']
+        PASS = dados_novo_cadastro['passUsuario']
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
