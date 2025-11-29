@@ -45,6 +45,7 @@ def credenciais_login(request):
     tipo_requisicao = dados_json['tipoRequest']
 
     if tipo_requisicao == 'salvarCadastro':
+
         dados_novo_cadastro = dados_json['dadosCredencial']
         NAME = dados_novo_cadastro['nomeUsuario']
         USER = dados_novo_cadastro['userLogin']
@@ -63,6 +64,7 @@ def credenciais_login(request):
             print('Erro ao cadastrar usuário')
             mensagem_erro = 'Erro ao cadastrar usuário.'
             erro_processo = 1
+
     elif tipo_requisicao == 'realizarLogin':
         dados_para_login = dados_json['dadosCredencial']
         USER = dados_para_login['userLogin']
