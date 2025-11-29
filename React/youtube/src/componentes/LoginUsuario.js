@@ -25,7 +25,7 @@ const LoginUsuario = () => {
 
       const PAYLOAD = {
         'tipoRequest': 'salvarCadastro',
-        'dadosNovaCredencia': {
+        'dadosCredencial': {
           'nomeUsuario': dadosNovoUser.nomeCompleto,
           'userLogin': dadosNovoUser.UserLogin,
           'emailUsuario': dadosNovoUser.novoEmail,
