@@ -106,7 +106,7 @@ const LoginUsuario = () => {
                 <label htmlFor="usuario">Usuário</label>              
                 <input type="text" name='usuario' className='login-input login-inputUsuario'
                 value={dadosParaLogin.userLogin}
-                onChange{e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
+                onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
                 />
                 
               </div>
@@ -115,7 +115,7 @@ const LoginUsuario = () => {
                 <label htmlFor="senha">Senha</label>
                 <input type="password" name='senha' className='login-input login-inputSenha'
                 value={dadosParaLogin.passLogin}
-                onChange{e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
+                onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
                 />
                 
               </div>
