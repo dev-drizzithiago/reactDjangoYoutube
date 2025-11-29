@@ -6,12 +6,14 @@ const LoginUsuario = () => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
+  const [dadosParaLogin, setDadosParaLogin] = useState([])
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
   }
 
+  /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
   const salvarNovoUser = async () => {    
 
     if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
@@ -42,6 +44,10 @@ const LoginUsuario = () => {
     }
   }
   
+  const eventoLogin = async () => {
+    console.log(dadosParaLogin)
+  }
+
   return (
     <div className='login-divPrincipal'>
         <h1>Cadastro</h1>        
@@ -98,15 +104,23 @@ const LoginUsuario = () => {
 
               <div className='login-divGridInputs'>
                 <label htmlFor="usuario">Usuário</label>              
-                <input type="text" name='usuario' className='login-input login-inputUsuario'/>            
+                <input type="text" name='usuario' className='login-input login-inputUsuario'
+                value={dadosParaLogin.userLogin}
+                onChange{e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
+                />
+                
               </div>
               
               <div className='login-divGridInputs'>
                 <label htmlFor="senha">Senha</label>
-                <input type="password" name='senha' className='login-input login-inputSenha'/>
+                <input type="password" name='senha' className='login-input login-inputSenha'
+                value={dadosParaLogin.passLogin}
+                onChange{e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
+                />
+                
               </div>
                      
-              <img className="login-btnNewUser login-btnVerificar" src="/img/imgBtns/verificar.png" alt="" />
+              <img className="login-btnNewUser login-btnVerificar" src="/img/imgBtns/verificar.png" alt="logar" onClick={eventoLogin}/>
               {
                 btnCriarNovoUserAtivo &&
                 <img className="login-btnNewUser login-btnCriarNovoUser" 
