@@ -47,7 +47,7 @@ def credenciais_login(request):
     if tipo_requisicao == 'salvarCadastro':
 
         dados_novo_cadastro = dados_json['dadosCredencial']
-        NAME = dados_novo_cadastro['nomeUsuario']
+        NAME = dados_novo_cadastro['nomeUsuario'].index()
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
@@ -69,7 +69,13 @@ def credenciais_login(request):
         dados_para_login = dados_json['dadosCredencial']
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
-        print(dados_para_login)
+
+        user_auth = authenticate(request, username=USER, password=PASS)
+
+        print(user_auth)
+
+        if not request.user.is_authenticated:
+            print(True)
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
