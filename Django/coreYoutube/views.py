@@ -42,6 +42,9 @@ def credenciais_login(request):
     erro_processo = None
 
     dados_json = json.loads(request.body)
+
+    print(dados_json)
+
     tipo_requisicao = dados_json['tipoRequest']
 
     if tipo_requisicao == 'salvarCadastro':
@@ -71,7 +74,6 @@ def credenciais_login(request):
         PASS = dados_para_login['passUsuario']
 
         user_auth = authenticate(request, username=USER, password=PASS)
-
         print(user_auth)
 
         if not request.user.is_authenticated:
