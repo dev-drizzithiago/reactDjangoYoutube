@@ -15,7 +15,8 @@ const LoginUsuario = (infoStatusLogin) => {
 
   /** Função para */
   const verificarUsuarioLogado = () => {
-    infoStatusLogin()
+    const statusLoginDjango = true
+    infoStatusLogin(true)
   }
 
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
