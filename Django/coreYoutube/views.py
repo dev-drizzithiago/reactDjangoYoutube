@@ -63,7 +63,7 @@ def credenciais_login(request):
             print('Erro ao cadastrar usuário')
             mensagem_erro = 'Erro ao cadastrar usuário.'
             erro_processo = 1
-    elif tipo_requisicao == 'logar':
+    elif tipo_requisicao == 'realizarLogin':
         dados_para_login = dados_json['dadosCredencial']
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
