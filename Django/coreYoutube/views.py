@@ -75,6 +75,8 @@ def credenciais_login(request):
         print(user_auth)
 
         if not request.user.is_authenticated:
+            print(False)
+        else:
             print(True)
 
     return JsonResponse({
