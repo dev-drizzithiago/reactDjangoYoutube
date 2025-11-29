@@ -23,6 +23,8 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
 
+  console.log(statusLogin)
+  
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
@@ -61,7 +63,7 @@ function App() {
           {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
           {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
-          
+
           <Routes>
             <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
             <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
