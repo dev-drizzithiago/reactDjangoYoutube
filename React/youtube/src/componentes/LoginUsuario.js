@@ -2,7 +2,7 @@ import './LoginUsuario.css'
 import { useState, useEffect } from 'react'
 import sendRequestDjango from './sendRequestDjango'
 
-const LoginUsuario = () => {
+const LoginUsuario = (infoStatusLogin) => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
@@ -11,6 +11,11 @@ const LoginUsuario = () => {
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
+  }
+
+  /** Função para */
+  const verificarUsuarioLogado = () => {
+    infoStatusLogin()
   }
 
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
@@ -44,19 +49,18 @@ const LoginUsuario = () => {
     }
   }
   
+  /** Função o usuário se logar  */
   const eventoLogin = async () => {
-
-    console.log(dadosParaLogin.length)
 
     const linkSendRequest = `http://localhost:8000/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
       console.log('Entre com Login e Senha')
     }
-    else if (dadosParaLogin.userLogin === '') {
+    else if (dadosParaLogin.userLogin === undefined) {
       console.log('Entre com Login')
     }
-    else if (dadosParaLogin.passLogin === '') {
+    else if (dadosParaLogin.passLogin === undefined) {
       console.log('Entre com sua Senha')
     }
     else {
@@ -67,7 +71,6 @@ const LoginUsuario = () => {
           'passUsuario': dadosParaLogin.passLogin, 
         },
       }
-      console.log(PAYLOAD)
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
       console.log(responseDjango)
     }
