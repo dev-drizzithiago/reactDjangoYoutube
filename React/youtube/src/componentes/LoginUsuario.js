@@ -45,19 +45,32 @@ const LoginUsuario = () => {
   }
   
   const eventoLogin = async () => {
-    console.log(dadosParaLogin)
+
+    console.log(dadosParaLogin.length)
+
     const linkSendRequest = `http://localhost:8000/credenciais_login/`;
 
-    const PAYLOAD = {
-      'tipoRequest': 'realizarLogin',
-      'dadosCredencial': {
-        'userLogin': dadosParaLogin.userLogin,
-        'passUsuario': dadosParaLogin.passLogin, 
-      },
+    if (dadosParaLogin.length === 0) {
+      console.log('Entre com Login e Senha')
     }
-    console.log(PAYLOAD)
-    const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
-    console.log(responseDjango)
+    else if (dadosParaLogin.userLogin === '') {
+      console.log('Entre com Login')
+    }
+    else if (dadosParaLogin.passLogin === '') {
+      console.log('Entre com sua Senha')
+    }
+    else {
+      const PAYLOAD = {
+        'tipoRequest': 'realizarLogin',
+        'dadosCredencial': {
+          'userLogin': dadosParaLogin.userLogin,
+          'passUsuario': dadosParaLogin.passLogin, 
+        },
+      }
+      console.log(PAYLOAD)
+      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+      console.log(responseDjango)
+    }
   }
 
   return (
