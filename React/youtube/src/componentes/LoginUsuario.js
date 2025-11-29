@@ -46,6 +46,18 @@ const LoginUsuario = () => {
   
   const eventoLogin = async () => {
     console.log(dadosParaLogin)
+    const linkSendRequest = `http://localhost:8000/credenciais_login/`;
+
+    const PAYLOAD = {
+      'tipoRequest': 'realizarLogin',
+      'dadosCredencial': {
+        'userLogin': dadosParaLogin.userLogin,
+        'passUsuario': dadosParaLogin.passLogin, 
+      },
+    }
+    console.log(PAYLOAD)
+    const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+    console.log(responseDjango)
   }
 
   return (
