@@ -29,12 +29,12 @@ Title: Do you know the best way to manage GitHub Issues?
 URL: https://youtube.com/watch?v=OccRyzAS4Vc
 Duration: 534 sec
 ---
-
 """
 
 from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.contrib.auth.models import User
 
 import urllib.parse
 import requests
@@ -48,7 +48,7 @@ from moviepy import AudioFileClip
 from pytubefix import YouTube
 
 logging.basicConfig(
-    level=logging.INFO, # Nível mínimo de log
+    level=logging.INFO,  # Nível mínimo de log
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler("log_events_app_yt.log"),  # Salva em arquivo
@@ -107,12 +107,14 @@ class YouTubeDownload:
     def registrando_link_base_dados(self, link):
         logging.info(f'Registrando link na base de dados')
         youtube = YouTube(link)
+        query_user = User.objects.filter(username='')
         dados_link = DadosYoutube(
             autor_link=youtube.author,
             titulo_link=youtube.title,
             duracao=youtube.length,
             miniatura=youtube.thumbnail_url,
             link_tube=youtube.watch_url,
+            usuario=query_user,
         )
         try:
             dados_link.save()
