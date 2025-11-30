@@ -33,12 +33,11 @@ def csrf_token_view(request):
     })
 
 def credenciais_login(request):
+
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
         }, status=400)
-
-    print(request.user.is_authenticated)
 
     mensagem_erro = None
     erro_processo = None
@@ -47,8 +46,6 @@ def credenciais_login(request):
 
     dados_json = json.loads(request.body)
 
-    print(dados_json)
-    print(request.user)
     tipo_requisicao = dados_json['tipoRequest']
 
     if tipo_requisicao == 'salvarCadastro':
