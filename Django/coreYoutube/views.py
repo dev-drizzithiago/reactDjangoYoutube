@@ -45,11 +45,10 @@ def credenciais_login(request):
     dados_json = json.loads(request.body)
 
     print(dados_json)
-
+    print(request.user)
     tipo_requisicao = dados_json['tipoRequest']
 
     if tipo_requisicao == 'salvarCadastro':
-
         dados_novo_cadastro = dados_json['dadosCredencial']
         NAME = dados_novo_cadastro['nomeUsuario'].index()
         USER = dados_novo_cadastro['userLogin']
@@ -74,14 +73,19 @@ def credenciais_login(request):
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
 
-        user_auth = authenticate(request, username=USER, password=PASS)
-
         if not request.user.is_authenticated:
+            print('Usuário logado: ', False)
+            user_auth = authenticate(request, username=USER, password=PASS)
             token_user_logado = str(uuid.uuid4())
             cache.set(token_user_logado, user_auth, timeout=600)
-            print(False)
+        elif request.user.is_authenticated:
+            token_config_user_logado = cache.get(token_user_logado)
+            print('Usuário logado: ', True)
+            print(token_config_user_logado)
         else:
-            print(True)
+            print('Processo invalido')
+            mensagem_erro = 'Processo invalido'
+            erro_processo = 1
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
