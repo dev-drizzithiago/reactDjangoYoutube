@@ -25,22 +25,27 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
 
-
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
 
-
-  useEffect( async () => {
-     const PAYLOAD = {
-        'tipoRequest': 'verificarUsuarioLogado',
+  useEffect(() => {
+    console.log(statusLogin)
+    const verificarStatusLogin = async () => {
+      if (statusLogin) {
+          const PAYLOAD = {
+            'tipoRequest': 'verificarUsuarioLogado',
+        }
+        const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
+        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
+        console.log(responseDjango)
+        setStatusLogin()
       }
-      const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
-      const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
-      console.log(responseDjango)
-      setStatusLogin()
+    }
+
+    verificarStatusLogin()
 
   }, [statusLogin])
 
