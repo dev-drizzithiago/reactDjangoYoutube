@@ -24,6 +24,7 @@ function App() {
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
+  
 
   useEffect(() => {
     if (linkMidia[0] !== null) {
@@ -52,7 +53,7 @@ function App() {
         }
       }
     }
-
+    console.log(statusLogin)
     verificarStatusLogin()
 
   }, [])
@@ -78,6 +79,10 @@ function App() {
     setElementoSelecionado(1)
   }
 
+  const deslogar = () => {
+
+  }
+
   return (
     <div className="App">
       <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
@@ -86,15 +91,21 @@ function App() {
             <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  /></NavLink>
             <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    /></NavLink>
             <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
+            <NavLink to="/deslogar"   ><img src="/img/imgBtns/btnDesligar.png" alt="player" className="app-imgBtn" onClick={deslogar}     /></NavLink>
           </div>
+          {
+            !statusLogin ?
+            <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn"/> :
+            <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn"/>
+          }
 
           {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
           {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
 
           <Routes>
-            <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>
-            <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
+            {statusLogin && <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>}
+            {statusLogin && <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />}
           </Routes>}
 
         </BrowserRouter>
