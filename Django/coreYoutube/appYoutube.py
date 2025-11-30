@@ -33,10 +33,10 @@ Duration: 534 sec
 
 from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 from django.conf import settings
-from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.core.files.base import ContentFile
 
-import urllib.parse
 import requests
 import logging
 from pathlib import Path
@@ -107,7 +107,9 @@ class YouTubeDownload:
     def registrando_link_base_dados(self, link):
         logging.info(f'Registrando link na base de dados')
         youtube = YouTube(link)
+
         query_user = User.objects.filter(username='')
+
         dados_link = DadosYoutube(
             autor_link=youtube.author,
             titulo_link=youtube.title,
