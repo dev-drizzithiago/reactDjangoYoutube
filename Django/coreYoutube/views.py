@@ -85,7 +85,6 @@ def credenciais_login(request):
             erro_processo = 1
 
     elif tipo_requisicao == 'verificarUsuarioLogado':
-        print('teste')
         if request.user.is_authenticated:
             token_config_user_logado = cache.get(token_user)
             print('Usuário logado: ', True)
