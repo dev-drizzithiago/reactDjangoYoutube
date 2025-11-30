@@ -117,27 +117,32 @@ def credenciais_login(request):
 # @csrf_protect
 def requestBaseDados(request):
     lista_dados_django = []
+
+    mensagem = None
+    erro_processo = None
+
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
         }, status=400)
+    if request.user != 'AnonymousUser':
+        usuario_logado = request.user
+        dados_json = json.loads(request.body)
+        query_dados_youtube = DadosYoutube.objects.filter(username=usuario_logado).order_by('-id_dados').values()
 
-    # if not request.user.is_authenticated:
-    #     return JsonResponse({
-    #         'user_deslogado': 1
-    #     })
+        print(query_dados_youtube)
 
-    dados_json = json.loads(request.body)
-    query_dados_youtube = DadosYoutube.objects.all().order_by('-id_dados').values()
-
-    for item in query_dados_youtube:
-        lista_dados_django.append({
-            'id_dados': item['id_dados'],
-            'link_tube': item['link_tube'],
-            'autor_link': item['autor_link'],
-            'titulo_link': item['titulo_link'],
-            'miniatura': item['miniatura'],
-        })
+        for item in query_dados_youtube:
+            lista_dados_django.append({
+                'id_dados': item['id_dados'],
+                'link_tube': item['link_tube'],
+                'autor_link': item['autor_link'],
+                'titulo_link': item['titulo_link'],
+                'miniatura': item['miniatura'],
+            })
+    else:
+        mensagem = 'Usuário não esta logado.'
+        erro_processo = 1
 
     return JsonResponse({
         'mensagem': 'Teste Django',
