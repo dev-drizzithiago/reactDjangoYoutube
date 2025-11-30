@@ -89,7 +89,8 @@ def credenciais_login(request):
                 usuario_logado = True
             else:
                 print('Credenciais inválidas')
-                usuario_logado = 'AnonymousUser'
+                mensagem_erro = 'Credenciais inválidas'
+                nome_usuario = 'AnonymousUser'
                 usuario_logado = False
         else:
             print('Processo invalido')
@@ -107,8 +108,8 @@ def credenciais_login(request):
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
-        'usuario_logado': usuario_logado,
         'nome_usuario': nome_usuario,
+        'usuario_logado': usuario_logado,
     })
 
 # @csrf_protect
