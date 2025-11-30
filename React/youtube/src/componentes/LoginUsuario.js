@@ -2,7 +2,7 @@ import './LoginUsuario.css'
 import { useState, useEffect } from 'react'
 import sendRequestDjango from './sendRequestDjango'
 
-const LoginUsuario = (infoStatusLogin) => {
+const LoginUsuario = ({infoStatusLogin}) => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
