@@ -44,7 +44,6 @@ def credenciais_login(request):
     erro_processo = None
     usuario_logado = None
     nome_usuario = None
-    validacao_user_logado = None
 
     dados_json = json.loads(request.body)
 
@@ -106,7 +105,10 @@ def credenciais_login(request):
             print('Usuário logado: ', False)
 
     elif tipo_requisicao == 'deslogarUsuario':
-        ...
+        mensagem_erro = 'Usuário deslogado'
+        erro_processo = 0
+        usuario_logado = False
+
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
