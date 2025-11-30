@@ -54,7 +54,7 @@ def credenciais_login(request):
 
     if tipo_requisicao == 'salvarCadastro':
         dados_novo_cadastro = dados_json['dadosCredencial']
-        NAME = str(dados_novo_cadastro['nomeUsuario']).index()
+        NAME = dados_novo_cadastro['nomeUsuario']
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
