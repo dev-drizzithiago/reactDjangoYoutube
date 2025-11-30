@@ -13,12 +13,6 @@ const LoginUsuario = (infoStatusLogin) => {
     setCriarUser(true)
   }
 
-  /** Função para */
-  const verificarUsuarioLogado = () => {
-    const statusLoginDjango = true
-    infoStatusLogin(true)
-  }
-
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
   const salvarNovoUser = async () => {    
 
@@ -73,7 +67,10 @@ const LoginUsuario = (infoStatusLogin) => {
         },
       }
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+
       console.log(responseDjango)
+
+      // const urlVerifUserLogado = `http://localhost:8000${responseDjango.token_login}`
     }
   }
 
