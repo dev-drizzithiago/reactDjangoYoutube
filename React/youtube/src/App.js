@@ -79,13 +79,16 @@ function App() {
     setElementoSelecionado(1)
   }
 
-  const deslogar = () => {
+  const deslogar = async () => {
     if (statusLogin) {
           const PAYLOAD = {
             'tipoRequest': 'deslogarUsuario',
         }
         const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
         const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
+        console.log(responseDjango)
+        setStatusLogin(false)
+      }
   }
 
   return (
