@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import PROTECT
+from django.contrib.auth.models import User
 
 class Base(models.Model):
     data_criacao = models.DateField('data_criacao', auto_now_add=True)
-
     class Meta:
         abstract = True
 
@@ -15,6 +15,7 @@ class DadosYoutube(Base):
     duracao = models.IntegerField()
     miniatura = models.CharField(max_length=255)
     link_tube = models.CharField(max_length=255)
+    path_usuario = models.ForeignKey(User, on_delete=PROTECT, default=0)
 
 class MoviesSalvasServidor(Base):
     id_movies = models.AutoField(primary_key=True)
@@ -23,6 +24,7 @@ class MoviesSalvasServidor(Base):
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
     dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    path_usuario = models.ForeignKey(User, on_delete=PROTECT, default=0)
 
 class MusicsSalvasServidor(Base):
     id_music = models.AutoField(primary_key=True)
@@ -31,3 +33,4 @@ class MusicsSalvasServidor(Base):
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
     dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    path_usuario = models.ForeignKey(User, on_delete=PROTECT, default=0)
