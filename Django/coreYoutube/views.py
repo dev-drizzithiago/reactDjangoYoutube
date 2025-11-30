@@ -38,9 +38,11 @@ def credenciais_login(request):
             'mensagem': 'É valido apenas POST',
         }, status=400)
 
+    print(request.user.is_authenticated)
+
     mensagem_erro = None
     erro_processo = None
-    token_user = None
+    usuario_logado = None
     validacao_user_logado = None
 
     dados_json = json.loads(request.body)
@@ -51,7 +53,7 @@ def credenciais_login(request):
 
     if tipo_requisicao == 'salvarCadastro':
         dados_novo_cadastro = dados_json['dadosCredencial']
-        NAME = dados_novo_cadastro['nomeUsuario'].index()
+        NAME = str(dados_novo_cadastro['nomeUsuario']).index()
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
@@ -77,8 +79,13 @@ def credenciais_login(request):
         if not request.user.is_authenticated:
             print('Usuário logado: ', False)
             user_auth = authenticate(request, username=USER, password=PASS)
-            token_user = str(uuid.uuid4())
-            cache.set(token_user, user_auth, timeout=600)
+            if user_auth is not None:
+                login(request, user_auth)  # Cria uma sessão automatico
+
+                request.session['usuario_id'] = user_auth.id
+                request.session['usuario_nome'] = user_auth.first_name
+                request.session['usuario_mail'] = user_auth.email
+                usuario_logado = True
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
@@ -86,15 +93,17 @@ def credenciais_login(request):
 
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
-            token_config_user_logado = cache.get(token_user)
-            print('Usuário logado: ', True)
-            print(request.user)
-            print(token_config_user_logado)
+            token_config_user_logado = cache.get(dados_json['token_user'])
+            print('Usuário logado: ', token_config_user_logado)
+        else:
+            token_user = None
+            print('Usuário logado: ', False)
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
-        'token_login': token_user,
+        'usuario_logado': usuario_logado,
+        'nome_usuario': request.first_name,
     })
 
 # @csrf_protect
