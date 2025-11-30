@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     console.log(statusLogin)
     const verificarStatusLogin = async () => {
-      if (!statusLogin) {
+      if (statusLogin) {
           const PAYLOAD = {
             'tipoRequest': 'verificarUsuarioLogado',
         }
