@@ -104,11 +104,13 @@ class YouTubeDownload:
         self._nome_validado = None
 
     # Registra o link na base de dados.
-    def registrando_link_base_dados(self, link):
+    def registrando_link_base_dados(self, link, usuario_logado):
         logging.info(f'Registrando link na base de dados')
+        session = requests.session()
+        response = session.get("http://localhost:8000/usuario_logado/")
         youtube = YouTube(link)
 
-        query_user = User.objects.filter(username='')
+        query_user_logado = User.objects.filter(username=usuario_logado)[0]
 
         dados_link = DadosYoutube(
             autor_link=youtube.author,
@@ -116,7 +118,7 @@ class YouTubeDownload:
             duracao=youtube.length,
             miniatura=youtube.thumbnail_url,
             link_tube=youtube.watch_url,
-            usuario=query_user,
+            usuario=query_user_logado,
         )
         try:
             dados_link.save()
@@ -136,7 +138,6 @@ class YouTubeDownload:
         query_remocao_caminho_movies = MoviesSalvasServidor.objects.filter(dados_youtube_id=query_remocao_link)
         query_remocao_caminho_musics = MusicsSalvasServidor.objects.filter(dados_youtube_id=query_remocao_link)
 
-
         if query_remocao_caminho_movies.exists():
             query_remocao_caminho_movies.delete()
 
@@ -149,7 +150,7 @@ class YouTubeDownload:
         return 'Link removido com sucesso'
 
     # Faz download do arquivo em MP3.
-    def download_music(self, id_entrada: int):
+    def download_music(self, id_entrada: int, usuario_logado):
         logging.info('Baixando mídia em MP3')
 
         # Query para buscar o link para realizar o download em MP3
@@ -199,6 +200,7 @@ class YouTubeDownload:
 
                 # Faz o download da miniatura
                 response = requests.get(miniatura)
+                query_user_logado = User.objects.filter(username=usuario_logado)[0]
 
                 # Cria o obj para salvar as informações no banco de dados.
                 musica = MusicsSalvasServidor(
@@ -206,6 +208,7 @@ class YouTubeDownload:
                     path_arquivo=path_url_midia,
                     duracao_midia=ducarao_midia,
                     dados_youtube_id=id_dados,
+                    usuario=query_user_logado,
                 )
 
                 # Salva a miniatura em uma pasta especifica.
@@ -223,7 +226,7 @@ class YouTubeDownload:
                 return 'Erro ao converter a midía m4a para MP3'
 
     # Faz o download do arquivo em MP4
-    def download_movie(self, id_entrada: int):
+    def download_movie(self, id_entrada: int, usuario_logado):
         """
         ** Se você colocasse save=True, o Django salvaria o objeto video imediatamente após salvar o arquivo,
         o que pode ser indesejado se o objeto ainda estiver incompleto ou se você quiser controlar melhor
@@ -266,12 +269,15 @@ class YouTubeDownload:
                 logging.error(f"Erro ao fazer o download MP4: {error}")
                 return 'Não foi possível fazer o download do vídeo...'
 
+            query_user_logado = User.objects.filter(username=usuario_logado)[0]
+
             # Prepara o obj para salvar as informações na base de dados.
             video = MoviesSalvasServidor(
                 nome_arquivo=self._nome_validado,
                 path_arquivo=path_midia,
                 duracao_midia=ducarao_midia,
                 dados_youtube_id=id_dados,
+                usuario=query_user_logado,
             )
 
             # Faz o download da miniatura
