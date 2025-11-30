@@ -33,7 +33,9 @@ def csrf_token_view(request):
     })
 
 def credenciais_login(request):
-
+    usuario_logado = request.user
+    print(usuario_logado)
+    print(request.user.is_authenticated)
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
@@ -87,6 +89,11 @@ def credenciais_login(request):
                 mensagem_erro = 'Credenciais inválidas'
                 nome_usuario = 'AnonymousUser'
                 usuario_logado = False
+        elif request.user.is_authenticated:
+            print('Usuário já esta logado')
+            mensagem_erro = 'Processo invalido'
+            erro_processo = 0
+            usuario_logado = True
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
@@ -96,10 +103,12 @@ def credenciais_login(request):
         if request.user.is_authenticated:
             id_usuario = request.session.get('usuario_id')
             nome_usuario = request.session.get('usuario_nome')
+            print(nome_usuario)
             mail_usuario = request.session.get('usuario_mail')
+            usuario_logado = request.user.is_authenticated
         else:
-            usuario_logado = None
-            print('Usuário logado: ', False)
+            usuario_logado = request.user.is_authenticated
+            print('Usuário logado: ', request.user.is_authenticated)
 
     elif tipo_requisicao == 'deslogarUsuario':
         logout(request)
@@ -122,9 +131,11 @@ def requestBaseDados(request):
     erro_processo = None
 
     if request.method != "POST":
+
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
         }, status=400)
+
     if request.user != 'AnonymousUser':
         usuario_logado = request.user
         dados_json = json.loads(request.body)
@@ -219,17 +230,17 @@ def remove_link(request):
 
 def listagem_midias(request):
     lista_midias_django = []
-
+    usuario_logado = request.user
     mensagem_processo = None
     erro_processo = 0
 
     dados_json = json.loads(request.body)
 
     if dados_json['tipoMidia'] == 'MP4':
-        query_dados_midias = MoviesSalvasServidor.objects.all().order_by('-id_movies').values()
+        query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
         key_midia = 'id_movies'
     elif dados_json['tipoMidia'] == 'MP3':
-        query_dados_midias = MusicsSalvasServidor.objects.all().order_by('-id_music').values()
+        query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
         key_midia = 'id_music'
     else:
         mensagem_processo = 'Tipo de mídia não existe'
