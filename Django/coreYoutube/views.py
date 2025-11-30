@@ -81,7 +81,6 @@ def credenciais_login(request):
             user_auth = authenticate(request, username=USER, password=PASS)
             if user_auth is not None:
                 login(request, user_auth)  # Cria uma sessão automatico
-
                 request.session['usuario_id'] = user_auth.id
                 request.session['usuario_nome'] = user_auth.first_name
                 request.session['usuario_mail'] = user_auth.email
@@ -98,6 +97,7 @@ def credenciais_login(request):
 
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
+            id_usuario = request.session.get('usuario_id')
             nome_usuario = request.session.get('usuario_nome')
             mail_usuario = request.session.get('usuario_mail')
         else:
