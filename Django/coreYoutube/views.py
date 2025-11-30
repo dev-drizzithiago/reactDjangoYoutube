@@ -105,6 +105,8 @@ def credenciais_login(request):
             usuario_logado = None
             print('Usuário logado: ', False)
 
+    elif tipo_requisicao == 'deslogarUsuario':
+        ...
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
