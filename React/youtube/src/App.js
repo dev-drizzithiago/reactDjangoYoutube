@@ -32,7 +32,9 @@ function App() {
   }, [linkMidia])
 
   useEffect(() => {
-    console.log(statusLogin)
+
+    console.log('Usuario Logado: ', statusLogin)
+
     const verificarStatusLogin = async () => {
       if (statusLogin) {
           const PAYLOAD = {
