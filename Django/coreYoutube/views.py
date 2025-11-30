@@ -89,6 +89,7 @@ def credenciais_login(request):
         if request.user.is_authenticated:
             token_config_user_logado = cache.get(token_user)
             print('Usuário logado: ', True)
+            print(request.user)
             print(token_config_user_logado)
 
     return JsonResponse({
