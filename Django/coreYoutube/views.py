@@ -41,6 +41,7 @@ def credenciais_login(request):
     mensagem_erro = None
     erro_processo = None
     token_user = None
+    validacao_user_logado = None
 
     dados_json = json.loads(request.body)
 
@@ -78,23 +79,22 @@ def credenciais_login(request):
             user_auth = authenticate(request, username=USER, password=PASS)
             token_user = str(uuid.uuid4())
             cache.set(token_user, user_auth, timeout=600)
-
-        elif request.user.is_authenticated:
-            token_config_user_logado = cache.get(token_user)
-            print('Usuário logado: ', True)
-            print(token_config_user_logado)
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
             erro_processo = 1
 
     elif tipo_requisicao == 'verificarUsuarioLogado':
-        ...
+        if request.user.is_authenticated:
+            token_config_user_logado = cache.get(token_user)
+            print('Usuário logado: ', True)
+            print(token_config_user_logado)
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
         'token_login': token_user,
+        'validacao_user_logado': validacao_user_logado
     })
 
 # @csrf_protect
