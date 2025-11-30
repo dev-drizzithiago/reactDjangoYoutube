@@ -40,14 +40,20 @@ function App() {
         }
         const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
         const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
+        
         console.log(responseDjango)
-        setStatusLogin()
+
+        if (responseDjango !== null) {
+          setStatusLogin(false)
+        } else {
+          setStatusLogin(true)
+        }
       }
     }
 
     verificarStatusLogin()
 
-  }, [statusLogin])
+  }, [])
 
   
   const fecharPlayerMidia = () => {
