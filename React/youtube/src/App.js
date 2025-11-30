@@ -25,11 +25,13 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
 
+
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
+
 
   useEffect( async () => {
      const PAYLOAD = {
@@ -41,7 +43,6 @@ function App() {
       setStatusLogin()
 
   }, [statusLogin])
-
 
   
   const fecharPlayerMidia = () => {
