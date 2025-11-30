@@ -44,7 +44,7 @@ const LoginUsuario = (infoStatusLogin) => {
     }
   }
   
-  /** Função o usuário se logar  */
+  /** Função para o usuário se logar  */
   const eventoLogin = async () => {
 
     const linkSendRequest = `http://localhost:8000/credenciais_login/`;
@@ -70,7 +70,10 @@ const LoginUsuario = (infoStatusLogin) => {
 
       console.log(responseDjango)
 
-      // const urlVerifUserLogado = `http://localhost:8000${responseDjango.token_login}`
+      if (responseDjango.usuario_logado === 'AnonymousUser'){
+        console.log('Usuário não esta logado.')
+      }
+      
     }
   }
 
