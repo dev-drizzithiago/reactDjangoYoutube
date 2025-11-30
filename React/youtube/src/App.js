@@ -3,6 +3,8 @@ import useCsrfInit from './componentes/useCsrfInit';
 import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 
+import sendRequestDjango from './componentes/sendRequestDjango';
+
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
@@ -23,13 +25,23 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
 
-  console.log(statusLogin)
-  
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
+
+  useEffect( async () => {
+     const PAYLOAD = {
+        'tipoRequest': 'verificarUsuarioLogado',
+      }
+      const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
+      const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
+      console.log(responseDjango)
+      setStatusLogin()
+
+  }, [statusLogin])
+
 
   
   const fecharPlayerMidia = () => {
@@ -41,10 +53,12 @@ function App() {
     console.log('Links')
     setElementoSelecionado(1)
   }
+
   const midiasMp3 = () => {
     console.log('MP3')
     setElementoSelecionado(1)
   }
+
   const midiasMp4 = () => {
     console.log('MP4')
     setElementoSelecionado(1)
