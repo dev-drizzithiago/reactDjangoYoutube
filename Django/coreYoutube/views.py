@@ -85,6 +85,7 @@ def credenciais_login(request):
             erro_processo = 1
 
     elif tipo_requisicao == 'verificarUsuarioLogado':
+        print('teste')
         if request.user.is_authenticated:
             token_config_user_logado = cache.get(token_user)
             print('Usuário logado: ', True)
@@ -94,7 +95,6 @@ def credenciais_login(request):
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
         'token_login': token_user,
-        'validacao_user_logado': validacao_user_logado
     })
 
 # @csrf_protect
