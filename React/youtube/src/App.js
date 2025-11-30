@@ -37,7 +37,7 @@ function App() {
     console.log('Usuario Logado: ', statusLogin)
 
     const verificarStatusLogin = async () => {
-      if (statusLogin) {
+      if (!statusLogin) {
           const PAYLOAD = {
             'tipoRequest': 'verificarUsuarioLogado',
         }
@@ -53,7 +53,7 @@ function App() {
         }
       }
     }
-    console.log(statusLogin)
+
     verificarStatusLogin()
 
   }, [])
