@@ -80,7 +80,12 @@ function App() {
   }
 
   const deslogar = () => {
-
+    if (statusLogin) {
+          const PAYLOAD = {
+            'tipoRequest': 'deslogarUsuario',
+        }
+        const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
+        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
   }
 
   return (
