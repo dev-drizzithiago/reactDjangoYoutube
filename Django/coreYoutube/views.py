@@ -128,9 +128,9 @@ def requestBaseDados(request):
     if request.user != 'AnonymousUser':
         usuario_logado = request.user
         dados_json = json.loads(request.body)
-        query_dados_youtube = DadosYoutube.objects.filter(username=usuario_logado).order_by('-id_dados').values()
+        query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
 
-        print(query_dados_youtube)
+        print('query ', query_dados_youtube)
 
         for item in query_dados_youtube:
             lista_dados_django.append({
@@ -152,6 +152,7 @@ def requestBaseDados(request):
 # @csrf_protect
 def requestAddLinks(request):
     obj_app_youtube = YouTubeDownload()
+    usuario_logado = request.user
 
     if request.method != 'POST':
         return JsonResponse({
@@ -169,7 +170,7 @@ def requestAddLinks(request):
     response_validacao_link = obj_app_youtube.validar_link_youtube(link_entrada)
 
     if response_validacao_link:
-        response_resitro_link = obj_app_youtube.registrando_link_base_dados(link_entrada)
+        response_resitro_link = obj_app_youtube.registrando_link_base_dados(link_entrada, usuario_logado)
         if response_resitro_link:
             mansagem_processo = 'Links Salvo na Base de Dados com Sucesso.'
             erro_processo = 0
@@ -186,7 +187,7 @@ def requestAddLinks(request):
     }, status=400)
 
 def download_link(request):
-
+    usuario_logado = request.user
     dados_json = json.loads(request.body)
 
     # Separa as informações que irão para o app de download
@@ -196,9 +197,9 @@ def download_link(request):
     inicio_obj_yt_registro = YouTubeDownload()
 
     if midia_down == 'MP3':
-        resultado_download = inicio_obj_yt_registro.download_music(id_dados)
+        resultado_download = inicio_obj_yt_registro.download_music(id_dados, usuario_logado)
     elif midia_down == 'MP4':
-        resultado_download = inicio_obj_yt_registro.download_movie(id_dados)
+        resultado_download = inicio_obj_yt_registro.download_movie(id_dados, usuario_logado)
 
     return JsonResponse({
         'mensagem': resultado_download,
