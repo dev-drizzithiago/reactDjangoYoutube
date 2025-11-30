@@ -70,10 +70,13 @@ const LoginUsuario = (infoStatusLogin) => {
 
       console.log(responseDjango)
 
-      if (responseDjango.usuario_logado === 'AnonymousUser'){
-        console.log('Usuário não esta logado.')
+      if (responseDjango.erro_processo !== 1) {
+        if (responseDjango.nome_usuario === 'AnonymousUser'){
+          console.log(responseDjango.mensagem_erro)
+        }
+      } else {
+          console.log(responseDjango.mensagem_erro)
       }
-      
     }
   }
 
