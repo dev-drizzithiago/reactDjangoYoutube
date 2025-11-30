@@ -43,6 +43,7 @@ def credenciais_login(request):
     mensagem_erro = None
     erro_processo = None
     usuario_logado = None
+    nome_usuario = None
     validacao_user_logado = None
 
     dados_json = json.loads(request.body)
