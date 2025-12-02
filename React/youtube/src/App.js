@@ -24,20 +24,21 @@ function App() {
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
-  
+   
 
+  /** Para ativar o player de midias */
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
 
+  /** Verifica se o usuário esta logado. */
   useEffect(() => {
-
     console.log('Usuario Logado: ', statusLogin)
 
     const verificarStatusLogin = async () => {
-      if (!statusLogin) {
+      if (!statusLogin) {  // Se o usuario estiver deslogado continua o processo
           const PAYLOAD = {
             'tipoRequest': 'verificarUsuarioLogado',
         }
@@ -48,7 +49,7 @@ function App() {
 
         if (responseDjango.usuario_logado) {
           setStatusLogin(true)
-        } else {
+        } else if (!responseDjango.usuario_logado){
           setStatusLogin(false)
         }
       }
@@ -56,7 +57,7 @@ function App() {
 
     verificarStatusLogin()
 
-  }, [statusLogin])
+  }, [])
 
   
   const fecharPlayerMidia = () => {
