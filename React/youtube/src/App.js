@@ -46,17 +46,17 @@ function App() {
         
         console.log(responseDjango)
 
-        if (responseDjango !== null) {
-          setStatusLogin(false)
-        } else {
+        if (responseDjango.usuario_logado) {
           setStatusLogin(true)
+        } else {
+          setStatusLogin(false)
         }
       }
     }
 
     verificarStatusLogin()
 
-  }, [])
+  }, [statusLogin])
 
   
   const fecharPlayerMidia = () => {
