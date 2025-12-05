@@ -2,6 +2,8 @@ import React from 'react'
 
 const VerificarUsuarioLogado = () => {
 
+    const [statusLogin, setStatusLogin] = useState(false)
+
     /** Verifica se o usuário esta logado. */
     useEffect(() => {
         console.log('Usuario Logado: ', statusLogin)
