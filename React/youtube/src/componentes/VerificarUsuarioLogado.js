@@ -1,4 +1,5 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import sendRequestDjango from './componentes/sendRequestDjango';
 
 const VerificarUsuarioLogado = () => {
 
@@ -18,10 +19,13 @@ const VerificarUsuarioLogado = () => {
             
             console.log(responseDjango)
 
-            if (responseDjango.usuario_logado) {
-            setStatusLogin(true)
+            if (responseDjango.usuario_logado) 
+                {
+                setStatusLogin(true)
+
             } else if (!responseDjango.usuario_logado){
-            setStatusLogin(false)
+
+                setStatusLogin(false)
             }
         }
         }
