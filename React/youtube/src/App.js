@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 
 import sendRequestDjango from './componentes/sendRequestDjango';
 
+import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado'
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
@@ -32,33 +33,6 @@ function App() {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
-
-  /** Verifica se o usuário esta logado. */
-  useEffect(() => {
-    console.log('Usuario Logado: ', statusLogin)
-
-    const verificarStatusLogin = async () => {
-      if (!statusLogin) {  // Se o usuario estiver deslogado continua o processo
-          const PAYLOAD = {
-            'tipoRequest': 'verificarUsuarioLogado',
-        }
-        const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
-        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
-        
-        console.log(responseDjango)
-
-        if (responseDjango.usuario_logado) {
-          setStatusLogin(true)
-        } else if (!responseDjango.usuario_logado){
-          setStatusLogin(false)
-        }
-      }
-    }
-
-    verificarStatusLogin()
-
-  }, [])
-
   
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
@@ -94,6 +68,9 @@ function App() {
 
   return (
     <div className="App">
+      <VerificarUsuarioLogado responseUserLogado={
+        (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
+      } />
       <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />
         <BrowserRouter>
           <div className='app-divBtnImg'>
