@@ -78,9 +78,16 @@ function App() {
             <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  /></NavLink>
             <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    /></NavLink>
             <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
-            <NavLink to="/deslogar"   ><img src="/img/imgBtns/btnDesligar.png" alt="player" className="app-imgBtn" onClick={deslogar}     /></NavLink>
-          </div>
-          
+            
+            <NavLink to="/deslogar">            
+            {!statusLogin ? 
+            <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn" onClick={deslogar} title='Desconectado'/> :
+            <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn" title='Conectado'/>
+            }
+            </NavLink>
+
+          </div>           
+
           {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
           {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
