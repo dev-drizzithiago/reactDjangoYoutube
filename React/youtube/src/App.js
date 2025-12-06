@@ -94,6 +94,7 @@ function App() {
 
           <Routes>
             {statusLogin && <Route path='linksSalvos' element={<LinkBancoDados triggerAtualizacao={atualizarBanco} />}/>}
+            
             {statusLogin && <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />}
           </Routes>}
 
