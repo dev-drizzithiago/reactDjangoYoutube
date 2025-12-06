@@ -34,8 +34,6 @@ def csrf_token_view(request):
 
 def credenciais_login(request):
     usuario_logado = request.user
-    print(usuario_logado)
-    print(request.user.is_authenticated)
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
@@ -135,12 +133,11 @@ def requestBaseDados(request):
             'mensagem': 'É valido apenas POST',
         }, status=400)
 
+    usuario_logado = request.user
+
     if request.user != 'AnonymousUser':
-        usuario_logado = request.user
         dados_json = json.loads(request.body)
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
-
-        print('query ', query_dados_youtube)
 
         for item in query_dados_youtube:
             lista_dados_django.append({
@@ -275,8 +272,6 @@ def preparar_midias_to_download(request):
     caminho_relativo = dados_json['linkDownload']
     caminho_abs_midia = os.path.normpath(os.path.join(settings.MEDIA_ROOT, caminho_relativo))
 
-    print('Caminho abs', settings.MEDIA_ROOT)
-
     nome_da_midia = os.path.basename(caminho_abs_midia)
 
     token = str(uuid.uuid4())
@@ -293,8 +288,6 @@ def preparar_midias_to_download(request):
 def download_da_midia(request):
     token = request.GET.get('token')
     caminho_arquivo = cache.get(token)
-
-    print(caminho_arquivo)
 
     if not caminho_arquivo or not os.path.exists(caminho_arquivo):
         return JsonResponse({
