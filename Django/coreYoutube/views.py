@@ -103,7 +103,6 @@ def credenciais_login(request):
         if request.user.is_authenticated:
             id_usuario = request.session.get('usuario_id')
             nome_usuario = request.session.get('usuario_nome')
-            print(nome_usuario)
             mail_usuario = request.session.get('usuario_mail')
             usuario_logado = request.user.is_authenticated
         else:
