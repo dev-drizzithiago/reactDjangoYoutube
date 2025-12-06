@@ -24,7 +24,7 @@
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:flex-start;
   margin: auto;
   width: 50%;
   height: 600px;
