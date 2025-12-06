@@ -43,13 +43,13 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     }
 
   return (    
-    <div className="returnFormsLink">      
-      <h2>Formulario para Link do Youtube</h2>      
+    <div className="returnFormsLink">
         <div className="divLabelInput">
           <label className="label labelLink" htmlFor="link">Cole o Link do Video:</label>
           <input type="text" className="inputText inputLinkYoutube" name="link" ref={refLink}/>
         </div>       
-        
+
+        {/** BLOCO DOS BOTOES */}
         <div className="divBtnImgAdd">
           <img src="/img/imgBtns/adicionar.png" alt="adicionar" className="imgBtn btnAdd" onClick={useDefGravandoLink}/>
           <img src="/img/imgBtns/limpar.png" alt="adicionar" className="imgBtn btnLimpar" onClick={useDefBtnLimparInput}/>          
