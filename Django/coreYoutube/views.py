@@ -140,6 +140,8 @@ def requestBaseDados(request):
 
     usuario_logado = request.user
 
+    print(usuario_logado)
+
     if request.user != 'AnonymousUser':
         dados_json = json.loads(request.body)
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
@@ -157,7 +159,8 @@ def requestBaseDados(request):
         erro_processo = 1
 
     return JsonResponse({
-        'mensagem': 'Teste Django',
+        'mensagem': mensagem,
+        'erro_processo': erro_processo,
         'dados_django': lista_dados_django,
     })
 
