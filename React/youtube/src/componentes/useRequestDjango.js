@@ -20,6 +20,7 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             setDados(data.dados_django);
             setCarregando(false);
         })
