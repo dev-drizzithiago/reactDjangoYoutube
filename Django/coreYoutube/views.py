@@ -122,6 +122,11 @@ def credenciais_login(request):
 
 # @csrf_protect
 def requestBaseDados(request):
+    """
+    Recupara os dados de link do usuário
+    :param request:
+    :return:
+    """
     lista_dados_django = []
 
     mensagem = None
