@@ -138,7 +138,7 @@ def requestBaseDados(request):
         }, status=400)
     usuario_logado = request.user
 
-    if request.user != 'AnonymousUser':
+    if request.user.is_authenticated:
         dados_json = json.loads(request.body)
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
 
@@ -236,24 +236,28 @@ def listagem_midias(request):
 
     dados_json = json.loads(request.body)
 
-    if dados_json['tipoMidia'] == 'MP4':
-        query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
-        key_midia = 'id_movies'
-    elif dados_json['tipoMidia'] == 'MP3':
-        query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
-        key_midia = 'id_music'
-    else:
-        mensagem_processo = 'Tipo de mídia não existe'
-        erro_processo = 1
+    if request.user.is_authenticated:
+        if dados_json['tipoMidia'] == 'MP4':
+            query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
+            key_midia = 'id_movies'
+        elif dados_json['tipoMidia'] == 'MP3':
+            query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
+            key_midia = 'id_music'
+        else:
+            mensagem_processo = 'Tipo de mídia não existe'
+            erro_processo = 1
 
-    for item in query_dados_midias:
-        lista_midias_django.append({
-            key_midia: key_midia,
-            'nome_arquivo': item['nome_arquivo'],
-            'duracao_midia': item['duracao_midia'],
-            'path_arquivo': item['path_arquivo'],
-            'path_miniatura': item['path_miniatura'],
-        })
+        for item in query_dados_midias:
+            lista_midias_django.append({
+                key_midia: key_midia,
+                'nome_arquivo': item['nome_arquivo'],
+                'duracao_midia': item['duracao_midia'],
+                'path_arquivo': item['path_arquivo'],
+                'path_miniatura': item['path_miniatura'],
+            })
+    else:
+        mensagem_processo = 'Usuário não esta logado.'
+        erro_processo = 1
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
