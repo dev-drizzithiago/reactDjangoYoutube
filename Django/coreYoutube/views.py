@@ -133,14 +133,10 @@ def requestBaseDados(request):
     erro_processo = None
 
     if request.method != "POST":
-
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
         }, status=400)
-
     usuario_logado = request.user
-
-    print(usuario_logado)
 
     if request.user != 'AnonymousUser':
         dados_json = json.loads(request.body)
