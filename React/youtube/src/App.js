@@ -26,6 +26,8 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
   
+  console.log(statusLogin)
+
   /** Para ativar o player de midias */
   useEffect(() => {
     if (linkMidia[0] !== null) {
