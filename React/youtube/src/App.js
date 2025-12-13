@@ -26,8 +26,6 @@ function App() {
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
   
-  console.log(statusLogin)
-
   /** Para ativar o player de midias */
   useEffect(() => {
     if (linkMidia[0] !== null) {
@@ -41,12 +39,14 @@ function App() {
   }
 
   const linksSalvos = () => {    
-    console.log('Links')    
+    console.log('Links')
+    
     if (statusLogin) {
       setElementoSelecionado(1)
     } else {
-      <LoginUsuario />
+      <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
     }
+    console.log(statusLogin)
   }
 
   const midiasMp3 = () => {
@@ -86,10 +86,10 @@ function App() {
             <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    /></NavLink>
             
             <NavLink to="/deslogar">            
-            {!statusLogin ? 
-            <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn" onClick={deslogar} title='Desconectado'/> :
-            <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn" title='Conectado'/>
-            }
+              {!statusLogin ? 
+                <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn" onClick={deslogar} title='Desconectado'/> :
+                <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn" title='Conectado'/>
+              }
             </NavLink>
 
           </div>           
