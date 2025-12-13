@@ -40,9 +40,13 @@ function App() {
     setLinkMidia([null, null])
   }
 
-  const linksSalvos = () => {
-    console.log('Links')
-    setElementoSelecionado(1)
+  const linksSalvos = () => {    
+    console.log('Links')    
+    if (statusLogin) {
+      setElementoSelecionado(1)
+    } else {
+      <LoginUsuario />
+    }
   }
 
   const midiasMp3 = () => {
