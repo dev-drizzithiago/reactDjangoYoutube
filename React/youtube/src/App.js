@@ -39,15 +39,17 @@ function App() {
   }
 
   const linksSalvos = () => {    
-    console.log('Links')
-    
-    if (statusLogin) {
-      setElementoSelecionado(1)
-    } else {
-      <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
-    }
+    console.log('Links')    
+    setElementoSelecionado(1)
     console.log(statusLogin)
+
+    return (
+      <VerificarUsuarioLogado responseUserLogado={
+        (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
+      } />
+    )
   }
+
 
   const midiasMp3 = () => {
     console.log('MP3')
