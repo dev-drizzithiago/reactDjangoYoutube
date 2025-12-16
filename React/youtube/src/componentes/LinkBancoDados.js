@@ -1,6 +1,7 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from "./sendRequestDjango";
+import VerificarUsuarioLogado from "./VerificarUsuarioLogado";
 
 import "./LinkBancoDados.css"
 
@@ -8,8 +9,10 @@ import { useState, useEffect } from "react";
 
 const LinkBancoDados = ({triggerAtualizacao}) => {    
     
-    const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0)    
-    const [downloadMidias, setdownloadMidias] = useState(null)
+    const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
+    const [downloadMidias, setdownloadMidias] = useState(null);
+      const [statusLogin, setStatusLogin] = useState(false);
+
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(triggerAtualizacao)
@@ -45,7 +48,12 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     }
     
     return (
+        
         <div>
+            <VerificarUsuarioLogado responseUserLogado={
+                (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
+            } />
+      
             <h3> Links para download </h3>
             <div className="linkBancoDados-content">
                 {dados.map((item) => (
