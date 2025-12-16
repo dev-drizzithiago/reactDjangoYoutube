@@ -70,7 +70,7 @@ function App() {
       } />
       
         <BrowserRouter>
-        {statusLogin && <FormularioLinkYoutube onLinkAdicionado={() => setAtualizarBanco(prev => prev + 1)} />}
+        
           <div className='app-divBtnImg'>
             
             <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  title='Links Salvos'/></NavLink>
