@@ -4,6 +4,7 @@ import sendRequestDjango from './sendRequestDjango'
 const VerificarUsuarioLogado = ({}) => {
 
     const [statusLogin, setStatusLogin] = useState(false)
+    console.log('Usuario Logado: ', statusLogin)
 
     /** Verifica se o usuário esta logado. */
     useEffect(() => {
@@ -21,16 +22,12 @@ const VerificarUsuarioLogado = ({}) => {
                     setStatusLogin(true)
 
                 } else if (!responseDjango.usuario_logado){
-
                     setStatusLogin(false)
                 }
             }
         }
-
         verificarStatusLogin()
-
   }, [])
-
   return statusLogin
 }
 
