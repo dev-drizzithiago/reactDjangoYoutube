@@ -23,6 +23,8 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     if(dados.erro_processo === 666 ){
         setStatusLogin(false)
+    } else {
+        setStatusLogin(true)
     }
 
     console.log(statusLogin)
