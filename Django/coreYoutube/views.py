@@ -257,7 +257,7 @@ def listagem_midias(request):
             })
     else:
         mensagem_processo = 'Usuário não esta logado.'
-        erro_processo = 1
+        erro_processo = 666
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
