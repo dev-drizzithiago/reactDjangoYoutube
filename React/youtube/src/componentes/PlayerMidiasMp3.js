@@ -26,12 +26,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             setStatusLogin(usuarioLogado)
         }
     }, [usuarioLogado])
-    
+
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
-
     
-    console.log(statusLogin)
-
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia..')
 
