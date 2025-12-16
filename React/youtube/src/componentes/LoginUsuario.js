@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 import sendRequestDjango from './sendRequestDjango'
 
 const LoginUsuario = ({infoStatusLogin}) => {
-  const [criarUser, setCriarUser] = useState(false)
-  const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
-  const [dadosNovoUser, setDadosNovoUser] = useState([])
-  const [dadosParaLogin, setDadosParaLogin] = useState([])
+const [criarUser, setCriarUser] = useState(false)
+const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
+const [dadosNovoUser, setDadosNovoUser] = useState([])
+const [dadosParaLogin, setDadosParaLogin] = useState([])
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
