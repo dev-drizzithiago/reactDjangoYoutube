@@ -11,10 +11,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
-    const [statusLogin, setStatusLogin] = useState(false);
 
-    console.log(propsStatusProcesso)
-    
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])
@@ -50,9 +47,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     return (
         <div>
-            <VerificarUsuarioLogado responseUserLogado={
-                (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
-            } />
       
             <h3> Links para download </h3>
             <div className="linkBancoDados-content">
