@@ -5,7 +5,7 @@ import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 
 import sendRequestDjango from './componentes/sendRequestDjango';
 
-import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado'
+import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado';
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
