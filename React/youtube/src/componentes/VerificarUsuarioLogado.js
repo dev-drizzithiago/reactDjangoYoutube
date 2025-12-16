@@ -7,7 +7,6 @@ const VerificarUsuarioLogado = ({}) => {
 
     /** Verifica se o usuário esta logado. */
     useEffect(() => {
-        console.log('Usuario Logado: ', statusLogin)
 
         const verificarStatusLogin = async () => {
             if (!statusLogin) {  // Se o usuario estiver deslogado continua o processo
