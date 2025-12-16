@@ -42,7 +42,7 @@ function App() {
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
     setElementoSelecionado(1)
-
+    
     return (
       <VerificarUsuarioLogado responseUserLogado={
         (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
