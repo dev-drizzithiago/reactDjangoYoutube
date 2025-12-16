@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import getCookies from "./getCookies"
+import LoginUsuario from "./LoginUsuario"
 
 const useRequestDjango = (urlDjango, payload, trigger) => {
    
@@ -21,14 +22,8 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            if (data.erro_processo === 666) {
-                console.log('Usuário deslogado')
-                setCarregando(false);
-            } 
-            else {
-                setDados(data.dados_django);
-                setCarregando(false);
-            }
+            setDados(data.dados_django);
+            setCarregando(false);
         })
         .catch (error => {
             console.error('Erro na requisição: ', error)
