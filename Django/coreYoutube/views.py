@@ -74,24 +74,27 @@ def credenciais_login(request):
         PASS = dados_para_login['passUsuario']
 
         if not request.user.is_authenticated:
-            print('Usuário logado: ', False)
+            print('Usuário logado: ', request.user.is_authenticated)
             user_auth = authenticate(request, username=USER, password=PASS)
             if user_auth is not None:
                 login(request, user_auth)  # Cria uma sessão automatico
                 request.session['usuario_id'] = user_auth.id
                 request.session['usuario_nome'] = user_auth.first_name
                 request.session['usuario_mail'] = user_auth.email
-                usuario_logado = True
+                usuario_logado = request.user.is_authenticated
+                mensagem_erro = 0
+                mensagem_erro = 'Login realizado com sucesso'
+                nome_usuario = request.user
             else:
                 print('Credenciais inválidas')
                 mensagem_erro = 'Credenciais inválidas'
-                nome_usuario = 'AnonymousUser'
-                usuario_logado = False
+                nome_usuario = request.user
+                usuario_logado = request.user.is_authenticated
         elif request.user.is_authenticated:
             print('Usuário já esta logado')
             mensagem_erro = 'Processo invalido'
             erro_processo = 0
-            usuario_logado = True
+            usuario_logado = request.user.is_authenticated
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
