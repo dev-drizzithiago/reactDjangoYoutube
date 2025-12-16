@@ -7,11 +7,11 @@ import "./LinkBancoDados.css"
 
 import { useState, useEffect } from "react";
 
-const LinkBancoDados = ({triggerAtualizacao}) => {    
+const LinkBancoDados = ({propsStatusProcesso}) => {    
     
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
-      const [statusLogin, setStatusLogin] = useState(false);
+    const [statusLogin, setStatusLogin] = useState(false);
 
 
     useEffect(()=>{
@@ -48,7 +48,6 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     }
     
     return (
-        
         <div>
             <VerificarUsuarioLogado responseUserLogado={
                 (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
