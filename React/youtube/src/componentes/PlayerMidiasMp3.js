@@ -20,6 +20,13 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
+
+    useEffect(()=>{
+        if (usuarioLogado) {
+            setStatusLogin(usuarioLogado)
+        }
+    }, [usuarioLogado])
+    
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
 
     
