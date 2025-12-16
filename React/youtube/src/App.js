@@ -90,7 +90,7 @@ function App() {
           {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
 
           <Routes>
-            <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={(atualizarBanco, statusLogin)} />}/>
+            <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={atualizarBanco} />}/>
             <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
           </Routes>}
 
