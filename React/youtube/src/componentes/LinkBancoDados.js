@@ -13,10 +13,11 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(false);
 
-
+    console.log(propsStatusProcesso)
+    
     useEffect(()=>{
-        setAtualizacaoBaseLinks(triggerAtualizacao)
-    }, [triggerAtualizacao])
+        setAtualizacaoBaseLinks(propsStatusProcesso)
+    }, [propsStatusProcesso])
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
