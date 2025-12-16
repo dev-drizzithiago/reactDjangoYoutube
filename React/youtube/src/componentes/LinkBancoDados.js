@@ -11,13 +11,16 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
+    const [statusLogin, setStatusLogin] = useState(false);
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])
-
+    
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+    
+    
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados) => {
@@ -47,7 +50,10 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     return (
         <div>
-      
+            <VerificarUsuarioLogado responseUserLogado={
+                (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
+            } />
+            
             <h3> Links para download </h3>
             <div className="linkBancoDados-content">
                 {dados.map((item) => (
