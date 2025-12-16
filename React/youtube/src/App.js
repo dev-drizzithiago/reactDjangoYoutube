@@ -21,7 +21,6 @@ function App() {
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
-  const [elementoSelecionado, setElementoSelecionado] = useState(0)
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
@@ -41,24 +40,15 @@ function App() {
   const linksSalvos = () => {    
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
-    // setElementoSelecionado(1)
-
-    return (
-      <VerificarUsuarioLogado responseUserLogado={
-        (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
-      } />
-    )
   }
 
 
   const midiasMp3 = () => {
     console.log('MP3')
-    // setElementoSelecionado(1)
   }
 
   const midiasMp4 = () => {
     console.log('MP4')
-    setElementoSelecionado(1)
   }
 
   const deslogar = async () => {
