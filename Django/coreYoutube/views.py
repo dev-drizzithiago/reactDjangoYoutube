@@ -152,7 +152,7 @@ def requestBaseDados(request):
             })
     else:
         mensagem = 'Usuário não esta logado.'
-        erro_processo = 1
+        erro_processo = 666
 
     return JsonResponse({
         'mensagem': mensagem,
