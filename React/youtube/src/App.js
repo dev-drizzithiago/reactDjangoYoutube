@@ -41,8 +41,8 @@ function App() {
   const linksSalvos = () => {    
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
-    setElementoSelecionado(1)
-    
+    // setElementoSelecionado(1)
+
     return (
       <VerificarUsuarioLogado responseUserLogado={
         (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
@@ -53,7 +53,7 @@ function App() {
 
   const midiasMp3 = () => {
     console.log('MP3')
-    setElementoSelecionado(1)
+    // setElementoSelecionado(1)
   }
 
   const midiasMp4 = () => {
