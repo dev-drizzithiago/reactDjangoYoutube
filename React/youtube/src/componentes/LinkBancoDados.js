@@ -16,7 +16,6 @@ const LinkBancoDados = ({triggerAtualizacao}) => {
     }, [triggerAtualizacao])
 
     const {dados, carregando} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
-
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
