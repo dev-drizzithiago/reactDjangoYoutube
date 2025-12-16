@@ -23,11 +23,12 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         .then(data => {
             console.log(data)
             if (data.erro_processo === 666 ) {
-                setDados(data.dados_django);
+                setDados(data);
                 setCarregando(false);
-            }
-            setDados(data.dados_django);
-            setCarregando(false);
+            } else {
+                setDados(data.dados_django);
+                setCarregando(false); 
+            }            
         })
         .catch (error => {
             console.error('Erro na requisição: ', error)
