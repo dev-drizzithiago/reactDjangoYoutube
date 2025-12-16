@@ -12,21 +12,18 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         tipoMidia: 'MP3',
     }
 
-    const [statusLogin, setStatusLogin] = useState(null)
+    const [statusLogin, setStatusLogin] = useState(false)
     
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
     useEffect(()=>{
         setAtualizacaoMidiaMp3(effectAtualizacao)
     }, [effectAtualizacao])
 
-    const {dados, carregando} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
+    const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
 
-    if (dados.erro_processo === 666 ){
-        setStatusLogin(false)
-    } else {
-        setStatusLogin(true)
-    }
+    
+    console.log(statusLogin)
 
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia..')
