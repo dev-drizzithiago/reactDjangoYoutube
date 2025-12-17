@@ -3,14 +3,12 @@ import { useState, useEffect } from 'react';
 import sendRequestDjango from './sendRequestDjango';
 import LinkBancoDados from './LinkBancoDados';
 
-
 const LoginUsuario = ({infoStatusLogin}) => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [statusLogin, setStatusLogin] = useState(null);
-
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
