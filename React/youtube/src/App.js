@@ -71,9 +71,9 @@ function App() {
       <BrowserRouter>
       
         <div className='app-divBtnImg'>          
-          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  title='Links Salvos'/></NavLink>
-          <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    title='Player MP3' /></NavLink>
-          <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    title='Player MP3' /></NavLink>
+          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos'/></NavLink>
+          <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3' /></NavLink>
+          <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3' /></NavLink>
           
           <NavLink to="/deslogar">            
             {!statusLogin ? 
