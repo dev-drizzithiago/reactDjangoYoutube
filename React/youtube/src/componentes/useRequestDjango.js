@@ -21,7 +21,6 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         })
         .then(response => response.json())
         .then(data => {
-            
             if (data.erro_processo === 666 ) {
                 setDados(data.dados_django);
                 setCarregando(false);
@@ -30,7 +29,7 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
                 setDados(data.dados_django);
                 setCarregando(false); 
                 setUsuarioLogado(true)
-            }            
+            }
         })
         .catch (error => {
             console.error('Erro na requisição: ', error)
