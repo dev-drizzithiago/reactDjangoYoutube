@@ -81,7 +81,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
         } else if (responseDjango.usuario_logado) {
           infoStatusLogin(responseDjango.usuario_logado)
           console.log(responseDjango.usuario_logado)
-          return <LinkBancoDados />
         }
       } else {
           console.log(responseDjango.mensagem_erro)
