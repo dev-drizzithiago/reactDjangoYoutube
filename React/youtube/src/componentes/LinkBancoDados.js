@@ -20,7 +20,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
 
-    const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)   
+    const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
 
     useEffect(()=>{
         if (usuarioLogado) {
