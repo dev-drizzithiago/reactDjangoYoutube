@@ -22,7 +22,9 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+
+            console.log(data.erro_processo)
+            
             if (data.erro_processo === 666 ) {
                 setDados(data.dados_django);
                 setCarregando(false);
