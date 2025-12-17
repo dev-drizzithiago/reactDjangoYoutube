@@ -9,8 +9,8 @@ import "./LinkBancoDados.css"
 
 import { useState, useEffect } from "react";
 
-const LinkBancoDados = ({propsStatusProcesso}) => {    
-    console.log('Chamando componente')
+const LinkBancoDados = ({propsStatusProcesso}) => {
+
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(null);
