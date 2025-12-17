@@ -40,7 +40,6 @@ function App() {
   const linksSalvos = () => {    
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
-    return <LinkBancoDados />
   }
 
   const midiasMp3 = () => {
@@ -69,32 +68,30 @@ function App() {
         (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
       } />
       
-        <BrowserRouter>
-        
-          <div className='app-divBtnImg'>
-            
-            <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  title='Links Salvos'/></NavLink>
-            <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    title='Player MP3' /></NavLink>
-            <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    title='Player MP3' /></NavLink>
-            
-            <NavLink to="/deslogar">            
-              {!statusLogin ? 
-                <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn" onClick={deslogar} title='Desconectado'/> :
-                <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn" title='Conectado'/>
-              }
-            </NavLink>
+      <BrowserRouter>
+      
+        <div className='app-divBtnImg'>          
+          <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" onClick={linksSalvos}  title='Links Salvos'/></NavLink>
+          <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" onClick={midiasMp3}    title='Player MP3' /></NavLink>
+          <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" onClick={midiasMp4}    title='Player MP3' /></NavLink>
+          
+          <NavLink to="/deslogar">            
+            {!statusLogin ? 
+              <img src="/img/imgBtns/desligar.png" alt="player" className="app-imgBtn" onClick={deslogar} title='Desconectado'/> :
+              <img src="/img/imgBtns/ligar.png"    alt="player" className="app-imgBtn" title='Conectado'/>
+            }
+          </NavLink>
+        </div>           
 
-          </div>           
+        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
-          {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-          {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
+        {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
+        <Routes>
+          <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={atualizarBanco} />}/>
+          <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
+        </Routes>}
 
-          <Routes>
-            <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={atualizarBanco} />}/>
-            <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
-          </Routes>}
-
-        </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }
