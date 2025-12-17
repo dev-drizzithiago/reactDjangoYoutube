@@ -40,6 +40,7 @@ function App() {
   const linksSalvos = () => {    
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
+    return <LinkBancoDados />
   }
 
   const midiasMp3 = () => {
