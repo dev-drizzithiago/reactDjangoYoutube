@@ -28,7 +28,8 @@ function App() {
   const [elementoLinks, setElementoLinks] = useState(false)
   const [elementoMp3, setElementoMp3] = useState(false)
 
-  
+  console.log('Elemento link: ',elementoLinks)
+  console.log('Elemento mp3: ',elementoMp3)
 
   /** Para ativar o player de midias */
   useEffect(() => {
@@ -36,8 +37,15 @@ function App() {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
-  
-  console.log('Usuario Logado: ', statusLogin)
+
+
+  useEffect(() => {
+    if (statusLogin) {
+      setElementoLinks(false)
+      setElementoMp3(false)
+    }
+  }, [])
+
   
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
@@ -47,11 +55,11 @@ function App() {
   const linksSalvos = () => {
     console.log('Links')
 
-    console.log(elementoLinks)
-    console.log(elementoMp3)
-
     if (!elementoLinks) {
       setElementoLinks(true)
+      setElementoMp3(false)
+    } else if (elementoLinks) {
+      setElementoLinks(false)
       setElementoMp3(false)
     }
   }
@@ -61,6 +69,9 @@ function App() {
     console.log('MP3')
     if (!elementoMp3) {
       setElementoMp3(true)
+      setElementoLinks(false)
+    } else if (elementoMp3) {
+      setElementoMp3(false)
       setElementoLinks(false)
     }
   }
