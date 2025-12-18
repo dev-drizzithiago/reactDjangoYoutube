@@ -15,9 +15,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(null);
 
-    
-    
-
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
@@ -25,7 +22,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
 
     useEffect(() => {
-        console.log('Usuário logado: ', statusLogin)
         if (statusLogin) {
             setAtualizacaoBaseLinks(prev => prev + 1)
         }
@@ -38,7 +34,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     }, [usuarioLogado])
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
-    
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados) => {
@@ -68,9 +63,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     
     return (        
         <div>
-            <VerificarUsuarioLogado responseUserLogado={
-                (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
-            } />
             {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}
             {statusLogin && <FormularioLinkYoutube onLinkAdicionado={() => setAtualizacaoBaseLinks(prev => prev + 1)} />}
 
