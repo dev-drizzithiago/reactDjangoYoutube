@@ -24,6 +24,9 @@ function App() {
   const [linkMidia, setLinkMidia] = useState([null, null])
   const [ativarPlayer, setAtivarPlayer] = useState(false)
   const [statusLogin, setStatusLogin] = useState(false)
+
+  const [elementoLinks, setElementoLinks] = useState(false)
+  const [elementoMp3, setElementoMp3] = useState(false)
   
   /** Para ativar o player de midias */
   useEffect(() => {
@@ -37,13 +40,15 @@ function App() {
     setLinkMidia([null, null])
   }
 
-  const linksSalvos = () => {    
+  const linksSalvos = () => {
+    setElementoLinks(true)
     console.log('Links')    
     console.log('Usuario Logado: ', statusLogin)
   }
 
   const midiasMp3 = () => {
     console.log('MP3')
+    setElementoMp3(true)
   }
 
   const midiasMp4 = () => {
@@ -66,26 +71,20 @@ function App() {
     <div className="App">
       <VerificarUsuarioLogado responseUserLogado={
         (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
-      } />
+      } />      
       
-      <BrowserRouter>
-        {statusLogin &&
-          <div className='app-divBtnImg'>          
-            <NavLink to="/linksSalvos"><img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos'/></NavLink>
-            <NavLink to="/midiasMp3"  ><img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3' /></NavLink>
-            <NavLink to="/midiasMp4"  ><img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3' /></NavLink>
-          </div>
-        }
+      
+      <div className='app-divBtnImg'>          
+        <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos()} />
+        <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3()}   />
+        <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3'  />
+      </div>      
 
-        {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+      {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+      {elementoLinks && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+      {elementoMp3 && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+      
 
-        {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
-        <Routes>          
-          <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={atualizarBanco} />} />
-          <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
-        </Routes>}
-
-      </BrowserRouter>
     </div>
   );
 }
