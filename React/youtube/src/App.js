@@ -94,7 +94,7 @@ function App() {
         <div className='app-divBtnImg'>
           <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
           <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
-          <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3'  />
+          <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'  />
         </div>
       }
 
