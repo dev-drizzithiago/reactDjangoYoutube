@@ -28,8 +28,8 @@ function App() {
   const [elementoLinks, setElementoLinks] = useState(false)
   const [elementoMp3, setElementoMp3] = useState(false)
 
-  console.log('Elemento link: ',elementoLinks)
-  console.log('Elemento mp3: ',elementoMp3)
+  // console.log('Elemento link: ',elementoLinks)
+  // console.log('Elemento mp3: ',elementoMp3)
 
   /** Para ativar o player de midias */
   useEffect(() => {
@@ -105,7 +105,7 @@ function App() {
         <div className='app-divBtnImg'>
           <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
           <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
-          <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'  />
+          <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} />
         </div>
       }
 
