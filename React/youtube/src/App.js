@@ -27,7 +27,9 @@ function App() {
 
   const [elementoLinks, setElementoLinks] = useState(false)
   const [elementoMp3, setElementoMp3] = useState(false)
+
   
+
   /** Para ativar o player de midias */
   useEffect(() => {
     if (linkMidia[0] !== null) {
@@ -35,20 +37,32 @@ function App() {
     }
   }, [linkMidia])
   
+  console.log('Usuario Logado: ', statusLogin)
+  
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
     setLinkMidia([null, null])
   }
 
   const linksSalvos = () => {
-    setElementoLinks(true)
-    console.log('Links')    
-    console.log('Usuario Logado: ', statusLogin)
+    console.log('Links')
+
+    console.log(elementoLinks)
+    console.log(elementoMp3)
+
+    if (!elementoLinks) {
+      setElementoLinks(true)
+      setElementoMp3(false)
+    }
   }
 
   const midiasMp3 = () => {
+
     console.log('MP3')
-    setElementoMp3(true)
+    if (!elementoMp3) {
+      setElementoMp3(true)
+      setElementoLinks(false)
+    }
   }
 
   const midiasMp4 = () => {
@@ -71,18 +85,22 @@ function App() {
     <div className="App">
       <VerificarUsuarioLogado responseUserLogado={
         (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
-      } />      
-      
-      
-      <div className='app-divBtnImg'>          
-        <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos()} />
-        <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3()}   />
-        <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3'  />
-      </div>      
+      } />
 
-      {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-      {elementoLinks && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
-      {elementoMp3 && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+      {/** Se o usuário estiver deslogado */}
+      {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado => setStatusLogin(statusLogado))}/>}
+
+      {statusLogin &&
+        <div className='app-divBtnImg'>
+          <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
+          <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
+          <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP3'  />
+        </div>
+      }
+
+      {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+      {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+      {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
       
 
     </div>
