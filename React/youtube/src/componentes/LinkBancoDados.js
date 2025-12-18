@@ -14,19 +14,22 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(null);
-    const [atualizarBanco, setAtualizarBanco] = useState(0);
 
-    useEffect(() => {
-        if (statusLogin) {
-            setAtualizacaoBaseLinks(prev => prev + 1)
-        }
-    }, [atualizacaoBaseLinks])
+    
+    
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
 
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
+
+    useEffect(() => {
+        console.log('Usuário logado: ', statusLogin)
+        if (statusLogin) {
+            setAtualizacaoBaseLinks(prev => prev + 1)
+        }
+    }, [statusLogin])
 
     useEffect(()=>{
         if (usuarioLogado) {
@@ -63,8 +66,11 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         setdownloadMidias(false);
     }
     
-    return (
+    return (        
         <div>
+            <VerificarUsuarioLogado responseUserLogado={
+                (StatusLoginUsuario) => setStatusLogin(StatusLoginUsuario)
+            } />
             {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}
             {statusLogin && <FormularioLinkYoutube onLinkAdicionado={() => setAtualizacaoBaseLinks(prev => prev + 1)} />}
 
