@@ -85,11 +85,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   return (
     <div className='login-divPrincipal'>
-      <h1>Cadastro</h1>        
+      <h1>Cadastro</h1>
+        {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
           <h3>Cadastro</h3>
-
           <div className='login-divGridInputs'>
             <label htmlFor="nomeCompleto">Nome Completo</label>              
             <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' 
@@ -134,6 +134,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
           <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="" onClick={salvarNovoUser}/>
         </div>}
 
+        {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>
             <h3>Login</h3>
 
