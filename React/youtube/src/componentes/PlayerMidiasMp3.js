@@ -8,18 +8,22 @@ import LoginUsuario from './LoginUsuario';
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
-    const payload = {
-        tipoMidia: 'MP3',
-    }
+    const payload = {tipoMidia: 'MP3'}
 
-    const [statusLogin, setStatusLogin] = useState(false)
-    
+    const [statusLogin, setStatusLogin] = useState(false)    
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
+
     useEffect(()=>{
         setAtualizacaoMidiaMp3(effectAtualizacao)
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
+
+    useEffect(() => {
+        if(statusLogin) {
+            setAtualizacaoMidiaMp3(prev => prev + 1)
+        }
+    }, [statusLogin])
 
     useEffect(()=>{
         if (usuarioLogado) {
