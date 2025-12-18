@@ -78,12 +78,12 @@ function App() {
         }
 
         {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-        
-        <Routes>
-          <Route path="/" element={<LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)} />} />
+
+        {!statusLogin ? <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/> : 
+        <Routes>          
           <Route path='linksSalvos' element={<LinkBancoDados propsStatusProcesso={atualizarBanco} />} />
           <Route path='midiasMp3'   element={<PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />} />
-        </Routes>
+        </Routes>}
 
       </BrowserRouter>
     </div>
