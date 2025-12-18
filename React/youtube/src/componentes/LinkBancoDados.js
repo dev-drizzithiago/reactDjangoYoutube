@@ -16,6 +16,12 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [statusLogin, setStatusLogin] = useState(null);
     const [atualizarBanco, setAtualizarBanco] = useState(0);
 
+    useEffect(() => {
+        if (statusLogin) {
+            setAtualizacaoBaseLinks(prev => prev + 1)
+        }
+    }, [atualizacaoBaseLinks])
+
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
