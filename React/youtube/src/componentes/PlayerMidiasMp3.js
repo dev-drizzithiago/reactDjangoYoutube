@@ -8,7 +8,6 @@ import LoginUsuario from './LoginUsuario';
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = "http://localhost:8000/media/"
-    const payload = {tipoMidia: 'MP3'}
 
     const [statusLogin, setStatusLogin] = useState(false)    
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
@@ -41,11 +40,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     }
 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
-    const downloadMidia = async (midiaDownload) => {
+    const downloadMidia = async (midiaDownload, tipoMidia) => {
         console.log('Download da mídia..')
 
         const payload = {
-            'tipoDownload': 'mp3',
+            'tipoDownload': tipoMidia,
             'linkDownload': midiaDownload,
         }
 
@@ -84,10 +83,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
                                 <img src="/img/imgBtns/download_mp3.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
-                                onClick={() => downloadMidia(item.path_arquivo)} title='Download MP3' />  
+                                onClick={() => downloadMidia(item.path_arquivo, 'MP3')} title='Download MP3' />  
 
                                 <img src="/img/imgBtns/download_mp4.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
-                                onClick={() => downloadMidia(item.path_arquivo)} title='Download MP4' />  
+                                onClick={() => downloadMidia(item.path_arquivo, 'MP4')} title='Download MP4' />  
 
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.path_arquivo)} />
