@@ -41,11 +41,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     }
 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
-    const downloadMidia = async (midiaDownload, tipoMidia) => {
+    const downloadMidia = async (midiaDownload) => {
         console.log('Download da mídia..')
 
         const payload = {
-            'tipoDownload': tipoMidia,
+            'tipoDownload': 'mp3',
             'linkDownload': midiaDownload,
         }
 
@@ -83,11 +83,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
                                 onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
-                                <img src="/img/imgBtns/download_mp3.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
-                                onClick={() => downloadMidia(item.path_arquivo, 'MP3')} title='Download MP3' />  
-
-                                <img src="/img/imgBtns/download_mp4.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
-                                onClick={() => downloadMidia(item.path_arquivo, 'MP4')} title='Download MP4' />  
+                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
+                                onClick={() => downloadMidia(item.path_arquivo)} />  
 
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.path_arquivo)} />
