@@ -36,11 +36,11 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
-    const downloadVideoAndMusic = async (id_dados) => {
+    const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
         setdownloadMidias(id_dados)
         const dadosDownload = {
             id_dados: id_dados,
-            midia: 'MP3',
+            midia: tipoMidia,
         }
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
@@ -82,8 +82,11 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                         <p className="linkBancoDados-btnsAcao">
                             
 
-                            <img src="/img/imgBtns/download.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
-                            onClick={() => downloadVideoAndMusic(item.id_dados)} aria-label={`Baixar mídia de ${item.titulo_link}`} />
+                            <img src="/img/imgBtns/download_mp3.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
+
+                            <img src="/img/imgBtns/download_mp4.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP4')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
 
                             <img src="/img/imgBtns/remover.png" alt="remover" className="linkBancoDados-imgBtn linkBancoDados-imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
 
