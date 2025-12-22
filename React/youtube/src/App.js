@@ -46,7 +46,6 @@ function App() {
     }
   }, [])
 
-  
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
     setLinkMidia([null, null])
