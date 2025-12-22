@@ -33,7 +33,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         }
     }, [usuarioLogado])
 
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>
+    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
@@ -80,7 +80,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                         </div>
                         
                         <p className="linkBancoDados-btnsAcao">
-                            
 
                             <img src="/img/imgBtns/download_mp3.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
                             onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
