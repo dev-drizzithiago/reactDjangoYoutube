@@ -63,6 +63,12 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         console.log('Removendo a mídia..')
     }
 
+    function converterDuracao(duracao) {
+        const minutos = Math.round(duracao / 60); // converte o valor inteiro para minutos.
+        const segundos = duracao % 60;  // converte o valor inteiro para segundos.
+        return `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+    }
+
     return (
         <div>
             <h3>Lista MP3</h3>
@@ -72,7 +78,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                         <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
                             <div className="playerMidiasMp3-div_paragraphTitulos">
                                 <p className='playerMidiasMp3-paragraphs'>{item.nome_arquivo}</p> 
-                                <p>{item.duracao_midia}</p>
+                                <p>{String.fromCodePoint(0x23F3)} - {converterDuracao(item.duracao_midia)}</p>
                             </div>
 
                             <div>
