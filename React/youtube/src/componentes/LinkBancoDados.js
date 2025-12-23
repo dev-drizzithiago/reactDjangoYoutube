@@ -81,10 +81,10 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                         
                         <p className="linkBancoDados-btnsAcao">
 
-                            <img src="/img/imgBtns/download_mp3.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            <img src="/img/imgBtns/download_mp3.png" alt="downloadMp3" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
                             onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
 
-                            <img src="/img/imgBtns/download_mp4.png" alt="download" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            <img src="/img/imgBtns/download_mp4.png" alt="downloadMp4" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
                             onClick={() => downloadVideoAndMusic(item.id_dados, 'MP4')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
 
                             <img src="/img/imgBtns/remover.png" alt="remover" className="linkBancoDados-imgBtn linkBancoDados-imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
