@@ -53,7 +53,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         
         if (response && response.download_url) {            
             setTimeout(() => {
-                const url = `http://localhost:8000${response.download_url}`
+                const url = encodeURI(`http://localhost:8000${response.download_url}`)
                 window.open(url, "_blank", "width=600 height=400");                
             }, 1000);
         }
