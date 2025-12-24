@@ -174,8 +174,10 @@ class YouTubeDownload:
 
         path_url_midia = (str(
             Path(
-                self.PATH_MIDIA_MUSICS_URL, self.nome_validado))
-                          .replace('\\', '/'))
+                self.PATH_MIDIA_MUSICS_URL,
+                self.nome_validado.strip().replace(' - ', '_')
+                .replace(' ', '_')
+            )).replace('\\', '/'))
 
         nome_m4a_to_mp3 = str(self.nome_validado).replace('.mp3', '.m4a')
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
