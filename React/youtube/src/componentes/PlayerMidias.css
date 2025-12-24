@@ -1,6 +1,6 @@
 .player-midia-imgBtn {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   margin: 5px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);  
@@ -10,6 +10,9 @@
 }
 
 .playerMidias {
+  width: 400px;
+  height: 300px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);  
 }
+
