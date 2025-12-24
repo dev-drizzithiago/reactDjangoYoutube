@@ -175,12 +175,19 @@ class YouTubeDownload:
         path_url_midia = (str(
             Path(
                 self.PATH_MIDIA_MUSICS_URL,
-                self.nome_validado.strip()
+                self.nome_validado
+                .strip()
                 .replace(' - ', '_')
                 .replace(' ', '_')
             )).replace('\\', '/'))
 
-        nome_m4a_to_mp3 = str(self.nome_validado).replace('.mp3', '.m4a')
+        nome_m4a_to_mp3 = str(
+            self.nome_validado
+            .strip()
+            .replace(' - ', '_')
+            .replace(' ', '_')
+        ).replace('.mp3', '.m4a')
+
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
 
         # Valida se o nome do arquivo é muito extenso; nome é baseado do "C:/" até o último carectere.
@@ -194,6 +201,7 @@ class YouTubeDownload:
             logging.info(f"Midia [{self.nome_validado}] já existe, se a mídia não estiver abrindo, chame o dev.")
             return f"Midia já existe."
         else:
+            # Se a midia não existir é feito o download
             try:
                 stream = self._download_yt.streams.get_audio_only()
                 stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
