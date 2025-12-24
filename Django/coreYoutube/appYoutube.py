@@ -171,7 +171,12 @@ class YouTubeDownload:
         # Formata os dados para o download da mídia
         ducarao_midia = f"{self._download_yt.length}"
         miniatura = self._download_yt.thumbnail_url
-        path_url_midia = str(Path(self.PATH_MIDIA_MUSICS_URL, self.nome_validado)).replace('\\', '/')
+
+        path_url_midia = (str(
+            Path(
+                self.PATH_MIDIA_MUSICS_URL, self.nome_validado))
+                          .replace('\\', '/'))
+
         nome_m4a_to_mp3 = str(self.nome_validado).replace('.mp3', '.m4a')
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
 
