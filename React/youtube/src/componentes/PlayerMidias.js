@@ -14,9 +14,7 @@ const PlayerMidias = ({executandoMidia, fecharPlayer}) => {
             <video controls className='playerMidias'>
                 <source src={encodeURI(`http://localhost:8000/media/${executandoMidia[0]}`)} type={`audio/${executandoMidia[1]}`}/>
             </video>
-
-          <img src="/img/imgBtns/botao-fechar.png" alt="player" className="player-midia-imgBtn" onClick={fecharPlayerMidia} />
-          
+          <img src="/img/imgBtns/botao-fechar.png" alt="player" className="player-midia-imgBtn" onClick={fecharPlayerMidia} />          
       </div>
     )
 }
