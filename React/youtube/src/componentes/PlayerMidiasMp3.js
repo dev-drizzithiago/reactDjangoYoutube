@@ -37,7 +37,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         console.log('Executando mídia..')
 
         /** Envia os dados para o elemento principal (app) */
-        executaMidia(linkMidia, 'mp3');
+        executaMidia(linkMidia, 'audio/mp3');
     }
 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
