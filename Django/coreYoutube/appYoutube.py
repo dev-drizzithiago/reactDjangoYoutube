@@ -175,7 +175,8 @@ class YouTubeDownload:
         path_url_midia = (str(
             Path(
                 self.PATH_MIDIA_MUSICS_URL,
-                self.nome_validado.strip().replace(' - ', '_')
+                self.nome_validado.strip()
+                .replace(' - ', '_')
                 .replace(' ', '_')
             )).replace('\\', '/'))
 
