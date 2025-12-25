@@ -70,6 +70,7 @@ function App() {
     console.log('MP3')
     if (!elementoMp3) {
       setElementoMp3(true)
+      setElementoMp4(false)
       setElementoLinks(false)
     } else if (elementoMp3) {
       setElementoMp3(false)
@@ -79,7 +80,15 @@ function App() {
 
   const midiasMp4 = () => {
     console.log('MP4')
-    setElementoMp4(true)
+    if (!elementoMp4) {
+      setElementoMp4(true)
+      setElementoLinks(false)
+      setElementoMp3(false)
+    } else if (elementoMp4) {
+      setElementoMp4(false)
+      setElementoMp3(false)
+      setElementoLinks(false)
+    }
   }
 
   const deslogar = async () => {
