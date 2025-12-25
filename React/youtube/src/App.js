@@ -9,6 +9,7 @@ import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado';
 import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
+import PlayerMidiasMp4 from './componentes/PlayerMidiasMp4';
 import PlayerMidias from "./componentes/PlayerMidias"
 import LoginUsuario from './componentes/LoginUsuario';
 
@@ -27,6 +28,7 @@ function App() {
 
   const [elementoLinks, setElementoLinks] = useState(false)
   const [elementoMp3, setElementoMp3] = useState(false)
+  const [elementoMp4, setElementoMp4] = useState(false)
 
   // console.log('Elemento link: ',elementoLinks)
   // console.log('Elemento mp3: ',elementoMp3)
@@ -77,6 +79,7 @@ function App() {
 
   const midiasMp4 = () => {
     console.log('MP4')
+    setElementoMp4(true)
   }
 
   const deslogar = async () => {
@@ -111,6 +114,7 @@ function App() {
       {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
       {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
       {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+      {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
       
 
     </div>
