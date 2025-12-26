@@ -37,7 +37,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         console.log('Executando mídia..')
 
         /** Envia os dados para o elemento principal (app) */
-        executaMidia(linkMidia, 'audio/mp4');
+        executaMidia(linkMidia, 'audio/mp4', true);
     }
 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
@@ -107,7 +107,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             </div> :
             <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
             }
-                    
         </div>
     );
 };
