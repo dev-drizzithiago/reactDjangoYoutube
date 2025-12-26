@@ -45,6 +45,13 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (statusLogin) {
+      setElementoLinks(false)
+      setElementoMp4(false)
+    }
+  }, [])
+
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
     setLinkMidia([null, null])
@@ -118,8 +125,6 @@ function App() {
       {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
       {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
       {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
-      
-
     </div>
   );
 }
