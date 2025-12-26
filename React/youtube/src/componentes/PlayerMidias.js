@@ -1,13 +1,12 @@
 import './PlayerMidias.css'
+
+
 const PlayerMidias = ({executandoMidia, fecharPlayer}) => {
 
     const fecharPlayerMidia = () => {
-      console.log('Fechar Player')
       fecharPlayer()
     }
-
-    console.log(encodeURI(`http://localhost:8000/media/${executandoMidia[0]}`))
-
+    
     return (
       <div>
           <h1> PLAYER DE MIDIAS</h1>
