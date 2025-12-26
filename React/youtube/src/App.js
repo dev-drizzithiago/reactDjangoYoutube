@@ -30,36 +30,34 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false)
   const [elementoMp4, setElementoMp4] = useState(false)
 
-  /** Para ativar o player de midias */
+  /** Para ativar o player de midias 
+   * Se o link tiver algum valor o player é ativado
+  */
   useEffect(() => {
     if (linkMidia[0] !== null) {
       setAtivarPlayer(true)
     }
   }, [linkMidia])
 
-
+  /** Avalia se o usuário esta logado, caso não esteja o 
+   * elemento do login é chamado e todos os elementos são fechados 
+   * */
   useEffect(() => {
     if (statusLogin) {
       setElementoLinks(false)
       setElementoMp3(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (statusLogin) {
-      setElementoLinks(false)
       setElementoMp4(false)
     }
   }, [])
 
+  /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false)
     setLinkMidia([null, null])
   }
 
+  /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
-    console.log('Links')
-
     if (!elementoLinks) {
       setElementoLinks(true)
       setElementoMp3(false)
@@ -69,6 +67,7 @@ function App() {
     }
   }
 
+  /** Abre o elemento onde estão as mídias MP3 salvas. */
   const midiasMp3 = () => {
     if (!elementoMp3) {
       setElementoMp3(true)
@@ -80,6 +79,7 @@ function App() {
     }
   }
 
+   /** Abre o elemento onde estão as mídias MP4 salvas. */
   const midiasMp4 = () => {
     if (!elementoMp4) {
       setElementoMp4(true)
@@ -126,7 +126,7 @@ function App() {
       {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
 
       {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-        
+
     </div>
   );
 }
