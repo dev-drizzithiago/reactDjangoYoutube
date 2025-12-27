@@ -35,7 +35,11 @@ function App() {
   */
   useEffect(() => {
     if (linkMidia[0] !== null) {
-      setAtivarPlayer(true)
+      if (ativarPlayer) {
+        setAtivarPlayer(false)
+      } else {
+        setAtivarPlayer(true)
+      }
     }
   }, [linkMidia])
 
