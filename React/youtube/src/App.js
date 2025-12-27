@@ -36,7 +36,10 @@ function App() {
   useEffect(() => {
     if (linkMidia[0] !== null) {
       if (ativarPlayer) {
-        setAtivarPlayer(false)
+        setAtivarPlayer(false)        
+        setTimeout(() => {
+          setAtivarPlayer(true)          
+        }, 300);
       } else if (!ativarPlayer){
         setAtivarPlayer(true)
       }
@@ -126,7 +129,7 @@ function App() {
       }
 
       {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-        
+
       {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
       {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
       {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
