@@ -6,7 +6,6 @@ import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
 import sendRequestDjango from './componentes/sendRequestDjango';
 
 import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado';
-import FormularioLinkYoutube from './componentes/FormularioLinkYoutube';
 import LinkBancoDados from './componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
 import PlayerMidiasMp4 from './componentes/PlayerMidiasMp4';
@@ -22,14 +21,14 @@ function App() {
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
-  const [linkMidia, setLinkMidia] = useState([null, null])
-  const [ativarPlayer, setAtivarPlayer] = useState(false)
-  const [statusLogin, setStatusLogin] = useState(false)
+  const [linkMidia, setLinkMidia] = useState([null, null]);
+  const [ativarPlayer, setAtivarPlayer] = useState(false);
+  const [statusLogin, setStatusLogin] = useState(false);
 
-  const [elementoLinks, setElementoLinks] = useState(false)
-  const [elementoMp3, setElementoMp3] = useState(false)
-  const [elementoMp4, setElementoMp4] = useState(false)
-  const [spinnerPlayer, setSpinnerPlayer] = useState(false)
+  const [elementoLinks, setElementoLinks] = useState(false);
+  const [elementoMp3, setElementoMp3] = useState(false);
+  const [elementoMp4, setElementoMp4] = useState(false);
+  const [spinnerPlayer, setSpinnerPlayer] = useState(false);
 
   /** Para ativar o player de midias 
    * Se o link tiver algum valor o player é ativado
@@ -37,75 +36,79 @@ function App() {
   useEffect(() => {
     if (linkMidia[0] !== null) {
 
-      setSpinnerPlayer(true)
+      setSpinnerPlayer(true);
 
       if (ativarPlayer) {
-        setAtivarPlayer(false)
+        setAtivarPlayer(false);
         setTimeout(() => {
-          setSpinnerPlayer(false)
-          setAtivarPlayer(true)
+          setSpinnerPlayer(false);
+          setAtivarPlayer(true);
+          setElementoLinks(false)
         }, 1000);
       } else if (!ativarPlayer){
-
         setTimeout(() => {
-          setAtivarPlayer(true)
-          setSpinnerPlayer(false)
+          setAtivarPlayer(true);
+          setSpinnerPlayer(false);
+          setElementoLinks(false)
         }, 1000);
         
       }
     }
-  }, [linkMidia])
+  }, [linkMidia]);
 
   /** Avalia se o usuário esta logado, caso não esteja o 
    * elemento do login é chamado e todos os elementos são fechados 
    * */
   useEffect(() => {
     if (statusLogin) {
-      setElementoLinks(false)
-      setElementoMp3(false)
-      setElementoMp4(false)
+      setElementoLinks(false);
+      setElementoMp3(false);
+      setElementoMp4(false);
     }
   }, [])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
-    setAtivarPlayer(false)
-    setLinkMidia([null, null])
+    setAtivarPlayer(false);
+    setLinkMidia([null, null]);
   }
 
   /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
     if (!elementoLinks) {
-      setElementoLinks(true)
-      setElementoMp3(false)
+      setElementoLinks(true);
+      setElementoMp3(false);
+      setElementoMp4(false);
+      setSpinnerPlayer(false);
+      setAtivarPlayer(false);
     } else if (elementoLinks) {
-      setElementoLinks(false)
-      setElementoMp3(false)
+      setElementoLinks(false);
+      setElementoMp3(false);
     }
   }
 
   /** Abre o elemento onde estão as mídias MP3 salvas. */
   const midiasMp3 = () => {
     if (!elementoMp3) {
-      setElementoMp3(true)
-      setElementoMp4(false)
-      setElementoLinks(false)
+      setElementoMp3(true);
+      setElementoMp4(false);
+      setElementoLinks(false);
     } else if (elementoMp3) {
-      setElementoMp3(false)
-      setElementoLinks(false)
+      setElementoMp3(false);
+      setElementoLinks(false);
     }
   }
 
    /** Abre o elemento onde estão as mídias MP4 salvas. */
   const midiasMp4 = () => {
     if (!elementoMp4) {
-      setElementoMp4(true)
-      setElementoMp3(false)
-      setElementoLinks(false)
+      setElementoMp4(true);
+      setElementoMp3(false);
+      setElementoLinks(false);
     } else if (elementoMp4) {
-      setElementoMp4(false)
-      setElementoMp3(false)
-      setElementoLinks(false)
+      setElementoMp4(false);
+      setElementoMp3(false);
+      setElementoLinks(false);
     }
   }
 
@@ -115,9 +118,9 @@ function App() {
             'tipoRequest': 'deslogarUsuario',
         }
         const urlDjangoLogin = `http://localhost:8000/credenciais_login/`;
-        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD)
-        console.log(responseDjango)
-        setStatusLogin(false)
+        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
+        console.log(responseDjango);
+        setStatusLogin(false);
       }
   }
 
