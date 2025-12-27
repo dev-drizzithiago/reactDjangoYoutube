@@ -37,7 +37,7 @@ function App() {
     if (linkMidia[0] !== null) {
       if (ativarPlayer) {
         setAtivarPlayer(false)
-      } else {
+      } else if (!ativarPlayer){
         setAtivarPlayer(true)
       }
     }
