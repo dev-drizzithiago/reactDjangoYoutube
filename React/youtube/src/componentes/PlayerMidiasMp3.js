@@ -78,7 +78,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                         <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
                             <div className="playerMidiasMp3-div_paragraphTitulos">
                                 <p className='playerMidiasMp3-paragraphs'>{item.nome_arquivo}</p> 
-                                <p>{String.fromCodePoint(0x23F3)} - {converterDuracao(item.duracao_midia)}</p>
+                                <p>{String.fromCodePoint(0x23F3)} {converterDuracao(item.duracao_midia)}</p>
                             </div>
 
                             <div>
