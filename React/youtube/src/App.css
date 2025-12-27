@@ -72,3 +72,11 @@
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
+
+.app-divImgLoading {
+  display: flex;
+  margin-top: 2%;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
