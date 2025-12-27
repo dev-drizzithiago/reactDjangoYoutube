@@ -29,19 +29,29 @@ function App() {
   const [elementoLinks, setElementoLinks] = useState(false)
   const [elementoMp3, setElementoMp3] = useState(false)
   const [elementoMp4, setElementoMp4] = useState(false)
+  const [spinnerPlayer, setSpinnerPlayer] = useState(false)
 
   /** Para ativar o player de midias 
    * Se o link tiver algum valor o player é ativado
   */
   useEffect(() => {
     if (linkMidia[0] !== null) {
+
+      setSpinnerPlayer(true)
+
       if (ativarPlayer) {
-        setAtivarPlayer(false)        
+        setAtivarPlayer(false)
         setTimeout(() => {
-          setAtivarPlayer(true)          
-        }, 300);
+          setSpinnerPlayer(false)
+          setAtivarPlayer(true)
+        }, 1000);
       } else if (!ativarPlayer){
-        setAtivarPlayer(true)
+
+        setTimeout(() => {
+          setAtivarPlayer(true)
+          setSpinnerPlayer(false)
+        }, 1000);
+        
       }
     }
   }, [linkMidia])
@@ -128,12 +138,17 @@ function App() {
         </div>
       }
 
+      {spinnerPlayer && (
+          <div className="app-divImgLoading">
+              <p>Carregando mídia...</p>
+              <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+          </div>
+      )}
       {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
       {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
       {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
       {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
-
 
     </div>
   );
