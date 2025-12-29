@@ -157,7 +157,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
               className='login-input login-inputSenha'
               value={dadosParaLogin.passLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
-              onKeyUp={criarNovoUsuario}/>
+              onKeyUp={eventoLogin}
+              />
               
             </div>
                     
@@ -165,13 +166,15 @@ const LoginUsuario = ({infoStatusLogin}) => {
             src="/img/imgBtns/verificar.png" 
             alt="logar" 
             title='Logar' 
-            onClick={eventoLogin}/>
+            onClick={eventoLogin}
+            />            
             {
               btnCriarNovoUserAtivo &&
               <img className="login-btnNewUser login-btnCriarNovoUser" 
               src="/img/imgBtns/adicionar-usuario.png" 
               alt="criar usuario" 
-              onClick={criarNovoUsuario} /> 
+              onClick={criarNovoUsuario} 
+              /> 
             }          
         </div>}
       </div>
