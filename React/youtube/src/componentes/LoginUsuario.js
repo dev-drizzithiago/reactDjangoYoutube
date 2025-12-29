@@ -128,10 +128,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
               value={dadosNovoUser.confirmSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
+              onKeyUp={salvarNovoUser}
               />              
             </div>            
 
-          <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="" onClick={salvarNovoUser}/>
+          <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="criarNovoUsuario" title='Criar Usuário' onClick={salvarNovoUser}/>
         </div>}
 
         {/** Processo para logar o usuário */}
@@ -140,7 +141,9 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
             <div className='login-divGridInputs'>
               <label htmlFor="usuario">Usuário</label>              
-              <input type="text" name='usuario' className='login-input login-inputUsuario'
+              <input type="text" 
+              name='usuario' 
+              className='login-input login-inputUsuario'
               value={dadosParaLogin.userLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
               />
@@ -149,18 +152,26 @@ const LoginUsuario = ({infoStatusLogin}) => {
             
             <div className='login-divGridInputs'>
               <label htmlFor="senha">Senha</label>
-              <input type="password" name='senha' className='login-input login-inputSenha'
+              <input type="password" 
+              name='senha' 
+              className='login-input login-inputSenha'
               value={dadosParaLogin.passLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
-              />
+              onKeyUp={criarNovoUsuario}/>
               
             </div>
                     
-            <img className="login-btnNewUser login-btnVerificar" src="/img/imgBtns/verificar.png" alt="logar" onClick={eventoLogin}/>
+            <img className="login-btnNewUser login-btnVerificar" 
+            src="/img/imgBtns/verificar.png" 
+            alt="logar" 
+            title='Logar' 
+            onClick={eventoLogin}/>
             {
               btnCriarNovoUserAtivo &&
               <img className="login-btnNewUser login-btnCriarNovoUser" 
-              src="/img/imgBtns/adicionar-usuario.png" alt="criar usuario" onClick={criarNovoUsuario} /> 
+              src="/img/imgBtns/adicionar-usuario.png" 
+              alt="criar usuario" 
+              onClick={criarNovoUsuario} /> 
             }          
         </div>}
       </div>
