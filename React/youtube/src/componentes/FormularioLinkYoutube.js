@@ -46,7 +46,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     <div className="returnFormsLink">
         <div className="divLabelInput">
           <label className="label labelLink" htmlFor="link">Cole o Link do Video:</label>
-          <input type="text" className="inputText inputLinkYoutube" name="link" ref={refLink}/>
+          <input type="text" className="inputText inputLinkYoutube" name="link" ref={refLink} onKeyUp={useDefGravandoLink}/>
         </div>       
 
         {/** BLOCO DOS BOTOES */}
