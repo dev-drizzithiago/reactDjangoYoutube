@@ -84,6 +84,7 @@ function App() {
     } else if (elementoLinks) {
       setElementoLinks(false);
       setElementoMp3(false);
+      setAtivarPlayer(false);      
     }
   }
 
@@ -93,9 +94,11 @@ function App() {
       setElementoMp3(true);
       setElementoMp4(false);
       setElementoLinks(false);
+      setAtivarPlayer(false);
     } else if (elementoMp3) {
       setElementoMp3(false);
       setElementoLinks(false);
+      setAtivarPlayer(false);
     }
   }
 
@@ -105,10 +108,12 @@ function App() {
       setElementoMp4(true);
       setElementoMp3(false);
       setElementoLinks(false);
+      setAtivarPlayer(false);
     } else if (elementoMp4) {
       setElementoMp4(false);
       setElementoMp3(false);
       setElementoLinks(false);
+      setAtivarPlayer(false);
     }
   }
 
