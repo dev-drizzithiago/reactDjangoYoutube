@@ -69,7 +69,9 @@ const LoginUsuario = ({infoStatusLogin}) => {
         },
       }
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+
       console.log(responseDjango)
+      
       if (responseDjango.erro_processo !== 1) {
         if (responseDjango.nome_usuario === 'AnonymousUser'){
           console.log(responseDjango.mensagem_erro)
