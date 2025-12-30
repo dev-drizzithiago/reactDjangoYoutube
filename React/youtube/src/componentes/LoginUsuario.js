@@ -68,7 +68,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
           'passUsuario': dadosParaLogin.passLogin, 
         },
       }
-
+      console.log('Processando login...')
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
 
       console.log(responseDjango)
