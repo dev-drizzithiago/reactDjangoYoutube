@@ -90,8 +90,8 @@ def credenciais_login(request):
                 usuario_logado = request.user.is_authenticated
                 erro_processo = 2
         elif request.user.is_authenticated:
-            print('Usuário já esta logado')
-            mensagem_erro = 'Processo invalido'
+            print('Usuário logado: ', request.user.is_authenticated)
+            mensagem_erro = f'Usuário logado: {request.user.is_authenticated}',
             usuario_logado = request.user.is_authenticated
             erro_processo = 0
         else:
