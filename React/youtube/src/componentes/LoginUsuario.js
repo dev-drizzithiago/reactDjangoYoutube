@@ -72,16 +72,17 @@ const LoginUsuario = ({infoStatusLogin}) => {
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
 
       console.log(responseDjango)
-      
-      if (responseDjango.erro_processo !== 1) {
-        if (responseDjango.nome_usuario === 'AnonymousUser'){
-          console.log(responseDjango.mensagem_erro)
-          infoStatusLogin(false)
-        } else if (responseDjango.usuario_logado) {
-          infoStatusLogin(responseDjango.usuario_logado)
+      if (responseDjango) {
+        if (Number(responseDjango.erro_processo) !== 1) {
+          if (responseDjango.nome_usuario === 'AnonymousUser'){
+            console.log(responseDjango.mensagem_erro)
+            infoStatusLogin(false)
+          } else if (responseDjango.usuario_logado) {
+            infoStatusLogin(responseDjango.usuario_logado)
+          }
+        } else {
+            console.log(responseDjango.mensagem_erro)
         }
-      } else {
-          console.log(responseDjango.mensagem_erro)
       }
     }
   }
