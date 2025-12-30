@@ -68,6 +68,7 @@ def credenciais_login(request):
             mensagem_erro = 'Erro ao cadastrar usuário.'
             erro_processo = 1
 
+    # Processo para realizar o login do usuário quando entra com as credenciais.
     elif tipo_requisicao == 'realizarLogin':
         dados_para_login = dados_json['dadosCredencial']
         USER = dados_para_login['userLogin']
@@ -81,31 +82,39 @@ def credenciais_login(request):
                 request.session['usuario_nome'] = user_auth.first_name
                 request.session['usuario_mail'] = user_auth.email
                 usuario_logado = request.user.is_authenticated
+                erro_processo = 0
             else:
                 print('Credenciais inválidas')
                 mensagem_erro = 'Credenciais inválidas'
                 nome_usuario = request.user
                 usuario_logado = request.user.is_authenticated
+                erro_processo = 2
         elif request.user.is_authenticated:
             print('Usuário já esta logado')
             mensagem_erro = 'Processo invalido'
-            erro_processo = 0
             usuario_logado = request.user.is_authenticated
+            erro_processo = 0
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
+            usuario_logado = request.user.is_authenticated
             erro_processo = 1
 
+    # Processo para verificar se o usuário está logado
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
             id_usuario = request.session.get('usuario_id')
             nome_usuario = request.session.get('usuario_nome')
             mail_usuario = request.session.get('usuario_mail')
             usuario_logado = request.user.is_authenticated
+            erro_processo = 0
         else:
             usuario_logado = request.user.is_authenticated
             print('Usuário logado: ', request.user.is_authenticated)
+            usuario_logado = request.user.is_authenticated
+            erro_processo = 0
 
+    # Processo para deslogar o usuário
     elif tipo_requisicao == 'deslogarUsuario':
         logout(request)
         mensagem_erro = 'Usuário deslogado'
