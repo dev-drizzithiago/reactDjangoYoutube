@@ -59,10 +59,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         }
    }
 
-    const removeDeleteMidia = () => {
+    const removeDeleteMidia = async () => {
         console.log('Removendo a mídia..')
 
-        const response = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
+        const responseDjango = await sendRequestDjango("http://localhost:8000/removendo_midias/", payload);
     }
 
     function converterDuracao(duracao) {
