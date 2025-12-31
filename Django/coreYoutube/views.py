@@ -339,5 +339,4 @@ def removendo_midias(request):
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
-        'dados_django': lista_midias_django,
     })
