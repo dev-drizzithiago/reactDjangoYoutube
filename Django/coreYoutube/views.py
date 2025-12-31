@@ -336,6 +336,14 @@ def removendo_midias(request):
     erro_processo = None
     dados_json = json.loads(request.body)
 
+    print(dados_json)
+
+    if dados_json['tipoMidia'] == 'MP3':
+        ...
+
+    elif dados_json['tipoMidia'] == 'MP4':
+        ...
+
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
