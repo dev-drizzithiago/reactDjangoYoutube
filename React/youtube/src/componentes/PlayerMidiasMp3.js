@@ -59,10 +59,15 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         }
    }
 
-    const removeDeleteMidia = async () => {
+    const removeDeleteMidia = async (id_music) => {
         console.log('Removendo a mídia..')
 
+        const payload = {
+            tipoMidia: 'MP3',
+            idMidia: id_music
+        }
         const responseDjango = await sendRequestDjango("http://localhost:8000/removendo_midias/", payload);
+        console.log(responseDjango)
     }
 
     function converterDuracao(duracao) {
@@ -95,7 +100,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
 
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
-                                onClick={() => removeDeleteMidia(item.path_arquivo)} />
+                                onClick={() => removeDeleteMidia(item.id_music)} />
 
                                 {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
