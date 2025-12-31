@@ -324,3 +324,20 @@ def consultar_progresso(request):
     return JsonResponse({
         'progresso': progresso
     })
+
+def removendo_midias(request):
+    usuario_logado = request.user
+    if request.method != "POST":
+        return JsonResponse({
+            'mensagem': 'É valido apenas POST',
+        }, status=400)
+
+    mensagem_processo = None
+    erro_processo = None
+    dados_json = json.loads(request.body)
+
+    return JsonResponse({
+        'mensagem_processo': mensagem_processo,
+        'erro_processo': erro_processo,
+        'dados_django': lista_midias_django,
+    })
