@@ -152,18 +152,18 @@ const LoginUsuario = ({infoStatusLogin}) => {
               value={dadosParaLogin.userLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
               />
-              
             </div>
             
             <div className='login-divGridInputs'>
               <label htmlFor="senha">Senha</label>
-              <input type="password" 
-              name='senha' 
+              <input type="password"
+              name='senha'
               className='login-input login-inputSenha'
               value={dadosParaLogin.passLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
-              onKeyUp={eventoLogin}              />
-              
+              onKeyUp={eventoLogin} 
+              />
+              <h3> Teste </h3>
             </div>
                     
             <img className="login-btnNewUser login-btnVerificar" 
