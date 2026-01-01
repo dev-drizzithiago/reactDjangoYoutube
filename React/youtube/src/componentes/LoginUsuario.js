@@ -9,6 +9,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [statusLogin, setStatusLogin] = useState(null);
+  const [msnAlerta, setMsgAlerta] = useState('')
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -52,13 +53,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
     const linkSendRequest = `http://localhost:8000/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
-      console.log('Entre com Login e Senha')
+      setMsgAlerta('Entre com Login e Senha')
     }
     else if (dadosParaLogin.userLogin === undefined) {
-      console.log('Entre com Login')
+      setMsgAlerta('Entre com Login')
     }
     else if (dadosParaLogin.passLogin === undefined) {
-      console.log('Entre com sua Senha')
+      setMsgAlerta('Entre com sua Senha')
     }
     else {
       const PAYLOAD = {
@@ -163,7 +164,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
               onKeyUp={eventoLogin} 
               />
-              <h3> Teste </h3>
+              <h3> {msnAlerta} </h3>
             </div>
                     
             <img className="login-btnNewUser login-btnVerificar" 
