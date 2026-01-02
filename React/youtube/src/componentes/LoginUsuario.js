@@ -9,7 +9,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [statusLogin, setStatusLogin] = useState(null);
-  const [msnAlerta, setMsgAlerta] = useState('')
+  const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -85,8 +85,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
         } else {
             console.log(responseDjango.mensagem_erro)
         }
+      } else {
+        setMsgAlerta("Erro no login")
       }
     }
+    setTimeout(() => {
+      setMsgAlerta('Entre com suas credenciais')
+    }, 30000);
   }
 
   return (
