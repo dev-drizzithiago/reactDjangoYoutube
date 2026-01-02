@@ -250,11 +250,9 @@ def listagem_midias(request):
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
             query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
-            print(query_dados_midias)
             key_midia = 'id_movies'
         elif dados_json['tipoMidia'] == 'MP3':
             query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
-            print(query_dados_midias)
             key_midia = 'id_music'
         else:
             mensagem_processo = 'Tipo de mídia não existe'
@@ -262,7 +260,7 @@ def listagem_midias(request):
 
         for item in query_dados_midias:
             lista_midias_django.append({
-                'key_midia': key_midia,
+                key_midia: item[key_midia],
                 'nome_arquivo': item['nome_arquivo'],
                 'duracao_midia': item['duracao_midia'],
                 'path_arquivo': item['path_arquivo'],
@@ -341,12 +339,12 @@ def removendo_midias(request):
     print(dados_json)
 
     id_midia = dados_json['idMidia']
-    tipo_midia =  dados_json['tipoMidia']
+    tipo_midia = dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
 
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
-        print(query_mp3_remove)
+        print(query_mp3_remove[0].nome_arquivo)
 
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
