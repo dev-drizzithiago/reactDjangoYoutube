@@ -348,7 +348,8 @@ def removendo_midias(request):
 
         # Remover midia
         # Remover base MusicsSalvasServidor
-        query_mp3_remove[0].delete
+        # query_mp3_remove[0].delete
+
         # Remover miniatura
         print(query_mp3_remove[0].path_miniatura)
 
