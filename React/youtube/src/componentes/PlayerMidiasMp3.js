@@ -19,8 +19,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
 
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
     
-    console.log(dados)
-
     useEffect(() => {
         if(statusLogin) {
             setAtualizacaoMidiaMp3(prev => prev + 1)
