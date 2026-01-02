@@ -250,9 +250,11 @@ def listagem_midias(request):
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
             query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
+            print(query_dados_midias)
             key_midia = 'id_movies'
         elif dados_json['tipoMidia'] == 'MP3':
             query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
+            print(query_dados_midias)
             key_midia = 'id_music'
         else:
             mensagem_processo = 'Tipo de mídia não existe'
@@ -260,7 +262,7 @@ def listagem_midias(request):
 
         for item in query_dados_midias:
             lista_midias_django.append({
-                key_midia: key_midia,
+                'key_midia': key_midia,
                 'nome_arquivo': item['nome_arquivo'],
                 'duracao_midia': item['duracao_midia'],
                 'path_arquivo': item['path_arquivo'],
