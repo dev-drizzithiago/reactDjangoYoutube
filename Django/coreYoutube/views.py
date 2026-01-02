@@ -342,7 +342,9 @@ def removendo_midias(request):
     tipo_midia =  dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
+
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
+        print(query_mp3_remove)
 
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
