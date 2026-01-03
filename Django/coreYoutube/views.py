@@ -347,8 +347,10 @@ def removendo_midias(request):
         path_arquivo = os.path.join(settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo).replace('\\', '/')
 
         # Remover midia
+        os.remove(path_arquivo)
+
         # Remover base MusicsSalvasServidor
-        # query_mp3_remove[0].delete
+        query_mp3_remove[0].delete()
 
         # Remover miniatura
         print(query_mp3_remove[0].path_miniatura)
