@@ -345,7 +345,7 @@ def removendo_midias(request):
 
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
         path_arquivo = os.path.join(settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo).replace('\\', '/')
-
+        print(query_mp3_remove)
         # Remover midia
         # os.remove(path_arquivo)
 
