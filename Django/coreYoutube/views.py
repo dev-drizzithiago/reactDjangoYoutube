@@ -344,16 +344,14 @@ def removendo_midias(request):
     if tipo_midia == 'MP3':
 
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
-        path_arquivo = os.path.join(settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo).replace('\\', '/')
+        path_arquivo_abs = os.path.join(settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo).replace('\\', '/')
         print(query_mp3_remove)
+
         # Remover midia
-        # os.remove(path_arquivo)
+        os.remove(path_arquivo_abs)
 
         # Remover base MusicsSalvasServidor
-        # query_mp3_remove[0].delete()
-
-        # Remover miniatura
-        print(query_mp3_remove[0].path_miniatura)
+        query_mp3_remove[0].delete()
 
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
