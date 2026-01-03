@@ -1,4 +1,4 @@
-import os.path
+import os
 import uuid
 import json
 
@@ -342,27 +342,28 @@ def removendo_midias(request):
     tipo_midia = dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
-
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
-        path_arquivo_abs_midia = os.path.join(
-            settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo
-        ).replace('\\', '/')
+        print(settings.MEDIA_ROOT)
+        print(query_mp3_remove[0].path_miniatura)
 
-        path_arquivo_abs_miniatura = os.path.join(
-            settings.MEDIA_ROOT, query_mp3_remove[0].path_miniatura
-        ).replace('\\', '/')
+        # print(os.path.join(settings.MEDIA_ROOT, query_mp3_remove[0].path_miniatura))
 
-
-        print(path_arquivo_abs_miniatura)
+        # path_arquivo_abs_midia = os.path.join(
+        #     settings.MEDIA_ROOT, query_mp3_remove[0].path_arquivo
+        # ).replace('\\', '/')
+        #
+        # path_arquivo_abs_miniatura = os.path.join(
+        #     settings.MEDIA_ROOT, query_mp3_remove[0].path_miniatura
+        # ).replace('\\', '/')
 
         # Remover midia
-        os.remove(path_arquivo_abs_midia)
+        # os.remove(path_arquivo_abs_midia)
 
         # Remover base MusicsSalvasServidor
-        query_mp3_remove[0].delete()
+        # query_mp3_remove[0].delete()
 
         # Remover miniatura
-        print(query_mp3_remove[0].path_miniatura)
+        # print(path_arquivo_abs_miniatura)
 
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
