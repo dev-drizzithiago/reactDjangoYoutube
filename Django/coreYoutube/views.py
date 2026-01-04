@@ -347,18 +347,17 @@ def removendo_midias(request):
         dados_caminho_midia = query_mp3_remove[0].path_arquivo
         dados_caminho_minuatura = query_mp3_remove[0].path_miniatura
 
-        path_arquivo_abs_midia = os.path.join(settings.MEDIA_ROOT, dados_caminho_midia.path).replace('\\', '/')
+        path_arquivo_abs_midia = os.path.join(settings.MEDIA_ROOT, dados_caminho_midia).replace('\\', '/')
         caminho_abs_miniatura = os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura.path)
-        print(path_arquivo_abs_midia)
 
         # Remover midia
-        # os.remove(path_arquivo_abs_midia)
-        #
-        # # Remover base MusicsSalvasServidor
-        # query_mp3_remove[0].delete()
-        #
-        # # Remover miniatura
-        # os.remove(caminho_abs_miniatura)
+        os.remove(path_arquivo_abs_midia)
+
+        # Remover base MusicsSalvasServidor
+        query_mp3_remove[0].delete()
+
+        # Remover miniatura
+        os.remove(caminho_abs_miniatura)
 
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
