@@ -67,7 +67,13 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             idMidia: id_music
         }
         const responseDjango = await sendRequestDjango("http://localhost:8000/removendo_midias/", payload);
-        console.log(responseDjango)
+        
+        setAtualizacaoMidiaMp3(prev => prev + 1)
+
+        if (responseDjango.erro_processo === 0){
+            console.log(responseDjango.mensagem_processo)
+        }
+        
     }
 
     function converterDuracao(duracao) {
