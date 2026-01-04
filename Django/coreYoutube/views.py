@@ -345,7 +345,7 @@ def removendo_midias(request):
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
 
         dados_caminho_minuatura = query_mp3_remove[0].path_miniatura
-        caminho_abs_miniatura = str(os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura))
+        caminho_abs_miniatura = os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura.path)
 
         print(caminho_abs_miniatura)
 
