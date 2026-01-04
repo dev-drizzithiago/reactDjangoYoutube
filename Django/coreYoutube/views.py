@@ -359,6 +359,9 @@ def removendo_midias(request):
         # Remover miniatura
         os.remove(caminho_abs_miniatura)
 
+        mensagem_processo = 'Midia removida com sucesso.'
+        erro_processo = 0
+
     elif tipo_midia == 'MP4':
         print('Removendo MP4')
 
