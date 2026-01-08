@@ -73,7 +73,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         if (responseDjango.erro_processo === 0){
             console.log(responseDjango.mensagem_processo)
         }
-        
     }
 
     function converterDuracao(duracao) {
