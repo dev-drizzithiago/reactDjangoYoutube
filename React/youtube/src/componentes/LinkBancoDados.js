@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 const LinkBancoDados = ({propsStatusProcesso}) => {
 
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
-    const [downloadMidias, setdownloadMidias] = useState(true);
+    const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(null);
 
     useEffect(()=>{
@@ -96,11 +96,11 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                             {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
                                *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
 
-                            {downloadMidias == item.id_dados && (
+                            {/* {downloadMidias == item.id_dados && ( */}
                                 <div className="linkBancoDados-divImgLoading">
                                     <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 </div>
-                            )}
+                            {/* )} */}
                         </p>                        
                     </div>
                 ))}
