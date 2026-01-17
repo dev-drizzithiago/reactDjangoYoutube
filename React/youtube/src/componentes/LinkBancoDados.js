@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 const LinkBancoDados = ({propsStatusProcesso}) => {
 
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
-    const [downloadMidias, setdownloadMidias] = useState(null);
+    const [downloadMidias, setdownloadMidias] = useState(true);
     const [statusLogin, setStatusLogin] = useState(null);
 
     useEffect(()=>{
