@@ -90,13 +90,13 @@
 }  
 
 .linkBancoDados-divImgLoading{
-  display: flex;
   width: 60px;
   height: 60px;
   margin-top: 5px;
   margin-left: auto;
   margin-right: 15px;  
   border-radius: 10px;  
+  display: block;
 } 
  .linkBancoDados-imgLoading{
     width: 60px;
@@ -104,8 +104,6 @@
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-
   }
 
 
