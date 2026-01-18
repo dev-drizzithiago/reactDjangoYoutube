@@ -109,5 +109,11 @@
     align-items: center;
   }
 
-
-  
+.msgAlerta{
+  display: none;
+  width: 100px;
+  height: 25px;
+}
+.msgAlerta:hover {
+  display: block;
+}
