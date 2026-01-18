@@ -101,6 +101,10 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                     <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 </div>
                             {/* )} */}
+
+                            <div className="msgAlerta">
+                                teste
+                            </div>
                         </p>                        
                     </div>
                 ))}
