@@ -111,7 +111,9 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             )} 
 
-                            {ativarMensagem && <div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>}
+                            {ativarMensagem && 
+                            <div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>
+                            }
                         </p>                        
                     </div>
                 ))}
