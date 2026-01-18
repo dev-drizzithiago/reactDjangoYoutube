@@ -40,6 +40,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
         setdownloadMidias(id_dados)
+        setAtivarMensagem(false)
 
         const dadosDownload = {
             id_dados: id_dados,
@@ -54,6 +55,10 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
             setMensagemProcesso(responseDjangoDownload.mensagem)
         }
         setdownloadMidias(false)
+
+        setTimeout(() => {
+            setMensagemProcesso(false)
+        }, 30000)
     }
 
     const removeLinkBaseDados = async (id_dados) => {
@@ -107,7 +112,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 <div className="linkBancoDados-divImgLoading">
                                     <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 </div>
-                            )} 
+                            )}
 
                             {ativarMensagem == item.id_dados && (<div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>)
                             }
