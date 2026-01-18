@@ -52,8 +52,13 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
 
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
             setAtivarMensagem(id_dados)
-            setMensagemProcesso(responseDjangoDownload.mensagem)
+            setMensagemProcesso('/img/imgLogos/confirmado.png')
+        } else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.") {
+            setAtivarMensagem(id_dados)
+            setMensagemProcesso('/img/imgLogos/confirmado.png')
         }
+
+        
         setdownloadMidias(false)
 
         setTimeout(() => {
@@ -114,7 +119,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             )}
 
-                            {ativarMensagem == item.id_dados && (<div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>)
+                            {ativarMensagem == item.id_dados && (<img className="linkBancoDados-msgAlerta" src="" />)
                             }
                         </p>                        
                     </div>
