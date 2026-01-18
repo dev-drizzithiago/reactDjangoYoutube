@@ -50,7 +50,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
-            setAtivarMensagem(true)
+            setAtivarMensagem(id_dados)
             setMensagemProcesso(responseDjangoDownload.mensagem)
         }
         setdownloadMidias(false)
@@ -109,8 +109,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             )} 
 
-                            {ativarMensagem && 
-                            <div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>
+                            {ativarMensagem == item.id_dados && (<div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>)
                             }
                         </p>                        
                     </div>
