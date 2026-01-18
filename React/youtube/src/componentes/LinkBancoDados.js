@@ -49,8 +49,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
-        console.log(responseDjangoDownload)
-
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
             setAtivarMensagem(true)
             setMensagemProcesso(responseDjangoDownload.mensagem)
