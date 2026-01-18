@@ -85,8 +85,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
         } else {
             console.log(responseDjango.mensagem_erro)
         }
-      } else {
-        setMsgAlerta(`Usuário logado: ${responseDjango.nome_usuario}`)
       }
     }
     setTimeout(() => {
