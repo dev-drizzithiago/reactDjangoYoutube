@@ -102,7 +102,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             {/* )} */}
 
-                            <div className="msgAlerta">
+                            <div className="linkBancoDados-msgAlerta">
                                 teste
                             </div>
                         </p>                        
