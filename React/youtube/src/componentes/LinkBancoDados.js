@@ -14,6 +14,8 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
     const [statusLogin, setStatusLogin] = useState(null);
+    const [ativarMensagem, setAtivarMensagem] = useState(false)
+    const [mensagemProcesso, setMensagemProcesso] = useState('')
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
@@ -38,14 +40,21 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
         setdownloadMidias(id_dados)
+
         const dadosDownload = {
             id_dados: id_dados,
             midia: tipoMidia,
         }
+
         const djangoUrlDownloads = "http://localhost:8000/download_link/"
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         console.log(responseDjangoDownload)
+
+        if (responseDjangoDownload.mensagem === "Midia já existe.") {
+            setAtivarMensagem(true)
+            setMensagemProcesso(responseDjangoDownload.mensagem)
+        }
         setdownloadMidias(false)
     }
 
@@ -102,9 +111,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             )} 
 
-                            <div className="linkBancoDados-msgAlerta">
-                                teste
-                            </div>
+                            {ativarMensagem && <div className="linkBancoDados-msgAlerta">{mensagemProcesso}</div>}
                         </p>                        
                     </div>
                 ))}
