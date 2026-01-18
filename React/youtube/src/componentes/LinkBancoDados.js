@@ -56,7 +56,10 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         } else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.") {
             setAtivarMensagem(id_dados)
             setMensagemProcesso('/img/imgLogos/confirmado.png')
-        }  else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.")
+        }  else if (responseDjangoDownload.erro_processo === 1) {
+            setAtivarMensagem(id_dados)
+            setMensagemProcesso('/img/imgLogos/error.png')
+        }
         
         setdownloadMidias(false)
 
