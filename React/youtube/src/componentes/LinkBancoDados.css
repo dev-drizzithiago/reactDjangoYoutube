@@ -108,8 +108,12 @@
     align-items: center;
   }
 
-.msgAlerta{
-  display: none;
-  width: 100px;
-  height: 25px;
+.linkBancoDados-msgAlerta{
+  /*border: 1px solid black;*/
+  width: 60px;
+  height: 60px;
+
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
