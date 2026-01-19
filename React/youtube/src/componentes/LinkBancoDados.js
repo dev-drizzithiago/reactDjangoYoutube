@@ -16,6 +16,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const [statusLogin, setStatusLogin] = useState(null);
     const [ativarMensagem, setAtivarMensagem] = useState(false)
     const [mensagemProcesso, setMensagemProcesso] = useState('')
+    const [imgStatus, setImgStatus] = useState(null)
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
@@ -51,21 +52,24 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
+            setMensagemProcesso("Midia já existe.")
             setAtivarMensagem(id_dados)
-            setMensagemProcesso('/img/imgLogos/alerta.png')
+            setImgStatus('/img/imgLogos/alerta.png')
         } else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.") {
+            setMensagemProcesso("Download da mídia concluido com sucesso.")
             setAtivarMensagem(id_dados)
-            setMensagemProcesso('/img/imgLogos/confirmado.png')
+            setImgStatus('/img/imgLogos/confirmado.png')
         }  else if (responseDjangoDownload.erro_processo === 1) {
+            setMensagemProcesso('Erro ao fazer o download da mídia')
             setAtivarMensagem(id_dados)
-            setMensagemProcesso('/img/imgLogos/error.png')
+            setImgStatus('/img/imgLogos/error.png')
         }
         
         setdownloadMidias(false)
 
         setTimeout(() => {
             setAtivarMensagem(false)
-        }, 30000)
+        }, 60000)
     }
 
     const removeLinkBaseDados = async (id_dados) => {
@@ -98,7 +102,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                             <img className="linkBancoDados-imgMiniatura" src={item.miniatura} alt="miniatura" />
                         </div>
                         
-                        <p className="linkBancoDados-btnsAcao">
+                        <div className="linkBancoDados-btnsAcao">
 
                             <img src="/img/imgBtns/download_mp3.png" alt="downloadMp3" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
                             onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
@@ -121,9 +125,9 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                                 </div>
                             )}
 
-                            {ativarMensagem == item.id_dados && (<img className="linkBancoDados-msgAlerta" src={mensagemProcesso} />)
+                            {ativarMensagem == item.id_dados && (<img className="linkBancoDados-msgAlerta" src={imgStatus} title={mensagemProcesso}/>)
                             }
-                        </p>                        
+                        </div>                        
                     </div>
                 ))}
             </div> :
