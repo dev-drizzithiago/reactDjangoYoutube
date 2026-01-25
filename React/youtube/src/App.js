@@ -1,7 +1,7 @@
 import './App.css';
 import useCsrfInit from './componentes/useCsrfInit';
 import { useState, useEffect } from 'react';
-import { Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify'
 
 import sendRequestDjango from './componentes/sendRequestDjango';
 
@@ -75,6 +75,7 @@ function App() {
 
   /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
+    toast.success("Abrindo links")
     if (!elementoLinks) {
       setElementoLinks(true);
       setElementoMp3(false);
