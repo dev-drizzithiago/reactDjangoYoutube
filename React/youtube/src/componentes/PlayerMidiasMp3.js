@@ -1,5 +1,6 @@
 /**  key= só utilizando que a lista não possui uma chave. */
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify'
 import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
@@ -14,7 +15,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
 
     useEffect(()=>{
-        setAtualizacaoMidiaMp3(effectAtualizacao)
+        setAtualizacaoMidiaMp3(effectAtualizacao)        
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
@@ -34,7 +35,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
     const executarPlayerMidia = (linkMidia) => {
-        console.log('Executando mídia..')
+        console.log('Executando mídia...')
+        toast.success('Executando mídia...')
 
         /** Envia os dados para o elemento principal (app) */
         executaMidia(linkMidia, 'audio/mp3');
