@@ -7,6 +7,11 @@ export default defineConfig({
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
+        server: {
+        port: 3000, // aqui você escolhe a porta
+        host: true  // opcional, para acessar pela rede
+      },
+
       },
     }),
   ],
