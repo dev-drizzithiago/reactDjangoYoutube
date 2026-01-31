@@ -1,5 +1,7 @@
 import { useEffect } from "react"
 
+const urlDefaultDjango = "http://localhost:8000"
+
 const useCsrfInit = () => {
 
     const urlDjango =" http://localhost:8000/csrf_token_view/"
