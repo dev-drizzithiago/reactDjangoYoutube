@@ -2,11 +2,10 @@
 *.iml
 *.sqlite3
 *.pyc
-*.json
 *.mp3
 *.mp4
+
 /React/youtube/node_modules
-/React/node_modules
 Django/coreYoutube/migrations/__init__.py
 Django/log_events_app_yt.log
 /Django/media/miniaturas
