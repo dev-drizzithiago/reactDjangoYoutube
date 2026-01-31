@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify'
 import './PlayerMidiasMp3.css'
 
-const urlDefaultDjango = "http://localhost:8000"
+const urlDefaultDjango = "http://localhost:8080"
 
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango'
