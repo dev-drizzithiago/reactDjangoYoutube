@@ -1,5 +1,6 @@
 import getCookies from "./getCookies";
 
+
 async function sendRequestDjango(linkSendRequest, payload) {
     const payloadString = JSON.stringify(payload)
     try {
