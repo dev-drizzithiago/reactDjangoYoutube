@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const urlDefaultDjango = "http://localhost:8000"
+const urlDefaultDjango = "http://localhost:8080"
 
 const useCsrfInit = () => {
 
