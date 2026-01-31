@@ -77,7 +77,6 @@ function App() {
 
   /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
-    toast.success("Abrindo links")
     if (!elementoLinks) {
       setElementoLinks(true);
       setElementoMp3(false);
@@ -157,7 +156,7 @@ function App() {
 
             </div>
         )}
-        
+
         {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
         {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
