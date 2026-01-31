@@ -1,0 +1,123 @@
+
+.linkBancoDados-imgBtn {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);  
+} 
+  .linkBancoDados-imgBtn:active {
+    transform: translateY(4px);
+}
+
+/* bloco principal dos links */
+.linkBancoDados-content {
+  /*border: 1px solid black;*/
+  display: grid;  /* Estilo de grade */  
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
+  justify-self: left;
+  width: 100%;
+  height: 550px;
+  margin: auto;
+  margin-right: 5px;
+  pointer-events: auto;
+  grid-template-columns: repeat(4, 1fr); /* 4 linhas de altura igual */
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  box-sizing: border-box;
+}
+
+.linkBancoDados-content::-webkit-scrollbar {
+    width: 0px; /* Largura da barra de rolagem */
+}
+
+.linkBancoDados-content::-webkit-scrollbar-thumb {
+    background: darkgrey; /* Cor da parte que pode ser arrastada */
+}
+
+/* bloco interno dos links */
+.linkBancoDados-linksYoutube {
+  /*border: 1px solid black;*/
+  display: grid;    
+  justify-content: center; /* Centraliza o conteúdo ao meio da DIV Y*/
+  align-items: center; /* Centraliza o conteúdo ao meio da DIV X*/
+  max-width: 80%;
+  width: 100%;
+  height: 500px;
+
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 5%;
+  margin-bottom: 5%;
+  
+  padding: 10px;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}
+
+.linkBancoDados-div_paragraphTitulos{
+  /*border: 1px solid black;*/
+  box-sizing: border-box;
+  width: 100%;
+  height: 125px;
+  margin: auto;
+  margin-bottom: 10px;
+} 
+
+.linkBancoDados-divImgMiniatura {
+  /*border: 1px solid black;*/
+  box-sizing: border-box;
+  margin: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+  .linkBancoDados-imgMiniatura{
+      width: 75%;
+      display: flex;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px black;
+    }
+
+/* DIV DOS BOTOES*/
+.linkBancoDados-btnsAcao {
+  /*border: 1px solid black;*/
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;  
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}  
+
+/* DIV DA IMAGEM DE LOADING*/
+.linkBancoDados-divImgLoading{
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: 15px;  
+  border-radius: 10px;
+} 
+ .linkBancoDados-imgLoading{
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+.linkBancoDados-msgAlerta{
+  /*border: 1px solid black;*/
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+}
