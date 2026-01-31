@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import './PlayerMidiasMp4.css'
 
+const urlDefaultDjango = "http://localhost:8000"
+
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango'
 import LoginUsuario from './LoginUsuario';
