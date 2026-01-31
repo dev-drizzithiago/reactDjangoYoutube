@@ -4,6 +4,8 @@ import LinkBancoDados from "./LinkBancoDados";
 import "./FormularioLinkYoutube.css"
 
 
+const urlDefaultDjango = "http://localhost:8080"
+
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     const [btnLimparForms, setLimparForms] = useState(null)
     const [responseAlertaDjango, setResponseAlertaDjango] = useState(null)
@@ -18,7 +20,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
       refLink.current.value = '';
       setCarregando(true)
 
-      const responseDados = await sendRequestDjango("http://localhost:8000/requestAddLinks/", {'link': linkYoutube})
+      const responseDados = await sendRequestDjango(`${urlDefaultDjango}/requestAddLinks/`, {'link': linkYoutube})
       
       setResponseAlertaDjango(responseDados.mensagem);
       setCarregando(false)
