@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import sendRequestDjango from './sendRequestDjango';
 import LinkBancoDados from './LinkBancoDados';
 
+const urlDefaultDjango = `http://localhost:8080`
+
 const LoginUsuario = ({infoStatusLogin}) => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
@@ -26,7 +28,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
         setCriarUser(false)
       }
 
-      const linkSendRequest = `http://localhost:8000/credenciais_login/`;
+      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
       const PAYLOAD = {
         'tipoRequest': 'salvarCadastro',
@@ -50,7 +52,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   /** Função para o usuário se logar  */
   const eventoLogin = async () => {
 
-    const linkSendRequest = `http://localhost:8000/credenciais_login/`;
+    const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
       setMsgAlerta('Entre com Login e Senha')
