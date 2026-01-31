@@ -141,18 +141,23 @@ function App() {
 
         {statusLogin &&
           <div className='app-divBtnImg'>
+
             <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
             <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
             <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} />
+
           </div>
         }
 
         {spinnerPlayer && (
             <div className="app-divImgLoading">
+
                 <p>Carregando mídia...</p>
                 <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+
             </div>
         )}
+        
         {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
         {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
