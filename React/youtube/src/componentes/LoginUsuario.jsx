@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import sendRequestDjango from './sendRequestDjango';
 import LinkBancoDados from './LinkBancoDados';
 
-const urlDefaultDjango = "http://localhost:8000"
+const urlDefaultDjango = "http://localhost:8080"
 const LoginUsuario = ({infoStatusLogin}) => {
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
