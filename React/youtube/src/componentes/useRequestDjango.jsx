@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import getCookies from "./getCookies"
 
+const urlDefaultDjango = "http://localhost:8080"
+
 const useRequestDjango = (urlDjango, payload, trigger) => {
    
     const payloadString = JSON.stringify(payload)
