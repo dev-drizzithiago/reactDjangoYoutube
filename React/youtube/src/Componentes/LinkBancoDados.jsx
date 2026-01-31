@@ -5,8 +5,9 @@ import LoginUsuario from "./LoginUsuario";
 import FormularioLinkYoutube from "./FormularioLinkYoutube";
 
 import "./LinkBancoDados.css"
-
 import { useState, useEffect } from "react";
+
+const urlDefaultDjango = `http://localhost:8080`
 
 const LinkBancoDados = ({propsStatusProcesso}) => {
 
@@ -21,7 +22,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
 
-    const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/requestBaseDados/", 'Listar', atualizacaoBaseLinks)
+    const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
 
     useEffect(() => {
         if (statusLogin) {
@@ -47,7 +48,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
             midia: tipoMidia,
         }
 
-        const djangoUrlDownloads = "http://localhost:8000/download_link/"
+        const djangoUrlDownloads = `${urlDefaultDjango}/download_link/`
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
@@ -74,7 +75,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     const removeLinkBaseDados = async (id_dados) => {
         setdownloadMidias(id_dados)
         const dadosDelete = {id_dados: id_dados}
-        const djangoUrlDownloads = "http://localhost:8000/remove_link/";
+        const djangoUrlDownloads = `${urlDefaultDjango}/remove_link/`;
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
 
         console.log(responseDjangoDownload);
