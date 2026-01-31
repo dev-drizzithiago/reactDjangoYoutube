@@ -10,7 +10,7 @@ import sendRequestDjango from './sendRequestDjango'
 import LoginUsuario from './LoginUsuario';
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
-    const urlMiniatura = "http://localhost:8000/media/"
+    const urlMiniatura = `${urlDefaultDjango}:8000/media/`
     const payload = {tipoMidia: 'MP3'}
 
     const [statusLogin, setStatusLogin] = useState(false)    
@@ -20,7 +20,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         setAtualizacaoMidiaMp3(effectAtualizacao)        
     }, [effectAtualizacao])
 
-    const {dados, carregando, usuarioLogado} = useRequestDjango("http://localhost:8000/listagem_midias/", payload, atualizacaoModiaMp3);
+    const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);
     
     useEffect(() => {
         if(statusLogin) {
@@ -53,10 +53,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             'linkDownload': midiaDownload,
         }
 
-        const response = await sendRequestDjango("http://localhost:8000/preparar_midias_to_download/", payload);
+        const response = await sendRequestDjango(`${urlDefaultDjango}/preparar_midias_to_download/`, payload);
         if (response && response.download_url) {            
             setTimeout(() => {
-                const url = encodeURI(`http://localhost:8000${response.download_url}`)
+                const url = encodeURI(`${urlDefaultDjango}${response.download_url}`)
                 window.open(url, "_blank", "width=600 height=400");                
             }, 1000);
         }
@@ -69,7 +69,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             tipoMidia: 'MP3',
             idMidia: id_music
         }
-        const responseDjango = await sendRequestDjango("http://localhost:8000/removendo_midias/", payload);
+        const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
         
         setAtualizacaoMidiaMp3(prev => prev + 1)
 
