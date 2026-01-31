@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import sendRequestDjango from './sendRequestDjango'
 
+const urlDefaultDjango = "http://localhost:8080"
+
 const VerificarUsuarioLogado = ({}) => {
 
     const [statusLogin, setStatusLogin] = useState(false)
