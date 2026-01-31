@@ -9,7 +9,7 @@ import sendRequestDjango from './sendRequestDjango'
 import LoginUsuario from './LoginUsuario';
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
-    const urlMiniatura = "http://localhost:8000/media/"
+    const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP4'}
 
     const [statusLogin, setStatusLogin] = useState(false)    
