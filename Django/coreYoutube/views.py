@@ -28,6 +28,7 @@ def csrf_token_view(request):
     :param request:
     :return: Retorna um aviso para o react.
     """
+    print('Enviando cookies para o frontend...')
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
     })

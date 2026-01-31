@@ -1,15 +1,15 @@
 import './App.css';
-import useCsrfInit from './componentes/useCsrfInit';
+import useCsrfInit from './Componentes/useCsrfInit';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify'
 
-import sendRequestDjango from './componentes/sendRequestDjango';
+import sendRequestDjango from './Componentes/sendRequestDjango';
 
-import VerificarUsuarioLogado from './componentes/VerificarUsuarioLogado';
-import LinkBancoDados from './componentes/LinkBancoDados';
-import PlayerMidiasMp3 from './componentes/PlayerMidiasMp3';
-import PlayerMidiasMp4 from './componentes/PlayerMidiasMp4';
-import PlayerMidias from "./componentes/PlayerMidias"
+import VerificarUsuarioLogado from './Componentes/VerificarUsuarioLogado';
+import LinkBancoDados from './Componentes/LinkBancoDados';
+import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
+import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
+import PlayerMidias from "./Componentes/PlayerMidias"
 import LoginUsuario from './componentes/LoginUsuario';
 
 function App() {
