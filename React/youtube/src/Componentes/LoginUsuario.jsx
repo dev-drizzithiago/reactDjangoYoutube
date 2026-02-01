@@ -19,7 +19,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   }
 
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
-  const salvarNovoUser = async () => {    
+  const salvarNovoUser = async () => {
 
     if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
       setBtnCriarNovoUserAtivo(true)      
@@ -74,15 +74,17 @@ const LoginUsuario = ({infoStatusLogin}) => {
       console.log('Processando login...')
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
 
-      console.log(responseDjango)
-
       if (responseDjango !== undefined) {
         if (Number(responseDjango.erro_processo) !== 1) {
           if (responseDjango.nome_usuario === 'AnonymousUser'){
+
             console.log(responseDjango.mensagem_erro)
             infoStatusLogin(false)
+
           } else if (responseDjango.usuario_logado) {
+
             infoStatusLogin(responseDjango.usuario_logado)
+
           }
         } else {
             console.log(responseDjango.mensagem_erro)
