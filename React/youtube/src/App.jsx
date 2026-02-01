@@ -61,10 +61,12 @@ function App() {
    * elemento do login é chamado e todos os elementos são fechados 
    * */ 
 
-   // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
+  // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
   useEffect(()=> {
     const toUserLogado = () => {
+
       console.log(statusLogin)
+
       if (statusLogin) {
         setElementoLinks(true)
       } else {
@@ -72,9 +74,34 @@ function App() {
         setElementoMp4(false)
         setSpinnerPlayer(false)
       }
+
+
     }
     toUserLogado()
+    
   }, [statusLogin])
+
+  useEffect(() => {
+      const verificaUserLogado = async () => {      
+          const urlDjango = `${urlDefaultDjango}/credenciais_login/`
+          const payload = {
+            tipoRequest: "verificarUsuarioLogado"
+          }
+          const resquestDjango = await sendRequestDjango(urlDjango, payload)
+
+          console.log(resquestDjango)
+          
+          if (resquestDjango.usuario_logado) {
+            setStatusLogin(true)
+          }
+        }
+
+      if (statusLogin) {
+        setInterval(()=> {
+          verificaUserLogado()
+        }, 10000)
+      } 
+    }, [statusLogin])      
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
