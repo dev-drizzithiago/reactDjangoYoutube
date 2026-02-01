@@ -79,7 +79,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
         if (Number(responseDjango.erro_processo) !== 1) {
           if (responseDjango.nome_usuario === 'AnonymousUser'){
 
-            console.log(responseDjango.mensagem_erro)
+            console.log(responseDjango.mensagem_erro === 1)
             infoStatusLogin(false)
 
           } else if (responseDjango.usuario_logado) {
