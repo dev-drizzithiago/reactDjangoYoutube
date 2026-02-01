@@ -88,6 +88,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
         } else {
             console.log(responseDjango.mensagem_erro)
         }
+      } else {
+        console.log('Erro no login !')
       }
     }
     setTimeout(() => {
