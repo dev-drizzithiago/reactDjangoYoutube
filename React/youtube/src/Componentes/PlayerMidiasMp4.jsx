@@ -4,8 +4,6 @@ import './PlayerMidiasMp4.css'
 
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango'
-import LoginUsuario from './LoginUsuario';
-
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -13,7 +11,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP4'}
 
-    const [statusLogin, setStatusLogin] = useState(false)    
     const [atualizacaoModiaMp4, setAtualizacaoMidiaMp4] = useState(0)
 
     useEffect(()=>{
@@ -21,19 +18,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp4);
-
-    useEffect(() => {
-        if(statusLogin) {
-            setAtualizacaoMidiaMp4(prev => prev + 1)
-        }
-    }, [statusLogin])
-
-    useEffect(()=>{
-        if (usuarioLogado) {
-            setStatusLogin(usuarioLogado)
-        }
-    }, [usuarioLogado])
-
+    
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
     const executarPlayerMidia = (linkMidia) => {
@@ -74,8 +59,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
 
     return (
         <div>
-            <h3>Lista MP4</h3>
-            {statusLogin ? 
+            <h3>Lista MP4</h3>           
             <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
                         <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
@@ -107,9 +91,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             </p>
                         </div>                     
                     ))}            
-            </div> :
-            <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
-            }
+            </div>
         </div>
     );
 };
