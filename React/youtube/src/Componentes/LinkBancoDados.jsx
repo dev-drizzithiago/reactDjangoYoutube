@@ -1,7 +1,6 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from "./sendRequestDjango";
-import LoginUsuario from "./LoginUsuario";
 import FormularioLinkYoutube from "./FormularioLinkYoutube";
 
 import "./LinkBancoDados.css"
@@ -13,7 +12,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
 
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
-    const [statusLogin, setStatusLogin] = useState(null);
     const [ativarMensagem, setAtivarMensagem] = useState(false)
     const [mensagemProcesso, setMensagemProcesso] = useState('')
     const [imgStatus, setImgStatus] = useState(null)
@@ -23,12 +21,6 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     }, [propsStatusProcesso])    
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
-
-    useEffect(() => {
-        if (statusLogin) {
-            setAtualizacaoBaseLinks(prev => prev + 1)
-        }
-    }, [statusLogin])
 
     useEffect(()=>{
         if (usuarioLogado) {
@@ -87,10 +79,9 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     return (        
         <div>
             {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}
-            {statusLogin && <FormularioLinkYoutube onLinkAdicionado={() => setAtualizacaoBaseLinks(prev => prev + 1)} />}
-
+            
             <h3> Links para download </h3>
-            {statusLogin ? <div className="linkBancoDados-content">
+            <div className="linkBancoDados-content">
                 {dados.map((item) => (
                     <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
                         <div className="linkBancoDados-div_paragraphTitulos">
@@ -130,9 +121,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
                         </div>                        
                     </div>
                 ))}
-            </div> :
-            <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
-            }
+            </div>
         </div>
     );
 };
