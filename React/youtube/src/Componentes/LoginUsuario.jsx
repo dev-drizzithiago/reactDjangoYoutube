@@ -51,7 +51,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
   
   /** Função para o usuário se logar  */
   const eventoLogin = async () => {
-
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
@@ -74,6 +73,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
       console.log('Processando login...')
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
 
+      console.log(responseDjango)
+
       if (responseDjango !== undefined) {
         if (Number(responseDjango.erro_processo) !== 1) {
           if (responseDjango.nome_usuario === 'AnonymousUser'){
@@ -82,9 +83,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
             infoStatusLogin(false)
 
           } else if (responseDjango.usuario_logado) {
-
             infoStatusLogin(responseDjango.usuario_logado)
-
           }
         } else {
             console.log(responseDjango.mensagem_erro)
