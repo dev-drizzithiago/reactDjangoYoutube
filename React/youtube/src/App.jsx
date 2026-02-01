@@ -33,8 +33,7 @@ function App() {
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
 
   /** Para ativar o player de midias 
-   * Se o link tiver algum valor o player é ativado
-  */
+   * Se o link tiver algum valor o player é ativado */
   useEffect(() => {
     if (linkMidia[0] !== null) {
 
@@ -60,18 +59,22 @@ function App() {
 
   /** Avalia se o usuário esta logado, caso não esteja o 
    * elemento do login é chamado e todos os elementos são fechados 
-   * */
-  useEffect(() => {
+   * */ 
 
-    console.log(statusLogin)
-
-    if (statusLogin) {
-      setElementoLinks(false);
-      setElementoMp3(false);
-      setElementoMp4(false);
+   // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
+  useEffect(()=> {
+    const toUserLogado = () => {
+      console.log(statusLogin)
+      if (statusLogin) {
+        setElementoLinks(true)
+      } else {
+        setElementoMp3(false)
+        setElementoMp4(false)
+        setSpinnerPlayer(false)
+      }
     }
-    
-  }, [])
+    toUserLogado()
+  }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
@@ -81,6 +84,9 @@ function App() {
 
   /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
+
+    console.log(statusLogin)
+
     if (!elementoLinks) {
       setElementoLinks(true);
       setElementoMp3(false);
@@ -96,6 +102,9 @@ function App() {
 
   /** Abre o elemento onde estão as mídias MP3 salvas. */
   const midiasMp3 = () => {
+
+    console.log(statusLogin)
+
     if (!elementoMp3) {
       setElementoMp3(true);
       setElementoMp4(false);
@@ -110,6 +119,9 @@ function App() {
 
    /** Abre o elemento onde estão as mídias MP4 salvas. */
   const midiasMp4 = () => {
+
+    console.log(statusLogin)
+
     if (!elementoMp4) {
       setElementoMp4(true);
       setElementoMp3(false);
@@ -124,6 +136,9 @@ function App() {
   }
 
   const deslogar = async () => {
+
+    console.log('USUÁRIO LOGADO:', statusLogin)
+
     if (statusLogin) {
           const PAYLOAD = {
             'tipoRequest': 'deslogarUsuario',
@@ -140,7 +155,7 @@ function App() {
       <div className="App">
 
         {/** Se o usuário estiver deslogado */}
-        {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado => setStatusLogin(statusLogado))}/>}
+        {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}
 
         {statusLogin && (
           <>
@@ -164,6 +179,7 @@ function App() {
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
 
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+
             {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
             {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
           </>)}
