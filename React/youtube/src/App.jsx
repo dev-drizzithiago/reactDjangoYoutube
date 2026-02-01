@@ -65,8 +65,6 @@ function App() {
   useEffect(()=> {
     const toUserLogado = () => {
 
-      console.log(statusLogin)
-
       if (statusLogin) {
         setElementoLinks(true)
       } else {
@@ -74,34 +72,37 @@ function App() {
         setElementoMp4(false)
         setSpinnerPlayer(false)
       }
-
-
     }
+
     toUserLogado()
-    
+
   }, [statusLogin])
 
+  // Verificar se o usuário esta logado, envia um sinal para o django para saber se continuar
+  // logado pelo sistema back, caso o usuário fique deslogado o sistema volta para o elemento de logar. 
   useEffect(() => {
-      const verificaUserLogado = async () => {      
-          const urlDjango = `${urlDefaultDjango}/credenciais_login/`
-          const payload = {
-            tipoRequest: "verificarUsuarioLogado"
-          }
-          const resquestDjango = await sendRequestDjango(urlDjango, payload)
+    console.log('Status de login do usuário: ', statusLogin)
 
-          console.log(resquestDjango)
-          
-          if (resquestDjango.usuario_logado) {
-            setStatusLogin(true)
-          }
+    const verificaUserLogado = async () => {      
+        const urlDjango = `${urlDefaultDjango}/credenciais_login/`
+        const payload = {
+          tipoRequest: "verificarUsuarioLogado"
         }
+        const resquestDjango = await sendRequestDjango(urlDjango, payload)
 
-      if (statusLogin) {
-        setInterval(()=> {
-          verificaUserLogado()
-        }, 10000)
-      } 
-    }, [statusLogin])      
+        console.log(resquestDjango)
+        
+        if (!resquestDjango.usuario_logado) {
+          setStatusLogin(resquestDjango.usuario_logado)
+        } 
+      }
+
+    if (statusLogin) {
+      setInterval(()=> {
+        verificaUserLogado()
+      }, 300000)
+    } 
+    }, [])      
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
