@@ -73,7 +73,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
       console.log('Processando login...')
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
 
-      console.log(responseDjango)
+      console.log('Dados django: ', responseDjango)
 
       if (responseDjango !== undefined) {
         if (Number(responseDjango.erro_processo) !== 1) {
