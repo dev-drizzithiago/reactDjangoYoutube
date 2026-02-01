@@ -4,7 +4,6 @@ import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango'
-import LoginUsuario from './LoginUsuario';
 
 // PADRÃO PARA A URL 
 const urlDefaultDjango = `http://localhost:8080`
@@ -13,7 +12,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP3'}
 
-    const [statusLogin, setStatusLogin] = useState(false)    
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
 
     useEffect(()=>{
@@ -21,18 +19,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);
-    
-    useEffect(() => {
-        if(statusLogin) {
-            setAtualizacaoMidiaMp3(prev => prev + 1)
-        }
-    }, [statusLogin])
-
-    useEffect(()=>{
-        if (usuarioLogado) {
-            setStatusLogin(usuarioLogado)
-        }
-    }, [usuarioLogado])
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
@@ -87,7 +73,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     return (
         <div>
             <h3>Lista MP3</h3>
-            {statusLogin ? 
             <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
                         <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
@@ -119,10 +104,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             </p>
                         </div>                     
                     ))}            
-            </div> :
-            <LoginUsuario infoStatusLogin={(returnStatusLogin) => setStatusLogin(returnStatusLogin)}/>
-            }
-                    
+            </div>
         </div>
     );
 };
