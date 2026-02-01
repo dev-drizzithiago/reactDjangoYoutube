@@ -21,11 +21,11 @@ function App() {
   useCsrfInit();
 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
+  const [statusLogin, setStatusLogin] = useState(false);
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [linkMidia, setLinkMidia] = useState([null, null]);
   const [ativarPlayer, setAtivarPlayer] = useState(false);
-  const [statusLogin, setStatusLogin] = useState(false);
 
   const [elementoLinks, setElementoLinks] = useState(false);
   const [elementoMp3, setElementoMp3] = useState(false);
@@ -62,11 +62,15 @@ function App() {
    * elemento do login é chamado e todos os elementos são fechados 
    * */
   useEffect(() => {
+
+    console.log(statusLogin)
+
     if (statusLogin) {
       setElementoLinks(false);
       setElementoMp3(false);
       setElementoMp4(false);
     }
+    
   }, [])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
@@ -132,39 +136,38 @@ function App() {
   }
 
   return (
-    <>
+    
       <div className="App">
 
         {/** Se o usuário estiver deslogado */}
         {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado => setStatusLogin(statusLogado))}/>}
 
-        {statusLogin &&
-          <div className='app-divBtnImg'>
+        {statusLogin && (
+          <>
+            <div className='app-divBtnImg'>
 
-            <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
-            <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
-            <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} />
-
-          </div>
-        }
-
-        {spinnerPlayer && (
-            <div className="app-divImgLoading">
-
-                <p>Carregando mídia...</p>
-                <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+              <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
+              <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
+              <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} />
 
             </div>
-        )}
 
-        {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+            {spinnerPlayer && 
+              <div className="app-divImgLoading">
 
-        {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
-        {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
-        {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+                  <p>Carregando mídia...</p>
+                  <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
 
-    </div>
-    </>
+              </div>
+            }
+
+            {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+
+            {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+            {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+            {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+          </>)}
+      </div>
   )
 }
 
