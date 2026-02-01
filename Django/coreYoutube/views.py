@@ -166,6 +166,7 @@ def requestBaseDados(request):
         mensagem = 'Usuário não esta logado.'
         erro_processo = 666
 
+    print(lista_dados_django)
     return JsonResponse({
         'mensagem': mensagem,
         'erro_processo': erro_processo,
