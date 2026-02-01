@@ -7,7 +7,6 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
-
 class DadosYoutube(Base):
     id_dados = models.AutoField(primary_key=True)
     autor_link = models.CharField(max_length=255)
@@ -18,20 +17,20 @@ class DadosYoutube(Base):
     usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
 
 class MoviesSalvasServidor(Base):
-    id_movies = models.AutoField(primary_key=True)
-    nome_arquivo = models.CharField(max_length=255, null=True)
-    path_arquivo = models.CharField(max_length=255, null=True)
-    duracao_midia = models.IntegerField()
-    path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
-    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
+    id_movies_midia = models.AutoField(primary_key=True)
+    nome_arquivo_midia = models.CharField(max_length=255, null=True)
+    path_arquivo_midia = models.CharField(max_length=255, null=True)
+    duracao_midia_midia = models.IntegerField()
+    path_miniatura_midia = models.FileField(upload_to='miniaturas/', max_length=255)
+    dados_youtube_midia = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    usuario_midia = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
 
 class MusicsSalvasServidor(Base):
-    id_music = models.AutoField(primary_key=True)
-    nome_arquivo = models.CharField(max_length=255, null=True)
-    path_arquivo = models.CharField(max_length=255, null=True)
-    duracao_midia = models.IntegerField()
-    path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
-    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
+    id_music_midia = models.AutoField(primary_key=True)
+    nome_arquivo_midia = models.CharField(max_length=255, null=True)
+    path_arquivo_midia = models.CharField(max_length=255, null=True)
+    duracao_midia_midia = models.IntegerField()
+    path_miniatura_midia = models.FileField(upload_to='miniaturas/', max_length=255)
+    dados_youtube_midia = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    usuario_midia = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
 
