@@ -77,6 +77,7 @@ def credenciais_login(request):
 
         if not request.user.is_authenticated:
             user_auth = authenticate(request, username=USER, password=PASS)
+
             if user_auth is not None:
                 login(request, user_auth)  # Cria uma sessão automatico
                 request.session['usuario_id'] = user_auth.id
@@ -87,14 +88,16 @@ def credenciais_login(request):
             else:
                 print('Credenciais inválidas')
                 mensagem_erro = 'Credenciais inválidas'
-                nome_usuario = request.user
-                usuario_logado = request.user.is_authenticated
+                nome_usuario = str(request.user)
+                usuario_logado = False
                 erro_processo = 2
+
         elif request.user.is_authenticated:
             print('Usuário logado: ', request.user.is_authenticated)
             mensagem_erro = f'Usuário logado: {request.user.is_authenticated}',
             usuario_logado = request.user.is_authenticated
             erro_processo = 0
+
         else:
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
