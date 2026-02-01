@@ -34,3 +34,4 @@ class MusicsSalvasServidor(Base):
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
     dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
     usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
+
