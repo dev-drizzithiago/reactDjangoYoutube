@@ -21,13 +21,7 @@ const LinkBancoDados = ({propsStatusProcesso}) => {
     }, [propsStatusProcesso])    
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
-
-    useEffect(()=>{
-        if (usuarioLogado) {
-            setStatusLogin(usuarioLogado)
-        }
-    }, [usuarioLogado])
-
+   
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
