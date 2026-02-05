@@ -10,7 +10,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
-  const [statusLogin, setStatusLogin] = useState(null);
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
 
   const criarNovoUsuario = () => {
