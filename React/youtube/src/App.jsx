@@ -83,25 +83,31 @@ function App() {
   useEffect(() => {
     console.log('Status de login do usuário: ', statusLogin)
 
-    const verificaUserLogado = async () => {      
+    const verificaUserLogado = async () => {
+
         const urlDjango = `${urlDefaultDjango}/credenciais_login/`
         const payload = {
           tipoRequest: "verificarUsuarioLogado"
         }
+
         const resquestDjango = await sendRequestDjango(urlDjango, payload)
        
         if (!resquestDjango.usuario_logado) {
           setStatusLogin(resquestDjango.usuario_logado)
+          sessionStorage.setItem('statusLogin', true)
         } 
+
       }
 
     // Verificar a cada 5 minutos se o usuário esta logado. 
     if (statusLogin) {
       setInterval(()=> {
-        verificaUserLogado()
+        if (!sessionStorage.getItem(statusLogin)) {
+          verificaUserLogado()
+        }
       }, 300000)
-    } 
-    }, [])      
+    }
+  }, [])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
