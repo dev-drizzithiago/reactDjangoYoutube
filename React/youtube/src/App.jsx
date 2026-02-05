@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
+
 import './App.css'
 
 import useCsrfInit from './Componentes/useCsrfInit';
@@ -61,6 +63,21 @@ function App() {
    * elemento do login é chamado e todos os elementos são fechados 
    * */ 
 
+  useEffect(() => {
+    const VerificarStatusLogindjango = async () => {
+      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+
+      const PAYLOAD = {
+        'tipoRequest': 'verificarUsuarioLogado',
+      }
+
+      responseDjangoVerificarStatusLogin = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
+      console.log(responseDjangoVerificarStatusLogin)
+    }
+    
+  }, [])
+  
+
   // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
   useEffect(()=> {
     const toUserLogado = () => {
@@ -81,31 +98,18 @@ function App() {
   // Verificar se o usuário esta logado, envia um sinal para o django para saber se continuar
   // logado pelo sistema back, caso o usuário fique deslogado o sistema volta para o elemento de logar. 
   useEffect(() => {
-    console.log('Status de login do usuário: ', statusLogin)
 
-    const verificaUserLogado = async () => {
+    const verificaStatusUser = async () => {        
 
-        const urlDjango = `${urlDefaultDjango}/credenciais_login/`
-        const payload = {
-          tipoRequest: "verificarUsuarioLogado"
-        }
-
-        const resquestDjango = await sendRequestDjango(urlDjango, payload)
-       
-        if (!resquestDjango.usuario_logado) {
-          setStatusLogin(resquestDjango.usuario_logado)
-          sessionStorage.setItem('statusLogin', true)
-        } 
+        console.log(sessionStorage.getItem('statusLogin'))
 
       }
 
     // Verificar a cada 5 minutos se o usuário esta logado. 
     if (statusLogin) {
       setInterval(()=> {
-        if (!sessionStorage.getItem(statusLogin)) {
-          verificaUserLogado()
-        }
-      }, 300000)
+          verificaStatusUser()
+      }, 10000)
     }
   }, [])
 
@@ -117,8 +121,6 @@ function App() {
 
   /** Abre o elemento onde estão os link que estão salvos. */
   const linksSalvos = () => {
-
-    console.log(statusLogin)
 
     if (!elementoLinks) {
       setElementoLinks(true);
