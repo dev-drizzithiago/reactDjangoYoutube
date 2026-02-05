@@ -1,7 +1,6 @@
 import './LoginUsuario.css';
 import { useState, useEffect } from 'react';
-import sendRequestDjango from './sendRequestDjango';
-import LinkBancoDados from './LinkBancoDados';
+import { verificarUsuarioLogado, logarUsuario, deslogarUsuario } from './statusLoginDjango';
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -11,6 +10,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
+ 
+  const tempoUserLogado = () => {
+    console.log('Contagem')
+    setTimeout(() => {
+      sessionStorage.clear()
+    }, 10000)
+  }
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -49,7 +55,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
   }
   
   /** Função para o usuário se logar  */
-  const eventoLogin = async () => {
+  const eventoLogin = async event => {
+    event.preventDefault()
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
@@ -69,8 +76,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
           'passUsuario': dadosParaLogin.passLogin, 
         },
       }
-      console.log('Processando login...')
-      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+
+      logarUsuario(linkSendRequest, PAYLOAD)
 
       console.log('Dados django: ', responseDjango)
 
@@ -79,10 +86,15 @@ const LoginUsuario = ({infoStatusLogin}) => {
           if (responseDjango.nome_usuario === 'AnonymousUser'){
 
             console.log(responseDjango.mensagem_erro === 1)
+
+            // Retorna o valor para o app
             infoStatusLogin(false)
 
           } else if (responseDjango.usuario_logado) {
             infoStatusLogin(responseDjango.usuario_logado)
+
+            sessionStorage.setItem('statusLogin', responseDjango.usuario_logado)
+            tempoUserLogado()
           }
         } else {
             console.log(responseDjango.mensagem_erro)
