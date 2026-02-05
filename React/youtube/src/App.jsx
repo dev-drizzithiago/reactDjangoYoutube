@@ -89,9 +89,7 @@ function App() {
           tipoRequest: "verificarUsuarioLogado"
         }
         const resquestDjango = await sendRequestDjango(urlDjango, payload)
-
-        console.log(resquestDjango)
-        
+       
         if (!resquestDjango.usuario_logado) {
           setStatusLogin(resquestDjango.usuario_logado)
         } 
