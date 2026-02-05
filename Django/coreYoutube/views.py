@@ -110,15 +110,12 @@ def credenciais_login(request):
     # Processo para verificar se o usuário está logado
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
-            id_usuario = request.session.get('usuario_id')
             nome_usuario = request.session.get('usuario_nome')
-            mail_usuario = request.session.get('usuario_mail')
             usuario_logado = request.user.is_authenticated
             erro_processo = 0
         else:
             usuario_logado = request.user.is_authenticated
             print('Usuário logado: ', request.user.is_authenticated)
-            usuario_logado = request.user.is_authenticated
             erro_processo = 0
 
     # Processo para deslogar o usuário
@@ -172,7 +169,6 @@ def requestBaseDados(request):
         mensagem = 'Usuário não esta logado.'
         erro_processo = 666
 
-    print(lista_dados_django)
     return JsonResponse({
         'mensagem': mensagem,
         'erro_processo': erro_processo,
