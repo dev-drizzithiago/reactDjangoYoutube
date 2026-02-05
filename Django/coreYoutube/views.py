@@ -17,6 +17,8 @@ from DjangoYouTube import settings
 from .appYoutube import YouTubeDownload
 from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
+from .utilitys import verificar_pasta_media
+
 
 def index(request):
     return render(request, 'index.html')
@@ -28,6 +30,7 @@ def csrf_token_view(request):
     :param request:
     :return: Retorna um aviso para o react.
     """
+    verificar_pasta_media()
     print('Enviando cookies para o frontend...')
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
