@@ -95,6 +95,7 @@ function App() {
         } 
       }
 
+    // Verificar a cada 5 minutos se o usuário esta logado. 
     if (statusLogin) {
       setInterval(()=> {
         verificaUserLogado()
