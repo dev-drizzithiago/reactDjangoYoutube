@@ -126,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Limite para autenticação
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # expira ao fechar navegador
 SESSION_SAVE_EVERY_REQUEST = True  # renova a cada requisição
-SESSION_COOKIE_AGE = 1800  # 30 minutos em segundos
+SESSION_COOKIE_AGE = 30 #1800  # 30 minutos em segundos
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
