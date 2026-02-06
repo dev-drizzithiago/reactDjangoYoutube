@@ -16,6 +16,7 @@ import LoginUsuario from './Componentes/LoginUsuario';
 const urlDefaultDjango = `http://localhost:8080`
 
 function App() {
+
   const [statusLogin, setStatusLogin] = useState(false);
   
   /** Recebe um GET do django com o cookies */
