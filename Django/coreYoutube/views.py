@@ -32,8 +32,16 @@ def csrf_token_view(request):
     """
     verificar_pasta_media()
     print('Enviando cookies para o frontend...')
+
+    usuario = str(request.user)
+    status = str(request.user.is_authenticated)
+    print("Usuário logado: ", status)
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
+        'statusLogin': {
+            'usuario': usuario,
+            'status': status,
+        }
     })
 
 def credenciais_login(request):
