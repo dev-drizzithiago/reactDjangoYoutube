@@ -64,18 +64,22 @@ function App() {
    * */ 
 
   useEffect(() => {
-    const VerificarStatusLogindjango = async () => {
+      const VerificarStatusLogindjango = async () => {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
       const PAYLOAD = {
         'tipoRequest': 'verificarUsuarioLogado',
       }
 
-      responseDjangoVerificarStatusLogin = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
-      console.log(responseDjangoVerificarStatusLogin)
+      const responseDjangoVerificarStatusLogin = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
+
+      if (responseDjangoVerificarStatusLogin) {
+        console.log(responseDjangoVerificarStatusLogin)
+      }
     }
+    VerificarStatusLogindjango()
     
-  }, [])
+  }, [statusLogin])
   
 
   // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
