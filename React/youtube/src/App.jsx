@@ -23,18 +23,26 @@ function App() {
   useCsrfInit()
 
   useEffect(() => {
+    console.log('verificando login')
     fetch(`${urlDefaultDjango}/credenciais_login/`, { 
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': getCookies('csrftoken'),
       },            
-        body: {tipoRequest: 'verificarUsuarioLogado'},
-        credentials: 'include',
+        body: {'tipoRequest': 'verificarUsuarioLogado'},
+        // credentials: 'include',
       })
       .then(res => res.json())
-      .then(data => setStatusLogin(data.usuario_logado))
-      .catch(() => setStatusLogin(false));
+      .then(( data )=> {
+        console.log(data)
+        setStatusLogin(data.usuario_logado)
+      })
+      .catch(() => {
+        console.log('Erro ')
+        setStatusLogin(false)
+      });
+
   }, []);
 
 
