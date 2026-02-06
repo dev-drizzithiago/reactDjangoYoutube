@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
 
 const urlDefaultDjango = `http://localhost:8080`
 
 const useCsrfInit = () => {
-
-    const [dataDjango, setDataDjango] = useState(null)
 
     const urlDjango =`${urlDefaultDjango}/csrf_token_view/`
     
@@ -14,19 +11,17 @@ const useCsrfInit = () => {
             method: 'GET',
             credentials: 'include', // Recebe o cookies do django
         })
-        .then(data => data.json())
-        .then((data) => {
-            
-            setDataDjango(data)
-
+        .then(() => {
             //console.log('CSRF cookie recebido');
         })
         .catch(err => {
             console.error("Erro ao obter CSRF cookie: ", err)
         })
-    }, [])
+    })
 
-    return {dataDjango}
+    return (
+        <div></div>
+    )
 }
 
 export default useCsrfInit;
