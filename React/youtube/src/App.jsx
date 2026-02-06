@@ -31,7 +31,7 @@ function App() {
           'X-CSRFToken': getCookies('csrftoken'),
       },            
         body: {'tipoRequest': 'verificarUsuarioLogado'},
-        // credentials: 'include',
+        credentials: 'include',
       })
       .then(res => res.json())
       .then(( data )=> {
