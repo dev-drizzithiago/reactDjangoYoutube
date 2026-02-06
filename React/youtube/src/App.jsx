@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
 
-import './App.css'
-
+import getCookies from './Componentes/getCookies';
 import useCsrfInit from './Componentes/useCsrfInit';
-
 import sendRequestDjango from './Componentes/sendRequestDjango';
+
+import './App.css'
 
 import LinkBancoDados from './Componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
@@ -20,17 +20,23 @@ function App() {
   const [statusLogin, setStatusLogin] = useState(false);
   
   /** Recebe um GET do django com o cookies */
-  const retornoLogin = useCsrfInit();
+  useCsrfInit()
 
   useEffect(() => {
-    if (retornoLogin) {
-      console.log(retornoLogin)
-      setStatusLogin(true)
-      if (!retornoLogin.dataDjango) {
-        setStatusLogin(false)
-      }
-    }
-  }, [])
+    fetch(`${urlDefaultDjango}/credenciais_login/`, { 
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookies('csrftoken'),
+      },            
+        body: {tipoRequest: 'verificarUsuarioLogado'},
+        credentials: 'include',
+      })
+      .then(res => res.json())
+      .then(data => setStatusLogin(data.usuario_logado))
+      .catch(() => setStatusLogin(false));
+  }, []);
+
 
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
