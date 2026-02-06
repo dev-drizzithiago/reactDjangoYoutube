@@ -11,12 +11,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
  
-  const tempoUserLogado = () => {
-    console.log('Contagem')
-    setTimeout(() => {
-      sessionStorage.clear()
-    }, 10000)
-  }
+  // const tempoUserLogado = () => {
+  //   console.log('Contagem')
+  //   setTimeout(() => {
+  //     sessionStorage.clear()
+  //   }, 10000)
+  // }
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -93,8 +93,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
           } else if (responseDjango.usuario_logado) {
             infoStatusLogin(responseDjango.usuario_logado)
 
-            sessionStorage.setItem('statusLogin', responseDjango.usuario_logado)
-            tempoUserLogado()
+            // sessionStorage.setItem('statusLogin', responseDjango.usuario_logado)
+            // tempoUserLogado()
           }
         } else {
             console.log(responseDjango.mensagem_erro)
