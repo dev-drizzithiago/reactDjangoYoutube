@@ -35,13 +35,12 @@ def csrf_token_view(request):
 
     usuario = str(request.user)
     status = str(request.user.is_authenticated)
+
     print("Usuário logado: ", status)
+
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
-        'statusLogin': {
-            'usuario': usuario,
-            'status': status,
-        }
+        'statusLogin': status,
     })
 
 def credenciais_login(request):
