@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const useCsrfInit = () => {
@@ -15,10 +16,10 @@ const useCsrfInit = () => {
         })
         .then(data => data.json())
         .then((data) => {
-            console.log(data)
-
-            setDataDjango(data)
             
+            console.log(data)
+            setDataDjango(data)
+
             //console.log('CSRF cookie recebido');
         })
         .catch(err => {
