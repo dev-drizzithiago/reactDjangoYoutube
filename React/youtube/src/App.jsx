@@ -31,9 +31,7 @@ function App() {
     }
   }, [])
 
-  {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */}
-
- 
+  {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
