@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import getCookies from "./getCookies"
+import { useState, useEffect } from "react";
+import getCookies from "./getCookies";
 
 const useRequestDjango = (urlDjango, payload, trigger) => {
    
