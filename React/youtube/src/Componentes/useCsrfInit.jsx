@@ -4,7 +4,7 @@ const urlDefaultDjango = `http://localhost:8080`
 
 const useCsrfInit = () => {
 
-    const [dataDjango, setDataDjango] = useState(null)
+    const [dataDjango, setDataDjango] = useState(false)
 
     const urlDjango =`${urlDefaultDjango}/csrf_token_view/`
     
@@ -15,9 +15,9 @@ const useCsrfInit = () => {
         })
         .then(data => data.json())
         .then((data) => {
-            
-            const statusLogin = data.statusLogin
-            setDataDjango(statusLogin)
+            console.log(data)
+
+            setDataDjango(data)
             
             //console.log('CSRF cookie recebido');
         })
