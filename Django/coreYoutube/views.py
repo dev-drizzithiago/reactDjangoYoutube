@@ -37,8 +37,9 @@ def csrf_token_view(request):
         'mensagem': 'Token CSRF enviado',
     })
 
+@csrf_protect
 def credenciais_login(request):
-    usuario_logado = request.user
+    print("Entrada da credencial")
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
