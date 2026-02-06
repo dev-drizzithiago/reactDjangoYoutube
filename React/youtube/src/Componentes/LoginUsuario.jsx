@@ -77,7 +77,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
         },
       }
 
-      logarUsuario(linkSendRequest, PAYLOAD)
+      const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)
 
       console.log('Dados django: ', responseDjango)
 
