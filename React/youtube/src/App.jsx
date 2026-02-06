@@ -16,14 +16,25 @@ import LoginUsuario from './Componentes/LoginUsuario';
 const urlDefaultDjango = `http://localhost:8080`
 
 function App() {
+  const [statusLogin, setStatusLogin] = useState(false);
+  
+  /** Recebe um GET do django com o cookies */
+  const retornoLogin = useCsrfInit();
+
+  useEffect(() => {
+    if (retornoLogin) {
+      console.log(retornoLogin)
+      setStatusLogin(true)
+      if (!retornoLogin.dataDjango) {
+        setStatusLogin(false)
+      }
+    }
+  }, [])
 
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */}
 
-  /** Recebe um GET do django com o cookies */
-  useCsrfInit();
-
+ 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
-  const [statusLogin, setStatusLogin] = useState(false);
   
   const [atualizarBanco, setAtualizarBanco] = useState(0);
   const [linkMidia, setLinkMidia] = useState([null, null]);
@@ -33,7 +44,7 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
-
+  
   /** Para ativar o player de midias 
    * Se o link tiver algum valor o player é ativado */
   useEffect(() => {
@@ -57,30 +68,7 @@ function App() {
         
       }
     }
-  }, [linkMidia]);
-
-  /** Avalia se o usuário esta logado, caso não esteja o 
-   * elemento do login é chamado e todos os elementos são fechados 
-   * */ 
-
-  useEffect(() => {
-      const VerificarStatusLogindjango = async () => {
-      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-
-      const PAYLOAD = {
-        'tipoRequest': 'verificarUsuarioLogado',
-      }
-
-      const responseDjangoVerificarStatusLogin = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
-
-      if (responseDjangoVerificarStatusLogin) {
-        console.log(responseDjangoVerificarStatusLogin)
-      }
-    }
-    VerificarStatusLogindjango()
-    
-  }, [statusLogin])
-  
+  }, [linkMidia]);  
 
   // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
   useEffect(()=> {
@@ -103,11 +91,17 @@ function App() {
   // logado pelo sistema back, caso o usuário fique deslogado o sistema volta para o elemento de logar. 
   useEffect(() => {
 
-    const verificaStatusUser = async () => {        
-
-        console.log(sessionStorage.getItem('statusLogin'))
-
+    const verificaStatusUser = async () => {
+      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+      const PAYLOAD = {
+        'tipoRequest': 'realizarLogin',
+        'dadosCredencial': {
+          'userLogin': dadosParaLogin.userLogin,
+          'passUsuario': dadosParaLogin.passLogin, 
+        },
       }
+      responseStatus = await verificarUsuarioLogadolinkSendRequest(linkSendRequest, PAYLOAD)
+    }
 
     // Verificar a cada 5 minutos se o usuário esta logado. 
     if (statusLogin) {
