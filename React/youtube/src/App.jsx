@@ -23,25 +23,10 @@ function App() {
   useCsrfInit()
 
   useEffect(() => {
-    console.log('verificando login')
-    fetch(`${urlDefaultDjango}/credenciais_login/`, { 
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookies('csrftoken'),
-      },            
-        body: {'tipoRequest': 'verificarUsuarioLogado'},
-        credentials: 'include',
-      })
-      .then(res => res.json())
-      .then(( data )=> {
-        console.log(data)
-        setStatusLogin(data.usuario_logado)
-      })
-      .catch(() => {
-        console.log('Erro ')
-        setStatusLogin(false)
-      });
+
+    const valorUserLodago = sessionStorage.getItem('usuarioLogado')
+    setStatusLogin(valorUserLodago)
+    console.log('Valor usuário Logado: ', valorUserLodago)
 
   }, []);
 
@@ -107,13 +92,10 @@ function App() {
     const verificaStatusUser = async () => {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
       const PAYLOAD = {
-        'tipoRequest': 'realizarLogin',
-        'dadosCredencial': {
-          'userLogin': dadosParaLogin.userLogin,
-          'passUsuario': dadosParaLogin.passLogin, 
-        },
+        'tipoRequest': 'verificarUsuarioLogado',
       }
-      responseStatus = await verificarUsuarioLogadolinkSendRequest(linkSendRequest, PAYLOAD)
+      const responseStatus = await verificarUsuarioLogadolinkSendRequest(linkSendRequest, PAYLOAD)
+      sessionStorage.setItem('usuarioLogado', false)
     }
 
     // Verificar a cada 5 minutos se o usuário esta logado. 
