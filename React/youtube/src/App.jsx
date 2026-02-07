@@ -1,14 +1,19 @@
-import { useState, useEffect } from 'react';
-import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
+import './App.css'
 
-import { useDispatch, useSelector } from 'react-redux';;
+// - Usa useEffect para rodar lógica ao montar o componente.
+import { useState, useEffect } from 'react';
+
+//- useSelector → acessa o estado global do Redux.
+//- useDispatch → dispara actions para alterar o estado.
+import { useDispatch, useSelector } from 'react-redux';
+
+// - Importa as actions criadas no slice.
 import { loginSuccess, logout } from './Componentes/sessionSlice';
 
-import getCookies from './Componentes/getCookies';
+import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
+
 import useCsrfInit from './Componentes/useCsrfInit';
 import sendRequestDjango from './Componentes/sendRequestDjango';
-
-import './App.css'
 
 import LinkBancoDados from './Componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
@@ -30,6 +35,10 @@ function App() {
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
 
+  // - Pega logado e usuario do estado global (state.session).
+  const { logado, usuario } = useSelector((state) => state.session)
+
+  // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
   
   /** Recebe um GET do django com o cookies */
@@ -99,23 +108,23 @@ function App() {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
       const PAYLOAD = JSON.stringify({ 'tipoRequest': 'verificarUsuarioLogado' })
 
+      // - verificaLogin → chama o backend Django para saber se o usuário ainda está logado.
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
 
       if (responseStatusLogindjango.usuario_logado) {
+        // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
       } else {
+        // - Se não → dispara logout.
         dispatch(logout())
       }
-
-      console.log(responseStatusLogindjango)
-      sessionStorage.setItem('usuarioLogado', false)
     }
 
     // Verificar a cada 5 minutos se o usuário esta logado. 
     if (statusLogin) {
       setInterval(()=> {
           verificaStatusUser()
-      }, 5 * 60 * 1000)
+      }, 10000)
     }
   }, [])
 
