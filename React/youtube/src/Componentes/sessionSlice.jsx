@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const sessionSlice = createSlice({
-    nome: 'session',
+    name: 'session',
     initialState: { usuario: null, logado: false },
     reducers: {
         loginSuccess(state, action) {
@@ -16,4 +16,4 @@ const sessionSlice = createSlice({
 });
 
 export const { loginSuccess, logout } = sessionSlice.actions;
-export default sessionSlice.reducers;
+export default sessionSlice.reducer;
