@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
 
-import { useSelector } from 'react-redux';;
-import { loginSucecess } from './Componentes/sessionSlice';
+import { useDispatch, useSelector } from 'react-redux';;
+import { loginSuccess, logout } from './Componentes/sessionSlice';
 
 import getCookies from './Componentes/getCookies';
 import useCsrfInit from './Componentes/useCsrfInit';
@@ -21,6 +21,16 @@ const urlDefaultDjango = `http://localhost:8080`
 function App() {
 
   const [statusLogin, setStatusLogin] = useState(false);
+  const [atualizarBanco, setAtualizarBanco] = useState(0);
+  const [linkMidia, setLinkMidia] = useState([null, null]);
+  const [ativarPlayer, setAtivarPlayer] = useState(false);
+
+  const [elementoLinks, setElementoLinks] = useState(false);
+  const [elementoMp3, setElementoMp3] = useState(false);
+  const [elementoMp4, setElementoMp4] = useState(false);
+  const [spinnerPlayer, setSpinnerPlayer] = useState(false);
+
+  const dispatch = useDispatch()
   
   /** Recebe um GET do django com o cookies */
   useCsrfInit()
@@ -37,14 +47,7 @@ function App() {
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
   
-  const [atualizarBanco, setAtualizarBanco] = useState(0);
-  const [linkMidia, setLinkMidia] = useState([null, null]);
-  const [ativarPlayer, setAtivarPlayer] = useState(false);
-
-  const [elementoLinks, setElementoLinks] = useState(false);
-  const [elementoMp3, setElementoMp3] = useState(false);
-  const [elementoMp4, setElementoMp4] = useState(false);
-  const [spinnerPlayer, setSpinnerPlayer] = useState(false);
+  
   
   /** Para ativar o player de midias 
    * Se o link tiver algum valor o player é ativado */
@@ -94,10 +97,17 @@ function App() {
 
     const verificaStatusUser = async () => {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-      const PAYLOAD = {
-        'tipoRequest': 'verificarUsuarioLogado',
+      const PAYLOAD = JSON.stringify({ 'tipoRequest': 'verificarUsuarioLogado' })
+
+      const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
+
+      if (responseStatusLogindjango.usuario_logado) {
+        dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
+      } else {
+        dispatch(logout())
       }
-      const responseStatus = await verificarUsuarioLogadolinkSendRequest(linkSendRequest, PAYLOAD)
+
+      console.log(responseStatusLogindjango)
       sessionStorage.setItem('usuarioLogado', false)
     }
 
@@ -105,7 +115,7 @@ function App() {
     if (statusLogin) {
       setInterval(()=> {
           verificaStatusUser()
-      }, 10000)
+      }, 5 * 60 * 1000)
     }
   }, [])
 
