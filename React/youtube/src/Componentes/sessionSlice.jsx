@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const sessionSlice = createSliece({
+const sessionSlice = createSlice({
     nome: 'session',
     initialState: { usuario: null, logado: false },
     reducers: {
