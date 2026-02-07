@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
 
+import { useSelector } from 'react-redux';;
+import { loginSucecess } from './Componentes/sessionSlice';
+
 import getCookies from './Componentes/getCookies';
 import useCsrfInit from './Componentes/useCsrfInit';
 import sendRequestDjango from './Componentes/sendRequestDjango';
