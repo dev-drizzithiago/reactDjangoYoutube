@@ -45,13 +45,15 @@ function App() {
   /** Recebe um GET do django com o cookies */
   useCsrfInit()
 
+  // VERIFICA SE O USUÁRIO ESTA LOGADO NO PRIMEIRO ACESSO AO SITE, GERALMENTE VERIFICA COM O DJANGO, MAS 
+  // PODE CONTER O STATUS PELA SESSION É MELHOR SEMPRE VERIFICAR. 
   useEffect(() => {
     if (logado) {
       setStatusLogin(logado)
     } else {
       dispatch(logout())
       setStatusLogin(false)
-    }    
+    }
   }, []);
 
 
@@ -78,12 +80,11 @@ function App() {
           setSpinnerPlayer(false);
           setElementoLinks(false)
         }, 1000);
-        
       }
     }
   }, [linkMidia]);  
 
-  // VERIFICAR SE O USUÁRIO ESTA ONLINE. 
+  // VERIFICAR SE O USUÁRIO ESTA ONLINE. CASO ESTEJA, VAI DIRECIONAR PARA OS LINKS
   useEffect(()=> {
     const toUserLogado = () => {
 
@@ -113,25 +114,24 @@ function App() {
 
       if (responseStatusLogindjango.usuario_logado) {
 
+        console.log(responseStatusLogindjango.usuario_logado)
+
         // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
-        
-
-        // sessionStorage.removeItem('usuarioLogado')
       } else {
 
         // - Se não → dispara logout.
-        setStatusLogin(responseStatusLogindjango.usuario_logado)
+
+        // setStatusLogin(responseStatusLogindjango.usuario_logado)
+
         dispatch(logout())
       }
     }
 
-    // Verificar a cada 5 minutos se o usuário esta logado. 
-    if (statusLogin) {
-      setInterval(()=> {
-          verificaStatusUser()
-      }, 10000)
-    }
+    // Verificar a cada 5 minutos se o usuário esta logado.     
+    setInterval(()=> {
+        verificaStatusUser()
+    }, 60000)
   }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
