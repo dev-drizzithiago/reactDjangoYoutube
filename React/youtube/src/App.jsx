@@ -35,27 +35,28 @@ function App() {
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
 
-  // - Pega logado e usuario do estado global (state.session).
-  const { logado, usuario } = useSelector((state) => state.session)
-
+  
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
   
+  // - Pega logado e usuario do estado global (state.session).
+  const { logado, usuario } = useSelector((state) => state.session)
+
   /** Recebe um GET do django com o cookies */
   useCsrfInit()
 
   useEffect(() => {
-    const valorUserLodago = sessionStorage.getItem('usuarioLogado')
-    setStatusLogin(valorUserLodago)
-    console.log('Valor usuário Logado: ', valorUserLodago)
-
+    if (logado) {
+      setStatusLogin(logado)
+    } else {
+      dispatch(logout())
+      setStatusLogin(false)
+    }    
   }, []);
 
 
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
-  {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}
-  
-  
+  {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}  
   
   /** Para ativar o player de midias 
    * Se o link tiver algum valor o player é ativado */
@@ -111,11 +112,16 @@ function App() {
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
 
       if (responseStatusLogindjango.usuario_logado) {
+
         // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
-        sessionStorage.removeItem('usuarioLogado')
+        
+
+        // sessionStorage.removeItem('usuarioLogado')
       } else {
+
         // - Se não → dispara logout.
+        setStatusLogin(responseStatusLogindjango.usuario_logado)
         dispatch(logout())
       }
     }
