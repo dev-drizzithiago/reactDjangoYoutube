@@ -1,7 +1,12 @@
 // Para colocar um qualquer elemento de html, é preciso esta sempre dentro de uma tag<div> => exemplo
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from "./sendRequestDjango";
-import FormularioLinkYoutube from "./FormularioLinkYoutube";
+
+//- useSelector → acessa o estado global do Redux.
+//- useDispatch → dispara actions para alterar o estado.
+import { useDispatch, useSelector } from 'react-redux';
+
+
 
 import "./LinkBancoDados.css"
 import { useState, useEffect } from "react";
@@ -9,6 +14,11 @@ import { useState, useEffect } from "react";
 const urlDefaultDjango = `http://localhost:8080`
 
 const LinkBancoDados = ({propsStatusProcesso}) => {
+
+    // - Pega logado e usuario do estado global (state.session).
+    const { logado, usuario } = useSelector((state) => state.session)
+    
+    console.log('usuario logado: ', logado, usuario)
 
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
