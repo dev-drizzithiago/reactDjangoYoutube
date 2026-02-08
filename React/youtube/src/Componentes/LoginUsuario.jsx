@@ -2,6 +2,8 @@ import './LoginUsuario.css';
 import { useState, useEffect } from 'react';
 import { verificarUsuarioLogado, logarUsuario, deslogarUsuario } from './statusLoginDjango';
 
+// - Importa as actions criadas no slice.
+import { loginSuccess, logout } from './sessionSlice';
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
@@ -10,20 +12,14 @@ import { useDispatch, useSelector } from 'react-redux';
 const urlDefaultDjango = `http://localhost:8080`
 
 const LoginUsuario = ({infoStatusLogin}) => {
+
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
 
-   const dispatch = useDispatch()
- 
-  const tempoUserLogado = () => {
-    console.log('Contagem')
-    setTimeout(() => {
-      sessionStorage.clear()
-    }, 10000)
-  }
+  const dispatch = useDispatch()
 
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
@@ -76,12 +72,14 @@ const LoginUsuario = ({infoStatusLogin}) => {
       setMsgAlerta('Entre com sua Senha')
     }
     else {
+
       const PAYLOAD = {
         'tipoRequest': 'realizarLogin',
         'dadosCredencial': {
           'userLogin': dadosParaLogin.userLogin,
           'passUsuario': dadosParaLogin.passLogin, 
         },
+
       }
 
       const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)
@@ -100,9 +98,9 @@ const LoginUsuario = ({infoStatusLogin}) => {
           } else if (responseDjango.usuario_logado) {
             infoStatusLogin(responseDjango.usuario_logado)
 
-            sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado)
-            dispatch(responseDjango.usuario_logado)
-            tempoUserLogado()
+            // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
+            dispatch(loginSuccess(responseDjango.usuario_logado));
+            
           }
         } else {
             console.log(responseDjango.mensagem_erro)
