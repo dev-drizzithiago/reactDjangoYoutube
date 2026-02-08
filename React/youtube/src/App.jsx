@@ -45,7 +45,6 @@ function App() {
   useCsrfInit()
 
   useEffect(() => {
-
     const valorUserLodago = sessionStorage.getItem('usuarioLogado')
     setStatusLogin(valorUserLodago)
     console.log('Valor usuário Logado: ', valorUserLodago)
@@ -106,7 +105,7 @@ function App() {
 
     const verificaStatusUser = async () => {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-      const PAYLOAD = JSON.stringify({ 'tipoRequest': 'verificarUsuarioLogado' })
+      const PAYLOAD = { 'tipoRequest': 'verificarUsuarioLogado' }
 
       // - verificaLogin → chama o backend Django para saber se o usuário ainda está logado.
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
@@ -114,6 +113,7 @@ function App() {
       if (responseStatusLogindjango.usuario_logado) {
         // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
+        sessionStorage.removeItem('usuarioLogado')
       } else {
         // - Se não → dispara logout.
         dispatch(logout())
@@ -126,7 +126,7 @@ function App() {
           verificaStatusUser()
       }, 10000)
     }
-  }, [])
+  }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
   const fecharPlayerMidia = () => {
