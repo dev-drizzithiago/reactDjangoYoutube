@@ -1,13 +1,13 @@
 import './LoginUsuario.css';
-import { useState, useEffect } from 'react';
-import { verificarUsuarioLogado, logarUsuario, deslogarUsuario } from './statusLoginDjango';
+import { useState } from 'react';
+import {  logarUsuario } from './statusLoginDjango';
 
 // - Importa as actions criadas no slice.
-import { loginSuccess, logout } from './sessionSlice';
+import { loginSuccess } from './sessionSlice';
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -59,7 +59,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   
   /** Função para o usuário se logar  */
   const eventoLogin = async event => {
-    event.preventDefault()
+    event.preventDefault();
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
     if (dadosParaLogin.length === 0) {
@@ -79,19 +79,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
           'userLogin': dadosParaLogin.userLogin,
           'passUsuario': dadosParaLogin.passLogin, 
         },
-
       }
 
-      const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)
-
-      console.log('Dados django: ', responseDjango)
+      const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)      
 
       if (responseDjango !== undefined) {
         if (Number(responseDjango.erro_processo) !== 1) {
           if (responseDjango.nome_usuario === 'AnonymousUser'){
-
-            console.log(responseDjango.mensagem_erro === 1)
-
             // Retorna o valor para o app
             infoStatusLogin(false)
 
@@ -100,7 +94,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
             // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
             dispatch(loginSuccess(responseDjango.usuario_logado));
-            
           }
         } else {
             console.log(responseDjango.mensagem_erro)
@@ -169,7 +162,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
         {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>
             <h3>Login</h3>
-
             <div className='login-divGridInputs'>
               <label htmlFor="usuario">Usuário</label>              
               <input type="text" 
@@ -197,7 +189,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
             alt="logar" 
             title='Logar' 
             onClick={eventoLogin}
-            />            
+            />
             {
               btnCriarNovoUserAtivo &&
               <img className="login-btnNewUser login-btnCriarNovoUser" 
