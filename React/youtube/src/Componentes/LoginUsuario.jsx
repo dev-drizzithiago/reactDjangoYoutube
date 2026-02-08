@@ -2,6 +2,11 @@ import './LoginUsuario.css';
 import { useState, useEffect } from 'react';
 import { verificarUsuarioLogado, logarUsuario, deslogarUsuario } from './statusLoginDjango';
 
+
+//- useSelector → acessa o estado global do Redux.
+//- useDispatch → dispara actions para alterar o estado.
+import { useDispatch, useSelector } from 'react-redux';
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const LoginUsuario = ({infoStatusLogin}) => {
@@ -10,6 +15,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
+
+   const dispatch = useDispatch()
  
   const tempoUserLogado = () => {
     console.log('Contagem')
@@ -94,6 +101,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
             infoStatusLogin(responseDjango.usuario_logado)
 
             sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado)
+            dispatch(responseDjango.usuario_logado)
             tempoUserLogado()
           }
         } else {
