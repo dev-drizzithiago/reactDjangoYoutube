@@ -111,6 +111,7 @@ function App() {
 
       // - verificaLogin → chama o backend Django para saber se o usuário ainda está logado.
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
+      console.log(responseStatusLogindjango)
 
       if (responseStatusLogindjango.usuario_logado) {
 
