@@ -30,11 +30,16 @@ def csrf_token_view(request):
     :param request:
     :return: Retorna um aviso para o react.
     """
+    user_logado = request.user.is_authenticated
+    nome_usuario = str(request.user)
     verificar_pasta_media()
+
     print('Enviando cookies para o frontend...')
 
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
+        'user_logado': user_logado,
+        'nome_usuario': nome_usuario
     })
 
 @csrf_protect
