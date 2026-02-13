@@ -19,6 +19,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
 
+  const [botaoAtivado, setBotaoAtivado] = useState(false)
+
   const dispatch = useDispatch()
 
   const criarNovoUsuario = () => {
@@ -59,52 +61,54 @@ const LoginUsuario = ({infoStatusLogin}) => {
   
   /** Função para o usuário se logar  */
   const eventoLogin = async event => {
-    event.preventDefault();
+    
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
-    if (dadosParaLogin.length === 0) {
-      setMsgAlerta('Entre com Login e Senha')
-    }
-    else if (dadosParaLogin.userLogin === undefined) {
-      setMsgAlerta('Entre com Login')
-    }
-    else if (dadosParaLogin.passLogin === undefined) {
-      setMsgAlerta('Entre com sua Senha')
-    }
-    else {
-
-      const PAYLOAD = {
-        'tipoRequest': 'realizarLogin',
-        'dadosCredencial': {
-          'userLogin': dadosParaLogin.userLogin,
-          'passUsuario': dadosParaLogin.passLogin, 
-        },
+    if (botaoAtivado) {
+      if (dadosParaLogin.length === 0) {
+        setMsgAlerta('Entre com Login e Senha')
       }
+      else if (dadosParaLogin.userLogin === undefined) {
+        setMsgAlerta('Entre com Login')
+      }
+      else if (dadosParaLogin.passLogin === undefined) {
+        setMsgAlerta('Entre com sua Senha')
+      }
+      else {
 
-      const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)      
+        const PAYLOAD = {
+          'tipoRequest': 'realizarLogin',
+          'dadosCredencial': {
+            'userLogin': dadosParaLogin.userLogin,
+            'passUsuario': dadosParaLogin.passLogin, 
+          },
+        }
 
-      if (responseDjango !== undefined) {
-        if (Number(responseDjango.erro_processo) !== 1) {
-          if (responseDjango.nome_usuario === 'AnonymousUser'){
-            // Retorna o valor para o app
-            infoStatusLogin(false)
+        const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)      
 
-          } else if (responseDjango.usuario_logado) {
-            infoStatusLogin(responseDjango.usuario_logado)
+        if (responseDjango !== undefined) {
+          if (Number(responseDjango.erro_processo) !== 1) {
+            if (responseDjango.nome_usuario === 'AnonymousUser'){
+              // Retorna o valor para o app
+              infoStatusLogin(false)
 
-            // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
-            dispatch(loginSuccess(responseDjango.usuario_logado));
+            } else if (responseDjango.usuario_logado) {
+              infoStatusLogin(responseDjango.usuario_logado)
+
+              // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
+              dispatch(loginSuccess(responseDjango.usuario_logado));
+            }
+          } else {
+              console.log(responseDjango.mensagem_erro)
           }
         } else {
-            console.log(responseDjango.mensagem_erro)
+          console.log('Erro no login !')
         }
-      } else {
-        console.log('Erro no login !')
       }
-    }
-    setTimeout(() => {
-      setMsgAlerta('Entre com suas credenciais')
-    }, 30000);
+      setTimeout(() => {
+        setMsgAlerta('Entre com suas credenciais')
+      }, 30000);
+    }   
   }
 
   return (
