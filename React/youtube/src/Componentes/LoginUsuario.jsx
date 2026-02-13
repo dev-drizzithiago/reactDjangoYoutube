@@ -61,10 +61,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   
   /** Função para o usuário se logar  */
   const eventoLogin = async (event) => {
-    console.log(event)
-    
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-
     
       if (dadosParaLogin.length === 0) {
         setMsgAlerta('Entre com Login e Senha')
