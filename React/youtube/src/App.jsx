@@ -129,7 +129,7 @@ function App() {
     // Verificar a cada 5 minutos se o usuário esta logado.     
     setInterval(()=> {
         verificaStatusUser()
-    }, 60000)
+    }, 600000)
   }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
