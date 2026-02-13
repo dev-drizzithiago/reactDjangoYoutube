@@ -12,7 +12,20 @@ const persistConfig = {key: 'root', storage: storageSession};
 const persistedReducer = persistReducer(persistConfig, sessionReducer);
 
 //- store → cria o Redux store com o reducer persistido.
-export const store = configureStore({reducer: {session: persistedReducer} });
+export const store = configureStore({
+        reducer: {session: persistedReducer},
+        middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+            },
+        })
+    });
 
 //- persistor → controla o processo de persistência (hidratar estado ao recarregar).
 export const persistor = persistStore(store)
+
+
+
+// Em resumo: serializável = pode virar JSON sem perder informação.
+
