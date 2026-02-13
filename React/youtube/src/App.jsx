@@ -113,18 +113,15 @@ function App() {
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
       console.log(responseStatusLogindjango)
 
-      if (responseStatusLogindjango.usuario_logado) {
-
-        console.log(responseStatusLogindjango.usuario_logado)
+      if (responseStatusLogindjango) {
 
         // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
+
       } else {
 
         // - Se não → dispara logout.
-
-        // setStatusLogin(responseStatusLogindjango.usuario_logado)
-
+        setStatusLogin(responseStatusLogindjango)
         dispatch(logout())
       }
     }
