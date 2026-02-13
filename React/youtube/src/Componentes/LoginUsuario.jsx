@@ -60,11 +60,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
   }
   
   /** Função para o usuário se logar  */
-  const eventoLogin = async event => {
+  const eventoLogin = async (event) => {
+    console.log(event)
     
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
 
-    if (botaoAtivado) {
+    
       if (dadosParaLogin.length === 0) {
         setMsgAlerta('Entre com Login e Senha')
       }
@@ -107,8 +108,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
       }
       setTimeout(() => {
         setMsgAlerta('Entre com suas credenciais')
-      }, 30000);
-    }   
+      }, 30000);    
   }
 
   return (
@@ -173,6 +173,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
               className='login-input login-inputUsuario'
               value={dadosParaLogin.userLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  eventoLogin();
+                  }
+                }
+              } 
               />
             </div>
             
@@ -183,7 +189,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
               className='login-input login-inputSenha'
               value={dadosParaLogin.passLogin}
               onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
-              onKeyUp={eventoLogin} 
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  eventoLogin();
+                  }
+                }
+              } 
               />
               <h3> {msnAlerta} </h3>
             </div>
