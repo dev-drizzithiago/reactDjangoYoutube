@@ -2,10 +2,20 @@ import './App.css'
 
 // - Usa useEffect para rodar lógica ao montar o componente.
 import { useState, useEffect } from 'react';
+import { FaBeer } from 'react-icons/fa';
+import { IconContext } from "react-icons";
+
+import { IoMdLogOut } from "react-icons/io";
+import { BsFiletypeMp3 } from "react-icons/bs";
+import { BsFiletypeMp4 } from "react-icons/bs";
+import { FaHome } from "react-icons/fa";
+
+
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch, useSelector } from 'react-redux';
+
 
 // - Importa as actions criadas no slice.
 import { loginSuccess, logout } from './Componentes/sessionSlice';
@@ -215,10 +225,24 @@ function App() {
           <>
             <div className='app-divBtnImg'>
 
-              <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} />
-              <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
-              <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} />
+              {/* <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} /> */}
+              {/* <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
+              <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} /> */}
 
+              <IconContext.Provider value={{ color: "#000", size: '75px'}}>                
+                <div>
+                  <FaHome title='Links Salvos' onClick={linksSalvos}/>
+                </div>
+                <div>
+                  <BsFiletypeMp3 onClick={midiasMp3} title='Player MP3' />
+                </div>
+                <div>
+                  <BsFiletypeMp4 onClick={midiasMp4} title='Player MP4'/>
+                </div>
+                <div>
+                  <IoMdLogOut  title='Logout'/>
+                </div>
+              </IconContext.Provider>
             </div>
 
             {spinnerPlayer && 
