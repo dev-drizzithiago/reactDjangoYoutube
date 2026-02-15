@@ -9,6 +9,10 @@ import { loginSuccess } from './sessionSlice';
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch } from 'react-redux';
 
+import { FaSave } from "react-icons/fa";
+import { TbUserCancel } from "react-icons/tb";
+import { GrUpdate } from "react-icons/gr";
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const LoginUsuario = ({infoStatusLogin}) => {
@@ -156,8 +160,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
               onKeyUp={salvarNovoUser}
               />              
             </div>            
-
-          <img className="login-btnNewUser" src="/img/imgBtns/salve.png" alt="criarNovoUsuario" title='Criar Usuário' onClick={salvarNovoUser}/>
+          
+          <TbUserCancel className="login-btnCancelar login-btnCadastrar" onClick={salvarNovoUser}/>
+          <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar" onClick={salvarNovoUser}/>
+          <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser}/>
+          
         </div>}
 
         {/** Processo para logar o usuário */}
