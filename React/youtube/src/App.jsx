@@ -12,6 +12,7 @@ import { FaHome } from "react-icons/fa";
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ToastContainer } from 'react-toastify';
 
 // - Importa as actions criadas no slice.
 import { loginSuccess, logout } from './Componentes/sessionSlice';
@@ -213,6 +214,7 @@ function App() {
   return (
     
       <div className="App">
+        <ToastContainer />
 
         {/** Se o usuário estiver deslogado */}
         {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}
