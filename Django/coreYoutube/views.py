@@ -85,23 +85,29 @@ def credenciais_login(request):
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
 
+        # Começa o processo para logar o usuario, caso ele ainda não esteja logado.
         if not request.user.is_authenticated:
             user_auth = authenticate(request, username=USER, password=PASS)
 
             if user_auth is not None:
-                login(request, user_auth)  # Cria uma sessão automatico
+
+                # Loga o usuário no sistema
+                login(request, user_auth)  # Cria uma sessão automática
                 request.session['usuario_id'] = user_auth.id
                 request.session['usuario_nome'] = user_auth.first_name
                 request.session['usuario_mail'] = user_auth.email
                 usuario_logado = request.user.is_authenticated
                 erro_processo = 0
             else:
+                # Quando entra com as credências invalidas.
                 print('Credenciais inválidas')
                 mensagem_erro = 'Credenciais inválidas'
                 nome_usuario = str(request.user)
                 usuario_logado = False
                 erro_processo = 2
 
+        # Se o utilizador estiver logado, envia as informações para o react.
+        # Dificilmente será usado.
         elif request.user.is_authenticated:
             print('Usuário logado: ', request.user.is_authenticated)
             mensagem_erro = f'Usuário logado: {request.user.is_authenticated}',
@@ -109,12 +115,13 @@ def credenciais_login(request):
             erro_processo = 0
 
         else:
+            # Quando ocorre algum erro fora do padrão.
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
             usuario_logado = request.user.is_authenticated
             erro_processo = 1
 
-    # Processo para verificar se o usuário está logado
+    # Processo para verificar se o utilizador está logado
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
             nome_usuario = request.session.get('usuario_nome')
@@ -125,7 +132,7 @@ def credenciais_login(request):
             print('Usuário logado: ', request.user.is_authenticated)
             erro_processo = 0
 
-    # Processo para deslogar o usuário
+    # Processo para desconectar o utilizador
     elif tipo_requisicao == 'deslogarUsuario':
         logout(request)
         mensagem_erro = 'Usuário deslogado'
