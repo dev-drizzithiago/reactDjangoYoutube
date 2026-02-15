@@ -1,12 +1,116 @@
-*{
-   box-sizing: border-box;
+
+/* Div principal para todos os blocos de login e cadastros.*/
+.login-divPrincipal{
+  /* border: 1px solid black; */
+  margin-top: 1%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #cecece3f;  
+  box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
 }
 
-.login-btnCadastrar {
+
+.login-lblCadastro {
+  /* border: 1px solid black; */
+  margin: auto;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  
+  width: 50%;
+  height: 100%;
+
+  color: #fff;
+  
+  border-radius: 10px;
+  background-color: #ffffff3f;
+  box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
+}
+.login-inputCadastro{
+
+  width: 75%;
+  height: 50px;
+  padding: 10px;
+  margin: auto;
+  margin-right: 0px;
+
+  border: none;
+  font-size: 18pt;  
+
+  display: flex;
+  text-align: left;
+  justify-content: right;
+
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+
+}
+
+/*DIV PRINCIPAL*/
+.login-divInputs{
+  order: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  gap: 50px;
+
+  border-radius: 10px;
+  background-color: #cecece3a;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+}
+
+.login-divGridInputs{
+  display: grid;
+  margin-top: 2%;
+}
+
+.login-inputEntrar {
+  /* border: 1px solid black; */
+  width: 75%;
+  height: 50px;
+  padding: 5px;
+  margin: auto;
+  border: none;
+  font-size: 18pt;
+  text-align: center;
+
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+}
+
+.login-divCriarLogin{
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+}
+
+/* Div onde fica o formulário */
+.login-divLogin{
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+}
+
+
+.login-btnCadastrar {
+  border: 1px solid black;
   width: 60px;
   height: 60px;
   margin: 5px;
+  padding: 10px;
   border-radius: 10px;
 } 
   .login-btnCadastrar:active {
@@ -41,77 +145,16 @@
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
 
+/* Configuração dos botões do login principal */
 .login-btnLogar { 
+  /* border: 1px solid black; */
   width: 60px;
   height: 60px;
   margin: 5px;
+  padding: 10px;
   border-radius: 10px;
 } 
   .login-btnLogar:active {
     transform: translateY(4px);
     border-bottom: #fff;
-}
-
-.login-divPrincipal{
-  /* border: 1px solid black; */
-  margin-top: 1%;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #cecece3f;  
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-}
-
-/*DIV PRINCIPAL*/
-.login-divInputs{
-    box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items:flex-start;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  gap: 50px;
-
-  border-radius: 10px;
-  background-color: #cecece3a;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-}
-
-.login-divGridInputs{
-  display: grid;
-  margin-top: 2%;
-}
-
-.login-input {
-  /* border: 1px solid black; */
-  width: 75%;
-  height: 50px;
-  padding: 5px;
-  margin: auto;
-  border: none;
-  font-size: 18pt;
-  text-align: center;
-
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-}
-
-.login-divCriarLogin{
-  /* border: 1px solid black; */
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-}
-/* Divi onde fica o formulário */
-.login-divLogin{
-  /* border: 1px solid black; */
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
