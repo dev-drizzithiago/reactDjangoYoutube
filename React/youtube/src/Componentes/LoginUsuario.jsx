@@ -74,13 +74,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
     
       if (dadosParaLogin.length === 0) {
-        toast.error('Entre com Login e Senha')
+        toast.warning('Entre com Login e Senha')
       }
       else if (dadosParaLogin.userLogin === undefined) {
-        toast.error('Entre com Login')
+        toast.warning('Entre com Login')
       }
       else if (dadosParaLogin.passLogin === undefined) {
-        toast.error('Entre com sua Senha')
+        toast.warning('Entre com sua Senha')
       }
       else {
 
@@ -92,25 +92,34 @@ const LoginUsuario = ({infoStatusLogin}) => {
           },
         }
 
-        const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)      
+        const responseDjango = await logarUsuario(linkSendRequest, PAYLOAD)
+        
+        console.log(responseDjango)
 
         if (responseDjango !== undefined) {
-          if (Number(responseDjango.erro_processo) !== 1) {
+          if (Number(responseDjango.erro_processo) === 2) {
+            
+            toast.error(responseDjango.mensagem_erro)
+
+          } else if (Number(responseDjango.erro_processo) !== 1) {
             if (responseDjango.nome_usuario === 'AnonymousUser'){
+              
               // Retorna o valor para o app
               infoStatusLogin(false)
 
             } else if (responseDjango.usuario_logado) {
+              toast.warning('Login realizado com sucesso...')
+
               infoStatusLogin(responseDjango.usuario_logado)
 
               // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
               dispatch(loginSuccess(responseDjango.usuario_logado));
             }
           } else {
-              console.log(responseDjango.mensagem_erro)
+              toast.error(responseDjango.mensagem_erro)
           }
         } else {
-          console.log('Erro no login !')
+          toast.error('Erro no login!')
         }
       }
       setTimeout(() => {
