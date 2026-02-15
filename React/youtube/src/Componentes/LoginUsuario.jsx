@@ -13,6 +13,9 @@ import { FaSave } from "react-icons/fa";
 import { TbUserCancel } from "react-icons/tb";
 import { GrUpdate } from "react-icons/gr";
 
+import { GrUserNew } from "react-icons/gr";
+import { GiConfirmed } from "react-icons/gi";
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const LoginUsuario = ({infoStatusLogin}) => {
@@ -36,7 +39,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const salvarNovoUser = async () => {
 
     if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
-      setBtnCriarNovoUserAtivo(true)      
+      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
 
       if (criarUser) {
         setCriarUser(false)
@@ -114,7 +117,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   return (
     <div className='login-divPrincipal'>
-      <h1>Cadastro</h1>
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
@@ -162,8 +164,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
           </div>
 
           <div className="login-divBtnsNovoUsuario">
-            <TbUserCancel className="login-btnCancelar login-btnCadastrar" onClick={salvarNovoUser} />
-            <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar" onClick={salvarNovoUser} />
+            <TbUserCancel className="login-btnCancelar login-btnCadastrar"  />
+            <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar"  />
             <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
           </div>
         </div>}
@@ -203,21 +205,14 @@ const LoginUsuario = ({infoStatusLogin}) => {
               />
               <h3> {msnAlerta} </h3>
             </div>
-                    
-            <img className="login-btnNewUser login-btnVerificar" 
-            src="/img/imgBtns/verificar.png" 
-            alt="logar" 
-            title='Logar' 
-            onClick={eventoLogin}
-            />
-            {
-              btnCriarNovoUserAtivo &&
-              <img className="login-btnNewUser login-btnCriarNovoUser" 
-              src="/img/imgBtns/adicionar-usuario.png" 
-              alt="criar usuario" 
-              onClick={criarNovoUsuario} 
-              /> 
-            }          
+            
+            <div className='login-divBtnLoginPrincipal'>
+              <GiConfirmed className="login-btnLogar login-btnVerificar" title='Logar' onClick={eventoLogin}/>
+              {
+                btnCriarNovoUserAtivo &&
+                <GrUserNew className="login-btnLogar login-btnCriarNovoUser" onClick={criarNovoUsuario} /> 
+              }
+            </div>
         </div>}
       </div>
     </div>
