@@ -159,12 +159,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
               onKeyUp={salvarNovoUser}
               />              
-            </div>            
-          
-          <TbUserCancel className="login-btnCancelar login-btnCadastrar" onClick={salvarNovoUser}/>
-          <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar" onClick={salvarNovoUser}/>
-          <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser}/>
-          
+          </div>
+
+          <div className="login-divBtnsNovoUsuario">
+            <TbUserCancel className="login-btnCancelar login-btnCadastrar" onClick={salvarNovoUser} />
+            <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar" onClick={salvarNovoUser} />
+            <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
+          </div>
         </div>}
 
         {/** Processo para logar o usuário */}
