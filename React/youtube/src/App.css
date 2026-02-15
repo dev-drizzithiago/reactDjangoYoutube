@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.TESTE {
+  color: antiquewhite;
+}
+
 
 .App-header {
   background-color: #282c34;
@@ -37,17 +41,19 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background-color: #cecece3f;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  background-color: #000000;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);  
 }
   .app-imgBtn {
     width: 80px;
     height: 80px;
+    padding: 10px;
     border-radius: 10px;
+    background-color: #ffffff;
   }
   .app-imgBtn:active {
     transform: translateY(4px);
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid rgb(128, 128, 128);
 }
 
 .app-divLinksMidias{
