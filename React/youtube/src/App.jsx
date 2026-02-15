@@ -2,15 +2,11 @@ import './App.css'
 
 // - Usa useEffect para rodar lógica ao montar o componente.
 import { useState, useEffect } from 'react';
-import { FaBeer } from 'react-icons/fa';
-import { IconContext } from "react-icons";
 
 import { IoMdLogOut } from "react-icons/io";
 import { BsFiletypeMp3 } from "react-icons/bs";
 import { BsFiletypeMp4 } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
-
-
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
@@ -231,16 +227,16 @@ function App() {
 
                   
                 <div>
-                  <FaHome className='app-imgBtn' title='Links Salvos' onClick={linksSalvos}/>
+                  <FaHome className='app-imgBtn'  onClick={linksSalvos} title='AbrirLinks Salvos'/>
                 </div>
                 <div>
-                  <BsFiletypeMp3 className='app-imgBtn' onClick={midiasMp3} title='Player MP3' />
+                  <BsFiletypeMp3 className='app-imgBtn' onClick={midiasMp3} title='Abrir Player MP3' />
                 </div>
                 <div>
-                  <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Player MP4'/>
+                  <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Abrir Player MP4'/>
                 </div>
                 <div>
-                  <IoMdLogOut className='app-imgBtn' onClick={midiasMp4} title='Logout'/>
+                  <IoMdLogOut className='app-imgBtn' onClick={deslogar} title='Logout'/>
                 </div>
               
             </div>
