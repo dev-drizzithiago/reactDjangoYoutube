@@ -16,6 +16,8 @@ import { GrUpdate } from "react-icons/gr";
 import { GrUserNew } from "react-icons/gr";
 import { GiConfirmed } from "react-icons/gi";
 
+import { toast } from 'react-toastify';
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const LoginUsuario = ({infoStatusLogin}) => {
@@ -30,6 +32,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   const dispatch = useDispatch()
 
+  // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
@@ -62,7 +65,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
       console.log(responseDjango)
 
     } else {
-      console.log('As senhas não confere!')
+      toast.error('As senhas não confere!')
     }
   }
   
@@ -71,13 +74,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
     
       if (dadosParaLogin.length === 0) {
-        setMsgAlerta('Entre com Login e Senha')
+        toast.error('Entre com Login e Senha')
       }
       else if (dadosParaLogin.userLogin === undefined) {
-        setMsgAlerta('Entre com Login')
+        toast.error('Entre com Login')
       }
       else if (dadosParaLogin.passLogin === undefined) {
-        setMsgAlerta('Entre com sua Senha')
+        toast.error('Entre com sua Senha')
       }
       else {
 
@@ -115,12 +118,27 @@ const LoginUsuario = ({infoStatusLogin}) => {
       }, 30000);    
   }
 
+  const atualizarCadastros = () => {
+    console.log('Atualizar cadastro...')
+  }
+
+  const cancelar = () => {
+    console.log('Cancelar Processo...')
+    
+    // Reativa o botão para criar um novo usuário na página principal de login
+    setBtnCriarNovoUserAtivo(true) 
+
+    if (criarUser) {
+      setCriarUser(false)
+    }
+  }
+
   return (
     <div className='login-divPrincipal'>
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
-          <h3>Cadastro</h3>
+          <h1>Cadastro</h1>
           <div className='login-divGridInputs'>
             <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
               Nome Completo
@@ -173,16 +191,18 @@ const LoginUsuario = ({infoStatusLogin}) => {
             </label>
           </div>
           <div className="login-divBtnsNovoUsuario">
-            <TbUserCancel className="login-btnCancelar login-btnCadastrar" title='Cancelar'/>
+            <TbUserCancel className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+            <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
             <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
           </div>
         </div>}
 
         {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>
-            <h3>Login</h3>
+            <h1>Login</h1>
+            <h3> {msnAlerta} </h3>
             <div className='login-divGridInputs'>
-              <label htmlFor="usuario">
+              <label htmlFor="usuario" className='login-lblLoginPrincipal'>
                 Usuário
                 <input type="text" 
                   name='usuario' 
@@ -196,12 +216,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
                     }
                   }
                 />
-              </label>              
-              
+              </label>
             </div>
             
             <div className='login-divGridInputs'>
-              <label htmlFor="senha">
+              <label htmlFor="senha" className='login-lblLoginPrincipal'>
                 Password
                 <input type="password"
                   name='senha'
@@ -216,8 +235,6 @@ const LoginUsuario = ({infoStatusLogin}) => {
                   } 
                   />
                 </label>
-              
-              <h3> {msnAlerta} </h3>
             </div>
             
             <div className='login-divBtnLoginPrincipal'>
