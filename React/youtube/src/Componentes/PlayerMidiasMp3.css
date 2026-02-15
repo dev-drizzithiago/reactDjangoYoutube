@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: #000;
 }
 
 .playerMidiasMp3-imgBtn {
@@ -66,7 +67,7 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
   .playerMidiasMp3-paragraphs {
-    text-align: left;
+    text-align: left;    
   }
 
 .playerMidiasMp3-divImgMiniatura {
