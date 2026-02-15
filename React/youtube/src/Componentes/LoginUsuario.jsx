@@ -97,13 +97,22 @@ const LoginUsuario = ({infoStatusLogin}) => {
         console.log(responseDjango)
 
         if (responseDjango !== undefined) {
-          if (Number(responseDjango.erro_processo) === 2) {
-            
+
+          if (responseDjango.erro_processo === 1 ) {
+            // Erro critico
+
             toast.error(responseDjango.mensagem_erro)
 
-          } else if (Number(responseDjango.erro_processo) !== 1) {
+          } else if (Number(responseDjango.erro_processo) === 2) {            
+            // Credenciais incorretas
+
+            toast.error(responseDjango.mensagem_erro)
+
+          } else if (Number(responseDjango.erro_processo) === 0) {
+            // Não ocorreu nenhum erro no processo 
+
             if (responseDjango.nome_usuario === 'AnonymousUser'){
-              
+              // Valida se o usuário é desconhecido.               
               // Retorna o valor para o app
               infoStatusLogin(false)
 
@@ -112,7 +121,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
               infoStatusLogin(responseDjango.usuario_logado)
 
-              // sessionStorage.setItem('usuarioLogado', responseDjango.usuario_logado);
+              // Coloca na session o estado do login. 
               dispatch(loginSuccess(responseDjango.usuario_logado));
             }
           } else {
