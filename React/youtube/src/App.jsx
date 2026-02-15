@@ -229,20 +229,20 @@ function App() {
               {/* <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
               <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} /> */}
 
-              <IconContext.Provider value={{ color: "#000", size: '75px'}}>                
+                  
                 <div>
-                  <FaHome title='Links Salvos' onClick={linksSalvos}/>
+                  <FaHome className='app-imgBtn' title='Links Salvos' onClick={linksSalvos}/>
                 </div>
                 <div>
-                  <BsFiletypeMp3 onClick={midiasMp3} title='Player MP3' />
+                  <BsFiletypeMp3 className='app-imgBtn' onClick={midiasMp3} title='Player MP3' />
                 </div>
                 <div>
-                  <BsFiletypeMp4 onClick={midiasMp4} title='Player MP4'/>
+                  <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Player MP4'/>
                 </div>
                 <div>
-                  <IoMdLogOut  title='Logout'/>
+                  <IoMdLogOut className='app-imgBtn' onClick={midiasMp4} title='Logout'/>
                 </div>
-              </IconContext.Provider>
+              
             </div>
 
             {spinnerPlayer && 
