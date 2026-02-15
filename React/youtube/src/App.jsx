@@ -251,9 +251,7 @@ function App() {
             }
 
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
-
             {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
             {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
           </>)}
