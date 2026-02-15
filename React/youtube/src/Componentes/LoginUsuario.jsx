@@ -122,50 +122,58 @@ const LoginUsuario = ({infoStatusLogin}) => {
           {criarUser && <div className='login-divCriarLogin'>
           <h3>Cadastro</h3>
           <div className='login-divGridInputs'>
-            <label htmlFor="nomeCompleto">Nome Completo</label>              
-            <input type="text" name='nomeCompleto' className='login-input login-inputNomecompleto' 
-            value={dadosNovoUser.nomeCompleto}
-            onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
-            />
+            <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
+              Nome Completo
+              <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
+              value={dadosNovoUser.nomeCompleto}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
+              />
+            </label>
           </div>
 
           <div className='login-divGridInputs'>
-            <label htmlFor="nomeUserLogin">Usuário Login</label>              
-            <input type="text" name='nomeUserLogin' className='login-input login-inputUserLogin' 
-            value={dadosNovoUser.UserLogin}
-            onChange={e => setDadosNovoUser({ ...dadosNovoUser, UserLogin: e.target.value})}
-            />
+            <label htmlFor="nomeUserLogin" className='login-lblCadastro login-lblUsuarioLogin'>
+              Usuário Login
+              <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
+              value={dadosNovoUser.UserLogin}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, UserLogin: e.target.value})}
+              />
+            </label>              
+            
           </div>
           
-          <div className='login-divGridInputs'>
-            <label htmlFor='email'>E-mail</label>              
-            <input type="email" name='email' className='login-input login-inputEmail' 
+          <div className='login-divGridInputs' >
+          <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
+            E-mail
+            <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
             value={dadosNovoUser.novoEmail}
             onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
             />
+          </label>
           </div>
           
           <div className='login-divGridInputs'>
-            <label htmlFor='senha'>Password</label>
-            <input type="password" name='senha' className='login-input login-inputSenha'
-            value={dadosNovoUser.primeiraSenha}
-            onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
-            />              
-          </div>
-          
+            <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
+              Password
+              <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
+              value={dadosNovoUser.primeiraSenha}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              />
+            </label>
+          </div>          
           
           <div className='login-divGridInputs'>
-            <label htmlFor='confirm-senha'>Confirmar Password</label>                
-              <input type="password" name='confirm-senha' className='login-input login-inputConfirSenha' 
+            <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
+              Confirmar Password
+              <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
               value={dadosNovoUser.confirmSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
               onKeyUp={salvarNovoUser}
-              />              
+              />
+            </label>
           </div>
-
           <div className="login-divBtnsNovoUsuario">
-            <TbUserCancel className="login-btnCancelar login-btnCadastrar"  />
-            <GrUpdate className="login-btnAtualizarDadosr login-btnCadastrar"  />
+            <TbUserCancel className="login-btnCancelar login-btnCadastrar" title='Cancelar'/>
             <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
           </div>
         </div>}
@@ -174,35 +182,41 @@ const LoginUsuario = ({infoStatusLogin}) => {
         {!criarUser && <div className='login-divLogin'>
             <h3>Login</h3>
             <div className='login-divGridInputs'>
-              <label htmlFor="usuario">Usuário</label>              
-              <input type="text" 
-              name='usuario' 
-              className='login-input login-inputUsuario'
-              value={dadosParaLogin.userLogin}
-              onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  eventoLogin();
+              <label htmlFor="usuario">
+                Usuário
+                <input type="text" 
+                  name='usuario' 
+                  className='login-inputEntrar login-inputUsuario'
+                  value={dadosParaLogin.userLogin}
+                  onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      eventoLogin();
+                      }
+                    }
                   }
-                }
-              } 
-              />
+                />
+              </label>              
+              
             </div>
             
             <div className='login-divGridInputs'>
-              <label htmlFor="senha">Senha</label>
-              <input type="password"
-              name='senha'
-              className='login-input login-inputSenha'
-              value={dadosParaLogin.passLogin}
-              onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  eventoLogin();
-                  }
-                }
-              } 
-              />
+              <label htmlFor="senha">
+                Password
+                <input type="password"
+                  name='senha'
+                  className='login-inputEntrar login-inputSenha'
+                  value={dadosParaLogin.passLogin}
+                  onChange={e => setDadosParaLogin({ ...dadosParaLogin, passLogin: e.target.value})}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      eventoLogin();
+                      }
+                    }
+                  } 
+                  />
+                </label>
+              
               <h3> {msnAlerta} </h3>
             </div>
             
