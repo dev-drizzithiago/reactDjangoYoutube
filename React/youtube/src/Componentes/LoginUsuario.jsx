@@ -27,9 +27,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
-
-  const [botaoAtivado, setBotaoAtivado] = useState(false)
-
+  
   const dispatch = useDispatch()
 
   // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
@@ -117,7 +115,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
               infoStatusLogin(false)
 
             } else if (responseDjango.usuario_logado) {
-              toast.warning('Login realizado com sucesso...')
+              toast.success('Login realizado com sucesso...')
 
               infoStatusLogin(responseDjango.usuario_logado)
 
