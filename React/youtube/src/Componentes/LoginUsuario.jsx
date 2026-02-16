@@ -1,5 +1,5 @@
 import './LoginUsuario.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {  logarUsuario } from './statusLoginDjango';
 
 // - Importa as actions criadas no slice.
@@ -7,7 +7,7 @@ import { loginSuccess } from './sessionSlice';
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FaSave } from "react-icons/fa";
 import { TbUserCancel } from "react-icons/tb";
@@ -27,8 +27,19 @@ const LoginUsuario = ({infoStatusLogin}) => {
   const [dadosNovoUser, setDadosNovoUser] = useState([])
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
-  
+  const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);
+
   const dispatch = useDispatch()
+  const { logado, usuario } = useSelector((state) => state.session)
+
+  useEffect(() => {
+    if (usuario) {      
+      setAtivaFormsLogin(true)
+    } else {
+      setAtivaFormsLogin(false)
+    }
+
+  }, [logado])
 
   // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
   const criarNovoUsuario = () => {
@@ -150,6 +161,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   }
 
   return (
+
     <div className='login-divPrincipal'>
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
@@ -216,7 +228,10 @@ const LoginUsuario = ({infoStatusLogin}) => {
         {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>
             <h1>Login</h1>
-            <h3> {msnAlerta} </h3>
+
+            {!ativaFormsLogin && <h3>{ msnAlerta }</h3> }
+            {ativaFormsLogin && <h3>Usuário esta logado, direcionando para a lista de links...  </h3>}
+
             <div className='login-divGridInputs'>
               <label htmlFor="usuario" className='login-lblLoginPrincipal'>
                 Usuário
