@@ -3,14 +3,14 @@
   box-sizing: border-box;
 }
 .returnFormsLink {
-  /*border: 1px solid black;*/
+  border: 1px solid black;
   margin: auto;
   margin-top: 2%;
   width: 100%;
   height: 205px;
   padding: 15px;
-  background-color: #cecece3f;
   border-radius: 14px;
+  background-color: #000000;
   box-shadow: 5px 5px 5px rgba(136, 136, 136, 0.151);
 }
 
@@ -27,23 +27,25 @@
 }
 
 .imgBtn{  
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
+  padding: 10px;
   justify-content: center;
   border-radius: 10px;
   margin-left: 15px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
 }
 .divBtnImgAdd {
+  border: 1px solid rgb(245, 0, 0);
   margin-right: auto;
   margin-left: auto;
   margin-top: 10px;
   display: flex;
   width: 50%;
-  padding: 5px;
+  padding: 10px;
   justify-content: center;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  background-color: #ffffff;
 }
 .divImgLoading{
   display: flex;
