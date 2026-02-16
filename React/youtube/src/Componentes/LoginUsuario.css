@@ -28,7 +28,7 @@
   box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
 }
 .login-inputCadastro{
-
+  /* border: 1px solid black; */
   width: 75%;
   height: 50px;
   padding: 10px;
@@ -48,15 +48,18 @@
 
 }
 
-/*DIV PRINCIPAL*/
+/*DIV dos inputs*/
 .login-divInputs{
-  order: 1px solid black;
+  /* border: 1px solid black; */
+
+  width: 100%;
+  height: 100%;
+  margin: auto;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin: auto;
-  width: 100%;
-  height: 100%;
+  
   padding: 20px;
   gap: 50px;
 
@@ -100,7 +103,6 @@
   
   border-radius: 10px;
   background-color: #ffffff3f;
-  box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
 }
 
 .login-divCriarLogin{
@@ -109,7 +111,6 @@
   padding: 15px;
   border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
 
 /* Div onde fica o formulário */
@@ -118,13 +119,11 @@
   width: 100%;
   padding: 15px;
   border-radius: 10px;
-  box-sizing: border-box;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  box-sizing: border-box;  
 }
 
-
 .login-btnCadastrar {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 60px;
   height: 60px;
   margin: 5px;
@@ -133,46 +132,51 @@
 } 
   .login-btnCadastrar:active {
     transform: translateY(4px);
+    border-bottom: #000000;
 }
 
 .login-divBtnsNovoUsuario {
   /* border: 1px solid black; */
   margin: auto;
   margin-top: 1%;
-  width: 75% ;
+  width: 50% ;
   display: flex;
   align-items: center;
   justify-content: right;
-  background-color: #cecece3f;
-
+  
   border-radius: 10px;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  background-color: #ffffff3f;
 }
 
 .login-divBtnLoginPrincipal {
   /* border: 1px solid black; */
-  width: 75%;
+  width: 50%;
   margin: auto;
-  gap: 15px;
-  padding: 15px;
+  margin-top: 1%;
+  gap: 10px;
+
+  padding: 10px;
+
   display: flex;
   align-items: center;
   justify-content: right;
 
   border-radius: 10px;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  background-color: #ffffff3f; 
 }
 
 /* Configuração dos botões do login principal */
-.login-btnLogar { 
-  /* border: 1px solid black; */
+.login-btnLogar {
+  /* border: 1px solid black; */  
   width: 60px;
   height: 60px;
   margin: 5px;
   padding: 10px;
   border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 } 
   .login-btnLogar:active {
     transform: translateY(4px);
-    border-bottom: #fff;
+    border-bottom: #000000;
 }
