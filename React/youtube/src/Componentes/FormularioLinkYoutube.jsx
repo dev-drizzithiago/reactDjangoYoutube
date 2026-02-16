@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import sendRequestDjango from "./sendRequestDjango";
 import "./FormularioLinkYoutube.css"
 
+import { SiCcleaner } from "react-icons/si";
+import { IoIosAddCircleOutline } from "react-icons/io";
+
 const urlDefaultDjango = `http://localhost:8080`
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
@@ -51,8 +54,8 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
 
         {/** BLOCO DOS BOTOES */}
         <div className="divBtnImgAdd">
-          <img src="/img/imgBtns/adicionar.png" alt="adicionar" className="imgBtn btnAdd" onClick={useDefGravandoLink}/>
-          <img src="/img/imgBtns/limpar.png" alt="adicionar" className="imgBtn btnLimpar" onClick={useDefBtnLimparInput}/>          
+          <IoIosAddCircleOutline className="imgBtn btnAdd" onClick={useDefGravandoLink} />
+          <SiCcleaner className="imgBtn btnLimpar" onClick={useDefBtnLimparInput} />          
           {carregando && <div className="divImgLoading"><img  className="imgBtn imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>}
         </div>   
 
