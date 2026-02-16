@@ -45,34 +45,25 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
-
   
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
   
   // - Pega logado e usuario do estado global (state.session).
   const { logado, usuario } = useSelector((state) => state.session)
-  console.log('Status Login: ', logado)
 
   // VERIFICA SE O USUÁRIO ESTA LOGADO NO PRIMEIRO ACESSO AO SITE, GERALMENTE VERIFICA COM O DJANGO, MAS 
   // PODE CONTER O STATUS PELA SESSION É MELHOR SEMPRE VERIFICAR. 
   useEffect(() => {
-    const testeStatusoLogin = () => {
-      
-      // console.log('Status Login: ', logado)
-
-      if (logado) {
-        setStatusLogin(logado)
-      } else {
-        dispatch(logout())
-        setStatusLogin(false)
-      }
+    const testeStatusoLogin = () => {      
+      setStatusLogin(true)
     }
-
-    setTimeout(()=> {
-      testeStatusoLogin()
-    }, 2000)
-  }, []);
+    if (logado) {
+      setTimeout(()=> {
+        testeStatusoLogin()
+      }, 2000)
+    }    
+  }, [logado]);
 
 
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
@@ -211,7 +202,7 @@ function App() {
       }
       const urlDjangoLogin = `${urlDefaultDjango}/credenciais_login/`;
       const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
-      console.log(responseDjango);
+      setStatusLogin(false)
       toast.success(responseDjango.mensagem_erro)
       }
   }
@@ -223,7 +214,7 @@ function App() {
 
         {/** Se o usuário estiver deslogado */}
         {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}
-
+        
         {statusLogin && (
           <>
             <div className='app-divBtnImg'>
@@ -240,7 +231,6 @@ function App() {
                 <div>
                   <IoMdLogOut className='app-imgBtn' onClick={deslogar} title='Logout'/>
                 </div>
-              
             </div>
 
             {spinnerPlayer && 
