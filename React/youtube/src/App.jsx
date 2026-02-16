@@ -223,16 +223,20 @@ function App() {
                 <div>
                   <FaHome className='app-imgBtn'  onClick={linksSalvos} title='AbrirLinks Salvos'/>
                 </div>
+
                 <div>
                   <BsFiletypeMp3 className='app-imgBtn' onClick={midiasMp3} title='Abrir Player MP3' />
                 </div>
+
                 <div>
                   <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Abrir Player MP4'/>
                 </div>
-                <div>
-                  <IoMdLogOut className='app-imgBtn' onClick={deslogar} title='Logout'/>
+
+                <div className='app-divBtnConfConta'>
+                  <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
-                <div>
+
+                <div >
                   <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar'/>
                 </div>
             </div>
