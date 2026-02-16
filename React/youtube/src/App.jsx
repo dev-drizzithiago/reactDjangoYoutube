@@ -7,6 +7,7 @@ import { IoMdLogOut } from "react-icons/io";
 import { BsFiletypeMp3 } from "react-icons/bs";
 import { BsFiletypeMp4 } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
 
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
@@ -230,6 +231,9 @@ function App() {
                 </div>
                 <div>
                   <IoMdLogOut className='app-imgBtn' onClick={deslogar} title='Logout'/>
+                </div>
+                <div>
+                  <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar'/>
                 </div>
             </div>
 
