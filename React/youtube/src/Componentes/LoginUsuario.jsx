@@ -50,15 +50,38 @@ const LoginUsuario = ({infoStatusLogin}) => {
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
   const salvarNovoUser = async () => {
 
-    if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
-      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+    if (
+        dadosNovoUser.nomeCompleto === '' && 
+        dadosNovoUser.UserLogin === '' &&
+        dadosNovoUser.novoEmail === '' &&
+        dadosNovoUser.primeiraSenha === '' &&
+        dadosNovoUser.confirmSenha == ''
+      ) {
 
-      if (criarUser) {
-        setCriarUser(false)
+      } else if (
+        dadosNovoUser.nomeCompleto === ''
+      ) {
+
+      } else if (
+        dadosNovoUser.UserLogin === ''
+      ) {
+        
+      } else if (
+        dadosNovoUser.novoEmail === ''
+      ) {
+        
+      } else if (
+        dadosNovoUser.primeiraSenha === ''
+      ) {
+        
+      } else if (
+        dadosNovoUser.confirmSenha === ''
+      ) {
+        
       }
-
+      
+    if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-
       const PAYLOAD = {
         'tipoRequest': 'salvarCadastro',
         'dadosCredencial': {
@@ -73,6 +96,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
       const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
       console.log(responseDjango)
 
+
+      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+      if (criarUser) {
+        setCriarUser(false)
+      }
     } else {
       toast.error('As senhas não confere!')
     }
