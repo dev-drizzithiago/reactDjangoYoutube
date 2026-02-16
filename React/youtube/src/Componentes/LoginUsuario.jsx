@@ -49,6 +49,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
   const salvarNovoUser = async () => {
+    console.log(dadosNovoUser)
+    if (dadosNovoUser.length === 0) {
+      toast.warning("É preciso preencher todos os campos")
+      return
+    }
 
     if (
         dadosNovoUser.nomeCompleto === '' && 
@@ -57,14 +62,17 @@ const LoginUsuario = ({infoStatusLogin}) => {
         dadosNovoUser.primeiraSenha === '' &&
         dadosNovoUser.confirmSenha == ''
       ) {
-
+        toast.warning("Precisa preenchar todos os campo")
+        return
       } else if (
-        dadosNovoUser.nomeCompleto === ''
+        dadosNovoUser.nomeCompleto === '' &&
+        dadosNovoUser.UserLogin === '' &&
+        dadosNovoUser.novoEmail === '' &&
+        dadosNovoUser.primeiraSenha === ''      
       ) {
-
+        toast.warning("Precisa preenchar todos os campo")
       } else if (
-        dadosNovoUser.UserLogin === ''
-      ) {
+        dadosNovoUser.UserLogin === '') {
         
       } else if (
         dadosNovoUser.novoEmail === ''
@@ -78,32 +86,31 @@ const LoginUsuario = ({infoStatusLogin}) => {
         dadosNovoUser.confirmSenha === ''
       ) {
         
-      }
-      
-    if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
-      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-      const PAYLOAD = {
-        'tipoRequest': 'salvarCadastro',
-        'dadosCredencial': {
-          'nomeUsuario': dadosNovoUser.nomeCompleto,
-          'userLogin': dadosNovoUser.UserLogin,
-          'emailUsuario': dadosNovoUser.novoEmail,
-          'passUsuario': dadosNovoUser.confirmSenha, 
-        },
-      }
-      
-      console.log(PAYLOAD)
-      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
-      console.log(responseDjango)
+      } else {
 
+        if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
+          const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+          const PAYLOAD = {
+            'tipoRequest': 'salvarCadastro',
+            'dadosCredencial': {
+              'nomeUsuario': dadosNovoUser.nomeCompleto,
+              'userLogin': dadosNovoUser.UserLogin,
+              'emailUsuario': dadosNovoUser.novoEmail,
+              'passUsuario': dadosNovoUser.confirmSenha, 
+            },
+          }
 
-      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
-      if (criarUser) {
-        setCriarUser(false)
+          const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+          console.log(responseDjango)
+
+          setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+          if (criarUser) {
+            setCriarUser(false)
+          }
+        } else {
+          toast.error('As senhas não confere!')
+        }
       }
-    } else {
-      toast.error('As senhas não confere!')
-    }
   }
   
   /** Função para o usuário se logar  */
@@ -201,6 +208,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
               value={dadosNovoUser.nomeCompleto}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  salvarNovoUser();
+                  }
+                }
+              }
               />
             </label>
           </div>
@@ -211,19 +224,31 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
               value={dadosNovoUser.UserLogin}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, UserLogin: e.target.value})}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  salvarNovoUser();
+                  }
+                }
+              }
               />
             </label>              
             
           </div>
           
           <div className='login-divGridInputs' >
-          <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
-            E-mail
-            <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
-            value={dadosNovoUser.novoEmail}
-            onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
-            />
-          </label>
+            <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
+              E-mail
+              <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
+              value={dadosNovoUser.novoEmail}
+              onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  salvarNovoUser();
+                  }
+                }
+              }
+              />
+            </label>
           </div>
           
           <div className='login-divGridInputs'>
@@ -232,6 +257,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
               value={dadosNovoUser.primeiraSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  salvarNovoUser();
+                  }
+                }
+              }
               />
             </label>
           </div>          
@@ -242,7 +273,13 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
               value={dadosNovoUser.confirmSenha}
               onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
-              onKeyUp={salvarNovoUser}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  salvarNovoUser();
+                  }
+                }
+              }
+              
               />
             </label>
           </div>
