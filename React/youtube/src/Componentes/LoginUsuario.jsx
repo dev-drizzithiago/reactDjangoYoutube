@@ -272,7 +272,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
               <GiConfirmed className="login-btnLogar login-btnVerificar" title='Logar' onClick={eventoLogin}/>
               {
                 btnCriarNovoUserAtivo &&
-                <GrUserNew className="login-btnLogar login-btnCriarNovoUser" onClick={criarNovoUsuario} /> 
+                <GrUserNew className="login-btnLogar login-btnCriarNovoUser" title='Criar Conta' onClick={criarNovoUsuario} /> 
               }
             </div>
         </div>}
