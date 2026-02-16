@@ -36,6 +36,11 @@ def csrf_token_view(request):
 
     print('Enviando cookies para o frontend...')
 
+    print()
+    print('Usuário Logado:')
+    print('---' * 20)
+    print(user_logado, ' - ', nome_usuario)
+
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
         'user_logado': user_logado,
@@ -139,8 +144,11 @@ def credenciais_login(request):
         erro_processo = 0
         usuario_logado = False
 
+    print()
+    print('---' * 20)
     print('Usuário logado: ', request.user.is_authenticated)
     print('Nome do usuário: ', request.user)
+    print()
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
