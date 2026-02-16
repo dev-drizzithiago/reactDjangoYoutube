@@ -12,7 +12,7 @@ import { FaHome } from "react-icons/fa";
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 // - Importa as actions criadas no slice.
 import { loginSuccess, logout } from './Componentes/sessionSlice';
@@ -30,7 +30,11 @@ import LoginUsuario from './Componentes/LoginUsuario';
 
 const urlDefaultDjango = `http://localhost:8080`
 
+
 function App() {
+
+  /** Recebe um GET do django com o cookies - Verifica se o usuário esta logado pelo backend*/
+  useCsrfInit()
 
   const [statusLogin, setStatusLogin] = useState(false);
   const [atualizarBanco, setAtualizarBanco] = useState(0);
@@ -48,19 +52,26 @@ function App() {
   
   // - Pega logado e usuario do estado global (state.session).
   const { logado, usuario } = useSelector((state) => state.session)
-
-  /** Recebe um GET do django com o cookies */
-  useCsrfInit()
+  console.log('Status Login: ', logado)
 
   // VERIFICA SE O USUÁRIO ESTA LOGADO NO PRIMEIRO ACESSO AO SITE, GERALMENTE VERIFICA COM O DJANGO, MAS 
   // PODE CONTER O STATUS PELA SESSION É MELHOR SEMPRE VERIFICAR. 
   useEffect(() => {
-    if (logado) {
-      setStatusLogin(logado)
-    } else {
-      dispatch(logout())
-      setStatusLogin(false)
+    const testeStatusoLogin = () => {
+      
+      // console.log('Status Login: ', logado)
+
+      if (logado) {
+        setStatusLogin(logado)
+      } else {
+        dispatch(logout())
+        setStatusLogin(false)
+      }
     }
+
+    setTimeout(()=> {
+      testeStatusoLogin()
+    }, 2000)
   }, []);
 
 
@@ -94,7 +105,6 @@ function App() {
   // VERIFICAR SE O USUÁRIO ESTA ONLINE. CASO ESTEJA, VAI DIRECIONAR PARA OS LINKS
   useEffect(()=> {
     const toUserLogado = () => {
-
       if (statusLogin) {
         setElementoLinks(true)
       } else {
@@ -103,9 +113,7 @@ function App() {
         setSpinnerPlayer(false)
       }
     }
-
     toUserLogado()
-
   }, [statusLogin])
 
   // Verificar se o usuário esta logado, envia um sinal para o django para saber se continuar
@@ -136,7 +144,7 @@ function App() {
     // Verificar a cada 5 minutos se o usuário esta logado.     
     setInterval(()=> {
         verificaStatusUser()
-    }, 600000)
+    }, 60000)
   }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
@@ -197,17 +205,14 @@ function App() {
   }
 
   const deslogar = async () => {
-
-    console.log('USUÁRIO LOGADO:', statusLogin)
-
     if (statusLogin) {
-          const PAYLOAD = {
-            'tipoRequest': 'deslogarUsuario',
-        }
-        const urlDjangoLogin = `${urlDefaultDjango}/credenciais_login/`;
-        const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
-        console.log(responseDjango);
-        setStatusLogin(false);
+      const PAYLOAD = {
+        'tipoRequest': 'deslogarUsuario',
+      }
+      const urlDjangoLogin = `${urlDefaultDjango}/credenciais_login/`;
+      const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
+      console.log(responseDjango);
+      toast.success(responseDjango.mensagem_erro)
       }
   }
 
@@ -222,11 +227,6 @@ function App() {
         {statusLogin && (
           <>
             <div className='app-divBtnImg'>
-
-              {/* <img src="/img/imgBtns/pasta_links.png" alt="player" className="app-imgBtn" title='Links Salvos' onClick={linksSalvos} /> */}
-              {/* <img src="/img/imgBtns/mp3.png"         alt="player" className="app-imgBtn" title='Player MP3'   onClick={midiasMp3}   />
-              <img src="/img/imgBtns/mp4.png"         alt="player" className="app-imgBtn" title='Player MP4'   onClick={midiasMp4} /> */}
-
                   
                 <div>
                   <FaHome className='app-imgBtn'  onClick={linksSalvos} title='AbrirLinks Salvos'/>
