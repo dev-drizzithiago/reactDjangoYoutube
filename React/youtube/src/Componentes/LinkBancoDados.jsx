@@ -75,6 +75,8 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
             {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}
             
             <h3> Links para download </h3>
+
+            <FormularioLinkYoutube />
             <div className="linkBancoDados-content">
                 {dados.map((item) => (
                     <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
