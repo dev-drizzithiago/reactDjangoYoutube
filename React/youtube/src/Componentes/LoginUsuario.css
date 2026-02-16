@@ -6,7 +6,6 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #cecece3f;  
-  box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
 }
 
 
@@ -14,18 +13,13 @@
   /* border: 1px solid black; */
   margin: auto;
   padding: 10px;
-
   display: flex;
-  align-items: center;
-  
+  align-items: center;  
   width: 50%;
   height: 100%;
-
-  color: #fff;
-  
+  color: #fff;  
   border-radius: 10px;
   background-color: #ffffff3f;
-  box-shadow: 10px 10px 10px 1px rgba(177, 176, 176, 0.151);
 }
 .login-inputCadastro{
   /* border: 1px solid black; */
@@ -34,14 +28,11 @@
   padding: 10px;
   margin: auto;
   margin-right: 0px;
-
   border: none;
   font-size: 18pt;  
-
   display: flex;
   text-align: left;
   justify-content: right;
-
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
@@ -55,14 +46,11 @@
   width: 100%;
   height: 100%;
   margin: auto;
-
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  
+  align-items: flex-start;  
   padding: 20px;
   gap: 50px;
-
   border-radius: 10px;
   background-color: #cecece3a;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
@@ -82,7 +70,6 @@
   border: none;
   font-size: 18pt;
   text-align: center;
-
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
@@ -92,15 +79,11 @@
   /* border: 1px solid black; */
   margin: auto;
   padding: 10px;
-
   display: flex;
-  align-items: center;
-  
+  align-items: center;  
   width: 50%;
   height: 100%;
-
-  color: #fff;
-  
+  color: #fff;  
   border-radius: 10px;
   background-color: #ffffff3f;
 }
@@ -142,8 +125,7 @@
   width: 50% ;
   display: flex;
   align-items: center;
-  justify-content: right;
-  
+  justify-content: right;  
   border-radius: 10px;
   background-color: #ffffff3f;
 }
@@ -154,13 +136,10 @@
   margin: auto;
   margin-top: 1%;
   gap: 10px;
-
   padding: 10px;
-
   display: flex;
   align-items: center;
   justify-content: right;
-
   border-radius: 10px;
   background-color: #ffffff3f; 
 }
