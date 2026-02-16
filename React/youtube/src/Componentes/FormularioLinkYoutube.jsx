@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import sendRequestDjango from "./sendRequestDjango";
-import LinkBancoDados from "./LinkBancoDados";
 import "./FormularioLinkYoutube.css"
 
 const urlDefaultDjango = `http://localhost:8080`
