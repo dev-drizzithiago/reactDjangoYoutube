@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 
 // - Importa as actions criadas no slice.
@@ -8,8 +8,7 @@ const urlDefaultDjango = `http://localhost:8080`
 
 const useCsrfInit = () => {
 
-    const urlDjango =`${urlDefaultDjango}/csrf_token_view/`
-    const [statusLogin, setStatusLogin] = useState(false)
+    const urlDjango =`${urlDefaultDjango}/csrf_token_view/`    
 
     // - Cria dispatch para enviar ações.
     const dispatch = useDispatch()
@@ -23,7 +22,6 @@ const useCsrfInit = () => {
         .then((data) => {
             console.log('CSRF cookie recebido');
             console.log(data);
-
             if (data.user_logado) {
                 dispatch(loginSuccess(data.user_logado))
             } else {
@@ -36,7 +34,7 @@ const useCsrfInit = () => {
     })
 
     return (
-        <div></div>
+        <></>
     )
 }
 
