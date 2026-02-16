@@ -4,7 +4,7 @@ import sendRequestDjango from "./sendRequestDjango";
 
 import "./LinkBancoDados.css"
 import { useState, useEffect } from "react";
-import { FormularioLinkYoutube } from './FormularioLinkYoutube'
+import FormularioLinkYoutube from "./FormularioLinkYoutube";
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -77,6 +77,7 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
             <h3> Links para download </h3>
 
             <FormularioLinkYoutube />
+
             <div className="linkBancoDados-content">
                 {dados.map((item) => (
                     <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
