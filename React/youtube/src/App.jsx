@@ -23,6 +23,7 @@ import { verificarUsuarioLogado } from './Componentes/statusLoginDjango';
 import useCsrfInit from './Componentes/useCsrfInit';
 import sendRequestDjango from './Componentes/sendRequestDjango';
 
+import FormularioLinkYoutube from './Componentes/FormularioLinkYoutube';
 import LinkBancoDados from './Componentes/LinkBancoDados';
 import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
 import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
@@ -46,6 +47,8 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
+
+  console.log(atualizarBanco)
   
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
@@ -214,9 +217,9 @@ function App() {
         <ToastContainer />
 
         {/** Se o usuário estiver deslogado */}
-        {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}
+        {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}        
         
-        {statusLogin && (
+        {statusLogin && (          
           <>
             <div className='app-divBtnImg'>
                   
@@ -249,6 +252,7 @@ function App() {
 
               </div>
             }
+            <FormularioLinkYoutube onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}/>
 
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
