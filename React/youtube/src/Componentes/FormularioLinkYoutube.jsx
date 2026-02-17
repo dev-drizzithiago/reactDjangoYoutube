@@ -9,9 +9,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 const urlDefaultDjango = `http://localhost:8080`
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
-    const [btnLimparForms, setLimparForms] = useState(null)
     const [carregando, setCarregando] = useState(null)
-    const [atualizarLinks, setAtualizeLinks] = useState(false)
 
     const refLink = useRef();
 
@@ -19,7 +17,8 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     const useDefGravandoLink = async () => {
       const linkYoutube = refLink.current.value
       refLink.current.value = '';
-      setCarregando(true)
+
+      setCarregando(true) // ínicia o spinner
 
       const responseDados = await sendRequestDjango(`${urlDefaultDjango}/requestAddLinks/`, {'link': linkYoutube})
       console.log(responseDados)
@@ -28,14 +27,12 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
         toast.success(responseDados.mensagem);
       } else if (responseDados.erro_processo === 1) {
         toast.warning(responseDados.mensagem);
+
+        /** Comunica o app.js que deve atualizar os links. */
+        onLinkAdicionado(prev => prev + 1)
       }
       
-      setCarregando(false)
-
-      /** Se não ocorrer nenhum erro, a lista de links serão atualizadas. */
-      if (responseDados.erro_processo === 0) {
-        onLinkAdicionado() /** Comunica o app.js que deve atualizar os links. */
-      }
+      setCarregando(false) // Fecha o spinner
     }
     
     /** FUNÇÃO PARA LIMPAR O CAMPO DE LINK */
@@ -50,7 +47,15 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     <div className="returnFormsLink">
         <div className="divLabelInput">
           <label className="label forms-labelLink" htmlFor="link">Cole o Link do Video:</label>
-          <input type="text" className="inputText inputLinkYoutube" name="link" ref={refLink} onKeyUp={useDefGravandoLink}/>
+          <input type="text" className="inputText inputLinkYoutube" name="link" 
+          ref={refLink} 
+          onKeyDown={e => {
+            if (e.key === "Enter") {
+              useDefGravandoLink;
+              }
+            }
+          }/>
+          
         </div>       
 
         {/** BLOCO DOS BOTOES */}
