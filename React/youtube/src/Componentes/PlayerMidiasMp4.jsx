@@ -73,7 +73,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             <h3>Lista MP4</h3>           
             <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
-                        <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
+                        <div className="playerMidiasMp3-playMidias"  key={item.id_movies}>
                             <div className="playerMidiasMp3-div_paragraphTitulos">
                                 <p className='playerMidiasMp3-paragraphs'>{item.nome_arquivo}</p> 
                                 <p>{String.fromCodePoint(0x23F3)} {converterDuracao(item.duracao_midia)}</p>
@@ -91,7 +91,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
 
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
-                                onClick={() => removeDeleteMidia(item.path_arquivo)} />
+                                onClick={() => removeDeleteMidia(item.id_movies)} />
 
                                 {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
 
