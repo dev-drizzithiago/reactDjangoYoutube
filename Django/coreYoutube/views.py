@@ -207,11 +207,6 @@ def requestAddLinks(request):
             'mensagem': 'É valido apenas POST'
         })
 
-    if not request.user.is_authenticated:
-        return JsonResponse({
-            'user_deslogado': 1
-        })
-
     dados_json = json.loads(request.body)
 
     link_entrada = dados_json['link']
@@ -232,7 +227,7 @@ def requestAddLinks(request):
     return JsonResponse({
         'mensagem': mansagem_processo,
         'erro_processo': erro_processo,
-    }, status=400)
+    })
 
 def download_link(request):
     usuario_logado = request.user
