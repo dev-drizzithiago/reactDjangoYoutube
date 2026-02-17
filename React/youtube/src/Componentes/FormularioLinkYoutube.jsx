@@ -24,11 +24,12 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
 
       if (responseDados.erro_processo === 0){
         toast.success(responseDados.mensagem);
-      } else if (responseDados.erro_processo === 1) {
-        toast.warning(responseDados.mensagem);
 
         /** Comunica o app.js que deve atualizar os links. */
         onLinkAdicionado(prev => prev + 1)
+
+      } else if (responseDados.erro_processo === 1) {
+        toast.warning(responseDados.mensagem);
       }
       
       setCarregando(false) // Fecha o spinner
