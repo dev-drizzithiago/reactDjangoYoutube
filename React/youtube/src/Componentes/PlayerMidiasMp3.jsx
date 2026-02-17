@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import './PlayerMidiasMp3.css'
 
 import useRequestDjango from "./useRequestDjango";
-import sendRequestDjango from './sendRequestDjango'
+import sendRequestDjango from './sendRequestDjango';
+
+import { toast } from 'react-toastify';
 
 // PADRÃO PARA A URL 
 const urlDefaultDjango = `http://localhost:8080`
@@ -59,8 +61,10 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         
         setAtualizacaoMidiaMp3(prev => prev + 1)
 
-        if (responseDjango.erro_processo === 0){
-            console.log(responseDjango.mensagem_processo)
+        if (responseDjango.erro_processo === 0) {
+            toast.success(responseDjango.mensagem_processo)
+        } else if (responseDjango.erro_processo === 0) {
+            toast.error(responseDjango.mensagem_processo)
         }
     }
 
