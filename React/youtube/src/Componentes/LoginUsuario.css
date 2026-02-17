@@ -86,9 +86,9 @@
   align-items: center;  
   width: 50%;
   height: 100%;
-  color: #fff;  
+  color: #000000;  
   border-radius: 10px;
-  background-color: #ffffff3f;
+  background-color: #ffffff;
 }
 
 /* Div do bloco de cadastro de usuario */
@@ -151,7 +151,7 @@
   align-items: center;
   justify-content: right;
   border-radius: 10px;
-  background-color: #ffffff3f; 
+  background-color: #ffffff; 
 }
 
 /* Configuração dos botões do login principal */
