@@ -21,7 +21,6 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
       setCarregando(true) // ínicia o spinner
 
       const responseDados = await sendRequestDjango(`${urlDefaultDjango}/requestAddLinks/`, {'link': linkYoutube})
-      console.log(responseDados)
 
       if (responseDados.erro_processo === 0){
         toast.success(responseDados.mensagem);
