@@ -29,6 +29,7 @@ import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
 import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
 import PlayerMidias from './Componentes/PlayerMidias';
 import LoginUsuario from './Componentes/LoginUsuario';
+import { preconnect } from 'react-dom';
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -47,8 +48,6 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
-
-  console.log(atualizarBanco)
   
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
@@ -68,7 +67,6 @@ function App() {
       }, 2000)
     }    
   }, [logado]);
-
 
   {/**- Tudo fora do return (dentro da função do componente) é onde você coloca lógica, hooks, variáveis, chamadas de API, etc. */} 
   {/** - Tudo dentro do return é JSX, ou seja, a estrutura visual que será renderizada na tela.*/}  
@@ -139,7 +137,7 @@ function App() {
     // Verificar a cada 5 minutos se o usuário esta logado.     
     setInterval(()=> {
         verificaStatusUser()
-    }, 60000)
+    }, 600000)
   }, [statusLogin])
 
   /** Recebe o sinal de fechando do elementro de produzir player*/
