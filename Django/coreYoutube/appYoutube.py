@@ -107,7 +107,7 @@ class YouTubeDownload:
     def registrando_link_base_dados(self, link, usuario_logado):
         logging.info(f'Registrando link na base de dados')
         session = requests.session()
-        response = session.get("http://localhost:8000/usuario_logado/")
+        response = session.get("http://localhost:8080/usuario_logado/")
         youtube = YouTube(link)
 
         query_user_logado = User.objects.filter(username=usuario_logado)[0]
@@ -268,7 +268,7 @@ class YouTubeDownload:
 
         creater_nome_midia = validacao_nome_arquivo(f"{download_yt.author}_{download_yt.title}.mp4")
         self._nome_validado = validacao_nome_arquivo(creater_nome_midia)
-        ducarao_midia = f"{download_yt.length}"
+        duracao_midia = f"{download_yt.length}"
         miniatura = download_yt.thumbnail_url
         path_midia = str(Path(self.PATH_MIDIA_MOVIES_URL, self._nome_validado)).replace('\\', '/')
 
@@ -291,7 +291,7 @@ class YouTubeDownload:
             video = MoviesSalvasServidor(
                 nome_arquivo=self._nome_validado,
                 path_arquivo=path_midia,
-                duracao_midia=ducarao_midia,
+                duracao_midia=duracao_midia,
                 dados_youtube_id=id_dados,
                 usuario=query_user_logado,
             )
