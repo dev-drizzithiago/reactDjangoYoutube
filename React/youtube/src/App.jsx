@@ -9,6 +9,9 @@ import { BsFiletypeMp4 } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 
+import { MdOutlineOpenInFull } from "react-icons/md";
+import { MdOutlineCloseFullscreen } from "react-icons/md";
+
 //- useSelector → acessa o estado global do Redux.
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +32,6 @@ import PlayerMidiasMp3 from './Componentes/PlayerMidiasMp3';
 import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
 import PlayerMidias from './Componentes/PlayerMidias';
 import LoginUsuario from './Componentes/LoginUsuario';
-import { preconnect } from 'react-dom';
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -48,6 +50,8 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
+
+  const [abrirFormsAddLink, setAbrirFormsAddLink] = useState(false)
   
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
@@ -197,6 +201,14 @@ function App() {
     }
   }
 
+  const defStatusFormsAddLinks = () => {
+    if (abrirFormsAddLink) {
+      setAbrirFormsAddLink(false)
+    } else if (!abrirFormsAddLink) {
+      setAbrirFormsAddLink(true)
+    }
+  }
+
   const deslogar = async () => {
     if (statusLogin) {
       const PAYLOAD = {
@@ -233,13 +245,17 @@ function App() {
                   <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Abrir Player MP4'/>
                 </div>
 
+                {abrirFormsAddLink ? 
+                <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms'/> : 
+                <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms'/>}
+
                 <div className='app-divBtnConfConta'>
                   <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
 
                 <div >
                   <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar'/>
-                </div>
+                </div>                
             </div>
 
             {spinnerPlayer && 
@@ -250,7 +266,7 @@ function App() {
 
               </div>
             }
-            <FormularioLinkYoutube onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}/>
+            {abrirFormsAddLink && <FormularioLinkYoutube onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}/>}
 
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
