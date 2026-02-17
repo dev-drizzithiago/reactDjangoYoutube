@@ -8,7 +8,7 @@
 }
 
 .returnFormsLink {
-  border: 1px solid rgb(255, 255, 255);
+  /* border: 1px solid rgb(255, 255, 255); */
   margin: auto;
   margin-top: 1%;
   width: 100%;
@@ -16,7 +16,7 @@
   padding: 10px;
   background-color: #000000;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(136, 136, 136, 0.151);
+  box-shadow: 5px 5px 10px 1px rgba(136, 136, 136, 0.151);
 }
 
 .inputText {
