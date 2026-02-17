@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import './PlayerMidiasMp4.css'
 
 import useRequestDjango from "./useRequestDjango";
-import sendRequestDjango from './sendRequestDjango'
+import sendRequestDjango from './sendRequestDjango';
+import { toast } from 'react-toastify';
 
 const urlDefaultDjango = `http://localhost:8080`
 
@@ -30,8 +31,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
     const downloadMidia = async (midiaDownload) => {
-        console.log('Download da mídia..')
-
         const payload = {
             'tipoDownload': 'mp4',
             'linkDownload': midiaDownload,
@@ -47,8 +46,20 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         }
    }
 
-    const removeDeleteMidia = () => {
-        console.log('Removendo a mídia..')
+    const removeDeleteMidia = async (id_music) => {
+        const payload = {
+            tipoMidia: 'MP4',
+            idMidia: id_music
+        }
+        const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
+        
+        setAtualizacaoMidiaMp4(prev => prev + 1)
+
+        if (responseDjango.erro_processo === 0){
+            toast.success(responseDjango.mensagem_processo)
+        } else if (responseDjango.erro_processo === 0) {
+            toast.error(responseDjango.mensagem_processo)
+        }
     }
 
     function converterDuracao(duracao) {
@@ -72,14 +83,14 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 <img className="playerMidiasMp3-imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                             </div>
 
-                            <p className="playerMidiasMp3-btnsAcao">
-                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
+                            <div className="playerMidiasMp4-divBtnsAcao">
+                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnLink" 
                                 onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
-                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
+                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnDownload" 
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
 
-                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
+                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.path_arquivo)} />
 
                                 {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
@@ -88,7 +99,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                  *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
 
                                 {/*downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)*/}
-                            </p>
+                            </div>
                         </div>                     
                     ))}            
             </div>
