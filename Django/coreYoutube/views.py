@@ -357,7 +357,7 @@ def removendo_midias(request):
     erro_processo = None
     dados_json = json.loads(request.body)
 
-    print(dados_json)
+    # print(dados_json)
 
     id_midia = dados_json['idMidia']
     tipo_midia = dados_json['tipoMidia']
@@ -384,7 +384,25 @@ def removendo_midias(request):
         erro_processo = 0
 
     elif tipo_midia == 'MP4':
-        print('Removendo MP4')
+        query_mp4_remove = MoviesSalvasServidor.objects.filter(id_movies=id_midia)
+
+        dados_caminho_midia = query_mp4_remove[0].path_arquivo
+        dados_caminho_minuatura = query_mp4_remove[0].path_miniatura
+
+        path_arquivo_abs_midia = os.path.join(settings.MEDIA_ROOT, dados_caminho_midia).replace('\\', '/')
+        caminho_abs_miniatura = os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura.path)
+
+        # Remover midia
+        os.remove(path_arquivo_abs_midia)
+
+        # Remover base MusicsSalvasServidor
+        query_mp4_remove[0].delete()
+
+        # Remover miniatura
+        os.remove(caminho_abs_miniatura)
+
+        mensagem_processo = 'Midia removida com sucesso.'
+        erro_processo = 0
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
