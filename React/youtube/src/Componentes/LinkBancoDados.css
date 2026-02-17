@@ -23,8 +23,7 @@
   pointer-events: auto;
   grid-template-columns: repeat(4, 1fr); /* 4 linhas de altura igual */
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
-  box-sizing: border-box;
+  box-shadow: 5px 5px 10px 1px rgba(136, 136, 136, 0.151);
 }
 
 .linkBancoDados-content::-webkit-scrollbar {
