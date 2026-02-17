@@ -1,7 +1,7 @@
 
 .linkBancoDados-imgBtn {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   margin: 5px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);  
@@ -12,7 +12,7 @@
 
 /* bloco principal dos links */
 .linkBancoDados-content {
-  /*border: 1px solid black;*/
+  /* border: 1px solid rgb(255, 0, 0); */
   display: grid;  /* Estilo de grade */  
   overflow-y: auto; /* Adiciona rolagem vertical se necessário */  
   justify-self: left;
@@ -36,7 +36,7 @@
 
 /* bloco interno dos links */
 .linkBancoDados-linksYoutube {
-  /*border: 1px solid black;*/
+  /* border: 1px solid rgb(255, 0, 0); */
   display: grid;    
   justify-content: center; /* Centraliza o conteúdo ao meio da DIV Y*/
   align-items: center; /* Centraliza o conteúdo ao meio da DIV X*/
@@ -53,7 +53,7 @@
   flex-direction: column;
   background-color: #f0f0f0;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  box-shadow: 5px 5px 10px 1px rgba(136, 136, 136, 0.151);
 }
 
 .linkBancoDados-div_paragraphTitulos{
@@ -94,16 +94,16 @@
 
 /* DIV DA IMAGEM DE LOADING*/
 .linkBancoDados-divImgLoading{
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   margin-top: 5px;
   margin-left: auto;
   margin-right: 15px;  
   border-radius: 10px;
 } 
  .linkBancoDados-imgLoading{
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
