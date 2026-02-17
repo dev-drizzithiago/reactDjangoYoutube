@@ -3,11 +3,6 @@
   text-align: center;
 }
 
-.TESTE {
-  color: antiquewhite;
-}
-
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -102,4 +97,8 @@
   gap: 15px;
   justify-content: center;
   align-items: center;
+}
+
+h3{
+  color: #ffffff;
 }
