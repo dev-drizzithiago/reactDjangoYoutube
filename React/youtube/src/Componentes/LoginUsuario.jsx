@@ -83,24 +83,32 @@ const LoginUsuario = ({infoStatusLogin}) => {
       console.log(responseDjango)
 
       if (responseDjango.erro_processo === 0) {
+        // Geralmente o erro 0 é considerado normal.
         toast.success('Conta criado com sucesso.')
 
         setTimeout(() => {
           if (criarUser) {
             setCriarUser(false)
           }
-        }, 2000)
+        }, 5000)
 
       } else if (responseDjango.erro_processo === 1) {
 
+        // Geralmente o erro 1 é considerado critico.
         console.log(responseDjango.mensagem_erro)
         toast.warning('Erro no processo para criar novo usuário')
 
       } else if ( responseDjango.erro_processo === 5 ) {
 
+        // Verificar se o usuário já esta cadastrado.
         console.log(responseDjango.mensagem_erro)
         toast.warning(responseDjango.mensagem_erro)
 
+        setTimeout(() => {
+          if (criarUser) {
+            setCriarUser(false)
+          }
+        }, 5000)
       } 
 
       setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
