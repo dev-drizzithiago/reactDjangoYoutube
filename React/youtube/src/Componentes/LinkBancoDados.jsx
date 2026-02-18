@@ -5,7 +5,7 @@ import sendRequestDjango from "./sendRequestDjango";
 import "./LinkBancoDados.css"
 import { useState, useEffect } from "react";
 
-const urlDefaultDjango = `http://localhost:8080`
+const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const LinkBancoDados = ({ propsStatusProcesso }) => {
 
