@@ -70,6 +70,7 @@ def credenciais_login(request):
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
+
         try:
             usuario = User.objects.create_user(
                 first_name=NAME,
@@ -80,9 +81,14 @@ def credenciais_login(request):
             mensagem_erro = 'Cadastro realizado com sucesso.'
             erro_processo = 0
         except Exception as error:
-            print('Erro ao cadastrar usuário')
-            mensagem_erro = 'Erro ao cadastrar usuário.'
-            erro_processo = 1
+            print('Erro ao cadastrar usuário', error)
+
+            if str(erro_processo) == "UNIQUE constraint failed: auth_user.username":
+                mensagem_erro = 'Usuário já existe...'
+                erro_processo = 5
+            else:
+                mensagem_erro = 'Erro ao cadastrar usuário.'
+                erro_processo = 1
 
     # Processo para realizar o login do usuário quando entra com as credenciais.
     elif tipo_requisicao == 'realizarLogin':
