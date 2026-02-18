@@ -23,10 +23,10 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
 
     useEffect(() => {
-        if (dados.length < 1){
-
+        if (dados.length > 0){
+            setListaVazia(true)
         }
-    })
+    }, [])
    
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
