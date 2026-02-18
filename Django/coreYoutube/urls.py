@@ -13,6 +13,12 @@ from .views import (
     removendo_midias,
 )
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,  # gera access + refresh
+    TokenRefreshView,     # renova access usando refresh
+)
+
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +34,12 @@ urlpatterns = [
     path('preparar_midias_to_download/', preparar_midias_to_download, name='preparar_midias_to_download'),
     path('download_da_midia/', download_da_midia, name='download_da_midia'),
     path('removendo_midias/', removendo_midias, name='removendo_midias'),
+
+    # - api/token/ → recebe usuário + senha e retorna access token e refresh token.
+    # - api/token/refresh/ → recebe refresh token e retorna novo access token.
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
