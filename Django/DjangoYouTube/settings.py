@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,11 +55,13 @@ MIDDLEWARE = [
 # - Permitir que navegadores façam requisições cross-origin
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    '0.0.0.0',
 ]
 
 # - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    '0.0.0.0',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
