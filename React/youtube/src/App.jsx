@@ -33,7 +33,7 @@ import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
 import PlayerMidias from './Componentes/PlayerMidias';
 import LoginUsuario from './Componentes/LoginUsuario';
 
-const urlDefaultDjango = `http://localhost:8080`
+const urlDefaultDjango = `http://192.168.15.250:8080`
 
 
 function App() {
