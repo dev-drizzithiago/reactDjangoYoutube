@@ -47,7 +47,7 @@ def csrf_token_view(request):
         'nome_usuario': nome_usuario
     })
 
-@csrf_protect
+@csrf_exempt # @csrf_protect
 def credenciais_login(request):
     if request.method != "POST":
         return JsonResponse({
