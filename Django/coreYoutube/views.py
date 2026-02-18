@@ -74,7 +74,7 @@ def credenciais_login(request):
         try:
             usuario = User.objects.create_user(
                 first_name=NAME,
-                username=MAIL,
+                username=USER,
                 email=MAIL,
                 password=PASS,
             )
@@ -101,7 +101,6 @@ def credenciais_login(request):
             user_auth = authenticate(request, username=USER, password=PASS)
 
             if user_auth is not None:
-
                 # Loga o usuário no sistema
                 login(request, user_auth)  # Cria uma sessão automática
                 request.session['usuario_id'] = user_auth.id
