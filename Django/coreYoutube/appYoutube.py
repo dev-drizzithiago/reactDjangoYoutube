@@ -34,7 +34,6 @@ Duration: 534 sec
 from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
 from django.core.files.base import ContentFile
 
 import requests
