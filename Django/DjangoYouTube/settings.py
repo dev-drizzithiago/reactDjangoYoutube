@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'coreYoutube',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://192.168.15.250:3000",  # IP da máquina na rede local
-
 ]
 
 # - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
@@ -82,6 +83,13 @@ CSRF_COOKIE_SECURE = False  # em dev, pode ser False; em produção, True com HT
 SESSION_COOKIE_SAMESITE = None  # se precisar compartilhar cookies entre domínios
 SESSION_COOKIE_DOMAIN = '192.168.15.250'  # deixa o navegador definir para o host atual
 CSRF_COOKIE_DOMAIN = '192.168.15.250'
+
+# Isso diz ao Django que vamos usar JWT para autenticação
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 ROOT_URLCONF = "DjangoYouTube.urls"
 
