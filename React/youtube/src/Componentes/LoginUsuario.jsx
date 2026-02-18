@@ -1,4 +1,6 @@
 import './LoginUsuario.css';
+
+import sendRequestDjango from './sendRequestDjango';
 import { useEffect, useState } from 'react';
 import {  logarUsuario } from './statusLoginDjango';
 
@@ -9,10 +11,10 @@ import { loginSuccess } from './sessionSlice';
 //- useDispatch → dispara actions para alterar o estado.
 import { useDispatch, useSelector } from 'react-redux';
 
+// Icones para os botões
 import { FaSave } from "react-icons/fa";
 import { TbUserCancel } from "react-icons/tb";
 import { GrUpdate } from "react-icons/gr";
-
 import { GrUserNew } from "react-icons/gr";
 import { GiConfirmed } from "react-icons/gi";
 
@@ -24,10 +26,16 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   const [criarUser, setCriarUser] = useState(false)
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
-  const [dadosNovoUser, setDadosNovoUser] = useState([])
+
+  const [ncNomeCompleto, setNcNomeCompleto] = useState('')
+  const [ncUsuario, setNcUsuario] = useState('')
+  const [ncEmail, setNcEmail] = useState('')
+  const [ncPrimeiraSenha, setNcPrimeiraSenha] = useState('')
+  const [ncConfirSenha, setNcconfirSenha] = useState('')
+
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
-  const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);
+  const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);  
 
   const dispatch = useDispatch()
   const { logado, usuario } = useSelector((state) => state.session)
@@ -49,68 +57,62 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
   const salvarNovoUser = async () => {
-    console.log(dadosNovoUser)
-    if (dadosNovoUser.length === 0) {
-      toast.warning("É preciso preencher todos os campos")
+
+    if (ncNomeCompleto === '' &&
+      ncUsuario === '' &&
+      ncEmail === '' &&
+      ncPrimeiraSenha === '' &&
+      ncConfirSenha === ''
+    ) {
+      toast.warning("Preencha todo o formulário...")
       return
     }
 
-    if (
-        dadosNovoUser.nomeCompleto === '' && 
-        dadosNovoUser.UserLogin === '' &&
-        dadosNovoUser.novoEmail === '' &&
-        dadosNovoUser.primeiraSenha === '' &&
-        dadosNovoUser.confirmSenha == ''
-      ) {
-        toast.warning("Precisa preenchar todos os campo")
-        return
-      } else if (
-        dadosNovoUser.nomeCompleto === '' &&
-        dadosNovoUser.UserLogin === '' &&
-        dadosNovoUser.novoEmail === '' &&
-        dadosNovoUser.primeiraSenha === ''      
-      ) {
-        toast.warning("Precisa preenchar todos os campo")
-      } else if (
-        dadosNovoUser.UserLogin === '') {
-        
-      } else if (
-        dadosNovoUser.novoEmail === ''
-      ) {
-        
-      } else if (
-        dadosNovoUser.primeiraSenha === ''
-      ) {
-        
-      } else if (
-        dadosNovoUser.confirmSenha === ''
-      ) {
-        
-      } else {
+    if (ncPrimeiraSenha === ncConfirSenha) {
+      const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+      const PAYLOAD = {
+        'tipoRequest': 'salvarCadastro',
+        'dadosCredencial': {
+          'nomeUsuario': ncNomeCompleto,
+          'userLogin': ncUsuario,
+          'emailUsuario': ncEmail,
+          'passUsuario': ncConfirSenha,
+        },
+      }
+      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+      console.log(responseDjango)
 
-        if (dadosNovoUser.primeiraSenha === dadosNovoUser.confirmSenha) {
-          const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
-          const PAYLOAD = {
-            'tipoRequest': 'salvarCadastro',
-            'dadosCredencial': {
-              'nomeUsuario': dadosNovoUser.nomeCompleto,
-              'userLogin': dadosNovoUser.UserLogin,
-              'emailUsuario': dadosNovoUser.novoEmail,
-              'passUsuario': dadosNovoUser.confirmSenha, 
-            },
-          }
+      if (responseDjango.erro_processo === 0) {
+        toast.success('Conta criado com sucesso.')
 
-          const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
-          console.log(responseDjango)
-
-          setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+        setTimeout(() => {
           if (criarUser) {
             setCriarUser(false)
           }
-        } else {
-          toast.error('As senhas não confere!')
-        }
-      }
+        }, 2000)
+
+      } else if (responseDjango.erro_processo === 1) {
+
+        console.log(responseDjango.mensagem_erro)
+        toast.warning('Erro no processo para criar novo usuário')
+
+      } else if ( responseDjango.erro_processo === 5 ) {
+
+        console.log(responseDjango.mensagem_erro)
+        toast.warning(responseDjango.mensagem_erro)
+
+      } 
+
+      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+      
+    } else {
+      toast.error('As senhas não confere!')
+    }
+    
+  }
+
+  const limparFormulario = () => {
+
   }
   
   /** Função para o usuário se logar  */
@@ -206,8 +208,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
               Nome Completo
               <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
-              value={dadosNovoUser.nomeCompleto}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, nomeCompleto: e.target.value})}
+              value={ncNomeCompleto}
+              onChange={e => setNcNomeCompleto(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   salvarNovoUser();
@@ -222,8 +224,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <label htmlFor="nomeUserLogin" className='login-lblCadastro login-lblUsuarioLogin'>
               Usuário Login
               <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
-              value={dadosNovoUser.UserLogin}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, UserLogin: e.target.value})}
+              value={ncUsuario}
+              onChange={e => setNcUsuario(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   salvarNovoUser();
@@ -239,8 +241,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
               E-mail
               <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
-              value={dadosNovoUser.novoEmail}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, novoEmail: e.target.value})}
+              value={ncEmail}
+              onChange={e => setNcEmail(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   salvarNovoUser();
@@ -255,8 +257,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
               Password
               <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
-              value={dadosNovoUser.primeiraSenha}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, primeiraSenha: e.target.value})}
+              value={ncPrimeiraSenha}
+              onChange={e => setNcPrimeiraSenha(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   salvarNovoUser();
@@ -271,8 +273,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
               Confirmar Password
               <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
-              value={dadosNovoUser.confirmSenha}
-              onChange={e => setDadosNovoUser({ ...dadosNovoUser, confirmSenha: e.target.value})}
+              value={ncConfirSenha}
+              onChange={e => setNcconfirSenha(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   salvarNovoUser();
