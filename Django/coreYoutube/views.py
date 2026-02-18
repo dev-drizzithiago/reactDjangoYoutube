@@ -49,7 +49,6 @@ def csrf_token_view(request):
 
 @csrf_protect
 def credenciais_login(request):
-    print("Entrada da credencial")
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
@@ -92,7 +91,10 @@ def credenciais_login(request):
 
     # Processo para realizar o login do usuário quando entra com as credenciais.
     elif tipo_requisicao == 'realizarLogin':
+
         dados_para_login = dados_json['dadosCredencial']
+        print(dados_para_login)
+
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
 
@@ -115,15 +117,6 @@ def credenciais_login(request):
                 nome_usuario = str(request.user)
                 usuario_logado = False
                 erro_processo = 2
-
-        # Se o utilizador estiver logado, envia as informações para o react.
-        # Dificilmente será usado.
-        elif request.user.is_authenticated:
-            print('Usuário logado: ', request.user.is_authenticated)
-            mensagem_erro = f'Usuário logado: {request.user.is_authenticated}',
-            usuario_logado = request.user.is_authenticated
-            erro_processo = 0
-
         else:
             # Quando ocorre algum erro fora do padrão.
             print('Processo invalido')
@@ -186,6 +179,7 @@ def requestBaseDados(request):
 
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
+
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
 
         for item in query_dados_youtube:
