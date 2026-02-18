@@ -11,7 +11,12 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 
 
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
+from django.views.decorators.csrf import (
+    csrf_exempt, # Desativa a verificação de CSRF para aquela view
+    ensure_csrf_cookie,  # - Garante que o Django envie o cookie csrftoken na resposta, mesmo em requisições GET.
+    csrf_protect  # Obriga que a view só aceite requisições que tragam um token CSRF válido.
+
+)
 from DjangoYouTube import settings
 
 from .appYoutube import YouTubeDownload
@@ -40,6 +45,7 @@ def csrf_token_view(request):
     print('Usuário Logado:')
     print('---' * 20)
     print(user_logado, ' - ', nome_usuario)
+    print()
 
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
@@ -47,7 +53,7 @@ def csrf_token_view(request):
         'nome_usuario': nome_usuario
     })
 
-@csrf_protect
+@csrf_exempt
 def credenciais_login(request):
     if request.method != "POST":
         return JsonResponse({
@@ -93,6 +99,7 @@ def credenciais_login(request):
     elif tipo_requisicao == 'realizarLogin':
 
         dados_para_login = dados_json['dadosCredencial']
+
         print(dados_para_login)
 
         USER = dados_para_login['userLogin']
@@ -172,10 +179,8 @@ def requestBaseDados(request):
             'mensagem': 'É valido apenas POST',
         }, status=400)
     usuario_logado = request.user
-    print(usuario_logado)
 
     query_user_logado = User.objects.filter(username=usuario_logado)
-    print(query_user_logado)
 
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
