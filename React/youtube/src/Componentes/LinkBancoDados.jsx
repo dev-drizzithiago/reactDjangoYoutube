@@ -14,12 +14,19 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     const [ativarMensagem, setAtivarMensagem] = useState(false)
     const [mensagemProcesso, setMensagemProcesso] = useState('')
     const [imgStatus, setImgStatus] = useState(null)
+    const [listaVazia, setListaVazia] = useState(false)
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
     }, [propsStatusProcesso])    
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
+
+    useEffect(() => {
+        if (dados.length < 1){
+
+        }
+    })
    
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
@@ -71,10 +78,11 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     
     return (        
         <div>
-            {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}
+            {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}       
             
+            {listaVazia ? <>
             <h3> Links para download </h3>
-            <div className="linkBancoDados-content">
+            <div className="linkBancoDados-content">                
                 {dados.map((item) => (
                     <div className="linkBancoDados-linksYoutube" key={item.id_dados}>         
                         <div className="linkBancoDados-div_paragraphTitulos">
@@ -114,7 +122,7 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
                         </div>                        
                     </div>
                 ))}
-            </div>
+            </div></> : <h3> Não foram encontrados registro de links na base de dados. </h3>}
         </div>
     );
 };
