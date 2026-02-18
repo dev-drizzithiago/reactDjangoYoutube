@@ -54,12 +54,18 @@ MIDDLEWARE = [
 
 # - Permitir que navegadores façam requisições cross-origin
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.15.254:3000",  # IP da máquina na rede local
+
 ]
 
 # - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.15.254:3000",  # IP da máquina na rede local
+
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -71,6 +77,12 @@ CORS_ALLOW_HEADERS = [
 # Para testes
 CORS_ALLOW_ALL_ORIGINS = False
 
+CSRF_COOKIE_HTTPONLY = False  # permite que o JS leia o cookie
+CSRF_COOKIE_SECURE = False  # em dev, pode ser False; em produção, True com HTTPS
+
+SESSION_COOKIE_SAMESITE = None  # se precisar compartilhar cookies entre domínios
+SESSION_COOKIE_DOMAIN = '192.168.15.250'  # deixa o navegador definir para o host atual
+CSRF_COOKIE_DOMAIN = '192.168.15.250'
 
 ROOT_URLCONF = "DjangoYouTube.urls"
 
