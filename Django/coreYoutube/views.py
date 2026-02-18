@@ -84,7 +84,7 @@ def credenciais_login(request):
             print('Erro ao cadastrar usuário', error)
 
             if str(error) == "UNIQUE constraint failed: auth_user.username":
-                mensagem_erro = 'Usuário já existe...'
+                mensagem_erro = 'Usuário já esta cadastrado...'
                 erro_processo = 5
             else:
                 mensagem_erro = 'Erro ao cadastrar usuário.'
