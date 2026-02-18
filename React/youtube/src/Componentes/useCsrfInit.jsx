@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 // - Importa as actions criadas no slice.
 import { loginSuccess, logout } from "./sessionSlice";
 
-const urlDefaultDjango = `http://localhost:8080`
+const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const useCsrfInit = () => {
 
@@ -20,6 +20,7 @@ const useCsrfInit = () => {
         })
         .then(data => data.json())
         .then((data) => {
+            console.log('Cookies recebido com sucesso.')
             if (data.user_logado) {
                 dispatch(loginSuccess(data.user_logado))
             } else {
