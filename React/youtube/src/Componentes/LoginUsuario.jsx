@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Icones para os botões
 import { FaSave } from "react-icons/fa";
-import { TbUserCancel } from "react-icons/tb";
+import { FaBackspace } from "react-icons/fa";
 import { GrUpdate } from "react-icons/gr";
 import { GrUserNew } from "react-icons/gr";
 import { GiConfirmed } from "react-icons/gi";
+import { AiOutlineClear } from "react-icons/ai";
 
 import { toast } from 'react-toastify';
 
@@ -86,6 +87,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
         // Geralmente o erro 0 é considerado normal.
         toast.success('Conta criado com sucesso.')
 
+        limparFormulario()
+
         setTimeout(() => {
           if (criarUser) {
             setCriarUser(false)
@@ -120,7 +123,11 @@ const LoginUsuario = ({infoStatusLogin}) => {
   }
 
   const limparFormulario = () => {
-
+    setNcNomeCompleto('')
+    setNcUsuario('')
+    setNcEmail('')
+    setNcPrimeiraSenha('')
+    setNcconfirSenha('')
   }
   
   /** Função para o usuário se logar  */
@@ -294,7 +301,8 @@ const LoginUsuario = ({infoStatusLogin}) => {
             </label>
           </div>
           <div className="login-divBtnsNovoUsuario">
-            <TbUserCancel className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+            <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+            <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
             <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
             <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
           </div>
