@@ -179,6 +179,10 @@ def requestBaseDados(request):
             'mensagem': 'É valido apenas POST',
         }, status=400)
     usuario_logado = request.user
+    print(usuario_logado)
+
+    query_user_logado = User.objects.filter(username=usuario_logado)
+    print(query_user_logado)
 
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
