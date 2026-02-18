@@ -6,7 +6,7 @@ import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango';
 import { toast } from 'react-toastify';
 
-const urlDefaultDjango = `http://localhost:8080`
+const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`
