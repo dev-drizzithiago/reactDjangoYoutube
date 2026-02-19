@@ -13,13 +13,14 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP4'}
 
     const [atualizacaoModiaMp4, setAtualizacaoMidiaMp4] = useState(0)
+    
 
     useEffect(()=>{
         setAtualizacaoMidiaMp4(effectAtualizacao)
     }, [effectAtualizacao])
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp4);
-    
+       
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
     const executarPlayerMidia = (linkMidia) => {
@@ -44,7 +45,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                 window.open(url, "_blank", "width=600 height=400");                
             }, 1000);
         }
-   }
+    }
 
     const removeDeleteMidia = async (id_music) => {
         const payload = {
@@ -70,7 +71,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
 
     return (
         <div>
-            <h3>Lista MP4</h3>           
+            {dados && dados.length ? <> <h3>Lista MP4</h3>           
             <div className="playerMidiasMp3-content">
                     {dados.map((item) => (
                         <div className="playerMidiasMp3-playMidias"  key={item.id_movies}>
@@ -93,16 +94,17 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.id_movies)} />
 
-                                {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
+                                <div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>
 
                                 {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
                                  *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
 
-                                {/*downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)*/}
+                                downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)
                             </div>
                         </div>                     
                     ))}            
             </div>
+            </> : <h3> Não foram encontrados registro de MP4 na base de dados. </h3> }
         </div>
     );
 };
