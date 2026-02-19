@@ -6,7 +6,7 @@ import "./FormularioLinkYoutube.css"
 import { SiCcleaner } from "react-icons/si";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
-const urlDefaultDjango = `http://localhost:8080`
+const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
     const [carregando, setCarregando] = useState(null)
