@@ -14,7 +14,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     const [ativarMensagem, setAtivarMensagem] = useState(false)
     const [mensagemProcesso, setMensagemProcesso] = useState('')
     const [imgStatus, setImgStatus] = useState(null)
-    const [listaVazia, setListaVazia] = useState(false)
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
@@ -22,12 +21,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
 
-    useEffect(() => {
-        if (dados.length > 0){
-            setListaVazia(true)
-        }
-    }, [])
-   
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
@@ -80,7 +73,7 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
         <div>
             {/** Chama o formulário e envia uma confirmação quando o link for atualizado. */}       
             
-            {listaVazia ? <>
+            {dados && dados.length ? <>
             <h3> Links para download </h3>
             <div className="linkBancoDados-content">                
                 {dados.map((item) => (
