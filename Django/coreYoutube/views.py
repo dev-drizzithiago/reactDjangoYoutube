@@ -278,6 +278,7 @@ def remove_link(request):
         'mensagem_processo': mensagem_processo
     })
 
+# Lista todas as midias salvas no servidor.
 def listagem_midias(request):
     lista_midias_django = []
     usuario_logado = request.user
@@ -288,11 +289,15 @@ def listagem_midias(request):
 
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
-            query_dados_midias = MoviesSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_movies').values()
+            query_dados_midias = MoviesSalvasServidor.objects.filter(
+                usuario=usuario_logado).order_by('-id_movies').values()
             key_midia = 'id_movies'
+
         elif dados_json['tipoMidia'] == 'MP3':
-            query_dados_midias = MusicsSalvasServidor.objects.filter(usuario=usuario_logado).order_by('-id_music').values()
+            query_dados_midias = MusicsSalvasServidor.objects.filter(
+                usuario=usuario_logado).order_by('-id_music').values()
             key_midia = 'id_music'
+
         else:
             mensagem_processo = 'Tipo de mídia não existe'
             erro_processo = 1
