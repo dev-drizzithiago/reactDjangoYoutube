@@ -15,6 +15,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP3'}
 
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
+    const [spinnerDownload, setSpinnerDownload] = useState(true)
     
 
     useEffect(()=>{
@@ -91,7 +92,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             <img className="playerMidiasMp3-imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                         </div>
 
-                        <p className="playerMidiasMp3-btnsAcao">
+                        <p className="playerMidiasMp3-divBtnsAcao">
                             <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
                             onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
@@ -101,12 +102,12 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                             onClick={() => removeDeleteMidia(item.id_music)} />
 
-                            <div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>
-
-                            {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
-                             *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
-
-                            downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)
+                            {spinnerDownload &&
+                                <div className='view_mp3-divImgLoading'>
+                                    <img  className="playerMidiasMp3-imgBtn" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+                                </div>                        
+                            }
+                            
                         </p>
                     </div>                     
                 ))}            
