@@ -9,3 +9,10 @@ export default defineConfig({
     host: true  // opcional, para acessar pela rede
   }
 })
+
+/**- 
+- GET → buscar dados
+- POST → criar
+- PUT/PATCH → atualizar
+- DELETE → remover
+ */
