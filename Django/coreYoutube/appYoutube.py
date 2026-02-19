@@ -195,6 +195,7 @@ class YouTubeDownload:
             return 'Nome do arquivo muito extenso'
 
         # Verifica se já existe algum registro no banco de dados das mídias salvas.
+        # Preciso pensar em uma forma para todos os usuário adicionárem essa mídia 
         query_validador_midia = MusicsSalvasServidor.objects.filter(nome_arquivo=self.nome_validado)
         if query_validador_midia.exists() and self.nome_validado:
             logging.info(f"Midia [{self.nome_validado}] já existe, se a mídia não estiver abrindo, chame o dev.")
