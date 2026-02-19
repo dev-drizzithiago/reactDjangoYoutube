@@ -44,7 +44,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
         }
 
         const response = await sendRequestDjango(`${urlDefaultDjango}/preparar_midias_to_download/`, payload);
-        if (response && response.download_url) {            
+
+        
+        if (response && response.download_url) {
             setTimeout(() => {
                 const url = encodeURI(`${urlDefaultDjango}${response.download_url}`)
                 window.open(url, "_blank", "width=600 height=400");                
