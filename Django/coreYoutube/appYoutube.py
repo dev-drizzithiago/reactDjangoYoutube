@@ -106,7 +106,7 @@ class YouTubeDownload:
     def registrando_link_base_dados(self, link, usuario_logado):
         logging.info(f'Registrando link na base de dados')
         session = requests.session()
-        response = session.get("http://localhost:8080/usuario_logado/")
+        # response = session.get("http://192.168.15.250:8080/usuario_logado/")
         youtube = YouTube(link)
 
         query_user_logado = User.objects.filter(username=usuario_logado)[0]
@@ -152,6 +152,7 @@ class YouTubeDownload:
     def download_music(self, id_entrada: int, usuario_logado):
         logging.info('Baixando mídia em MP3')
 
+        # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
         for item in query_validador_dados:
@@ -195,12 +196,20 @@ class YouTubeDownload:
             return 'Nome do arquivo muito extenso'
 
         # Verifica se já existe algum registro no banco de dados das mídias salvas.
-        # Preciso pensar em uma forma para todos os usuário adicionárem essa mídia 
+        # Preciso pensar numa forma para todos os usuário adicionárem essa mídia
         query_validador_midia = MusicsSalvasServidor.objects.filter(nome_arquivo=self.nome_validado)
+
         if query_validador_midia.exists() and self.nome_validado:
             logging.info(f"Midia [{self.nome_validado}] já existe, se a mídia não estiver abrindo, chame o dev.")
+
+            if query_validador_midia[0].usuario:
+                print(query_validador_midia[0].usuario)
+            else:
+                pass
+
             return f"Midia já existe."
         else:
+
             # Se a midia não existir é feito o download
             try:
                 stream = self._download_yt.streams.get_audio_only()
@@ -209,7 +218,7 @@ class YouTubeDownload:
                 logging.error(f"Erro no download da mídia 'm4a': {error}")
                 return f"Erro no download da mídia 'm4a': {error}"
 
-            # Conversão só vai ocorre se o download da mídia der certo.
+            # Conversão só vai ocorrer se o download da mídia der certo.
             mp3_ok = self.mp4_to_mp3(nome_m4a_to_mp3)
 
             if mp3_ok:
@@ -227,7 +236,7 @@ class YouTubeDownload:
                     usuario=query_user_logado,
                 )
 
-                # Salva a miniatura em uma pasta especifica.
+                # Salva a miniatura numa pasta especifica.
                 musica.path_miniatura.save(
                     nome_miniatura_png,
                     ContentFile(response.content),
