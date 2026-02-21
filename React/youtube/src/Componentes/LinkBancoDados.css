@@ -112,17 +112,3 @@
     border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
   }
-
-.linkBancoDados-msgAlerta{
-  /*border: 1px solid black;*/
-  width: 60px;
-  height: 60px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
-}
