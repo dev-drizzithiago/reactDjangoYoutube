@@ -158,6 +158,7 @@ class YouTubeDownload:
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
+
         for item in query_validador_dados:
             id_dados = item['id_dados']
             link_tube = item['link_tube']
@@ -204,34 +205,33 @@ class YouTubeDownload:
 
         if query_validador_midia.exists():
             logging.info(f"Midia [{self.nome_validado}] já existe, se a mídia não estiver abrindo, chame o dev.")
-            print(usuario_logado)
-            print(query_validador_midia[0].usuario)
+
+
+            nome_do_arquivo = query_validador_midia[0].nome_arquivo
+            pasta_do_arquivo = query_validador_midia[0].path_arquivo
+            duracao_da_midia = query_validador_midia[0].duracao_da_midia
+            dados_youtube_id = query_validador_midia[0].dados_youtube_id
+            novo_usuario = usuario_logado
+            pasta_da_minuatura = query_validador_midia[0].pasta_da_midia
+
 
             if query_validador_midia[0].usuario != usuario_logado:
-
-                # Faz o download da miniatura
-                response = requests.get(miniatura)
                 query_user_logado = User.objects.filter(username=usuario_logado)[0]
 
                 # Cria o obj para salvar as informações no banco de dados.
                 musica = MusicsSalvasServidor(
-                    nome_arquivo=self.nome_validado,
-                    path_arquivo=path_url_midia,
-                    duracao_midia=ducarao_midia,
-                    dados_youtube_id=id_dados,
+                    nome_arquivo=nome_do_arquivo,
+                    path_arquivo=pasta_do_arquivo,
+                    duracao_midia=duracao_da_midia,
+                    dados_youtube_id=dados_youtube_id,
                     usuario=query_user_logado,
+                    path_miniatura=pasta_da_minuatura,
                 )
 
-                # Salva a miniatura numa pasta especifica.
-                musica.path_miniatura.save(
-                    nome_miniatura_png,
-                    ContentFile(response.content),
-                    save=False  # **
-                )
                 musica.save()
-
                 return f"Download da mídia concluido com sucesso."
-
+            if query_validador_midia[0].usuario != usuario_logado:
+                return "Mídia já existe para o usuário: {}".format(usuario_logado)
             else:
                 return f"Midia já existe."
 
