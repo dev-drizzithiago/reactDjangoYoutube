@@ -106,7 +106,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
 
                             {spinnerDownload &&
                                 <div className='view_mp3-divImgLoading'>
-                                    <img  className="playerMidiasMp3-imgBtn" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+                                    <img  className="playerMidiasMp3-imgBtn playerMidiasMp3-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 </div>                        
                             }
                             
