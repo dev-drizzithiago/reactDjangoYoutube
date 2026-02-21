@@ -207,52 +207,75 @@ class YouTubeDownload:
             print(usuario_logado)
             print(query_validador_midia[0].usuario)
 
-            # if query_validador_midia[0].usuario == usuario_logado:
-            #     print(query_validador_midia[0].usuario, usuario_logado)
-            # else:
-            #     pass
+            if query_validador_midia[0].usuario != usuario_logado:
 
-            return f"Midia já existe."
+                # Faz o download da miniatura
+                response = requests.get(miniatura)
+                query_user_logado = User.objects.filter(username=usuario_logado)[0]
 
-        # Se a midia não existir é feito o download
-        try:
-            stream = self._download_yt.streams.get_audio_only()
-            stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
-        except Exception as error:
-            logging.error(f"Erro no download da mídia 'm4a': {error}")
-            return f"Erro no download da mídia 'm4a': {error}"
+                # Cria o obj para salvar as informações no banco de dados.
+                musica = MusicsSalvasServidor(
+                    nome_arquivo=self.nome_validado,
+                    path_arquivo=path_url_midia,
+                    duracao_midia=ducarao_midia,
+                    dados_youtube_id=id_dados,
+                    usuario=query_user_logado,
+                )
 
-        # Conversão só vai ocorrer se o download da mídia der certo.
-        mp3_ok = self.mp4_to_mp3(nome_m4a_to_mp3)
+                # Salva a miniatura numa pasta especifica.
+                musica.path_miniatura.save(
+                    nome_miniatura_png,
+                    ContentFile(response.content),
+                    save=False  # **
+                )
+                musica.save()
 
-        if mp3_ok:
+                return f"Download da mídia concluido com sucesso."
 
-            # Faz o download da miniatura
-            response = requests.get(miniatura)
-            query_user_logado = User.objects.filter(username=usuario_logado)[0]
+            else:
+                return f"Midia já existe."
 
-            # Cria o obj para salvar as informações no banco de dados.
-            musica = MusicsSalvasServidor(
-                nome_arquivo=self.nome_validado,
-                path_arquivo=path_url_midia,
-                duracao_midia=ducarao_midia,
-                dados_youtube_id=id_dados,
-                usuario=query_user_logado,
-            )
 
-            # Salva a miniatura numa pasta especifica.
-            musica.path_miniatura.save(
-                nome_miniatura_png,
-                ContentFile(response.content),
-                save=False  # **
-            )
-            musica.save()
-
-            logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
-            return f"Download da mídia concluido com sucesso."
         else:
-            logging.error('Erro ao converter a midía m4a para MP3')
-            return 'Erro ao converter a midía m4a para MP3'
+            # Se a midia não existir é feito o download
+            try:
+                stream = self._download_yt.streams.get_audio_only()
+                stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
+            except Exception as error:
+                logging.error(f"Erro no download da mídia 'm4a': {error}")
+                return f"Erro no download da mídia 'm4a': {error}"
+
+            # Conversão só vai ocorrer se o download da mídia der certo.
+            mp3_ok = self.mp4_to_mp3(nome_m4a_to_mp3)
+
+            if mp3_ok:
+
+                # Faz o download da miniatura
+                response = requests.get(miniatura)
+                query_user_logado = User.objects.filter(username=usuario_logado)[0]
+
+                # Cria o obj para salvar as informações no banco de dados.
+                musica = MusicsSalvasServidor(
+                    nome_arquivo=self.nome_validado,
+                    path_arquivo=path_url_midia,
+                    duracao_midia=ducarao_midia,
+                    dados_youtube_id=id_dados,
+                    usuario=query_user_logado,
+                )
+
+                # Salva a miniatura numa pasta especifica.
+                musica.path_miniatura.save(
+                    nome_miniatura_png,
+                    ContentFile(response.content),
+                    save=False  # **
+                )
+                musica.save()
+
+                logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+                return f"Download da mídia concluido com sucesso."
+            else:
+                logging.error('Erro ao converter a midía m4a para MP3')
+                return 'Erro ao converter a midía m4a para MP3'
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
