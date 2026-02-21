@@ -63,15 +63,14 @@
   }
 
 .playerMidiasMp3-divImgMiniatura {
-  /*border: 1px solid black;*/
-  box-sizing: border-box;
+  border: 1px solid rgb(247, 0, 0);
   margin: auto;
   width: 100%;
   border-radius: 10px;
 }
   .playerMidiasMp3-imgMiniatura{
-      width: 75%;
-      display: flex;
+    /* border: 1px solid rgb(255, 0, 0); */
+      width: 100 %;      
       margin: auto;
       border-radius: 10px;
       box-shadow: 1px 1px 1px black;
