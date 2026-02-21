@@ -5,15 +5,14 @@ import sendRequestDjango from "./sendRequestDjango";
 import "./LinkBancoDados.css"
 import { useState, useEffect } from "react";
 
+import { toast } from "react-toastify";
+
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const LinkBancoDados = ({ propsStatusProcesso }) => {
 
     const [atualizacaoBaseLinks, setAtualizacaoBaseLinks] = useState(0);
     const [downloadMidias, setdownloadMidias] = useState(null);
-    const [ativarMensagem, setAtivarMensagem] = useState(false)
-    const [mensagemProcesso, setMensagemProcesso] = useState('')
-    const [imgStatus, setImgStatus] = useState(null)
 
     useEffect(()=>{
         setAtualizacaoBaseLinks(propsStatusProcesso)
@@ -26,7 +25,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
         setdownloadMidias(id_dados)
-        setAtivarMensagem(false)
 
         const dadosDownload = {
             id_dados: id_dados,
@@ -37,17 +35,11 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
 
         if (responseDjangoDownload.mensagem === "Midia já existe.") {
-            setMensagemProcesso("Midia já existe.")
-            setAtivarMensagem(id_dados)
-            setImgStatus('/img/imgLogos/alerta.png')
+            toast.warning("Midia já existe.")
         } else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.") {
-            setMensagemProcesso("Download da mídia concluido com sucesso.")
-            setAtivarMensagem(id_dados)
-            setImgStatus('/img/imgLogos/confirmado.png')
+            toast.success("Download da mídia concluido com sucesso.")
         }  else if (responseDjangoDownload.erro_processo === 1) {
-            setMensagemProcesso('Erro ao fazer o download da mídia')
-            setAtivarMensagem(id_dados)
-            setImgStatus('/img/imgLogos/error.png')
+            toast.error('Erro ao fazer o download da mídia')
         }
         
         setdownloadMidias(false)
@@ -109,9 +101,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
                                     <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 </div>
                             )}
-
-                            {ativarMensagem == item.id_dados && (<img className="linkBancoDados-msgAlerta" src={imgStatus} title={mensagemProcesso}/>)
-                            }
                         </div>                        
                     </div>
                 ))}
