@@ -91,11 +91,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
                             <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="linkBancoDados-imgBtn linkBancoDados-imgBtnLink"/></a>
 
-                            {/*<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>*/}
-
-                            {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
-                               *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
-
                             {downloadMidias == item.id_dados && (
                                 <div className="linkBancoDados-divImgLoading">
                                     <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
