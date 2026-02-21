@@ -15,7 +15,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP3'}
 
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(true)
+    const [spinnerDownload, setSpinnerDownload] = useState(false)
     
 
     useEffect(()=>{
