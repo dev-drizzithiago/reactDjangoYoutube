@@ -209,10 +209,9 @@ class YouTubeDownload:
 
             nome_do_arquivo = query_validador_midia[0].nome_arquivo
             pasta_do_arquivo = query_validador_midia[0].path_arquivo
-            duracao_da_midia = query_validador_midia[0].duracao_da_midia
+            duracao_da_midia = query_validador_midia[0].duracao_midia
             dados_youtube_id = query_validador_midia[0].dados_youtube_id
-            novo_usuario = usuario_logado
-            pasta_da_minuatura = query_validador_midia[0].pasta_da_midia
+            pasta_da_minuatura = query_validador_midia[0].path_miniatura
 
 
             if query_validador_midia[0].usuario != usuario_logado:
