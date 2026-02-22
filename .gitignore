@@ -12,3 +12,4 @@ Django/log_events_app_yt.log
 *.m4a
 *.sqlite3-journal
 *.sqlite3_old
+*.exe
