@@ -10,7 +10,6 @@
 *.exe
 
 Django/log_events_app_yt.log
-
-/Django/media
-/React/youtube/node_modules
-/Django/coreYoutube/migrations
+Django/media
+Django/coreYoutube/migrations/
+React/.env
