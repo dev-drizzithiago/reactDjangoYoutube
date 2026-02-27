@@ -49,18 +49,23 @@ def csrf_token_view(request):
     nome_usuario = str(request.user)
     verificar_pasta_media()
 
+    if request.user != "AnonymousUser":
+        user_logado_primeiro_nome = request.user.first_name
+        user_logado_sobrenome = request.user.last_name
+        nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
+
     print('Enviando cookies para o frontend...')
 
     print()
     print('Usuário Logado:')
     print('---' * 20)
-    print(user_logado, ' - ', nome_usuario)
+    print(user_logado, ' - ', nome_completo_usuario)
     print()
 
     return JsonResponse({
         'mensagem': 'Token CSRF enviado',
         'user_logado': user_logado,
-        'nome_usuario': nome_usuario
+        'nome_usuario': nome_completo_usuario
     })
 
 @csrf_exempt
@@ -159,16 +164,21 @@ def credenciais_login(request):
         erro_processo = 0
         usuario_logado = False
 
-    print()
+    if request.user != "AnonymousUser":
+        user_logado_primeiro_nome = request.user.first_name
+        user_logado_sobrenome = request.user.last_name
+        nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
+
+    print(nome_completo_usuario)
     print('---' * 20)
     print('Usuário logado: ', request.user.is_authenticated)
-    print('Nome do usuário: ', request.user)
+    print('Nome do usuário: ', nome_completo_usuario)
     print()
 
     return JsonResponse({
         'mensagem_erro': mensagem_erro,
         'erro_processo': erro_processo,
-        'nome_usuario': nome_usuario,
+        'nome_usuario': nome_completo_usuario,
         'usuario_logado': usuario_logado,
     })
 
@@ -190,11 +200,8 @@ def requestBaseDados(request):
         }, status=400)
     usuario_logado = request.user
 
-    query_user_logado = User.objects.filter(username=usuario_logado)
-
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
-
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
 
         for item in query_dados_youtube:
