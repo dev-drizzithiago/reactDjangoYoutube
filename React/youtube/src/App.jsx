@@ -8,6 +8,7 @@ import { BsFiletypeMp3 } from "react-icons/bs";
 import { BsFiletypeMp4 } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 
 import { MdOutlineOpenInFull } from "react-icons/md";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
@@ -58,7 +59,6 @@ function App() {
   
   // - Pega logado e usuario do estado global (state.session).
   const { logado, usuario } = useSelector((state) => state.session)
-  console.log(usuario)
 
   // VERIFICA SE O USUÁRIO ESTA LOGADO NO PRIMEIRO ACESSO AO SITE, GERALMENTE VERIFICA COM O DJANGO, MAS 
   // PODE CONTER O STATUS PELA SESSION É MELHOR SEMPRE VERIFICAR. 
@@ -217,6 +217,7 @@ function App() {
       }
       const urlDjangoLogin = `${urlDefaultDjango}/credenciais_login/`;
       const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
+      dispatch(logout())
       setStatusLogin(false)
       toast.success(responseDjango.mensagem_erro)
       }
@@ -250,7 +251,8 @@ function App() {
                 <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms'/> : 
                 <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms'/>}
 
-                <div className='app-divBtnConfConta'>
+                <div className='app-divBtnDeslogar'>
+                  <p className='app-userLogado'>{usuario} <FaRegUser /> </p>
                   <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
 
