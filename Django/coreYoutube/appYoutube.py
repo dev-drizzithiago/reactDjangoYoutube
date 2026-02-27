@@ -107,9 +107,8 @@ class YouTubeDownload:
 
     # Registrar o link na base de dados.
     def registrando_link_base_dados(self, link, usuario_logado):
+
         logging.info(f'Registrando link na base de dados')
-        session = requests.session()
-        # response = session.get("http://192.168.15.250:8080/usuario_logado/")
         youtube = YouTube(link)
 
         query_user_logado = User.objects.filter(username=usuario_logado)[0]
@@ -133,6 +132,11 @@ class YouTubeDownload:
     def removendo_link_base_dados(self, id_dados: int):
         """
         Metódo responsável por remover o link da base de dados.
+        O link que será removido será apenas do usuário que solicitar.
+
+        Quando o usuário adicionar, quando ele abre a página principal é o id único daquele link, não
+        corre o risco de deletar outros.
+
         :param id_link: Recebe o valor do número do id do link.
         :return: Retorna a confirmação que o link foi deletado.
         """
