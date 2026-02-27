@@ -183,10 +183,10 @@ const LoginUsuario = ({infoStatusLogin}) => {
               infoStatusLogin(responseDjango.usuario_logado)
 
               // Coloca na session o estado do login. 
-              dispatch(
-                loginSuccess().logado = responseDjango.usuario_logado,
-                loginSuccess().action = responseDjango.nome_usuario,
-              );
+              dispatch(loginSuccess({
+                logado: responseDjango.usuario_logado,
+                usuario: responseDjango.nome_usuario
+              }));
             }
           } else {
               toast.error(responseDjango.mensagem_erro)
