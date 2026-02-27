@@ -58,6 +58,7 @@ function App() {
   
   // - Pega logado e usuario do estado global (state.session).
   const { logado, usuario } = useSelector((state) => state.session)
+  console.log(usuario)
 
   // VERIFICA SE O USUÁRIO ESTA LOGADO NO PRIMEIRO ACESSO AO SITE, GERALMENTE VERIFICA COM O DJANGO, MAS 
   // PODE CONTER O STATUS PELA SESSION É MELHOR SEMPRE VERIFICAR. 
