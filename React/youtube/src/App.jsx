@@ -252,7 +252,7 @@ function App() {
                 <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms'/>}
 
                 <div className='app-divBtnDeslogar'>
-                  <p className='app-userLogado'>{usuario} <FaRegUser /> </p>
+                  <p className='app-userLogado'>Ola, {usuario} <FaRegUser /> </p>
                   <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
 
