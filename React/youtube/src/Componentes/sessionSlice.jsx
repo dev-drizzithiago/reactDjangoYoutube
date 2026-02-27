@@ -7,8 +7,8 @@ const sessionSlice = createSlice({
 
     reducers: {  // → funções que alteram o estado:
         loginSuccess(state, action) {  // → recebe action.payload (o usuário logado) e atualiza o estado para logado: true.
-            state.usuario = action.payload;
-            state.logado = true;
+            state.usuario = action.payload.usuario;
+            state.logado = action.payload.logado;
         },
         logout(state) {  // logout → limpa o usuário e marca como deslogado.
             state.usuario = null;
