@@ -230,7 +230,7 @@ class YouTubeDownload:
 
             # Salva as informações da miniatura no banco de dados.
             dados_musics.path_miniatura.save(
-                f"{nome_m4a_to_mp3.replace('.m4a', '_mp4')}.png",
+                f"{self.nome_validado}.png",
                 ContentFile(response.content),
                 save=False  # **
             )
