@@ -107,22 +107,36 @@ class YouTubeDownload:
 
     # Registrar o link na base de dados.
     def registrando_link_base_dados(self, link, usuario_logado):
+        """
+        - Assim você garante que:
+        - O vídeo só existe uma vez no banco.
+        - Vários usuários podem estar associados ao mesmo vídeo.
+        - Não há erro de TypeError.
 
-        logging.info(f'Registrando link na base de dados')
-        youtube = YouTube(link)
-
-        query_user_logado = User.objects.filter(username=usuario_logado).first()
-
-        dados_link = DadosYoutube(
-            autor_link=youtube.author,
-            titulo_link=youtube.title,
-            duracao=youtube.length,
-            miniatura=youtube.thumbnail_url,
-            link_tube=youtube.watch_url,
-            usuario=query_user_logado,
-        )
+        """
         try:
-            dados_link.save()
+            logging.info(f'Registrando link na base de dados')
+            youtube = YouTube(link)
+            query_user_logado = User.objects.filter(username=usuario_logado).first()
+
+
+            # - Usei get_or_create para evitar duplicar vídeos já existentes.
+            # - Se já existe, ele retorna o objeto.
+            # - Se não existe, cria com os valores de defaults.
+            dados_link, created = DadosYoutube.objects.get_or_create(
+                link_tube=youtube.watch_url,
+                defaults={
+                    'autor_link': youtube.author,
+                    'titulo_link': youtube.title,
+                    'duracao': youtube.length,
+                    'miniatura': youtube.thumbnail_url,
+                }
+            )
+
+            # - Em vez de passar usuario no construtor, uso dados_link.usuarios.add(query_user_logado)
+            # depois de salvar.
+            dados_link.usuario.add(query_user_logado)
+
             logging.info('Link salvo na base de dados com sucesso')
             return True
         except Exception as error:
