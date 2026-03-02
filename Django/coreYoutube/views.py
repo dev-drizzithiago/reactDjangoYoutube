@@ -46,15 +46,17 @@ def csrf_token_view(request):
     :return: Retorna um aviso para o react.
     """
     user_logado = request.user.is_authenticated
-    nome_usuario = str(request.user)
+    nome_completo_usuario = None
     verificar_pasta_media()
 
-    if request.user != "AnonymousUser":
+    if user_logado:
         user_logado_primeiro_nome = request.user.first_name
         user_logado_sobrenome = request.user.last_name
         nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
 
+    print()
     print('Enviando cookies para o frontend...')
+    print('---' * 20)
 
     print()
     print('Usuário Logado:')
@@ -78,7 +80,7 @@ def credenciais_login(request):
     mensagem_erro = None
     erro_processo = None
     usuario_logado = None
-    nome_usuario = None
+    nome_completo_usuario = None
 
     dados_json = json.loads(request.body)
 
