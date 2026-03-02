@@ -180,9 +180,6 @@ class YouTubeDownload:
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
-        self._usuario_logado = User.objects.filter(usuario=usuario_logado)
-
-        print(self._usuario_logado)
 
         self._auto_link = query_validador_dados.autor_link
         self._titulo_link = query_validador_dados.titulo_link
@@ -190,54 +187,62 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
-        dados_musics = MusicsSalvasServidor.objects.create(
-            id_music='',
-            nome_arquivo='',
-            path_arquivo='',
-            duracao_midia='',
-            path_miniatura='',
-            dados_youtube='',
-        )
+        # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
+        self._download_yt = YouTube(self._link_tube)
 
-        # # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
-        # self._download_yt = YouTube(self._link_tube)
-        # self.nome_validado = validacao_nome_arquivo(f"{data_timestamp()}")
-        #
-        # path_url_midia = (str(
-        #     Path(
-        #         self.PATH_MIDIA_MUSICS_URL,
-        #         self.nome_validado
-        #         .strip()
-        #         .replace(' - ', '_')
-        #         .replace(' ', '_')
-        #     )).replace('\\', '/'))
-        #
-        # nome_m4a_to_mp3 = str(
-        #     self.nome_validado.strip().replace(' - ', '_').replace(' ', '_')
-        # ).replace('.mp3', '.m4a')
-        #
-        # # Prepara o nome para o arquivo.
-        # nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
-        #
-        # # Faz o download da miniatura
-        # response_miniatura = requests.get(self._miniatura)
-        #
-        # # Se a midia não existir é feito o download
-        # try:
-        #     stream = self._download_yt.streams.get_audio_only()
-        #     stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
-        # except Exception as error:
-        #     logging.error(f"Erro no download da mídia 'm4a': {error}")
-        #     return f"Erro no download da mídia 'm4a': {error}"
+        # Valida o nome do arquivo para ficar dentro do banco de dados.
+        self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
 
-        # _m4a_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
-        #
-        # if _m4a_mp3:
-        #     logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
-        #     return f"Download da mídia concluido com sucesso."
-        # else:
-        #     logging.error('Erro ao converter a midía m4a para MP3')
-        #     return 'Erro ao converter a midía m4a para MP3'
+        # Cria o nome padrão para realizar o download e colocar o caminho no banco de dados.
+        nome_m4a_to_mp3 = str(f"{data_timestamp()}.m4a")
+
+        # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
+        path_url_midia = (str(
+            Path(self.PATH_MIDIA_MUSICS_URL, nome_m4a_to_mp3)
+        ).replace('\\', '/').replace('m4a', 'mp3'))
+
+        # Se a midia não existir é feito o download
+        try:
+            stream = self._download_yt.streams.get_audio_only()
+            stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
+
+            print()
+            print('---'*20)
+            print('>> Download da mídia: {}'.format(nome_m4a_to_mp3))
+
+        except Exception as error:
+            logging.error(f"Erro no download da mídia 'm4a': {error}")
+            return f"Erro no download da mídia 'm4a': {error}"
+
+        _mp4_to_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
+
+        if _mp4_to_mp3:
+
+            dados_musics = MusicsSalvasServidor.objects.create(
+                nome_arquivo=self.nome_validado,
+                path_arquivo=path_url_midia,
+                duracao_midia=self._duracao,
+                dados_youtube=query_validador_dados,
+            )
+
+            # Download da miniatura.
+            response = requests.get(self._miniatura)
+
+            # Salva as informações da miniatura no banco de dados.
+            dados_musics.path_miniatura.save(
+                f"{nome_m4a_to_mp3.replace('.m4a', '_mp4')}.png",
+                ContentFile(response.content),
+                save=False  # **
+            )
+            dados_musics.save()
+
+            # --------------------------------------------------------------------------------------------------------------
+            # Final do modulo
+            logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+            return f"Download da mídia concluido com sucesso."
+        else:
+            logging.error('Erro ao converter a midía m4a para MP3')
+            return 'Erro ao converter a midía m4a para MP3'
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
@@ -310,25 +315,25 @@ class YouTubeDownload:
     # Processo para transformar o arquivo de mp4 em mp3
     # Esse problema não tem nenhum não pode ser chamado pelo usuário, apenas para uso internet do app
     def mp4_to_mp3(self, nome_midia):
-        logging.info(f"Conversão de mídia - {nome_midia}")
+        logging.info(f"Conversão de mídia >> {nome_midia}")
 
         # Busca a quantidade de midias que estão dentro da pasta temp
         qtd_midias = listdir(self.PATH_MIDIA_TEMP)
 
         if len(qtd_midias) > 1:
-            logging.warning('Existe mais de uma mídia na pasta de temporários. '
-                            'Verifique com o desenvolvedor: ', len(qtd_midias))
+            logging.warning('>> Existe mais de uma mídia na pasta de temporários. '
+                            '>> Verifique com o desenvolvedor: ', len(qtd_midias))
             return False
         else:
             logging.info('Analisando arquivo de mídia para conversão...')
 
             for arquivo_m4a in listdir(self.PATH_MIDIA_TEMP):
                 if search(f"{nome_midia}", arquivo_m4a):
-                    print('----', arquivo_m4a)
+                    print('>> ', arquivo_m4a)
                     m4a_file_abs = path.join(self.PATH_MIDIA_TEMP, arquivo_m4a)
-                    print('----', m4a_file_abs)
+                    print('>> ', m4a_file_abs)
                     mp3_file = path.join(self.PATH_MIDIA_MUSICS, f"{arquivo_m4a.replace('m4a', 'mp3')}")
-                    print('----', mp3_file)
+                    print('>> ', mp3_file)
 
                     """#### Processa o MP4 para MP3"""
                     novo_mp3 = AudioFileClip(m4a_file_abs)
