@@ -14,3 +14,4 @@ Django/media
 Django/coreYoutube/migrations/
 React/.env
 /Django/coreYoutube/migrations
+*.sqlite3_old2
