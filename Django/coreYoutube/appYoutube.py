@@ -67,7 +67,7 @@ def validacao_nome_arquivo(filename):
     :param filename: recebe o nome do arquivo, caso tenha erro, arquivo será corrigido.
     :return:
     """
-    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_]', '', filename)
+    return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_]', ' - ', filename)
 
 def data_hora_certa():
     """
@@ -194,11 +194,11 @@ class YouTubeDownload:
         self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
 
         # Cria o nome padrão para realizar o download e colocar o caminho no banco de dados.
-        nome_m4a_to_mp3 = str(f"{data_timestamp()}.m4a")
+        nome_m4a_to_mp3 = str(f"{self.nome_validado}.m4a")
 
         # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
         path_url_midia = (str(
-            Path(self.PATH_MIDIA_MUSICS_URL, nome_m4a_to_mp3)
+            Path(self.PATH_MIDIA_MUSICS_URL, self.nome_validado)
         ).replace('\\', '/').replace('m4a', 'mp3'))
 
         # Se a midia não existir é feito o download
