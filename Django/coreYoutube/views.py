@@ -155,7 +155,11 @@ def credenciais_login(request):
     # Processo para verificar se o utilizador está logado
     elif tipo_requisicao == 'verificarUsuarioLogado':
         if request.user.is_authenticated:
-            nome_usuario = request.session.get('usuario_nome')
+
+            user_logado_primeiro_nome = request.user.first_name
+            user_logado_sobrenome = request.user.last_name
+            nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
+
             usuario_logado = request.user.is_authenticated
             erro_processo = 0
         else:
