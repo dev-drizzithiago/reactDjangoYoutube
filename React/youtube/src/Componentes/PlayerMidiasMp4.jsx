@@ -104,7 +104,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                         </div>                     
                     ))}            
             </div>
-            </> : <h3> Não foram encontrados registro de MP4 na base de dados. </h3> }
+            </> : <h3> Você não possui nenhum MP4 baixado. </h3> }
         </div>
     );
 };
