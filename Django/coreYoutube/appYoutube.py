@@ -233,7 +233,7 @@ class YouTubeDownload:
 
 
             if query_validador_midia[0].usuario != usuario_logado:
-                query_user_logado = User.objects.filter(username=usuario_logado)[0]
+                query_user_logado = User.objects.filter(username=usuario_logado).first()
 
                 # Cria o obj para salvar as informações no banco de dados.
                 musica = MusicsSalvasServidor(
