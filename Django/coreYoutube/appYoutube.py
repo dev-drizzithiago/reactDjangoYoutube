@@ -176,10 +176,40 @@ class YouTubeDownload:
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
-        print(query_validador_dados.id_dados)
 
-        id_dados = query_validador_dados.id_dados
         link_tube = query_validador_dados.link_tube
+
+        # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
+        self._download_yt = YouTube(link_tube)
+
+        path_url_midia = (str(
+            Path(
+                self.PATH_MIDIA_MUSICS_URL,
+                self.nome_validado
+                .strip()
+                .replace(' - ', '_')
+                .replace(' ', '_')
+            )).replace('\\', '/'))
+
+        nome_m4a_to_mp3 = str(
+            self.nome_validado
+            .strip()
+            .replace(' - ', '_')
+            .replace(' ', '_')
+        ).replace('.mp3', '.m4a')
+
+        nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
+
+        # Faz o download da miniatura
+        response = requests.get(miniatura)
+
+        # Se a midia não existir é feito o download
+        try:
+            stream = self._download_yt.streams.get_audio_only()
+            stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
+        except Exception as error:
+            logging.error(f"Erro no download da mídia 'm4a': {error}")
+            return f"Erro no download da mídia 'm4a': {error}"
 
         # try:
         #     # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
@@ -198,23 +228,7 @@ class YouTubeDownload:
         # ducarao_midia = f"{self._download_yt.length}"
         # miniatura = self._download_yt.thumbnail_url
         #
-        # path_url_midia = (str(
-        #     Path(
-        #         self.PATH_MIDIA_MUSICS_URL,
-        #         self.nome_validado
-        #         .strip()
-        #         .replace(' - ', '_')
-        #         .replace(' ', '_')
-        #     )).replace('\\', '/'))
-        #
-        # nome_m4a_to_mp3 = str(
-        #     self.nome_validado
-        #     .strip()
-        #     .replace(' - ', '_')
-        #     .replace(' ', '_')
-        # ).replace('.mp3', '.m4a')
-        #
-        # nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
+
         #
         # # Valida se o nome do arquivo é muito extenso; nome é baseado do "C:/" até o último carectere.
         # if int(len(path.join(self.PATH_MIDIA_TEMP, self.nome_validado)) > 254):
@@ -255,21 +269,13 @@ class YouTubeDownload:
         #         return f"Midia já existe."
         #
         # else:
-        #     # Se a midia não existir é feito o download
-        #     try:
-        #         stream = self._download_yt.streams.get_audio_only()
-        #         stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
-        #     except Exception as error:
-        #         logging.error(f"Erro no download da mídia 'm4a': {error}")
-        #         return f"Erro no download da mídia 'm4a': {error}"
+        #
         #
         #     # Conversão só vai ocorrer se o download da mídia der certo.
         #     mp3_ok = self.mp4_to_mp3(nome_m4a_to_mp3)
         #
-        #     if mp3_ok:
+        #     if mp3_ok:        #
         #
-        #         # Faz o download da miniatura
-        #         response = requests.get(miniatura)
         #         query_user_logado = User.objects.filter(username=usuario_logado)[0]
         #
         #         # Cria o obj para salvar as informações no banco de dados.
