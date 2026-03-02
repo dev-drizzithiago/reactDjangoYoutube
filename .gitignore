@@ -13,3 +13,4 @@ Django/log_events_app_yt.log
 Django/media
 Django/coreYoutube/migrations/
 React/.env
+/Django/coreYoutube/migrations
