@@ -114,7 +114,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                     </div>                     
                 ))}            
             </div>
-            </> : <h3> Não foram encontrados registro de MP3 na base de dados. </h3>}
+            </> : <h3> Você não possui nenhum MP3 baixado. </h3>}
         </div>
     );
 };
