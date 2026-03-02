@@ -183,13 +183,16 @@ class YouTubeDownload:
             link_tube = item['link_tube']
 
         try:
-            # Monta o obj do youtube.
+            # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
             self._download_yt = YouTube(link_tube)
         except Exception as error:
             logging.error(f"Não foi possível criar o obj do YouTube: {error}")
             return 'Não foi possível criar o obj do YouTube'
 
+        # Cria o modelo do nome, abaixo é validado.
         self.creater_nome_midia = str(f"{self._download_yt.author}_{self._download_yt.title}.mp3").strip()
+
+        # Velida o nome do arquivo, removendo caracteres especiais
         self.nome_validado = validacao_nome_arquivo(self.creater_nome_midia)
 
         # Formata os dados para o download da mídia
