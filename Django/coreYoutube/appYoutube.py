@@ -177,10 +177,17 @@ class YouTubeDownload:
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
 
-        link_tube = query_validador_dados.link_tube
+        self._auto_link = query_validador_dados.autor_link
+        self._titulo_link = query_validador_dados.titulo_link
+        self._link_tube = query_validador_dados.link_tube
+        self._duracao = query_validador_dados.duracao
+        self._miniatura = query_validador_dados.miniatura
 
         # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
-        self._download_yt = YouTube(link_tube)
+        self._download_yt = YouTube(self._link_tube)
+        self.nome_validado = validacao_nome_arquivo(
+            f"{ self._auto_link}_{self._titulo_link}"
+        )
 
         path_url_midia = (str(
             Path(
@@ -201,7 +208,7 @@ class YouTubeDownload:
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
 
         # Faz o download da miniatura
-        response = requests.get(miniatura)
+        response_miniatura = requests.get(self._miniatura)
 
         # Se a midia não existir é feito o download
         try:
@@ -211,89 +218,7 @@ class YouTubeDownload:
             logging.error(f"Erro no download da mídia 'm4a': {error}")
             return f"Erro no download da mídia 'm4a': {error}"
 
-        # try:
-        #     # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
-        #     self._download_yt = YouTube(link_tube)
-        # except Exception as error:
-        #     logging.error(f"Não foi possível criar o obj do YouTube: {error}")
-        #     return 'Não foi possível criar o obj do YouTube'
-        #
-        # # Cria o modelo do nome, abaixo é validado.
-        # self.creater_nome_midia = str(f"{self._download_yt.author}_{self._download_yt.title}.mp3").strip()
-        #
-        # # Velida o nome do arquivo, removendo caracteres especiais
-        # self.nome_validado = validacao_nome_arquivo(self.creater_nome_midia)
-        #
-        # # Formata os dados para o download da mídia
-        # ducarao_midia = f"{self._download_yt.length}"
-        # miniatura = self._download_yt.thumbnail_url
-        #
 
-        #
-        # # Valida se o nome do arquivo é muito extenso; nome é baseado do "C:/" até o último carectere.
-        # if int(len(path.join(self.PATH_MIDIA_TEMP, self.nome_validado)) > 254):
-        #     logging.warning('Nome do arquivo muito extenso')
-        #     return 'Nome do arquivo muito extenso'
-        #
-        # # Verifica se já existe algum registro no banco de dados das mídias salvas.
-        # # Preciso pensar numa forma para todos os usuário adicionárem essa mídia
-        # query_validador_midia = MusicsSalvasServidor.objects.filter(nome_arquivo=self.nome_validado)
-        # if query_validador_midia.exists():
-        #     logging.info(f"Midia [{self.nome_validado}] já existe, se a mídia não estiver abrindo, chame o dev.")
-        #
-        #     nome_do_arquivo = query_validador_midia[0].nome_arquivo
-        #     pasta_do_arquivo = query_validador_midia[0].path_arquivo
-        #     duracao_da_midia = query_validador_midia[0].duracao_midia
-        #     dados_youtube_id = query_validador_midia[0].dados_youtube_id
-        #     pasta_da_minuatura = query_validador_midia[0].path_miniatura
-        #
-        #
-        #     if query_validador_midia[0].usuario != usuario_logado:
-        #         query_user_logado = User.objects.filter(username=usuario_logado).first()
-        #
-        #         # Cria o obj para salvar as informações no banco de dados.
-        #         musica = MusicsSalvasServidor(
-        #             nome_arquivo=nome_do_arquivo,
-        #             path_arquivo=pasta_do_arquivo,
-        #             duracao_midia=duracao_da_midia,
-        #             dados_youtube_id=dados_youtube_id,
-        #             usuario=query_user_logado,
-        #             path_miniatura=pasta_da_minuatura,
-        #         )
-        #
-        #         musica.save()
-        #         return f"Download da mídia concluido com sucesso."
-        #     if query_validador_midia[0].usuario != usuario_logado:
-        #         return "Mídia já existe para o usuário: {}".format(usuario_logado)
-        #     else:
-        #         return f"Midia já existe."
-        #
-        # else:
-        #
-        #
-        #     # Conversão só vai ocorrer se o download da mídia der certo.
-        #     mp3_ok = self.mp4_to_mp3(nome_m4a_to_mp3)
-        #
-        #     if mp3_ok:        #
-        #
-        #         query_user_logado = User.objects.filter(username=usuario_logado)[0]
-        #
-        #         # Cria o obj para salvar as informações no banco de dados.
-        #         musica = MusicsSalvasServidor(
-        #             nome_arquivo=self.nome_validado,
-        #             path_arquivo=path_url_midia,
-        #             duracao_midia=ducarao_midia,
-        #             dados_youtube_id=query_validador_dados,
-        #             usuario=query_user_logado,
-        #         )
-        #
-        #         # Salva a miniatura numa pasta especifica.
-        #         musica.path_miniatura.save(
-        #             nome_miniatura_png,
-        #             ContentFile(response.content),
-        #             save=False  # **
-        #         )
-        #         musica.save()
         #
         #         logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
         #         return f"Download da mídia concluido com sucesso."
