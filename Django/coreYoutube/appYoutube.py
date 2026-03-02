@@ -111,7 +111,7 @@ class YouTubeDownload:
         logging.info(f'Registrando link na base de dados')
         youtube = YouTube(link)
 
-        query_user_logado = User.objects.filter(username=usuario_logado)[0]
+        query_user_logado = User.objects.filter(username=usuario_logado).first()
 
         dados_link = DadosYoutube(
             autor_link=youtube.author,
