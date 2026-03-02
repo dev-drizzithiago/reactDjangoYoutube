@@ -14,6 +14,9 @@ class DadosYoutube(Base):
     duracao = models.IntegerField()
     miniatura = models.URLField(max_length=255)
     link_tube = models.URLField(max_length=255)
+
+    # - ManyToManyField precisa que o objeto seja salvo primeiro e
+    # depois você use métodos como .add(), .set() ou .remove() para manipular a relação.
     usuario = models.ManyToManyField(User, blank=True)
 
 class MoviesSalvasServidor(Base):
@@ -22,8 +25,7 @@ class MoviesSalvasServidor(Base):
     path_arquivo = models.CharField(max_length=255, null=True)
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
-    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
+    dados_youtube = models.OneToOneField(DadosYoutube, on_delete=PROTECT)
 
 class MusicsSalvasServidor(Base):
     id_music = models.AutoField(primary_key=True)
@@ -32,5 +34,3 @@ class MusicsSalvasServidor(Base):
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
     dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
-    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
-
