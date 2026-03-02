@@ -180,6 +180,9 @@ class YouTubeDownload:
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+        self._usuario_logado = User.objects.filter(usuario=usuario_logado)
+
+        print(self._usuario_logado)
 
         self._auto_link = query_validador_dados.autor_link
         self._titulo_link = query_validador_dados.titulo_link
@@ -187,58 +190,54 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
-        self._usuario_logado = User.objects.get(id=usuario_logado)
-
-        dados_link, created = DadosYoutube.objects.get_or_create(
-            link_tube=self._link_tube,
-            defaults={
-                'autor_link': self._auto_link,
-                'titulo_link': self._titulo_link,
-                'duracao': self._duracao,
-                'miniatura': self._miniatura,
-            }
+        dados_musics = MusicsSalvasServidor.objects.create(
+            id_music='',
+            nome_arquivo='',
+            path_arquivo='',
+            duracao_midia='',
+            path_miniatura='',
+            dados_youtube='',
         )
-        dados_link.usuario.add(self._usuario_logado)
 
-        # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
-        self._download_yt = YouTube(self._link_tube)
-        self.nome_validado = validacao_nome_arquivo(f"{data_timestamp()}")
+        # # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
+        # self._download_yt = YouTube(self._link_tube)
+        # self.nome_validado = validacao_nome_arquivo(f"{data_timestamp()}")
+        #
+        # path_url_midia = (str(
+        #     Path(
+        #         self.PATH_MIDIA_MUSICS_URL,
+        #         self.nome_validado
+        #         .strip()
+        #         .replace(' - ', '_')
+        #         .replace(' ', '_')
+        #     )).replace('\\', '/'))
+        #
+        # nome_m4a_to_mp3 = str(
+        #     self.nome_validado.strip().replace(' - ', '_').replace(' ', '_')
+        # ).replace('.mp3', '.m4a')
+        #
+        # # Prepara o nome para o arquivo.
+        # nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
+        #
+        # # Faz o download da miniatura
+        # response_miniatura = requests.get(self._miniatura)
+        #
+        # # Se a midia não existir é feito o download
+        # try:
+        #     stream = self._download_yt.streams.get_audio_only()
+        #     stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
+        # except Exception as error:
+        #     logging.error(f"Erro no download da mídia 'm4a': {error}")
+        #     return f"Erro no download da mídia 'm4a': {error}"
 
-        path_url_midia = (str(
-            Path(
-                self.PATH_MIDIA_MUSICS_URL,
-                self.nome_validado
-                .strip()
-                .replace(' - ', '_')
-                .replace(' ', '_')
-            )).replace('\\', '/'))
-
-        nome_m4a_to_mp3 = str(
-            self.nome_validado.strip().replace(' - ', '_').replace(' ', '_')
-        ).replace('.mp3', '.m4a')
-
-        # Prepara o nome para o arquivo.
-        nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
-
-        # Faz o download da miniatura
-        response_miniatura = requests.get(self._miniatura)
-
-        # Se a midia não existir é feito o download
-        try:
-            stream = self._download_yt.streams.get_audio_only()
-            stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
-        except Exception as error:
-            logging.error(f"Erro no download da mídia 'm4a': {error}")
-            return f"Erro no download da mídia 'm4a': {error}"
-
-        _m4a_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
-
-        if _m4a_mp3:
-            logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
-            return f"Download da mídia concluido com sucesso."
-        else:
-            logging.error('Erro ao converter a midía m4a para MP3')
-            return 'Erro ao converter a midía m4a para MP3'
+        # _m4a_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
+        #
+        # if _m4a_mp3:
+        #     logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+        #     return f"Download da mídia concluido com sucesso."
+        # else:
+        #     logging.error('Erro ao converter a midía m4a para MP3')
+        #     return 'Erro ao converter a midía m4a para MP3'
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
