@@ -128,7 +128,11 @@ def credenciais_login(request):
                 # Loga o usuário no sistema
                 login(request, user_auth)  # Cria uma sessão automática
                 request.session['usuario_id'] = user_auth.id
-                request.session['usuario_nome'] = user_auth.first_name
+
+                user_logado_primeiro_nome = request.user.first_name
+                user_logado_sobrenome = request.user.last_name
+                nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
+
                 request.session['usuario_mail'] = user_auth.email
                 usuario_logado = request.user.is_authenticated
                 erro_processo = 0
@@ -136,13 +140,13 @@ def credenciais_login(request):
                 # Quando entra com as credências invalidas.
                 print('Credenciais inválidas')
                 mensagem_erro = 'Credenciais inválidas'
-                nome_usuario = str(request.user)
                 usuario_logado = False
                 erro_processo = 2
         else:
             # Quando ocorre algum erro fora do padrão.
             print('Processo invalido')
             mensagem_erro = 'Processo invalido'
+            nome_completo_usuario = '<desconhecido>'
             usuario_logado = request.user.is_authenticated
             erro_processo = 1
 
@@ -164,12 +168,6 @@ def credenciais_login(request):
         erro_processo = 0
         usuario_logado = False
 
-    if request.user != "AnonymousUser":
-        user_logado_primeiro_nome = request.user.first_name
-        user_logado_sobrenome = request.user.last_name
-        nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
-
-    print(nome_completo_usuario)
     print('---' * 20)
     print('Usuário logado: ', request.user.is_authenticated)
     print('Nome do usuário: ', nome_completo_usuario)
