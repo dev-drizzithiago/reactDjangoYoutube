@@ -22,8 +22,8 @@ class MoviesSalvasServidor(Base):
     path_arquivo = models.CharField(max_length=255, null=True)
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.ManyToManyField(DadosYoutube)
-    usuario = models.ManyToManyField(User, blank=True)
+    dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
 
 class MusicsSalvasServidor(Base):
     id_music = models.AutoField(primary_key=True)
@@ -31,6 +31,6 @@ class MusicsSalvasServidor(Base):
     path_arquivo = models.CharField(max_length=255, null=True)
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.ManyToManyField(DadosYoutube)
-    usuario = models.ManyToManyField(User, blank=True)
+    dados_youtube = models.ForeignKey(DadosYoutube, on_delete=PROTECT)
+    usuario = models.ForeignKey(User, on_delete=PROTECT, null=True, blank=True)
 
