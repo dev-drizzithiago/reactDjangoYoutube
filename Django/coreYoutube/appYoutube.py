@@ -175,17 +175,12 @@ class YouTubeDownload:
 
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
-        query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
-        query_validado_midias = MusicsSalvasServidor.objects.filter(id_dados=query_validador_dados).values()
+        query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+        print(query_validador_dados.id_dados)
 
-        print(query_validador_dados)
+        id_dados = query_validador_dados.id_dados
+        link_tube = query_validador_dados.link_tube
 
-
-        # # Separa o id do link e o url.
-        # for item in query_validador_dados:
-        #     id_dados = item['id_dados']
-        #     link_tube = item['link_tube']
-        #
         # try:
         #     # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
         #     self._download_yt = YouTube(link_tube)
