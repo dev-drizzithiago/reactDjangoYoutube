@@ -212,15 +212,10 @@ class YouTubeDownload:
             )).replace('\\', '/'))
 
         nome_m4a_to_mp3 = str(
-            self.nome_validado
-            .strip()
-            .replace(' - ', '_')
-            .replace(' ', '_')
+            self.nome_validado.strip().replace(' - ', '_').replace(' ', '_')
         ).replace('.mp3', '.m4a')
 
-        _download_mp3 = self._download_yt.streams.filter()
-        _download_mp3.download(self.PATH_MIDIA_TEMP)
-
+        # Prepara o nome para o arquivo.
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
 
         # Faz o download da miniatura
@@ -234,13 +229,14 @@ class YouTubeDownload:
             logging.error(f"Erro no download da mídia 'm4a': {error}")
             return f"Erro no download da mídia 'm4a': {error}"
 
+        _m4a_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
 
-        #
-        #         logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
-        #         return f"Download da mídia concluido com sucesso."
-        #     else:
-        #         logging.error('Erro ao converter a midía m4a para MP3')
-        #         return 'Erro ao converter a midía m4a para MP3'
+        if _m4a_mp3:
+            logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+            return f"Download da mídia concluido com sucesso."
+        else:
+            logging.error('Erro ao converter a midía m4a para MP3')
+            return 'Erro ao converter a midía m4a para MP3'
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
