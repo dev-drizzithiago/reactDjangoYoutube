@@ -200,6 +200,7 @@ def requestBaseDados(request):
 
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
+
         query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
 
         for item in query_dados_youtube:
@@ -276,6 +277,7 @@ def remove_link(request):
     id_dados = int(dados_json['id_dados'])
 
     inicio_obj_yt_delete = YouTubeDownload()
+
     retorno_processo = inicio_obj_yt_delete.removendo_link_base_dados(id_dados)
 
     mensagem_processo = retorno_processo
