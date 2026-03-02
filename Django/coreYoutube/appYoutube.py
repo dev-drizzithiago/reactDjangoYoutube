@@ -174,14 +174,16 @@ class YouTubeDownload:
         logging.info('Baixando mídia em MP3')
 
         # --------------------------------------------------------------------------------------------------------------
-        # Query para buscar o link para realizar o download em MP3
+        # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
 
+        # Separa o id do link e o url.
         for item in query_validador_dados:
             id_dados = item['id_dados']
             link_tube = item['link_tube']
 
         try:
+            # Monta o obj do youtube.
             self._download_yt = YouTube(link_tube)
         except Exception as error:
             logging.error(f"Não foi possível criar o obj do YouTube: {error}")
