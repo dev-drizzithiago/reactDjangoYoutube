@@ -275,7 +275,7 @@ class YouTubeDownload:
                     nome_arquivo=self.nome_validado,
                     path_arquivo=path_url_midia,
                     duracao_midia=ducarao_midia,
-                    dados_youtube_id=id_dados,
+                    dados_youtube_id=query_validador_dados,
                     usuario=query_user_logado,
                 )
 
