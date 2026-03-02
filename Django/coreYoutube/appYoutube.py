@@ -110,7 +110,7 @@ class YouTubeDownload:
         """
         - Assim você garante que:
         - O vídeo só existe uma vez no banco.
-        - Vários usuários podem estar associados ao mesmo vídeo.
+        - Vários utilizadores podem estar associados ao mesmo vídeo.
         - Não há erro de TypeError.
 
         """
@@ -118,7 +118,6 @@ class YouTubeDownload:
             logging.info(f'Registrando link na base de dados')
             youtube = YouTube(link)
             query_user_logado = User.objects.filter(username=usuario_logado).first()
-
 
             # - Usei get_or_create para evitar duplicar vídeos já existentes.
             # - Se já existe, ele retorna o objeto.
@@ -134,12 +133,13 @@ class YouTubeDownload:
             )
 
             # - Em vez de passar usuario no construtor, uso dados_link.usuarios.add(query_user_logado)
-            # depois de salvar.
+            # após salvar.
             dados_link.usuario.add(query_user_logado)
 
             logging.info('Link salvo na base de dados com sucesso')
             return True
         except Exception as error:
+            print(error)
             logging.error(f'Não foi possível registrar o link: [{link}]')
             return False
 
