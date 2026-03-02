@@ -260,19 +260,27 @@ def requestAddLinks(request):
     })
 
 def download_link(request):
-    usuario_logado = request.user
+    resultado_download = None
+
+    nome_usuario_logado = request.user
+    usuario_logado = request.user.is_authenticated
+
     dados_json = json.loads(request.body)
 
-    # Separa as informações que irão para o app de download
-    id_dados = dados_json['id_dados']
-    midia_down = dados_json['midia']
+    if usuario_logado:
 
-    inicio_obj_yt_registro = YouTubeDownload()
+        # Separa as informações que irão para o app de download
+        id_dados = dados_json['id_dados']
+        midia_down = dados_json['midia']
 
-    if midia_down == 'MP3':
-        resultado_download = inicio_obj_yt_registro.download_music(id_dados, usuario_logado)
-    elif midia_down == 'MP4':
-        resultado_download = inicio_obj_yt_registro.download_movie(id_dados, usuario_logado)
+        inicio_obj_yt_registro = YouTubeDownload()
+
+        if midia_down == 'MP3':
+            resultado_download = inicio_obj_yt_registro.download_music(id_dados, nome_usuario_logado)
+        elif midia_down == 'MP4':
+            resultado_download = inicio_obj_yt_registro.download_movie(id_dados, nome_usuario_logado)
+    else:
+        resultado_download = "Usuário não esta logado."
 
     return JsonResponse({
         'mensagem': resultado_download,
