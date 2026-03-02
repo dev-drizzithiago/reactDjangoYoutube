@@ -78,6 +78,10 @@ def data_hora_certa():
     data_certa = valor_data.strftime('%d/%m/%Y - %H:%m')
     return data_certa
 
+def data_timestamp():
+    data_stamtime = datetime.now()
+    return str(data_stamtime.timestamp()).split('.')[0]
+
 class YouTubeDownload:
 
     PATH_MIDIA_MOVIES = path.join(settings.MEDIA_ROOT, 'movies')
@@ -183,11 +187,20 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
+        dados_link, created = DadosYoutube.objects.get_or_create(
+            link_tube=self._link_tube.watch_url,
+            defaults={
+                'autor_link': self._auto_link,
+                'titulo_link': self._titulo_link,
+                'duracao': self._duracao,
+                'miniatura': self._miniatura,
+            }
+        )
+        dados_link.usuario.add(query_validador_dados.usuario)
+
         # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
         self._download_yt = YouTube(self._link_tube)
-        self.nome_validado = validacao_nome_arquivo(
-            f"{ self._auto_link}_{self._titulo_link}"
-        )
+        self.nome_validado = validacao_nome_arquivo(f"{data_timestamp()}")
 
         path_url_midia = (str(
             Path(
@@ -204,6 +217,9 @@ class YouTubeDownload:
             .replace(' - ', '_')
             .replace(' ', '_')
         ).replace('.mp3', '.m4a')
+
+        _download_mp3 = self._download_yt.streams.filter()
+        _download_mp3.download(self.PATH_MIDIA_TEMP)
 
         nome_miniatura_png = f"{self.nome_validado.replace('.mp3', '_mp3')}.png"
 
