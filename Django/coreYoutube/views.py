@@ -315,8 +315,10 @@ def listagem_midias(request):
             key_midia = 'id_movies'
 
         elif dados_json['tipoMidia'] == 'MP3':
-            query_dados_midias = MusicsSalvasServidor.objects.filter(
-                usuario=usuario_logado).order_by('-id_music').values()
+
+            query_dados_midias = (
+                DadosYoutube.objects.filter(usuario=usuario_logado).select_related('musicssalvasservidor')
+            )
             key_midia = 'id_music'
 
         else:
@@ -324,16 +326,25 @@ def listagem_midias(request):
             erro_processo = 1
 
         for item in query_dados_midias:
+
+            id_music = str(item.musicssalvasservidor.id_music)
+            nome_arquivo = str(item.musicssalvasservidor.nome_arquivo)
+            duracao_midia = str(item.musicssalvasservidor.duracao_midia)
+            path_arquivo = str(item.musicssalvasservidor.path_arquivo)
+            path_miniatura = str(item.musicssalvasservidor.path_miniatura)
+
             lista_midias_django.append({
-                key_midia: item[key_midia],
-                'nome_arquivo': item['nome_arquivo'],
-                'duracao_midia': item['duracao_midia'],
-                'path_arquivo': item['path_arquivo'],
-                'path_miniatura': item['path_miniatura'],
+                key_midia: id_music,
+                'nome_arquivo': nome_arquivo,
+                'duracao_midia': duracao_midia,
+                'path_arquivo': path_arquivo,
+                'path_miniatura': path_miniatura,
             })
     else:
         mensagem_processo = 'Usuário não esta logado.'
         erro_processo = 666
+
+    print(lista_midias_django)
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
