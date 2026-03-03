@@ -302,10 +302,13 @@ def listagem_midias(request):
     lista_midias_django = []
     query_dados_midias = None
     usuario_logado = request.user
+    key_midia = None
     mensagem_processo = None
     erro_processo = 0
 
     dados_json = json.loads(request.body)
+
+    print(dados_json)
 
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
@@ -315,24 +318,25 @@ def listagem_midias(request):
             key_midia = 'id_movies'
 
         elif dados_json['tipoMidia'] == 'MP3':
-
             query_dados_midias = (
-                DadosYoutube.objects.filter(usuario=usuario_logado).select_related('musicssalvasservidor')
+                DadosYoutube.objects.filter(
+                    usuario=usuario_logado,
+                ).select_related('musicssalvasservidor')
             )
-            key_midia = 'id_music'
-
         else:
             mensagem_processo = 'Tipo de mídia não existe'
             erro_processo = 1
 
-        if hasattr(query_dados_midias, '__iter__'):
-            for item in query_dados_midias:
+        for item in query_dados_midias:
+            if hasattr(item, 'musicssalvasservidor'):
 
-                id_music = str(item.musicssalvasservidor.id_music)
-                nome_arquivo = str(item.musicssalvasservidor.nome_arquivo)
-                duracao_midia = str(item.musicssalvasservidor.duracao_midia)
-                path_arquivo = str(item.musicssalvasservidor.path_arquivo)
-                path_miniatura = str(item.musicssalvasservidor.path_miniatura)
+                midia = item.musicssalvasservidor
+
+                id_music = midia.id_music
+                nome_arquivo = midia.nome_arquivo
+                duracao_midia = midia.duracao_midia
+                path_arquivo = str(midia.path_arquivo)  # Converte para string; evita erro "JSON serializable"
+                path_miniatura = str(midia.path_miniatura)  # Converte para string; evita erro "JSON serializable"
 
                 lista_midias_django.append({
                     key_midia: id_music,
@@ -341,9 +345,9 @@ def listagem_midias(request):
                     'path_arquivo': path_arquivo,
                     'path_miniatura': path_miniatura,
                 })
-        else:
-            mensagem_processo = 'Usuário não esta logado.'
-            erro_processo = 666
+    else:
+        mensagem_processo = 'Usuário não esta logado.'
+        erro_processo = 666
 
     print(lista_midias_django)
 
