@@ -35,7 +35,7 @@
 }
 
 .forms-divBtnImgAdd {
-  border: 1px solid rgb(245, 0, 0);
+  /* border: 1px solid rgb(245, 0, 0); */
 
   display: flex;
   align-items: center;
