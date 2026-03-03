@@ -25,6 +25,8 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);    
            
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
+    
+    console.log(dados)
 
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia...')
