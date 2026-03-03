@@ -82,6 +82,7 @@ def data_timestamp():
     data_stamtime = datetime.now()
     return str(data_stamtime.timestamp()).split('.')[0]
 
+
 class YouTubeDownload:
 
     PATH_MIDIA_MOVIES = path.join(settings.MEDIA_ROOT, 'movies')
@@ -279,6 +280,8 @@ class YouTubeDownload:
 
         # Busca o link na base de dados.
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+
+
         self._auto_link = query_validador_dados.autor_link
         self._titulo_link = query_validador_dados.titulo_link
         self._link_tube = query_validador_dados.link_tube
@@ -286,15 +289,23 @@ class YouTubeDownload:
         self._miniatura = query_validador_dados.miniatura
 
         if hasattr(query_validador_dados, 'moviessalvarservidor'):
+            logging.info(f'Mídia adicionado ao seu usuário...')
             # Associa o usuário
             query_validador_dados.usuario.add(usuario_logado)
             return 'Mídia adicionado ao seu usuário..'
         else:
+            logging.info(f'Download do vídeo selecionado...')
+
             # Cria o objeto para o YouTube
             download_yt = YouTube(self._link_tube)
 
             # Cria e valida o nome do arquivo.
-            self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            logging.info(f"Nome Validado: {self._nome_validado}")
+
+            path_arquivo_mp4 = str(path.join(self.PATH_MIDIA_MOVIES, self._nome_validado, '.mp4'))
+            logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
+
             dados_link, created = DadosYoutube.objects.get_or_create(
                 link_tube=self._link_tube,
                 defaults={
@@ -307,13 +318,13 @@ class YouTubeDownload:
             )
             try:
                 download = download_yt.streams.get_highest_resolution()
-                download.download(output_path=self.PATH_MIDIA_TEMP)
+                download.download(output_path=self.PATH_MIDIA_MOVIES)
 
                 response_miniature = requests.get(self._miniatura)
 
                 movies = MoviesSalvasServidor.objects.create(
-                    nome_aquivo=self._nome_validado,
-                    path_aquivo=self.PATH_MIDIA_MOVIES,
+                    nome_arquivo=f"{self._nome_validado}",
+                    path_arquivo=path_arquivo_mp4,
                     duracao_midia=self._duracao,
                     dados_youtube=dados_link,
                 )
@@ -326,9 +337,11 @@ class YouTubeDownload:
                 )
                 dados_link.usuario.add(usuario_logado)
 
+                logging.info('Vídeo adicionado a sua conta com sucesso...')
                 return 'Vídeo adicionado a sua conta com sucesso...'
 
             except Exception as error:
+                logging.error(f"Erro ao fazer o download: {error}")
                 return f"Erro ao fazer o download: {error}"
 
 
