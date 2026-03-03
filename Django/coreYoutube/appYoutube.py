@@ -217,8 +217,8 @@ class YouTubeDownload:
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
             path_url_midia = (str(
-                Path(self.PATH_MIDIA_MUSICS_URL, self.nome_validado)
-            ).replace('\\', '/').replace('m4a', 'mp3'))
+                Path(self.PATH_MIDIA_MUSICS_URL, f'{self.nome_validado}.mp3')
+            ).replace('\\', '/'))
 
             # Se a midia não existir é feito o download
             try:
