@@ -9,7 +9,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
-    const [carregando, setCarregando] = useState(null)
+    const [carregando, setCarregando] = useState(true)
 
     const refLink = useRef();
 
@@ -59,10 +59,10 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
         </div>       
 
         {/** BLOCO DOS BOTOES */}
-        <div className="divBtnImgAdd">
+        <div className="forms-divBtnImgAdd">
+          {carregando && <div className="forms-divImgLoading"><img className="imgBtn forms-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>}
           <IoIosAddCircleOutline className="imgBtn btnAdd" onClick={useDefGravandoLink} />
           <SiCcleaner className="imgBtn btnLimpar" onClick={useDefBtnLimparInput} />          
-          {carregando && <div className="divImgLoading"><img  className="imgBtn imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>}
         </div>
     </div>   
   );
