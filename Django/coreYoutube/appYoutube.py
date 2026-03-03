@@ -194,6 +194,7 @@ class YouTubeDownload:
             # Associa o usuário
             query_validador_dados.usuario.add(usuario_logado)
             return f"Download da mídia concluido com sucesso."
+
         else:
 
             dados_link, created = DadosYoutube.objects.get_or_create(
@@ -285,16 +286,50 @@ class YouTubeDownload:
         self._miniatura = query_validador_dados.miniatura
 
         if hasattr(query_validador_dados, 'moviessalvarservidor'):
-            pass
+            # Associa o usuário
+            query_validador_dados.usuario.add(usuario_logado)
+            return 'Mídia adicionado ao seu usuário..'
         else:
             # Cria o objeto para o YouTube
             download_yt = YouTube(self._link_tube)
 
             # Cria e valida o nome do arquivo.
             self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            dados_link, created = DadosYoutube.objects.get_or_create(
+                link_tube=self._link_tube,
+                defaults={
+                    'autor_link': self._auto_link,
+                    'titulo_link': self._titulo_link,
+                    'link_tube': self._link_tube,
+                    'duracao_midia': self._duracao,
+                    'miniatura': self._miniatura,
+                },
+            )
+            try:
+                download = download_yt.streams.get_highest_resolution()
+                download.download(output_path=self.PATH_MIDIA_TEMP)
 
-        
+                response_miniature = requests.get(self._miniatura)
 
+                movies = MoviesSalvasServidor.objects.create(
+                    nome_aquivo=self._nome_validado,
+                    path_aquivo=self.PATH_MIDIA_MOVIES,
+                    duracao_midia=self._duracao,
+                    dados_youtube=dados_link,
+                )
+
+                # Salva as informações da miniatura no banco de dados.
+                movies.path_miniatura.save(
+                    f"{self.nome_validado}.png",
+                    ContentFile(response_miniature.content),
+                    save=True  # **
+                )
+                dados_link.usuario.add(usuario_logado)
+
+                return 'Vídeo adicionado a sua conta com sucesso...'
+
+            except Exception as error:
+                return f"Erro ao fazer o download: {error}"
 
 
     # Processo para transformar o arquivo de mp4 em mp3
