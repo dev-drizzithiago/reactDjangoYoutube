@@ -329,7 +329,13 @@ class YouTubeDownload:
             self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
             logging.info(f"Nome Validado: {self._nome_validado}")
 
-            path_arquivo_mp4 = path.join(f"{self.PATH_MIDIA_MOVIES_URL}", f"{self._nome_validado}.mp4")
+            # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
+            path_arquivo_mp4 = (str(
+                Path(
+                    self.PATH_MIDIA_MOVIES_URL,
+                    f'{self._nome_validado}.mp4')
+                ).replace('\\', '/'))
+
             logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
 
             dados_link, created = DadosYoutube.objects.get_or_create(

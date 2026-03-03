@@ -13,6 +13,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP4'}
 
     const [atualizacaoModiaMp4, setAtualizacaoMidiaMp4] = useState(0)
+    const [spinnerDownload, setSpinnerDownload] = useState(false)
     
 
     useEffect(()=>{
@@ -22,7 +23,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp4);
 
     console.log('dados MP4: ', dados)
-    
+
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
     const executarPlayerMidia = (linkMidia) => {
@@ -96,12 +97,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                                 <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.id_movies)} />
 
-                                <div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>
+                                {spinnerDownload === item.id_movies && 
+                                <div className="divImgLoading">
+                                    <img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+                                </div>}
 
-                                {/** && Use quando você só quer mostrar algo se a condição for verdadeira:
-                                 *  ? Use quando você quer mostrar uma coisa OU outra, dependendo da condição:*/}
-
-                                downloadMidias == item.id_dados && (<div className="divImgLoading"><img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/></div>)
                             </div>
                         </div>                     
                     ))}            
