@@ -117,8 +117,6 @@ def credenciais_login(request):
 
         dados_para_login = dados_json['dadosCredencial']
 
-        print(dados_para_login)
-
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
 
