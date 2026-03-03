@@ -187,23 +187,24 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
-        dados_link, created = DadosYoutube.objects.get_or_create(
-            link_tube=self._link_tube,
-            defaults={
-                'autor_link': self._auto_link,
-                'titulo_link': self._titulo_link,
-                'duracao': self._duracao,
-                'miniatura': self._miniatura,
-            }
-        )
-
-        # Associa o usuário
-        dados_link.usuario.add(usuario_logado)
-
+        # Verifica se a midia já foi baixado por algum outro usuário
         if hasattr(query_validador_dados, 'musicssalvasservidor'):
-            logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+            logging.info(f"Download da mídia concluido com sucesso.")
+
+            # Associa o usuário
+            query_validador_dados.usuario.add(usuario_logado)
             return f"Download da mídia concluido com sucesso."
         else:
+
+            dados_link, created = DadosYoutube.objects.get_or_create(
+                link_tube=self._link_tube,
+                defaults={
+                    'autor_link': self._auto_link,
+                    'titulo_link': self._titulo_link,
+                    'duracao': self._duracao,
+                    'miniatura': self._miniatura,
+                }
+            )
 
             # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
             self._download_yt = YouTube(self._link_tube)
@@ -250,9 +251,11 @@ class YouTubeDownload:
                 dados_musics.path_miniatura.save(
                     f"{self.nome_validado}.png",
                     ContentFile(response.content),
-                    save=False  # **
+                    save=True# **
                 )
-                dados_musics.save()
+
+                # Associa o usuário
+                dados_link.usuario.add(usuario_logado)
 
                 # --------------------------------------------------------------------------------------------------------------
                 # Final do modulo
