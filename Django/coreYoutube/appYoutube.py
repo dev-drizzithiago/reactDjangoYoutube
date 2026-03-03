@@ -110,6 +110,10 @@ class YouTubeDownload:
         self.creater_nome_midia = None
         self.nome_validado = None
 
+        self.dados_retorno = {None}
+        self.erro_processo = None
+        self.mensagem_processo = None
+
     # Registrar o link na base de dados.
     def registrando_link_base_dados(self, link, usuario_logado):
         """
@@ -190,11 +194,18 @@ class YouTubeDownload:
 
         # Verifica se a midia já foi baixado por algum outro usuário
         if hasattr(query_validador_dados, 'musicssalvasservidor'):
-            logging.info(f"Download da mídia concluido com sucesso.")
+            logging.info('Mídia adicionado ao seu usuário...')
 
             # Associa o usuário
             query_validador_dados.usuario.add(usuario_logado)
-            return f"Download da mídia concluido com sucesso."
+
+            self.erro_processo = 0
+            self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
+
+            self.dados_retorno = {
+                'erro_processo': self.erro_processo,
+                'mensagem_erro': self.mensagem_processo,
+            }
 
         else:
 
@@ -261,11 +272,26 @@ class YouTubeDownload:
 
                 # --------------------------------------------------------------------------------------------------------------
                 # Final do modulo
+                self.erro_processo = 0
+                self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
+
+                self.dados_retorno = {
+                    'erro_processo': self.erro_processo,
+                    'mensagem_erro': self.mensagem_processo,
+                }
                 logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
-                return f"Download da mídia concluido com sucesso."
+
             else:
+                self.erro_processo = 0
+                self.mensagem_processo = 'Erro ao converter a midía m4a para MP3'
+
+                self.dados_retorno = {
+                    'erro_processo': self.erro_processo,
+                    'mensagem_erro': self.mensagem_processo,
+                }
                 logging.error('Erro ao converter a midía m4a para MP3')
-                return 'Erro ao converter a midía m4a para MP3'
+
+        return self.dados_retorno
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
@@ -281,7 +307,6 @@ class YouTubeDownload:
         # Busca o link na base de dados.
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
 
-
         self._auto_link = query_validador_dados.autor_link
         self._titulo_link = query_validador_dados.titulo_link
         self._link_tube = query_validador_dados.link_tube
@@ -292,7 +317,14 @@ class YouTubeDownload:
             logging.info(f'Mídia adicionado ao seu usuário...')
             # Associa o usuário
             query_validador_dados.usuario.add(usuario_logado)
-            return 'Mídia adicionado ao seu usuário..'
+
+            self.erro_processo = 0
+            self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
+
+            self.dados_retorno = {
+                'erro_processo': self.erro_processo,
+                'mensagem_erro': self.mensagem_processo,
+            }
         else:
             logging.info(f'Download do vídeo selecionado...')
 
@@ -337,13 +369,30 @@ class YouTubeDownload:
                 )
                 dados_link.usuario.add(usuario_logado)
 
+                # ------------------------------------------------------------------------------------------------------
+                # Final do processo.
+                self.erro_processo = 0
+                self.mensagem_processo = 'Vídeo adicionado a sua conta com sucesso...'
+
+                self.dados_retorno = {
+                    'erro_processo': self.erro_processo,
+                    'mensagem_erro': self.mensagem_processo,
+                }
+
                 logging.info('Vídeo adicionado a sua conta com sucesso...')
-                return 'Vídeo adicionado a sua conta com sucesso...'
 
             except Exception as error:
                 logging.error(f"Erro ao fazer o download: {error}")
-                return f"Erro ao fazer o download: {error}"
 
+                self.erro_processo = 1
+                self.mensagem_processo = f"Erro ao fazer o download: {error}"
+                self.dados_retorno = {
+                    'erro_processo': self.erro_processo,
+                    'mensagem_erro': self.mensagem_processo,
+                }
+
+        # Retorno final.
+        return self.dados_retorno
 
     # Processo para transformar o arquivo de mp4 em mp3
     # Esse problema não tem nenhum não pode ser chamado pelo usuário, apenas para uso internet do app

@@ -33,14 +33,7 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
         const djangoUrlDownloads = `${urlDefaultDjango}/download_link/`
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
-
-        if (responseDjangoDownload.mensagem === "Midia já existe.") {
-            toast.warning("Midia já existe.")
-        } else if (responseDjangoDownload.mensagem === "Download da mídia concluido com sucesso.") {
-            toast.success("Download da mídia concluido com sucesso.")
-        }  else if (responseDjangoDownload.erro_processo === 1) {
-            toast.error('Erro ao fazer o download da mídia')
-        }
+              
         
         setdownloadMidias(false)
 
