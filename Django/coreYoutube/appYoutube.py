@@ -275,63 +275,27 @@ class YouTubeDownload:
         :return: Mensagem de sucesso quando finalizar o download do vídeo.
         """
         logging.info(f'Baixando mídia em MP4...')
-        print(self.PATH_MIDIA_MOVIES)
-        print(self.PATH_MIDIA_MOVIES_URL)
+
         # Busca o link na base de dados.
-        query_validador_dados = DadosYoutube.objects.filter(id_dados=id_entrada).values()
-        for item in query_validador_dados:
-            id_dados = item['id_dados']
-            link_tube = item['link_tube']
+        query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+        self._auto_link = query_validador_dados.autor_link
+        self._titulo_link = query_validador_dados.titulo_link
+        self._link_tube = query_validador_dados.link_tube
+        self._duracao = query_validador_dados.duracao
+        self._miniatura = query_validador_dados.miniatura
 
-        # Cria a o obj do youtube.
-        try:
-            download_yt = YouTube(link_tube)
-        except Exception as error:
-            logging.error(f"Erro ao criar o obj do youtube: {error}")
-            return f"Erro ao criar o obj do youtube."
-
-        creater_nome_midia = validacao_nome_arquivo(f"{download_yt.author}_{download_yt.title}.mp4")
-        self._nome_validado = validacao_nome_arquivo(creater_nome_midia)
-        duracao_midia = f"{download_yt.length}"
-        miniatura = download_yt.thumbnail_url
-        path_midia = str(Path(self.PATH_MIDIA_MOVIES_URL, self._nome_validado)).replace('\\', '/')
-
-        query_validador_midia = MoviesSalvasServidor.objects.filter(nome_arquivo=self._nome_validado)
-
-        if query_validador_midia.exists():
-            logging.warning(f"Midia já existe: {self._nome_validado}")
-            return 'Midia já existe'
+        if hasattr(query_validador_dados, 'moviessalvarservidor'):
+            pass
         else:
-            try:
-                stream = download_yt.streams.get_highest_resolution()
-                stream.download(output_path=self.PATH_MIDIA_MOVIES, filename=validacao_nome_arquivo(self._nome_validado))
-            except Exception as error:
-                logging.error(f"Erro ao fazer o download MP4: {error}")
-                return 'Não foi possível fazer o download do vídeo...'
+            # Cria o objeto para o YouTube
+            download_yt = YouTube(self._link_tube)
 
-            query_user_logado = User.objects.filter(username=usuario_logado)[0]
+            # Cria e valida o nome do arquivo.
+            self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
 
-            # Prepara o obj para salvar as informações na base de dados.
-            video = MoviesSalvasServidor(
-                nome_arquivo=self._nome_validado,
-                path_arquivo=path_midia,
-                duracao_midia=duracao_midia,
-                dados_youtube_id=id_dados,
-                usuario=query_user_logado,
-            )
+        
 
-            # Faz o download da miniatura
-            response = requests.get(miniatura)
 
-            # Salva as informações da miniatura no banco de dados.
-            video.path_miniatura.save(
-                f"{self._nome_validado.replace('.mp4', '_mp4')}.png",
-                ContentFile(response.content),
-                save=False  # **
-            )
-            video.save()
-            logging.info(f"Download do vídeo {self._nome_validado} realizado com sucesso")
-            return "Download do vídeo realizado com sucesso"
 
     # Processo para transformar o arquivo de mp4 em mp3
     # Esse problema não tem nenhum não pode ser chamado pelo usuário, apenas para uso internet do app
@@ -384,53 +348,3 @@ class YouTubeDownload:
         else:
             logging.info(f"Link valido: {link}")
             return True
-
-
-"""
-Claro, Thiago! Aqui está um script em **Python** que você pode usar para **normalizar os nomes dos arquivos** em uma 
-pasta, removendo ou substituindo caracteres especiais e garantindo que os nomes fiquem seguros para requisições GET 
-em um servidor web como Django:
-
-### 🧰 Script: Normalizador de nomes de arquivos
-
-```python
-import os
-import urllib.parse
-
-# Caminho da pasta onde estão os arquivos
-pasta = r"H:\Estudos\reactDJangoyoutube\Django\media\miniaturas"
-
-# Função para normalizar nomes de arquivos
-def normalizar_nome(nome):
-    # Remove espaços extras e codifica caracteres especiais
-    nome_sem_espacos = nome.strip().replace(" ", "_")
-    nome_codificado = urllib.parse.quote(nome_sem_espacos, safe="_-.")
-    return nome_codificado
-
-# Renomeia os arquivos na pasta
-for nome_arquivo in os.listdir(pasta):
-    caminho_antigo = os.path.join(pasta, nome_arquivo)
-    nome_normalizado = normalizar_nome(nome_arquivo)
-    caminho_novo = os.path.join(pasta, nome_normalizado)
-
-    # Evita renomear se o nome já estiver normalizado
-    if nome_arquivo != nome_normalizado:
-        os.rename(caminho_antigo, caminho_novo)
-        print(f"Renomeado: {nome_arquivo} → {nome_normalizado}")
-    else:
-        print(f"Já normalizado: {nome_arquivo}")
-```
-
-### ✅ O que esse script faz:
-- Substitui espaços por `_`
-- Codifica acentos e caracteres especiais com `urllib.parse.quote`
-- Renomeia os arquivos diretamente na pasta
-- Evita renomear arquivos que já estão normalizados
-
-### ⚠️ Cuidados:
-- Faça um **backup da pasta** antes de rodar o script.
-- Verifique se o servidor Django está apontando corretamente para `MEDIA_ROOT` e `MEDIA_URL`.
-- Se estiver usando thumbnails ou links em templates, atualize os caminhos conforme os novos nomes.
-
-Se quiser, posso adaptar esse script para rodar dentro de um comando Django ou para gerar um log com os arquivos renomeados. Quer que eu faça isso também?
-"""

@@ -305,6 +305,7 @@ def listagem_midias(request):
     key_midia = None
     mensagem_processo = None
     erro_processo = 0
+    banco_midias = None
 
     dados_json = json.loads(request.body)
 
@@ -313,9 +314,12 @@ def listagem_midias(request):
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
             query_dados_midias = (
-                DadosYoutube.objects.filter(usuario=usuario_logado).select_related('moviessalvasservidor')
+                DadosYoutube.objects.filter(
+                    usuario=usuario_logado
+                ).select_related('moviessalvasservidor')
             )
             key_midia = 'id_movies'
+            banco_midias = 'moviessalvasservidor'
 
         elif dados_json['tipoMidia'] == 'MP3':
             query_dados_midias = (
@@ -323,23 +327,26 @@ def listagem_midias(request):
                     usuario=usuario_logado,
                 ).select_related('musicssalvasservidor')
             )
+            key_midia = 'id_music'
+            banco_midias = 'musicssalvasservidor'
         else:
             mensagem_processo = 'Tipo de mídia não existe'
             erro_processo = 1
 
         for item in query_dados_midias:
-            if hasattr(item, 'musicssalvasservidor'):
+
+            if hasattr(item, banco_midias):
 
                 midia = item.musicssalvasservidor
 
-                id_music = midia.id_music
+                id = midia.id_music
                 nome_arquivo = midia.nome_arquivo
                 duracao_midia = midia.duracao_midia
                 path_arquivo = str(midia.path_arquivo)  # Converte para string; evita erro "JSON serializable"
                 path_miniatura = str(midia.path_miniatura)  # Converte para string; evita erro "JSON serializable"
 
                 lista_midias_django.append({
-                    key_midia: id_music,
+                    key_midia: id,
                     'nome_arquivo': nome_arquivo,
                     'duracao_midia': duracao_midia,
                     'path_arquivo': path_arquivo,
@@ -348,8 +355,6 @@ def listagem_midias(request):
     else:
         mensagem_processo = 'Usuário não esta logado.'
         erro_processo = 666
-
-    print(lista_midias_django)
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
