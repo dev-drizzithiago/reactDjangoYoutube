@@ -204,7 +204,7 @@ class YouTubeDownload:
 
             self.dados_retorno = {
                 'erro_processo': self.erro_processo,
-                'mensagem_erro': self.mensagem_processo,
+                'mensagem_processo': self.mensagem_processo,
             }
 
         else:
@@ -277,7 +277,7 @@ class YouTubeDownload:
 
                 self.dados_retorno = {
                     'erro_processo': self.erro_processo,
-                    'mensagem_erro': self.mensagem_processo,
+                    'mensagem_processo': self.mensagem_processo,
                 }
                 logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
 
@@ -287,7 +287,7 @@ class YouTubeDownload:
 
                 self.dados_retorno = {
                     'erro_processo': self.erro_processo,
-                    'mensagem_erro': self.mensagem_processo,
+                    'mensagem_processo': self.mensagem_processo,
                 }
                 logging.error('Erro ao converter a midía m4a para MP3')
 
@@ -316,7 +316,7 @@ class YouTubeDownload:
 
             self.dados_retorno = {
                 'erro_processo': self.erro_processo,
-                'mensagem_erro': self.mensagem_processo,
+                'mensagem_processo': self.mensagem_processo,
             }
         else:
             logging.info(f'Download do vídeo selecionado...')
@@ -369,7 +369,7 @@ class YouTubeDownload:
 
                 self.dados_retorno = {
                     'erro_processo': self.erro_processo,
-                    'mensagem_erro': self.mensagem_processo,
+                    'mensagem_processo': self.mensagem_processo,
                 }
 
                 logging.info('Vídeo adicionado a sua conta com sucesso...')
@@ -381,7 +381,7 @@ class YouTubeDownload:
                 self.mensagem_processo = f"Erro ao fazer o download: {error}"
                 self.dados_retorno = {
                     'erro_processo': self.erro_processo,
-                    'mensagem_erro': self.mensagem_processo,
+                    'mensagem_processo': self.mensagem_processo,
                 }
 
         # Retorno final.
