@@ -181,16 +181,16 @@ class YouTubeDownload:
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
         query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
 
+        self._auto_link = query_validador_dados.autor_link
+        self._titulo_link = query_validador_dados.titulo_link
+        self._link_tube = query_validador_dados.link_tube
+        self._duracao = query_validador_dados.duracao
+        self._miniatura = query_validador_dados.miniatura
+
         if hasattr(query_validador_dados, 'musicssalvasservidor'):
-            print(query_validador_dados.musicssalvasservidor)
             logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
             return f"Download da mídia concluido com sucesso."
         else:
-            self._auto_link = query_validador_dados.autor_link
-            self._titulo_link = query_validador_dados.titulo_link
-            self._link_tube = query_validador_dados.link_tube
-            self._duracao = query_validador_dados.duracao
-            self._miniatura = query_validador_dados.miniatura
 
             # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
             self._download_yt = YouTube(self._link_tube)
