@@ -33,13 +33,14 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
         const djangoUrlDownloads = `${urlDefaultDjango}/download_link/`
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
+        console.log(responseDjangoDownload);
               
-        if (responseDjangoDownload.erro_processo === 0) {
-            toast.success(responseDjangoDownload.mensagem_processo)
-        } else if (responseDjangoDownload.erro_processo === 1) {
-            toast.error(responseDjangoDownload.mensagem_processo)
+        if (responseDjangoDownload.mensagem.erro_processo === 0) {
+            toast.success(responseDjangoDownload.mensagem.mensagem_processo)
+        } else if (responseDjangoDownload.mensagem.erro_processo === 1) {
+            toast.error(responseDjangoDownload.mensagem.mensagem_processo)
         }
-        
+
         setdownloadMidias(false)
 
         setTimeout(() => {
