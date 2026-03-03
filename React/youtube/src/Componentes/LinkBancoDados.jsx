@@ -36,8 +36,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
         const erroProcesso = responseDjangoDownload.dados_json.erro_processo;
         const mensagemProcesso = responseDjangoDownload.dados_json.mensagem_processo;
-
-        console.log(erroProcesso, mensagemProcesso);
               
         if (erroProcesso === 0) {
             toast.success(mensagemProcesso)

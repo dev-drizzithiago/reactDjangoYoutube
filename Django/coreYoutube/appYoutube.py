@@ -306,8 +306,9 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
-        if hasattr(query_validador_dados, 'moviessalvarservidor'):
+        if hasattr(query_validador_dados, 'moviessalvasservidor'):
             logging.info(f'Mídia adicionado ao seu usuário...')
+
             # Associa o usuário
             query_validador_dados.usuario.add(usuario_logado)
 
