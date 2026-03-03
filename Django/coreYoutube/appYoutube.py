@@ -295,13 +295,6 @@ class YouTubeDownload:
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado):
-        """
-        ** Se você colocasse save=True, o Django salvaria o objeto video imediatamente após salvar o arquivo,
-        o que pode ser indesejado se o objeto ainda estiver incompleto ou se você quiser controlar melhor
-        o momento do save().
-        :param id_entrada: Recebe o id para ser feito uma query na base de dados
-        :return: Mensagem de sucesso quando finalizar o download do vídeo.
-        """
         logging.info(f'Baixando mídia em MP4...')
 
         # Busca o link na base de dados.

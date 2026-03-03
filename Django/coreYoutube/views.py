@@ -265,23 +265,21 @@ def download_link(request):
 
     dados_json = json.loads(request.body)
 
-    if usuario_logado:
+    # Separa as informações que irão para o app de download
+    id_dados = dados_json['id_dados']
+    midia_down = dados_json['midia']
 
-        # Separa as informações que irão para o app de download
-        id_dados = dados_json['id_dados']
-        midia_down = dados_json['midia']
+    # Chama o app que processo tudo sobre o youtube
+    inicio_obj_yt_registro = YouTubeDownload()
 
-        inicio_obj_yt_registro = YouTubeDownload()
-
-        if midia_down == 'MP3':
-            resultado_download = inicio_obj_yt_registro.download_music(id_dados, nome_usuario_logado)
-        elif midia_down == 'MP4':
-            resultado_download = inicio_obj_yt_registro.download_movie(id_dados, nome_usuario_logado)
-    else:
-        resultado_download = "Usuário não esta logado."
+    # Chama o método responsável para o processo.
+    if midia_down == 'MP3':
+        resultado_download = inicio_obj_yt_registro.download_music(id_dados, nome_usuario_logado)
+    elif midia_down == 'MP4':
+        resultado_download = inicio_obj_yt_registro.download_movie(id_dados, nome_usuario_logado)
 
     return JsonResponse({
-        'mensagem': resultado_download,
+        'dados_json': resultado_download,
     })
 
 def remove_link(request):

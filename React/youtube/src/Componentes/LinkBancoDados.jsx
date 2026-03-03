@@ -31,21 +31,21 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
             midia: tipoMidia,
         }
 
-        const djangoUrlDownloads = `${urlDefaultDjango}/download_link/`
-        const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload)
-        console.log(responseDjangoDownload);
+        const djangoUrlDownloads = `${urlDefaultDjango}/download_link/`;
+        const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDownload);
+
+        const erroProcesso = responseDjangoDownload.dados_json.erro_processo;
+        const mensagemProcesso = responseDjangoDownload.dados_json.mensagem_processo;
+
+        console.log(erroProcesso, mensagemProcesso);
               
-        if (responseDjangoDownload.mensagem.erro_processo === 0) {
-            toast.success(responseDjangoDownload.mensagem.mensagem_processo)
-        } else if (responseDjangoDownload.mensagem.erro_processo === 1) {
-            toast.error(responseDjangoDownload.mensagem.mensagem_processo)
+        if (erroProcesso === 0) {
+            toast.success(mensagemProcesso)
+        } else if (erroProcesso === 1) {
+            toast.error(mensagemProcesso)
         }
 
         setdownloadMidias(false)
-
-        setTimeout(() => {
-            setAtivarMensagem(false)
-        }, 60000)
     }
 
     const removeLinkBaseDados = async (id_dados) => {
