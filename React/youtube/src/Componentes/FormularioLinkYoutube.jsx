@@ -9,7 +9,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
-    const [carregando, setCarregando] = useState(true)
+    const [carregando, setCarregando] = useState(null)
 
     const refLink = useRef();
 
