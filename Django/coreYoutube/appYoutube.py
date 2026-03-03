@@ -329,7 +329,7 @@ class YouTubeDownload:
             self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
             logging.info(f"Nome Validado: {self._nome_validado}")
 
-            path_arquivo_mp4 = f"{self.PATH_MIDIA_MOVIES}_{self._nome_validado}.mp4"
+            path_arquivo_mp4 = path.join(f"{self.PATH_MIDIA_MOVIES_URL}", f"{self._nome_validado}.mp4")
             logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
 
             dados_link, created = DadosYoutube.objects.get_or_create(
@@ -344,12 +344,12 @@ class YouTubeDownload:
             )
             try:
                 download = download_yt.streams.get_highest_resolution()
-                download.download(output_path=self.PATH_MIDIA_MOVIES)
+                download.download(output_path=self.PATH_MIDIA_MOVIES, filename=self._nome_validado)
 
                 response_miniature = requests.get(self._miniatura)
 
                 movies = MoviesSalvasServidor.objects.create(
-                    nome_arquivo=f"{self._nome_validado}",
+                    nome_arquivo=self._nome_validado,
                     path_arquivo=path_arquivo_mp4,
                     duracao_midia=self._duracao,
                     dados_youtube=dados_link,

@@ -301,6 +301,7 @@ def listagem_midias(request):
     query_dados_midias = None
     usuario_logado = request.user
     key_midia = None
+    id_midia = None
     mensagem_processo = None
     erro_processo = 0
     banco_midias = None
@@ -332,19 +333,22 @@ def listagem_midias(request):
             erro_processo = 1
 
         for item in query_dados_midias:
-
             if hasattr(item, banco_midias):
 
-                midia = item.musicssalvasservidor
+                if banco_midias == 'musicssalvasservidor':
+                    midia = item.musicssalvasservidor
+                    id_midia = midia.id_music
+                else:
+                    midia = item.moviessalvasservidor
+                    id_midia = midia.id_movies
 
-                id = midia.id_music
                 nome_arquivo = midia.nome_arquivo
                 duracao_midia = midia.duracao_midia
                 path_arquivo = str(midia.path_arquivo)  # Converte para string; evita erro "JSON serializable"
                 path_miniatura = str(midia.path_miniatura)  # Converte para string; evita erro "JSON serializable"
 
                 lista_midias_django.append({
-                    key_midia: id,
+                    key_midia: id_midia,
                     'nome_arquivo': nome_arquivo,
                     'duracao_midia': duracao_midia,
                     'path_arquivo': path_arquivo,
