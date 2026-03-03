@@ -24,6 +24,8 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
     /** Função para preparar o download tanto em video como em musicas mp3 */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
+
+        // Evita que o usuário inicie um novo download enquanto outro processo de download estiver em andamento.
         if (downloadMidias) {
             toast.info("Aguarde o processo atual finalizar para iniciar um novo download.")
             return;
@@ -52,11 +54,13 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
     }
 
     const removeLinkBaseDados = async (id_dados) => {
+
+        // Eveita que o usuário inicie um novo processo de remoção enquanto outro processo de download ou remoção estiver em andamento.
         if (downloadMidias) {
             toast.info("Aguarde o processo atual para remover o link.")
             return;
         }
-        
+
         setdownloadMidias(id_dados)
         const dadosDelete = {id_dados: id_dados}
         const djangoUrlDownloads = `${urlDefaultDjango}/remove_link/`;

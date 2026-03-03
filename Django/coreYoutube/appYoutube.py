@@ -251,7 +251,7 @@ class YouTubeDownload:
             if _mp4_to_mp3:
 
                 dados_musics = MusicsSalvasServidor.objects.create(
-                    nome_arquivo=self.nome_validado,
+                    nome_arquivo=self.nome_validado,  # A extensão o método self.mp4_to_mp3 vai colocar.
                     path_arquivo=path_url_midia,
                     duracao_midia=self._duracao,
                     dados_youtube=query_validador_dados,
@@ -326,7 +326,7 @@ class YouTubeDownload:
             download_yt = YouTube(self._link_tube)
 
             # Cria e valida o nome do arquivo.
-            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}.mp4")
             logging.info(f"Nome Validado: {self._nome_validado}")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
