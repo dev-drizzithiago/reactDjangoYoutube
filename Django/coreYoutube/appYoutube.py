@@ -187,6 +187,19 @@ class YouTubeDownload:
         self._duracao = query_validador_dados.duracao
         self._miniatura = query_validador_dados.miniatura
 
+        dados_link, created = DadosYoutube.objects.get_or_create(
+            link_tube=self._link_tube,
+            defaults={
+                'autor_link': self._auto_link,
+                'titulo_link': self._titulo_link,
+                'duracao': self._duracao,
+                'miniatura': self._miniatura,
+            }
+        )
+
+        # Associa o usuário
+        dados_link.usuario.add(usuario_logado)
+
         if hasattr(query_validador_dados, 'musicssalvasservidor'):
             logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
             return f"Download da mídia concluido com sucesso."
