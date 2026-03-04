@@ -22,7 +22,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP3'}
 
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(true)
+    const [spinnerDownload, setSpinnerDownload] = useState(false)
     
 
     useEffect(()=>{
@@ -116,11 +116,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                             onClick={() => removeDeleteMidia(item.id_music)} />
 
-                            {spinnerDownload &&
-                                <div className='view_mp3-divImgLoading'>
+                            <div className='view_mp3-divImgLoading'>
+                                {spinnerDownload &&                                
                                     <img  className="playerMidiasMp3-imgBtn playerMidiasMp3-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
                     </div>                     
                 ))}            
