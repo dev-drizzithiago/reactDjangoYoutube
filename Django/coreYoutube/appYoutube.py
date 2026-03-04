@@ -326,7 +326,7 @@ class YouTubeDownload:
             download_yt = YouTube(self._link_tube)
 
             # Cria e valida o nome do arquivo.
-            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}.mp4")
+            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
             logging.info(f"Nome Validado: {self._nome_validado}")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
@@ -350,7 +350,10 @@ class YouTubeDownload:
             )
             try:
                 download = download_yt.streams.get_highest_resolution()
-                download.download(output_path=self.PATH_MIDIA_MOVIES, filename=self._nome_validado)
+                download.download(
+                    output_path=self.PATH_MIDIA_MOVIES,
+                    filename=f"{self._nome_validado}.mp4", # Adicionar a extensão ao nome do arquivo.
+                )
 
                 response_miniature = requests.get(self._miniatura)
 
