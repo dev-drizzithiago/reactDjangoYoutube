@@ -283,12 +283,13 @@ def download_link(request):
     })
 
 def remove_link(request):
+    usuario_logado = request.user
+
     dados_json = json.loads(request.body)
     id_dados = int(dados_json['id_dados'])
 
     inicio_obj_yt_delete = YouTubeDownload()
-
-    retorno_processo = inicio_obj_yt_delete.removendo_link_base_dados(id_dados)
+    retorno_processo = inicio_obj_yt_delete.removendo_link_base_dados(id_dados, usuario_logado)
 
     mensagem_processo = retorno_processo
     return JsonResponse({

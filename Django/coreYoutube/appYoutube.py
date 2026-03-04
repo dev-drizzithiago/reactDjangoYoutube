@@ -152,7 +152,7 @@ class YouTubeDownload:
             logging.error(f'Não foi possível registrar o link: [{link}]')
             return False
 
-    def removendo_link_base_dados(self, id_dados: int):
+    def removendo_link_base_dados(self, id_dados: int, usuario_logado):
         """
         Metódo responsável por remover o link da base de dados.
         O link que será removido será apenas do usuário que solicitar.
@@ -164,16 +164,17 @@ class YouTubeDownload:
         :return: Retorna a confirmação que o link foi deletado.
         """
         query_remocao_link = DadosYoutube.objects.get(id_dados=id_dados)
-        query_remocao_caminho_movies = MoviesSalvasServidor.objects.filter(dados_youtube_id=query_remocao_link)
-        query_remocao_caminho_musics = MusicsSalvasServidor.objects.filter(dados_youtube_id=query_remocao_link)
+        query_remocao_link.usuario.remove(usuario=usuario_logado)
 
-        if query_remocao_caminho_movies.exists():
-            query_remocao_caminho_movies.delete()
+        if query_remocao_link.usuario.count() == 0:
+            if hasattr(query_remocao_link, 'musicssalvasservidor'):
+                query_remocao_link.musicssalvasservidor.delete()
 
-        if query_remocao_caminho_musics.exists():
-            query_remocao_caminho_musics.delete()
+            if hasattr(query_remocao_link, 'moviessalvasservidor'):
+                query_remocao_link.moviessalvasservidor.delete()
 
-        query_remocao_link.delete()
+            # remove o próprio vídeo.
+            query_remocao_link.delete()
 
         logging.warning('Link removido com sucesso')
         return 'Link removido com sucesso'

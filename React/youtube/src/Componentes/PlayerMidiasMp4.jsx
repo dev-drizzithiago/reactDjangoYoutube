@@ -6,14 +6,21 @@ import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango';
 import { toast } from 'react-toastify';
 
+import { TbPlayerPlay } from "react-icons/tb";
+import { TbPlayerTrackNext } from "react-icons/tb";
+import { TbPlayerTrackPrev } from "react-icons/tb";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
+import { FaDownload } from "react-icons/fa6";
+
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
+const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP4'}
 
     const [atualizacaoModiaMp4, setAtualizacaoMidiaMp4] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(false)
+    const [spinnerDownload, setSpinnerDownload] = useState(null)
     
 
     useEffect(()=>{
@@ -88,19 +95,20 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             </div>
 
                             <div className="playerMidiasMp4-divBtnsAcao">
-                                <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnLink" 
+                                <TbPlayerPlay className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnLink" 
                                 onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
-                                <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnDownload" 
+                                <FaDownload className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnDownload" 
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
 
-                                <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
+                                <RiDeleteBin6Line className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.id_movies)} />
 
-                                {spinnerDownload === item.id_movies && 
-                                <div className="divImgLoading">
-                                    <img  className="imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
-                                </div>}
+                                 <div className="playerMidiasMp4-divImgLoading">
+                                    {spinnerDownload === item.id_movies &&
+                                        <img className="playerMidiasMp4-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+                                    }
+                                </div>
 
                             </div>
                         </div>                     
@@ -111,4 +119,4 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     );
 };
 
-export default PlayerMidiasMp3;
+export default PlayerMidiasMp4;

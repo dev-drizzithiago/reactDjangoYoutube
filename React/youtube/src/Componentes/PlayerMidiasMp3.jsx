@@ -117,7 +117,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             onClick={() => removeDeleteMidia(item.id_music)} />
 
                             <div className='view_mp3-divImgLoading'>
-                                {spinnerDownload &&                                
+                                {spinnerDownload === item.id_music &&                               
                                     <img  className="playerMidiasMp3-imgBtn playerMidiasMp3-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
                                 }
                             </div>
