@@ -7,6 +7,13 @@ import sendRequestDjango from './sendRequestDjango';
 
 import { toast } from 'react-toastify';
 
+import { TbPlayerPlay } from "react-icons/tb";
+import { TbPlayerTrackNext } from "react-icons/tb";
+import { TbPlayerTrackPrev } from "react-icons/tb";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
+import { FaDownload } from "react-icons/fa6";
+
 // PADRÃO PARA A URL 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
@@ -15,7 +22,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
     const payload = {tipoMidia: 'MP3'}
 
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(false)
+    const [spinnerDownload, setSpinnerDownload] = useState(true)
     
 
     useEffect(()=>{
@@ -96,23 +103,25 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
                             <img className="playerMidiasMp3-imgMiniatura" src={`${urlMiniatura}${item.path_miniatura}`} alt="miniatura"  />
                         </div>
 
-                        <p className="playerMidiasMp3-divBtnsAcao">
-                            <img src="/img/imgBtns/botao-play.png" alt="player" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
+                        <div className="playerMidiasMp3-divBtnsAcao">
+                            <TbPlayerPlay 
+                            className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnLink" 
                             onClick={() => executarPlayerMidia(item.path_arquivo)} />
 
-                            <img src="/img/imgBtns/download.png" alt="download" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
+                            <FaDownload 
+                            className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnDownload" 
                             onClick={() => downloadMidia(item.path_arquivo)} />  
 
-                            <img src="/img/imgBtns/remover.png" alt="remover" className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
+                            <RiDeleteBin6Line 
+                            className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                             onClick={() => removeDeleteMidia(item.id_music)} />
 
                             {spinnerDownload &&
                                 <div className='view_mp3-divImgLoading'>
                                     <img  className="playerMidiasMp3-imgBtn playerMidiasMp3-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
-                                </div>                        
+                                </div>
                             }
-                            
-                        </p>
+                        </div>
                     </div>                     
                 ))}            
             </div>
