@@ -283,7 +283,7 @@ def download_link(request):
     })
 
 def remove_link(request):
-    usuario_logado = request.user
+    usuario_logado = str(request.user)
 
     dados_json = json.loads(request.body)
     id_dados = int(dados_json['id_dados'])

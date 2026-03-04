@@ -55,11 +55,13 @@ logging.basicConfig(
     ]
 )
 
+
 def on_progress_(stream, chunk, bytes_remaining):
     total_size = stream.filesize
     bytes_download = total_size - bytes_remaining
     porcentagem = (bytes_download / total_size) * 100
     print(f'Download: {porcentagem:.2f} concluido...')
+
 
 def validacao_nome_arquivo(filename):
     """
@@ -68,6 +70,7 @@ def validacao_nome_arquivo(filename):
     :return:
     """
     return sub(r'[\\/:*?"<>|()\[\]{}!@#$%¨&`^_]', ' - ', filename)
+
 
 def data_hora_certa():
     """
@@ -78,13 +81,13 @@ def data_hora_certa():
     data_certa = valor_data.strftime('%d/%m/%Y - %H:%m')
     return data_certa
 
+
 def data_timestamp():
     data_stamtime = datetime.now()
     return str(data_stamtime.timestamp()).split('.')[0]
 
 
 class YouTubeDownload:
-
     PATH_MIDIA_MOVIES = path.join(settings.MEDIA_ROOT, 'movies')
     PATH_MIDIA_MOVIES_URL = 'movies'
 
@@ -152,7 +155,7 @@ class YouTubeDownload:
             logging.error(f'Não foi possível registrar o link: [{link}]')
             return False
 
-    def removendo_link_base_dados(self, id_dados: int, usuario_logado):
+    def removendo_link_base_dados(self, id_dados: int, usuario_logado: str):
         """
         Metódo responsável por remover o link da base de dados.
         O link que será removido será apenas do usuário que solicitar.
@@ -164,7 +167,8 @@ class YouTubeDownload:
         :return: Retorna a confirmação que o link foi deletado.
         """
         query_remocao_link = DadosYoutube.objects.get(id_dados=id_dados)
-        query_remocao_link.usuario.remove(usuario=usuario_logado)
+        dados_usuario = User.objects.filter(username=usuario_logado).first()
+        query_remocao_link.usuario.remove(dados_usuario)
 
         if query_remocao_link.usuario.count() == 0:
             if hasattr(query_remocao_link, 'musicssalvasservidor'):
@@ -172,9 +176,6 @@ class YouTubeDownload:
 
             if hasattr(query_remocao_link, 'moviessalvasservidor'):
                 query_remocao_link.moviessalvasservidor.delete()
-
-            # remove o próprio vídeo.
-            query_remocao_link.delete()
 
         logging.warning('Link removido com sucesso')
         return 'Link removido com sucesso'
@@ -240,7 +241,7 @@ class YouTubeDownload:
                 stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
 
                 print()
-                print('---'*20)
+                print('---' * 20)
                 print('>> Download da mídia: {}'.format(nome_m4a_to_mp3))
 
             except Exception as error:
@@ -265,7 +266,7 @@ class YouTubeDownload:
                 dados_musics.path_miniatura.save(
                     f"{self.nome_validado}.png",
                     ContentFile(response.content),
-                    save=True# **
+                    save=True  # **
                 )
 
                 # Associa o usuário
@@ -335,7 +336,7 @@ class YouTubeDownload:
                 Path(
                     self.PATH_MIDIA_MOVIES_URL,
                     f'{self._nome_validado}.mp4')
-                ).replace('\\', '/'))
+            ).replace('\\', '/'))
 
             logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
 
@@ -353,7 +354,7 @@ class YouTubeDownload:
                 download = download_yt.streams.get_highest_resolution()
                 download.download(
                     output_path=self.PATH_MIDIA_MOVIES,
-                    filename=f"{self._nome_validado}.mp4", # Adicionar a extensão ao nome do arquivo.
+                    filename=f"{self._nome_validado}.mp4",  # Adicionar a extensão ao nome do arquivo.
                 )
 
                 response_miniature = requests.get(self._miniatura)
