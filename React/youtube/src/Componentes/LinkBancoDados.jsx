@@ -7,6 +7,12 @@ import { useState, useEffect } from "react";
 
 import { toast } from "react-toastify";
 
+// Importação dos ícones para os botões de download e remoção.
+import { BsFiletypeMp4 } from "react-icons/bs";
+import { BsFiletypeMp3 } from "react-icons/bs";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { SiYoutubekids } from "react-icons/si";
+
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
 const LinkBancoDados = ({ propsStatusProcesso }) => {
@@ -92,15 +98,22 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
                         
                         <div className="linkBancoDados-btnsAcao">
 
-                            <img src="/img/imgBtns/download_mp3.png" alt="downloadMp3" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
-                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
+                            <BsFiletypeMp3 
+                            className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP3')} 
+                            aria-label={`Baixar mídia de ${item.titulo_link}`} />
 
-                            <img src="/img/imgBtns/download_mp4.png" alt="downloadMp4" className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
-                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP4')} aria-label={`Baixar mídia de ${item.titulo_link}`} />
+                            <BsFiletypeMp4  className="linkBancoDados-imgBtn linkBancoDados-imgBtnDownload" 
+                            onClick={() => downloadVideoAndMusic(item.id_dados, 'MP4')} 
+                            aria-label={`Baixar mídia de ${item.titulo_link}`} />
 
-                            <img src="/img/imgBtns/remover.png" alt="remover" className="linkBancoDados-imgBtn linkBancoDados-imgBtnRemover" onClick={() => removeLinkBaseDados(item.id_dados) } />
+                            <RiDeleteBin6Line 
+                            className="linkBancoDados-imgBtn linkBancoDados-imgBtnRemover" 
+                            onClick={() => removeLinkBaseDados(item.id_dados) } />
 
-                            <a href={item.link_tube} target="_blank"><img src="/img/imgBtns/youtube.png" alt="link" className="linkBancoDados-imgBtn linkBancoDados-imgBtnLink"/></a>
+                            <a href={item.link_tube} target="_blank">
+                                <SiYoutubekids className="linkBancoDados-imgBtn linkBancoDados-imgBtnLink"/>
+                            </a>
 
                             {downloadMidias == item.id_dados && (
                                 <div className="linkBancoDados-divImgLoading">
