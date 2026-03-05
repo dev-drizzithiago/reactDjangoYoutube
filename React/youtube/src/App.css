@@ -3,8 +3,12 @@
 
   padding: 25px;
   text-align: center;
+  
+  background-color: #242424;
+
   border-radius: 10px;
   box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13); 
+
 }
 
 .app-divBtnImg{
