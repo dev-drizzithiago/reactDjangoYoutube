@@ -261,7 +261,8 @@ def download_link(request):
     resultado_download = None
 
     nome_usuario_logado = request.user
-    usuario_logado = request.user.is_authenticated
+
+    print(nome_usuario_logado)
 
     dados_json = json.loads(request.body)
 

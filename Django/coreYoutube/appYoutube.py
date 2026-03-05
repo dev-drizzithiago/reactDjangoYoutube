@@ -124,10 +124,9 @@ class YouTubeDownload:
         - O vídeo só existe uma vez no banco.
         - Vários utilizadores podem estar associados ao mesmo vídeo.
         - Não há erro de TypeError.
-
         """
         try:
-            logging.info(f'Registrando link na base de dados')
+            logging.info(f'Registrar link na base de dados')
             youtube = YouTube(link)
             query_user_logado = User.objects.filter(username=usuario_logado).first()
 
@@ -150,9 +149,11 @@ class YouTubeDownload:
 
             logging.info('Link salvo na base de dados com sucesso')
             return True
+
         except Exception as error:
             print(error)
             logging.error(f'Não foi possível registrar o link: [{link}]')
+
             return False
 
     def removendo_link_base_dados(self, id_dados: int, usuario_logado: str):
@@ -182,7 +183,9 @@ class YouTubeDownload:
 
     # Faz download do arquivo em MP3.
     def download_music(self, id_entrada: int, usuario_logado):
+
         logging.info('Baixando mídia em MP3')
+        logging.info(f'Baixando mídia em MP3 para o usuário: {usuario_logado}')
 
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
