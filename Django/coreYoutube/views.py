@@ -426,12 +426,11 @@ def removendo_midias(request):
     erro_processo = None
     dados_json = json.loads(request.body)
 
-    # print(dados_json)
-
     id_midia = dados_json['idMidia']
     tipo_midia = dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
+
         query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
 
         dados_caminho_midia = query_mp3_remove[0].path_arquivo
