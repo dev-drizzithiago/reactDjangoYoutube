@@ -105,9 +105,8 @@ class YouTubeDownload:
         self._auto_link = None
         self._titulo_link = None
         self._duracao = None
-        self._miniatura = None
-        self._link_tube = None
-        self._usuario_logado = None
+        self._link_miniatura = None
+        self._link_video_youtube = None
 
         # Declaração para mídias
         self._nome_da_midia = None
@@ -191,26 +190,23 @@ class YouTubeDownload:
         return 'Link removido com sucesso'
 
     # Faz download do arquivo em MP3.
-    def download_music(self, id_entrada: int, usuario_logado):
+    def download_music(self, id_entrada: int, usuario_logado: str):
 
         logging.info('Baixando mídia em MP3')
+
+        logging.info(f"ID: {id_entrada}")
         logging.info(f'Baixando mídia em MP3 para o usuário: {usuario_logado}')
 
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
-        query_validador_dados = MusicsSalvasServidor.objects.get(id_music=id_entrada)
-
-        self._nome_da_midia = query_validador_dados.nome_arquivo
-        self._pasta_da_midia = query_validador_dados.path_arquivo
-        self._duracao_da_midia = query_validador_dados.duracao_midia
-        self._pasta_da_minuatura = query_validador_dados.path_miniatura
+        query_dados_midia = MusicsSalvasServidor.objects.filter(id_music=id_entrada).first()
 
         # Verifica se a midia já foi baixado por algum outro usuário
-        if query_validador_dados:
+        if query_dados_midia:
             logging.info('Mídia adicionado ao seu usuário...')
 
             # Associa o usuário
-            query_validador_dados.usuario_music.add(usuario_logado)
+            query_dados_midia.usuario_music.add(usuario_logado)
 
             self.erro_processo = 0
             self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
@@ -222,8 +218,17 @@ class YouTubeDownload:
 
         else:
 
+            # Se ainda não existe uma mídia salva no servidor, então é construida uma
+            query_dados_youtube = DadosYoutube.objects.get(id_dados=id_entrada)
+
+            self._auto_link = query_dados_youtube.autor_link
+            self._titulo_link = query_dados_youtube.titulo_link
+            self._duracao = query_dados_youtube.duracao
+            self._link_miniatura = query_dados_youtube.miniatura
+            self._link_video_youtube = query_dados_youtube.link_tube
+
             # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
-            self._download_yt = YouTube(self._link_tube)
+            self._download_yt = YouTube(self._link_video_youtube)
 
             # Valida o nome do arquivo para ficar dentro do banco de dados.
             self._nome_formatado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
@@ -232,7 +237,7 @@ class YouTubeDownload:
             nome_m4a_to_mp3 = str(f"{self._nome_formatado}.m4a")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
-            path_url_midia = (str(
+            self._pasta_da_midia = (str(
                 Path(self.PATH_MIDIA_MUSICS_URL, f'{self._nome_formatado}.mp3')
             ).replace('\\', '/'))
 
@@ -254,25 +259,24 @@ class YouTubeDownload:
             if _mp4_to_mp3:
 
                 # Download da miniatura.
-                response = requests.get(self._miniatura)
+                response_miniatura = requests.get(self._link_miniatura)
 
-                dados_midia, created = query_validador_dados.objects.get_or_create(
-                    path_arquivo=self._link_tube,
-                    defaults={
-                        'nome_arquivo': self._nome_formatado,
-                        'duracao_midia': self._duracao_da_midia,
-                    }
+                music = MusicsSalvasServidor.objects.create(
+                    # ID automático
+                    nome_arquivo=self._nome_formatado,
+                    path_arquivo=self._pasta_da_midia,
+                    duracao_midia=self._duracao,
                 )
 
                 # Salva as informações da miniatura no banco de dados.
-                dados_midia.path_miniatura.save(
+                music.path_miniatura.save(
                     f"{self._nome_formatado}.png",
-                    ContentFile(response.content),
-                    save=True
+                    ContentFile(response_miniatura.content),
+                    save=True  # **
                 )
 
-                # Associa o usuário
-                dados_midia.usuario_music.add(usuario_logado)
+                # Associa o usuário a mídia
+                music.usuario_music.add(usuario_logado)
 
                 # --------------------------------------------------------------------------------------------------------------
                 # Final do modulo

@@ -314,48 +314,39 @@ def listagem_midias(request):
 
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
-            query_dados_midias = (
-                DadosYoutube.objects.filter(
-                    usuario=usuario_logado
-                ).select_related('moviessalvasservidor')
-            )
-            key_midia = 'id_movies'
-            banco_midias = 'moviessalvasservidor'
+
+            query_dados_midias = MoviesSalvasServidor.objects.filter(usuario_movie=usuario_logado)
+            if query_dados_midias.exists():
+                key_midia = 'id_movie'
+                erro_processo = 0
 
         elif dados_json['tipoMidia'] == 'MP3':
-            query_dados_midias = (
-                DadosYoutube.objects.filter(
-                    usuario=usuario_logado,
-                ).select_related('musicssalvasservidor')
-            )
-            key_midia = 'id_music'
-            banco_midias = 'musicssalvasservidor'
+
+            query_dados_midias = DadosYoutube.objects.filter(usuario_music=usuario_logado)
+            if query_dados_midias.exists():
+                key_midia = 'id_music'
+                erro_processo = 0
+
         else:
             mensagem_processo = 'Tipo de mídia não existe'
             erro_processo = 1
 
         for item in query_dados_midias:
-            if hasattr(item, banco_midias):
 
-                if banco_midias == 'musicssalvasservidor':
-                    midia = item.musicssalvasservidor
-                    id_midia = midia.id_music
-                else:
-                    midia = item.moviessalvasservidor
-                    id_midia = midia.id_movies
+            nome_arquivo = item.nome_arquivo
+            duracao_midia = item.duracao_midia
+            path_arquivo = str(item.path_arquivo)  # Converte para string; evita erro "JSON serializable"
+            path_miniatura = str(item.path_miniatura)  # Converte para string; evita erro "JSON serializable"
 
-                nome_arquivo = midia.nome_arquivo
-                duracao_midia = midia.duracao_midia
-                path_arquivo = str(midia.path_arquivo)  # Converte para string; evita erro "JSON serializable"
-                path_miniatura = str(midia.path_miniatura)  # Converte para string; evita erro "JSON serializable"
+            lista_midias_django.append({
+                key_midia: id_midia,
+                'nome_arquivo': nome_arquivo,
+                'duracao_midia': duracao_midia,
+                'path_arquivo': path_arquivo,
+                'path_miniatura': path_miniatura,
+            })
 
-                lista_midias_django.append({
-                    key_midia: id_midia,
-                    'nome_arquivo': nome_arquivo,
-                    'duracao_midia': duracao_midia,
-                    'path_arquivo': path_arquivo,
-                    'path_miniatura': path_miniatura,
-                })
+            mensagem_processo = 'Listagem concluída com sucesso...'
     else:
         mensagem_processo = 'Usuário não esta logado.'
         erro_processo = 666
