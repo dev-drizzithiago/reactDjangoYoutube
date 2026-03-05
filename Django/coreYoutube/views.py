@@ -422,22 +422,13 @@ def removendo_midias(request):
 
     if tipo_midia == 'MP3':
 
-        query_mp3_remove = MusicsSalvasServidor.objects.filter(id_music=id_midia)
+        query_mp3_remove = MusicsSalvasServidor.objects.get(id_music=id_midia)
 
-        dados_caminho_midia = query_mp3_remove[0].path_arquivo
-        dados_caminho_minuatura = query_mp3_remove[0].path_miniatura
+        query_mp3_remove.usuario_music.delete()
 
-        path_arquivo_abs_midia = os.path.join(settings.MEDIA_ROOT, dados_caminho_midia).replace('\\', '/')
-        caminho_abs_miniatura = os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura.path)
-
-        # Remover midia
-        os.remove(path_arquivo_abs_midia)
-
-        # Remover base MusicsSalvasServidor
-        query_mp3_remove[0].delete()
-
-        # Remover miniatura
-        os.remove(caminho_abs_miniatura)
+        if query_mp3_remove.usuario_music.count() == 0:
+            os.remove(os.path.join(settings.MEDIA_ROOT, query_mp3_remove.path_arquivo))
+            os.remove(os.path.join(settings.MEDIA_ROOT, query_mp3_remove.path_miniatura))
 
         mensagem_processo = 'Midia removida com sucesso.'
         erro_processo = 0

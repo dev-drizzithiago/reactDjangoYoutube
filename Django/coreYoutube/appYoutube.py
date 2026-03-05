@@ -174,12 +174,12 @@ class YouTubeDownload:
         """
         query_remocao_link = DadosYoutube.objects.get(id_dados=id_dados)
         dados_usuario = User.objects.filter(username=usuario_logado).first()
-        query_remocao_link.usuario.remove(dados_usuario)
+        query_remocao_link.usuario_dados.remove(dados_usuario)
 
-        print('Removendo usuário: ', query_remocao_link.usuario.remove(dados_usuario))
-        print(query_remocao_link.usuario.count() == 0, query_remocao_link.usuario.count())
+        print('Removendo usuário: ', query_remocao_link.usuario_dados.remove(dados_usuario))
+        print(query_remocao_link.usuario_dados.count() == 0, query_remocao_link.usuario_dados.count())
 
-        if query_remocao_link.usuario.count() == 0:
+        if query_remocao_link.usuario_dados.count() == 0:
             if hasattr(query_remocao_link, 'musicssalvasservidor'):
                 query_remocao_link.musicssalvasservidor.delete()
 
