@@ -17,7 +17,7 @@ import { FaDownload } from "react-icons/fa6";
 // PADRÃO PARA A URL 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {    
+const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP3'}
 
@@ -69,16 +69,20 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             tipoMidia: 'MP3',
             idMidia: id_music
         }
-
-        console.log(payload)
         
-        const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
-        
-        setAtualizacaoMidiaMp3(prev => prev + 1)
+        // Faz a requisição para o Django para remover a mídia, e aguarda a resposta.
+        const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);        
 
         if (responseDjango.erro_processo === 0) {
             toast.success(responseDjango.mensagem_processo)
-        } else if (responseDjango.erro_processo === 0) {
+
+            // Atualiza a lista de mídias após a remoção, incrementando o estado para disparar o useEffect.
+            setAtualizacaoMidiaMp3(prev => prev + 1)
+
+            // Fecha o elemento de player de MP3 após a remoção da mídia.
+            fechaElementoMp3(false)
+
+        } else if (responseDjango.erro_processo === 1) {
             toast.error(responseDjango.mensagem_processo)
         }
     }

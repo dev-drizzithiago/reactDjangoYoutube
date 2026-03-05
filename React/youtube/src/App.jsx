@@ -170,8 +170,6 @@ function App() {
   /** Abre o elemento onde estão as mídias MP3 salvas. */
   const midiasMp3 = () => {
 
-    console.log(statusLogin)
-
     if (!elementoMp3) {
       setElementoMp3(true);
       setElementoMp4(false);
@@ -182,12 +180,11 @@ function App() {
       setElementoLinks(false);
       setAtivarPlayer(false);
     }
+
   }
 
    /** Abre o elemento onde estão as mídias MP4 salvas. */
   const midiasMp4 = () => {
-
-    console.log(statusLogin)
 
     if (!elementoMp4) {
       setElementoMp4(true);
@@ -200,27 +197,33 @@ function App() {
       setElementoLinks(false);
       setAtivarPlayer(false);
     }
+
   }
 
   const defStatusFormsAddLinks = () => {
+
     if (abrirFormsAddLink) {
       setAbrirFormsAddLink(false)
     } else if (!abrirFormsAddLink) {
       setAbrirFormsAddLink(true)
     }
+
   }
 
   const deslogar = async () => {
+
     if (statusLogin) {
       const PAYLOAD = {
         'tipoRequest': 'deslogarUsuario',
       }
       const urlDjangoLogin = `${urlDefaultDjango}/credenciais_login/`;
       const responseDjango = await sendRequestDjango(urlDjangoLogin, PAYLOAD);
+
       dispatch(logout())
       setStatusLogin(false)
       toast.success(responseDjango.mensagem_erro)
-      }
+    }
+
   }
 
   return (
@@ -273,8 +276,14 @@ function App() {
 
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
-            {elementoMp3    && <PlayerMidiasMp3 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+
+            {elementoMp3    && <PlayerMidiasMp3 
+            
+              executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
+              fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)} />}
+
             {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+
           </>)}
       </div>
   )
