@@ -33,7 +33,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
            
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
-    console.log(dados)
 
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia...')
@@ -70,6 +69,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia }) => {
             tipoMidia: 'MP3',
             idMidia: id_music
         }
+
+        console.log(payload)
+        
         const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
         
         setAtualizacaoMidiaMp3(prev => prev + 1)

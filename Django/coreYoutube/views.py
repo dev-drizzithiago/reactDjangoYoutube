@@ -311,13 +311,11 @@ def remove_link(request):
 # Lista todas as midias salvas no servidor.
 def listagem_midias(request):
     lista_midias_django = []
-    query_dados_midias = None
     usuario_logado = request.user
+    query_dados_midias = None
     key_midia = None
-    id_midia = None
     mensagem_processo = None
     erro_processo = 0
-    banco_midias = None
 
     dados_json = json.loads(request.body)
 
@@ -344,6 +342,7 @@ def listagem_midias(request):
 
         for item in query_dados_midias:
 
+            id_midia = item.id_music
             nome_arquivo = item.nome_arquivo
             duracao_midia = item.duracao_midia
             path_arquivo = str(item.path_arquivo)  # Converte para string; evita erro "JSON serializable"
@@ -419,6 +418,8 @@ def consultar_progresso(request):
 
 def removendo_midias(request):
     usuario_logado = request.user
+    obj_usuario_logado = User.objects.filter(username=usuario_logado).first()
+
     if request.method != "POST":
         return JsonResponse({
             'mensagem': 'É valido apenas POST',
@@ -428,43 +429,29 @@ def removendo_midias(request):
     erro_processo = None
     dados_json = json.loads(request.body)
 
-    logger.info('Dados JSON: ', dados_json)
+    logger.info(f'Dados JSON: {dados_json}')
 
     id_midia = dados_json['idMidia']
     tipo_midia = dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
-
         query_mp3_remove = MusicsSalvasServidor.objects.get(id_music=id_midia)
-
-
-
-        query_mp3_remove.usuario_music.delete()
+        query_mp3_remove.usuario_music.remove(obj_usuario_logado)
 
         if query_mp3_remove.usuario_music.count() == 0:
+            query_mp3_remove.delete()
             os.remove(os.path.join(settings.MEDIA_ROOT, query_mp3_remove.path_arquivo))
-            os.remove(os.path.join(settings.MEDIA_ROOT, query_mp3_remove.path_miniatura))
 
         mensagem_processo = 'Midia removida com sucesso.'
         erro_processo = 0
 
     elif tipo_midia == 'MP4':
-        query_mp4_remove = MoviesSalvasServidor.objects.filter(id_movies=id_midia)
+        query_mp4_remove = MoviesSalvasServidor.objects.get(id_movie=id_midia)
+        query_mp4_remove.usuario_movie.remove(obj_usuario_logado)
 
-        dados_caminho_midia = query_mp4_remove[0].path_arquivo
-        dados_caminho_minuatura = query_mp4_remove[0].path_miniatura
-
-        path_arquivo_abs_midia = os.path.join(settings.MEDIA_ROOT, dados_caminho_midia).replace('\\', '/')
-        caminho_abs_miniatura = os.path.join(settings.MEDIA_ROOT, dados_caminho_minuatura.path)
-
-        # Remover midia
-        os.remove(path_arquivo_abs_midia)
-
-        # Remover base MusicsSalvasServidor
-        query_mp4_remove[0].delete()
-
-        # Remover miniatura
-        os.remove(caminho_abs_miniatura)
+        if query_mp4_remove.usuario_movie.count() == 0:
+            query_mp4_remove.delete()
+            os.remove(os.path.join(settings.MEDIA_ROOT, query_mp4_remove.path_arquivo))
 
         mensagem_processo = 'Midia removida com sucesso.'
         erro_processo = 0
