@@ -1,11 +1,15 @@
 .App {
+  /* border: 1px solid rgb(255, 4, 4); */
+
   padding: 25px;
   text-align: center;
-  /* border: 1px solid rgb(255, 4, 4); */
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13); 
 }
 
 .app-divBtnImg{
   /* border: 1px solid rgb(255, 4, 4); */
+
   width: 100%;
   height: 100px;
   margin-top: 1%;
@@ -19,7 +23,7 @@
 
   border-radius: 10px;
   background-color: #ffffff;
-  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.151);  
+  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
 }  
   .app-imgBtn {
     width: 80px;
@@ -30,11 +34,11 @@
   }
   .app-imgBtn:active {    
     transform: translateY(4px);
-    border-bottom: 5px solid rgb(128, 128, 128);
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.13);  
   }
 
 /* h3 para titulos no elemento */
-h3 {  
+h3 {
   color: #ffffff;
   width: 30%;
   
@@ -44,10 +48,11 @@ h3 {
   
   padding-bottom: 5px;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.151);
   
-  border-bottom: 1px solid #ffffff;
   font: 18pt Arial, Helvetica, sans-serif;
+  
+  border-bottom: 1px solid #ffffff80;
+  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
 }
 
 /* DIV do botão de deslogar DA PÁGINA PRINCIPAL */
@@ -59,10 +64,12 @@ h3 {
   flex: 1; /* Ocupa todo espaço disponível. Precisa esta dentro da div*/
 
   gap: 5px;
-  /* box-shadow: 1px 1px 10px rgb(0, 0, 0); */
+  
 }
   /* Paragrafo contendo nome do usuário */
   .app-userLogado{
+    /* border: 1px solid rgb(0, 0, 0);  */
+
     font-size: 16pt;
     text-align: center;
     
@@ -72,21 +79,22 @@ h3 {
     
     padding: 5px;
     
-    /* border: 1px solid rgb(0, 0, 0);  */
     border-radius: 10px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.212)
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.212);
   }
 
 .app-btnConfigurarConta{
   /* border: 1px solid rgb(0, 0, 0); */
+
   display: flex;
-  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.151);
+  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.13);
+
 }
 .app-btnDeslogar{
   /* border: 1px solid rgb(0, 0, 0); */
   
   display: flex;
-  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.151);
+  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.13);
 }
 
 .app-divLinksMidias{
@@ -99,7 +107,7 @@ h3 {
   margin-top: 1%;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.151);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.13);
 }
 
 .app-divImgLoading {
