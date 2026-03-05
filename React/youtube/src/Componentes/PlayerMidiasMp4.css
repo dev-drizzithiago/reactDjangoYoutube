@@ -89,7 +89,7 @@
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
   padding: 2px;
   gap: 5px;
   border-radius: 10px;
