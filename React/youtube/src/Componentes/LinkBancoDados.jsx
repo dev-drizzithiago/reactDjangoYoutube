@@ -68,11 +68,17 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
         }
 
         setdownloadMidias(id_dados)
+
         const dadosDelete = {id_dados: id_dados}
         const djangoUrlDownloads = `${urlDefaultDjango}/remove_link/`;
+
         const responseDjangoDownload = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
 
-        console.log(responseDjangoDownload);
+        if (responseDjangoDownload.dados_json.erro_processo === 0) {
+            toast.success(responseDjangoDownload.dados_json.mensagem_processo);
+        } else {
+            toast.error(responseDjangoDownload.dados_json.mensagem_processo);
+        }
 
         setAtualizacaoBaseLinks(prev => prev + 1);
         setdownloadMidias(false);

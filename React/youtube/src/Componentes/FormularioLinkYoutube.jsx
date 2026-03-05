@@ -24,13 +24,13 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
       const responseDados = await sendRequestDjango(`${urlDefaultDjango}/requestAddLinks/`, {'link': linkYoutube})
 
       if (responseDados.erro_processo === 0){
-        toast.success(responseDados.mensagem);
+        toast.success(responseDados.mensagem_processo);
 
         /** Comunica o app.js que deve atualizar os links. */
         onLinkAdicionado(prev => prev + 1)
 
       } else if (responseDados.erro_processo === 1) {
-        toast.warning(responseDados.mensagem);
+        toast.warning(responseDados.mensagem_processo);
       }
       
       setCarregando(false) // Fecha o spinner

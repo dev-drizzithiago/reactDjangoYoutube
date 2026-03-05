@@ -98,14 +98,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
       } else if (responseDjango.erro_processo === 1) {
 
         // Geralmente o erro 1 é considerado critico.
-        console.log(responseDjango.mensagem_erro)
+        console.log(responseDjango.mensagem_processo)
         toast.warning('Erro no processo para criar novo usuário')
 
       } else if ( responseDjango.erro_processo === 5 ) {
-
-        // Verificar se o usuário já esta cadastrado.
-        console.log(responseDjango.mensagem_erro)
-        toast.warning(responseDjango.mensagem_erro)
+        
+        toast.warning(responseDjango.mensagem_processo)
 
         setTimeout(() => {
           if (criarUser) {
@@ -162,12 +160,12 @@ const LoginUsuario = ({infoStatusLogin}) => {
           if (responseDjango.erro_processo === 1 ) {
             // Erro critico
 
-            toast.error(responseDjango.mensagem_erro)
+            toast.error(responseDjango.mensagem_processo)
 
           } else if (Number(responseDjango.erro_processo) === 2) {            
             // Credenciais incorretas
 
-            toast.error(responseDjango.mensagem_erro)
+            toast.error(responseDjango.mensagem_processo)
 
           } else if (Number(responseDjango.erro_processo) === 0) {
             // Não ocorreu nenhum erro no processo 
