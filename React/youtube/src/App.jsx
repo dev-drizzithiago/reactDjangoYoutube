@@ -265,10 +265,16 @@ function App() {
             </div>
 
             {spinnerPlayer && 
+            
               <div className="app-divImgLoading">
 
-                  <p>Carregando mídia...</p>
-                  <img  className="linkBancoDados-imgLoading" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
+                  <p>Carregando mídia... </p>
+
+                  <img
+                    className="linkBancoDados-imgLoading" 
+                    src="/img/imgBtns/spinner.gif" 
+                    alt="Carregando..."
+                  />
 
               </div>
             }
@@ -280,9 +286,13 @@ function App() {
             {elementoMp3    && <PlayerMidiasMp3 
             
               executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
-              fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)} />}
+              fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)} 
+            />}
 
-            {elementoMp4    && <PlayerMidiasMp4 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} />}
+            {elementoMp4    && <PlayerMidiasMp4 
+              executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
+              fechaElementoMp4={(statusFechar) => setElementoMp4(statusFechar)} 
+            />}
 
           </>)}
       </div>

@@ -4,23 +4,20 @@ import './PlayerMidiasMp4.css'
 
 import useRequestDjango from "./useRequestDjango";
 import sendRequestDjango from './sendRequestDjango';
+
 import { toast } from 'react-toastify';
 
 import { TbPlayerPlay } from "react-icons/tb";
-import { TbPlayerTrackNext } from "react-icons/tb";
-import { TbPlayerTrackPrev } from "react-icons/tb";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
 import { FaDownload } from "react-icons/fa6";
 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia }) => {    
+const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP4'}
 
     const [atualizacaoModiaMp4, setAtualizacaoMidiaMp4] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(null)
     
 
     useEffect(()=>{
@@ -64,11 +61,20 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia }) => {
         }
         const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
         
-        setAtualizacaoMidiaMp4(prev => prev + 1)
+        
 
         if (responseDjango.erro_processo === 0){
+
             toast.success(responseDjango.mensagem_processo)
-        } else if (responseDjango.erro_processo === 0) {
+            
+            // Atualiza a lista de mídias após a remoção, incrementando o estado para disparar o useEffect.
+            setAtualizacaoMidiaMp4(prev => prev + 1)
+
+            // Fecha o elemento de player de MP3 após a remoção da mídia.
+            fechaElementoMp4(false)
+
+        } else if (responseDjango.erro_processo === 1) {
+
             toast.error(responseDjango.mensagem_processo)
         }
     }
@@ -103,13 +109,6 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia }) => {
 
                                 <RiDeleteBin6Line className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
                                 onClick={() => removeDeleteMidia(item.id_movies)} />
-
-                                 <div className="playerMidiasMp4-divImgLoading">
-                                    {spinnerDownload === item.id_movies &&
-                                        <img className="playerMidiasMp4-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
-                                    }
-                                </div>
-
                             </div>
                         </div>                     
                     ))}            

@@ -364,6 +364,7 @@ class YouTubeDownload:
                 )
 
                 # Salva as informações da miniatura no banco de dados.
+                # Sugestão: salvar a miniatura em DadosYoutube e referenciar nos dois modelos. Assim evita duplicação.
                 movie.path_miniatura.save(
                     f"{self._nome_formatado}.png",
                     ContentFile(response_miniature.content),

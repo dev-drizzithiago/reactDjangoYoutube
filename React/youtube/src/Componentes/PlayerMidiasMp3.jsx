@@ -8,10 +8,7 @@ import sendRequestDjango from './sendRequestDjango';
 import { toast } from 'react-toastify';
 
 import { TbPlayerPlay } from "react-icons/tb";
-import { TbPlayerTrackNext } from "react-icons/tb";
-import { TbPlayerTrackPrev } from "react-icons/tb";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
 import { FaDownload } from "react-icons/fa6";
 
 // PADRÃO PARA A URL 
@@ -22,7 +19,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
     const payload = {tipoMidia: 'MP3'}
 
     const [atualizacaoModiaMp3, setAtualizacaoMidiaMp3] = useState(0)
-    const [spinnerDownload, setSpinnerDownload] = useState(false)
     
 
     useEffect(()=>{
@@ -45,7 +41,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
     /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
     const downloadMidia = async (midiaDownload) => {
         console.log('Download da mídia..')
-
+        
         const payload = {
             'tipoDownload': 'mp3',
             'linkDownload': midiaDownload,
@@ -58,7 +54,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
                 const url = encodeURI(`${urlDefaultDjango}${response.download_url}`)
                 window.open(url, "_blank", "width=600 height=400");                
             }, 1000);
-        }
+        }        
    }
 
     const removeDeleteMidia = async (id_music) => {
@@ -120,12 +116,6 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
                             <RiDeleteBin6Line 
                             className="playerMidiasMp3-imgBtn playerMidiasMp3-imgBtnRemover" 
                             onClick={() => removeDeleteMidia(item.id_music)} />
-
-                            <div className='view_mp3-divImgLoading'>
-                                {spinnerDownload === item.id_music &&                               
-                                    <img  className="playerMidiasMp3-imgBtn playerMidiasMp3-imgSpinner" src="/img/imgBtns/spinner.gif" alt="Carregando..."/>
-                                }
-                            </div>
                         </div>
                     </div>                     
                 ))}            
