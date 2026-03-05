@@ -101,13 +101,18 @@ def credenciais_login(request):
     if tipo_requisicao == 'salvarCadastro':
         dados_novo_cadastro = dados_json['dadosCredencial']
         NAME = dados_novo_cadastro['nomeUsuario']
+
+        PRIMEIRO_NOME = NAME.split(' ')[0]
+        SOBRENOME = NAME.split(' ')[1]
+
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
         PASS = dados_novo_cadastro['passUsuario']
 
         try:
             usuario = User.objects.create_user(
-                first_name=NAME,
+                first_name=PRIMEIRO_NOME,
+                last_name=SOBRENOME,
                 username=USER,
                 email=MAIL,
                 password=PASS,
