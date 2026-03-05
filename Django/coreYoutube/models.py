@@ -17,15 +17,18 @@ class DadosYoutube(Base):
 
     # - ManyToManyField precisa que o objeto seja salvo primeiro e
     # depois você use métodos como .add(), .set() ou .remove() para manipular a relação.
-    usuario = models.ManyToManyField(User, blank=True)
+    usuario_dados = models.ManyToManyField(User, blank=True)
 
 class MoviesSalvasServidor(Base):
-    id_movies = models.AutoField(primary_key=True)
+    id_movie = models.AutoField(primary_key=True)
     nome_arquivo = models.CharField(max_length=255, null=True)
     path_arquivo = models.CharField(max_length=255, null=True)
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.OneToOneField(DadosYoutube, on_delete=PROTECT)
+
+    # - ManyToManyField precisa que o objeto seja salvo primeiro e
+    # depois você use métodos como .add(), .set() ou .remove() para manipular a relação.
+    usuario_movie = models.ManyToManyField(User, blank=True)
 
 class MusicsSalvasServidor(Base):
     id_music = models.AutoField(primary_key=True)
@@ -33,4 +36,7 @@ class MusicsSalvasServidor(Base):
     path_arquivo = models.CharField(max_length=255, null=True)
     duracao_midia = models.IntegerField()
     path_miniatura = models.FileField(upload_to='miniaturas/', max_length=255)
-    dados_youtube = models.OneToOneField(DadosYoutube, on_delete=PROTECT)
+
+    # - ManyToManyField precisa que o objeto seja salvo primeiro e
+    # depois você use métodos como .add(), .set() ou .remove() para manipular a relação.
+    usuario_music = models.ManyToManyField(User, blank=True)

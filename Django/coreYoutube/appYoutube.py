@@ -100,6 +100,8 @@ class YouTubeDownload:
         self.link = None
         self.conexao_banco = None
         self.cursor = None
+
+        # Declaração para dados do youtube
         self._auto_link = None
         self._titulo_link = None
         self._duracao = None
@@ -107,11 +109,16 @@ class YouTubeDownload:
         self._link_tube = None
         self._usuario_logado = None
 
-        self._download_yt = None
-        self._nome_validado = None
+        # Declaração para mídias
+        self._nome_da_midia = None
+        self._pasta_da_midia = None
+        self._duracao_da_midia = None
+        self._pasta_da_minuatura = None
 
-        self.creater_nome_midia = None
-        self.nome_validado = None
+        # Declaração para os
+        self._download_yt = None
+
+        self._nome_formatado = None
 
         self.dados_retorno = {None}
         self.erro_processo = None
@@ -153,7 +160,6 @@ class YouTubeDownload:
         except Exception as error:
             print(error)
             logging.error(f'Não foi possível registrar o link: [{link}]')
-
             return False
 
     def removendo_link_base_dados(self, id_dados: int, usuario_logado: str):
@@ -192,20 +198,19 @@ class YouTubeDownload:
 
         # --------------------------------------------------------------------------------------------------------------
         # Query para buscar o link, na tabela de dados, para realizar o download em MP3
-        query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+        query_validador_dados = MusicsSalvasServidor.objects.get(id_music=id_entrada)
 
-        self._auto_link = query_validador_dados.autor_link
-        self._titulo_link = query_validador_dados.titulo_link
-        self._link_tube = query_validador_dados.link_tube
-        self._duracao = query_validador_dados.duracao
-        self._miniatura = query_validador_dados.miniatura
+        self._nome_da_midia = query_validador_dados.nome_arquivo
+        self._pasta_da_midia = query_validador_dados.path_arquivo
+        self._duracao_da_midia = query_validador_dados.duracao_midia
+        self._pasta_da_minuatura = query_validador_dados.path_miniatura
 
         # Verifica se a midia já foi baixado por algum outro usuário
-        if hasattr(query_validador_dados, 'musicssalvasservidor'):
+        if query_validador_dados:
             logging.info('Mídia adicionado ao seu usuário...')
 
             # Associa o usuário
-            query_validador_dados.usuario.add(usuario_logado)
+            query_validador_dados.usuario_music.add(usuario_logado)
 
             self.erro_processo = 0
             self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
@@ -217,28 +222,18 @@ class YouTubeDownload:
 
         else:
 
-            dados_link, created = DadosYoutube.objects.get_or_create(
-                link_tube=self._link_tube,
-                defaults={
-                    'autor_link': self._auto_link,
-                    'titulo_link': self._titulo_link,
-                    'duracao': self._duracao,
-                    'miniatura': self._miniatura,
-                }
-            )
-
             # Monta o obj do YouTube para realizar o download e as separações dos links, miniatura, etc.
             self._download_yt = YouTube(self._link_tube)
 
             # Valida o nome do arquivo para ficar dentro do banco de dados.
-            self.nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            self._nome_formatado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
 
             # Cria o nome padrão para realizar o download e colocar o caminho no banco de dados.
-            nome_m4a_to_mp3 = str(f"{self.nome_validado}.m4a")
+            nome_m4a_to_mp3 = str(f"{self._nome_formatado}.m4a")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
             path_url_midia = (str(
-                Path(self.PATH_MIDIA_MUSICS_URL, f'{self.nome_validado}.mp3')
+                Path(self.PATH_MIDIA_MUSICS_URL, f'{self._nome_formatado}.mp3')
             ).replace('\\', '/'))
 
             # Se a midia não existir é feito o download
@@ -258,18 +253,19 @@ class YouTubeDownload:
 
             if _mp4_to_mp3:
 
-                dados_musics = MusicsSalvasServidor.objects.create(
-                    nome_arquivo=self.nome_validado,  # A extensão o método self.mp4_to_mp3 vai colocar.
-                    path_arquivo=path_url_midia,
-                    duracao_midia=self._duracao,
-                    dados_youtube=query_validador_dados,
-                )
-
                 # Download da miniatura.
                 response = requests.get(self._miniatura)
 
+                dados_midia, created = DadosYoutube.objects.get_or_create(
+                    path_arquivo=self._link_tube,
+                    defaults={
+                        'nome_arquivo': self._nome_formatado,
+                        'duracao_midia': self._duracao_da_midia,
+                    }
+                )
+
                 # Salva as informações da miniatura no banco de dados.
-                dados_musics.path_miniatura.save(
+                dados_midia.path_miniatura.save(
                     f"{self.nome_validado}.png",
                     ContentFile(response.content),
                     save=True  # **
@@ -287,7 +283,7 @@ class YouTubeDownload:
                     'erro_processo': self.erro_processo,
                     'mensagem_processo': self.mensagem_processo,
                 }
-                logging.info(f"Download da mídia [{self.nome_validado}] concluido com sucesso.")
+                logging.info(f"Download da mídia [{self._nome_formatado}] concluido com sucesso.")
 
             else:
                 self.erro_processo = 0
@@ -334,14 +330,14 @@ class YouTubeDownload:
             download_yt = YouTube(self._link_tube)
 
             # Cria e valida o nome do arquivo.
-            self._nome_validado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
-            logging.info(f"Nome Validado: {self._nome_validado}")
+            self._nome_formatado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
+            logging.info(f"Nome Validado: {self._nome_formatado}")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
             path_arquivo_mp4 = (str(
                 Path(
                     self.PATH_MIDIA_MOVIES_URL,
-                    f'{self._nome_validado}.mp4')
+                    f'{self._nome_formatado}.mp4')
             ).replace('\\', '/'))
 
             logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
@@ -360,13 +356,13 @@ class YouTubeDownload:
                 download = download_yt.streams.get_highest_resolution()
                 download.download(
                     output_path=self.PATH_MIDIA_MOVIES,
-                    filename=f"{self._nome_validado}.mp4",  # Adicionar a extensão ao nome do arquivo.
+                    filename=f"{self._nome_formatado}.mp4",  # Adicionar a extensão ao nome do arquivo.
                 )
 
                 response_miniature = requests.get(self._miniatura)
 
                 movies = MoviesSalvasServidor.objects.create(
-                    nome_arquivo=self._nome_validado,
+                    nome_arquivo=self._nome_formatado,
                     path_arquivo=path_arquivo_mp4,
                     duracao_midia=self._duracao,
                     dados_youtube=dados_link,
@@ -374,7 +370,7 @@ class YouTubeDownload:
 
                 # Salva as informações da miniatura no banco de dados.
                 movies.path_miniatura.save(
-                    f"{self.nome_validado}.png",
+                    f"{self._nome_formatado}.png",
                     ContentFile(response_miniature.content),
                     save=True  # **
                 )
