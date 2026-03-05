@@ -206,7 +206,7 @@ class YouTubeDownload:
 
         # Verifica se a midia já foi baixado por algum outro usuário
         if query_dados_midia:
-            logging.info('Mídia adicionado ao seu usuário...')
+            logging.info(f'Mídia adicionado ao usuário: {usuario_logado}')
 
             # Associa o usuário
             query_dados_midia.usuario_music.add(usuario_logado)
@@ -307,6 +307,9 @@ class YouTubeDownload:
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado: str):
 
+        logging.info(f"ID: {id_entrada}")
+        logging.info(f'Baixando mídia em MP4 para o usuário: {usuario_logado}')
+
         query_validador_movie = MoviesSalvasServidor.objects.filter(id_movie=id_entrada).first()
 
         if query_validador_movie:
@@ -320,7 +323,7 @@ class YouTubeDownload:
                 'erro_processo': self.erro_processo,
                 'mensagem_processo': self.mensagem_processo,
             }
-            logging.error('Mídia adicionado ao seu usuário...')
+            logging.info(f'Mídia adicionado ao usuário: {usuario_logado}')
 
         else:
             # Busca o link na base de dados.
