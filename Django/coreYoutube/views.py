@@ -76,7 +76,7 @@ def csrf_token_view(request):
     print()
 
     return JsonResponse({
-        'mensagem': 'Token CSRF enviado',
+        'mensagem_processo': 'Token CSRF enviado',
         'user_logado': user_logado,
         'nome_usuario': nome_completo_usuario
     })
@@ -85,7 +85,8 @@ def csrf_token_view(request):
 def credenciais_login(request):
     if request.method != "POST":
         return JsonResponse({
-            'mensagem': 'É valido apenas POST',
+            'mensagem_processo': 'É valido apenas POST',
+            'erro_processo': 1,
         }, status=400)
 
     mensagem_erro = None
@@ -189,7 +190,7 @@ def credenciais_login(request):
     print()
 
     return JsonResponse({
-        'mensagem_erro': mensagem_erro,
+        'mensagem_processo': mensagem_erro,
         'erro_processo': erro_processo,
         'nome_usuario': nome_completo_usuario,
         'usuario_logado': usuario_logado,
@@ -231,7 +232,7 @@ def requestBaseDados(request):
         erro_processo = 666
 
     return JsonResponse({
-        'mensagem': mensagem,
+        'mensagem_processo': mensagem,
         'erro_processo': erro_processo,
         'dados_django': lista_dados_django,
     })
@@ -243,7 +244,7 @@ def requestAddLinks(request):
 
     if request.method != 'POST':
         return JsonResponse({
-            'mensagem': 'É valido apenas POST'
+            'mensagem_processo': 'É valido apenas POST'
         })
 
     dados_json = json.loads(request.body)
@@ -264,16 +265,13 @@ def requestAddLinks(request):
         erro_processo = 1
 
     return JsonResponse({
-        'mensagem': mansagem_processo,
+        'mensagem_processo': mansagem_processo,
         'erro_processo': erro_processo,
     })
 
 def download_link(request):
     resultado_download = None
-
     nome_usuario_logado = request.user
-
-    print(nome_usuario_logado)
 
     dados_json = json.loads(request.body)
 
@@ -312,14 +310,14 @@ def remove_link(request):
 def listagem_midias(request):
     lista_midias_django = []
     usuario_logado = request.user
+
     query_dados_midias = None
     key_midia = None
+
     mensagem_processo = None
     erro_processo = 0
 
     dados_json = json.loads(request.body)
-
-    print(dados_json)
 
     if request.user.is_authenticated:
         if dados_json['tipoMidia'] == 'MP4':
@@ -401,7 +399,7 @@ def download_da_midia(request):
 
     if not caminho_arquivo or not os.path.exists(caminho_arquivo):
         return JsonResponse({
-            'mensagem_erro': 'Token invalido ou expirado.',
+            'mensagem_processo': 'Token invalido ou expirado.',
             'erro_processo': 1,
         })
     with open(caminho_arquivo, 'rb') as file:
@@ -422,7 +420,8 @@ def removendo_midias(request):
 
     if request.method != "POST":
         return JsonResponse({
-            'mensagem': 'É valido apenas POST',
+            'mensagem_processo': 'É valido apenas POST',
+            'erro_processo': 1,
         }, status=400)
 
     mensagem_processo = None
@@ -438,6 +437,7 @@ def removendo_midias(request):
         query_mp3_remove = MusicsSalvasServidor.objects.get(id_music=id_midia)
         query_mp3_remove.usuario_music.remove(obj_usuario_logado)
 
+        # Caso fique sem usuário vinculado a midia, são removidos a mídia e a miniatura
         if query_mp3_remove.usuario_music.count() == 0:
             query_mp3_remove.delete()
             os.remove(os.path.join(settings.MEDIA_ROOT, query_mp3_remove.path_arquivo))
@@ -449,6 +449,7 @@ def removendo_midias(request):
         query_mp4_remove = MoviesSalvasServidor.objects.get(id_movie=id_midia)
         query_mp4_remove.usuario_movie.remove(obj_usuario_logado)
 
+        # Caso fique sem usuário vinculado a midia, são removidos a mídia e a miniatura
         if query_mp4_remove.usuario_movie.count() == 0:
             query_mp4_remove.delete()
             os.remove(os.path.join(settings.MEDIA_ROOT, query_mp4_remove.path_arquivo))
