@@ -46,9 +46,10 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
 
   return (    
     <div className="returnFormsLink">
-        <div className="divLabelInput">
-          <label className="label forms-labelLink" htmlFor="link">Cole o Link do Video:</label>
+      <h3> Registrar link na base de dados</h3>
+        <div className="divLabelInput">          
           <input type="text" className="inputText inputLinkYoutube" name="link" 
+          placeholder="Cole aqui o link do youtube"
           ref={refLink} 
           onKeyDown={e => {
             if (e.key === "Enter") {
