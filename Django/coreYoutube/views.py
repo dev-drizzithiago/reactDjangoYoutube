@@ -322,7 +322,7 @@ def listagem_midias(request):
 
         elif dados_json['tipoMidia'] == 'MP3':
 
-            query_dados_midias = DadosYoutube.objects.filter(usuario_music=usuario_logado)
+            query_dados_midias = MusicsSalvasServidor.objects.filter(usuario_music=usuario_logado)
             if query_dados_midias.exists():
                 key_midia = 'id_music'
                 erro_processo = 0
