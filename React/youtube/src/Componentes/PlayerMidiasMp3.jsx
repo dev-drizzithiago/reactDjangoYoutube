@@ -25,10 +25,9 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
         setAtualizacaoMidiaMp3(effectAtualizacao)        
     }, [effectAtualizacao])
 
-    const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);    
+    const { dados, carregando } = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);    
            
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
-    
 
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia...')
@@ -75,7 +74,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
             setAtualizacaoMidiaMp3(prev => prev + 1)
 
             // Fecha o elemento de player de MP3 após a remoção da mídia.
-            fechaElementoMp3(false)
+            // fechaElementoMp3(false)
 
         } else if (responseDjango.erro_processo === 1) {
             toast.error(responseDjango.mensagem_processo)

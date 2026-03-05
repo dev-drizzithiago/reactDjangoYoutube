@@ -24,9 +24,7 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
         setAtualizacaoMidiaMp4(effectAtualizacao)
     }, [effectAtualizacao])
 
-    const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp4);
-
-    console.log('dados MP4: ', dados)
+    const { dados, carregando } = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp4);
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
@@ -46,22 +44,22 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
 
         const response = await sendRequestDjango(`${urlDefaultDjango}/preparar_midias_to_download/`, payload);
         
-        if (response && response.download_url) {            
+        if (response && response.download_url) {        
+
             setTimeout(() => {
                 const url = encodeURI(`${urlDefaultDjango}${response.download_url}`)
                 window.open(url, "_blank", "width=600 height=400");                
             }, 1000);
+
         }
     }
 
-    const removeDeleteMidia = async (id_music) => {
+    const removeDeleteMidia = async (id_movie) => {
         const payload = {
             tipoMidia: 'MP4',
-            idMidia: id_music
+            idMidia: id_movie
         }
         const responseDjango = await sendRequestDjango(`${urlDefaultDjango}/removendo_midias/`, payload);
-        
-        
 
         if (responseDjango.erro_processo === 0){
 
@@ -71,7 +69,7 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
             setAtualizacaoMidiaMp4(prev => prev + 1)
 
             // Fecha o elemento de player de MP3 após a remoção da mídia.
-            fechaElementoMp4(false)
+            // fechaElementoMp4(false)
 
         } else if (responseDjango.erro_processo === 1) {
 
@@ -108,7 +106,7 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
                                 onClick={() => downloadMidia(item.path_arquivo)} />  
 
                                 <RiDeleteBin6Line className="playerMidiasMp4-imgBtn playerMidiasMp4-imgBtnRemover" 
-                                onClick={() => removeDeleteMidia(item.id_movies)} />
+                                onClick={() => removeDeleteMidia(item.id_movie)} />
                             </div>
                         </div>                     
                     ))}            

@@ -7,7 +7,6 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
 
     const [dados, setDados] = useState([])
     const [carregando, setCarregando] = useState(true)
-    const [usuarioLogado, setUsuarioLogado] = useState(null)
 
     useEffect(() => {
         fetch(urlDjango, {
@@ -44,7 +43,7 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
      * (sem lista) Toda renderização Se você não passar lista nenhuma, ele roda toda vez que o componente renderiza — o que pode causar loops indesejados.
      */
 
-    return {dados, carregando, usuarioLogado}
+    return {dados, carregando}
 }
 
 export default useRequestDjango
