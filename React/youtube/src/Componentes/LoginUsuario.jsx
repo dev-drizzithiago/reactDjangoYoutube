@@ -316,7 +316,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <h1>Login</h1>
 
             {!ativaFormsLogin && <h3>{ msnAlerta }</h3> }
-            {ativaFormsLogin && <h3> Usuário logado: {usuario}... </h3>}
+            {ativaFormsLogin && <h3> Usuário logado: {usuario} direcionando aos links... </h3>}
 
             <div className='login-divGridInputs'>
               <label htmlFor="usuario" className='login-lblLoginPrincipal'>
