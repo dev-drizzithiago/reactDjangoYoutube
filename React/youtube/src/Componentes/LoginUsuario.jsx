@@ -111,8 +111,9 @@ const LoginUsuario = ({infoStatusLogin}) => {
           }
         }, 5000)
       } 
-
-      setBtnCriarNovoUserAtivo(true)  // O elemento fecha e o botão para criar novo usuário é aberto;
+      
+      // O elemento fecha e o botão para criar novo usuário é aberto;
+      setBtnCriarNovoUserAtivo(true)  
       
     } else {
       toast.error('As senhas não confere!')
@@ -130,6 +131,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
   
   /** Função para o usuário se logar  */
   const eventoLogin = async (event) => {
+
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
     
       if (dadosParaLogin.length === 0) {
@@ -219,7 +221,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && <div className='login-divCriarLogin'>
-          <h1>Cadastro</h1>
+          <h1> Cadastro </h1>
           <div className='login-divGridInputs'>
             <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
               Nome Completo
@@ -314,7 +316,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
             <h1>Login</h1>
 
             {!ativaFormsLogin && <h3>{ msnAlerta }</h3> }
-            {ativaFormsLogin && <h3>Usuário esta logado, direcionando para a lista de links...  </h3>}
+            {ativaFormsLogin && <h3> Usuário logado: {usuario}... </h3>}
 
             <div className='login-divGridInputs'>
               <label htmlFor="usuario" className='login-lblLoginPrincipal'>

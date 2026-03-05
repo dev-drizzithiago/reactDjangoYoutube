@@ -251,8 +251,8 @@ function App() {
                 </div>
 
                 {abrirFormsAddLink ? 
-                <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms'/> : 
-                <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms'/>}
+                <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms' /> : 
+                <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms' />}
 
                 <div className='app-divBtnDeslogar'>
                   <p className='app-userLogado'>Ola, {usuario} <FaRegUser /> </p>
@@ -265,7 +265,7 @@ function App() {
             </div>
 
             {spinnerPlayer && 
-            
+
               <div className="app-divImgLoading">
 
                   <p>Carregando mídia... </p>
@@ -278,7 +278,11 @@ function App() {
 
               </div>
             }
-            {abrirFormsAddLink && <FormularioLinkYoutube onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}/>}
+            {abrirFormsAddLink && <FormularioLinkYoutube 
+
+              onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}
+              fecharFormularioAdicionarLonk={(fecharJanela) => setAbrirFormsAddLink(fecharJanela)}
+            />}
 
             {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
             {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}

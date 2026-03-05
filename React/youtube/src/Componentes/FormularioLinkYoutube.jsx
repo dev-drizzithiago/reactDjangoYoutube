@@ -9,7 +9,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
+const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk }) => {
     const [carregando, setCarregando] = useState(null)
 
     const refLink = useRef();
@@ -28,6 +28,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
 
         /** Comunica o app.js que deve atualizar os links. */
         onLinkAdicionado(prev => prev + 1)
+        fecharFormularioAdicionarLonk(false) // Fecha o formulário
 
       } else if (responseDados.erro_processo === 1) {
         toast.warning(responseDados.mensagem_processo);
@@ -58,7 +59,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado }) => {
             }
           }/>
           
-        </div>       
+        </div>
 
         {/** BLOCO DOS BOTOES */}
         <div className="forms-divBtnImgAdd">
