@@ -150,9 +150,9 @@ class YouTubeDownload:
                 }
             )
 
-            # - Em vez de passar usuario no construtor, uso dados_link.usuarios.add(query_user_logado)
+            # - Em vez de passar usuario no construtor, uso dados_link.usuario_dados.add(query_user_logado)
             # após salvar.
-            dados_link.usuario.add(query_user_logado)
+            dados_link.usuario_dados.add(query_user_logado)
 
             logging.info('Link salvo na base de dados com sucesso')
             return True
@@ -256,7 +256,7 @@ class YouTubeDownload:
                 # Download da miniatura.
                 response = requests.get(self._miniatura)
 
-                dados_midia, created = DadosYoutube.objects.get_or_create(
+                dados_midia, created = query_validador_dados.objects.get_or_create(
                     path_arquivo=self._link_tube,
                     defaults={
                         'nome_arquivo': self._nome_formatado,
@@ -266,13 +266,13 @@ class YouTubeDownload:
 
                 # Salva as informações da miniatura no banco de dados.
                 dados_midia.path_miniatura.save(
-                    f"{self.nome_validado}.png",
+                    f"{self._nome_formatado}.png",
                     ContentFile(response.content),
-                    save=True  # **
+                    save=True
                 )
 
                 # Associa o usuário
-                dados_link.usuario.add(usuario_logado)
+                dados_midia.usuario_music.add(usuario_logado)
 
                 # --------------------------------------------------------------------------------------------------------------
                 # Final do modulo

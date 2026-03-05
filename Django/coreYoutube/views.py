@@ -205,7 +205,7 @@ def requestBaseDados(request):
     if request.user.is_authenticated:
         dados_json = json.loads(request.body)
 
-        query_dados_youtube = DadosYoutube.objects.filter(usuario=usuario_logado).order_by('-id_dados').values()
+        query_dados_youtube = DadosYoutube.objects.filter(usuario_dados=usuario_logado).order_by('-id_dados').values()
 
         for item in query_dados_youtube:
             lista_dados_django.append({
