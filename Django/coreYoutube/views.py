@@ -340,7 +340,11 @@ def listagem_midias(request):
 
         for item in query_dados_midias:
 
-            id_midia = item.id_music
+            if key_midia == 'id_music':
+                id_midia = item.id_music
+            else:
+                id_midia = item.id_movie
+
             nome_arquivo = item.nome_arquivo
             duracao_midia = item.duracao_midia
             path_arquivo = str(item.path_arquivo)  # Converte para string; evita erro "JSON serializable"

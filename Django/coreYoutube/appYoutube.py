@@ -108,6 +108,9 @@ class YouTubeDownload:
         self._link_miniatura = None
         self._link_video_youtube = None
 
+        self._nome_m4a_to_mp3 = None
+        self._path_arquivo_mp4 = None
+
         # Declaração para mídias
         self._nome_da_midia = None
         self._pasta_da_midia = None
@@ -234,7 +237,7 @@ class YouTubeDownload:
             self._nome_formatado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
 
             # Cria o nome padrão para realizar o download e colocar o caminho no banco de dados.
-            nome_m4a_to_mp3 = str(f"{self._nome_formatado}.m4a")
+            self._nome_m4a_to_mp3 = str(f"{self._nome_formatado}.m4a")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
             self._pasta_da_midia = (str(
@@ -244,17 +247,17 @@ class YouTubeDownload:
             # Se a midia não existir é feito o download
             try:
                 stream = self._download_yt.streams.get_audio_only()
-                stream.download(output_path=self.PATH_MIDIA_TEMP, filename=nome_m4a_to_mp3)
+                stream.download(output_path=self.PATH_MIDIA_TEMP, filename=self._nome_m4a_to_mp3)
 
                 print()
                 print('---' * 20)
-                print('>> Download da mídia: {}'.format(nome_m4a_to_mp3))
+                print('>> Download da mídia: {}'.format(self._nome_m4a_to_mp3))
 
             except Exception as error:
                 logging.error(f"Erro no download da mídia 'm4a': {error}")
                 return f"Erro no download da mídia 'm4a': {error}"
 
-            _mp4_to_mp3 = self.mp4_to_mp3(nome_m4a_to_mp3)
+            _mp4_to_mp3 = self.mp4_to_mp3(self._nome_m4a_to_mp3)
 
             if _mp4_to_mp3:
 
@@ -302,23 +305,13 @@ class YouTubeDownload:
         return self.dados_retorno
 
     # Faz o download do arquivo em MP4
-    def download_movie(self, id_entrada: int, usuario_logado):
-        logging.info(f'Baixando mídia em MP4...')
+    def download_movie(self, id_entrada: int, usuario_logado: str):
 
-        # Busca o link na base de dados.
-        query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+        query_validador_movie = MoviesSalvasServidor.objects.filter(id_movie=id_entrada).first()
 
-        self._auto_link = query_validador_dados.autor_link
-        self._titulo_link = query_validador_dados.titulo_link
-        self._link_tube = query_validador_dados.link_tube
-        self._duracao = query_validador_dados.duracao
-        self._miniatura = query_validador_dados.miniatura
+        if query_validador_movie:
 
-        if hasattr(query_validador_dados, 'moviessalvasservidor'):
-            logging.info(f'Mídia adicionado ao seu usuário...')
-
-            # Associa o usuário
-            query_validador_dados.usuario.add(usuario_logado)
+            query_validador_movie.usuario_movie.add(usuario_logado)
 
             self.erro_processo = 0
             self.mensagem_processo = 'Mídia adicionado ao seu usuário...'
@@ -327,35 +320,33 @@ class YouTubeDownload:
                 'erro_processo': self.erro_processo,
                 'mensagem_processo': self.mensagem_processo,
             }
+            logging.error('Mídia adicionado ao seu usuário...')
+
         else:
+            # Busca o link na base de dados.
+            query_validador_dados = DadosYoutube.objects.get(id_dados=id_entrada)
+
+            self._auto_link = query_validador_dados.autor_link
+            self._titulo_link = query_validador_dados.titulo_link
+            self._duracao = query_validador_dados.duracao
+            self._link_video_youtube = query_validador_dados.link_tube
+            self._link_miniatura = query_validador_dados.miniatura
             logging.info(f'Download do vídeo selecionado...')
 
             # Cria o objeto para o YouTube
-            download_yt = YouTube(self._link_tube)
+            download_yt = YouTube(self._link_video_youtube)
 
             # Cria e valida o nome do arquivo.
             self._nome_formatado = validacao_nome_arquivo(f"{self._auto_link}_{self._titulo_link}")
             logging.info(f"Nome Validado: {self._nome_formatado}")
 
             # Com o nome validade é colocado dentro da pasta com a extensão de MP3;
-            path_arquivo_mp4 = (str(
+            self._path_arquivo_mp4 = (str(
                 Path(
                     self.PATH_MIDIA_MOVIES_URL,
                     f'{self._nome_formatado}.mp4')
             ).replace('\\', '/'))
 
-            logging.info(f"Caminho arquivo MP4: {path_arquivo_mp4}")
-
-            dados_link, created = DadosYoutube.objects.get_or_create(
-                link_tube=self._link_tube,
-                defaults={
-                    'autor_link': self._auto_link,
-                    'titulo_link': self._titulo_link,
-                    'link_tube': self._link_tube,
-                    'duracao_midia': self._duracao,
-                    'miniatura': self._miniatura,
-                },
-            )
             try:
                 download = download_yt.streams.get_highest_resolution()
                 download.download(
@@ -363,22 +354,22 @@ class YouTubeDownload:
                     filename=f"{self._nome_formatado}.mp4",  # Adicionar a extensão ao nome do arquivo.
                 )
 
-                response_miniature = requests.get(self._miniatura)
+                response_miniature = requests.get(self._link_miniatura)
 
-                movies = MoviesSalvasServidor.objects.create(
+                movie = MoviesSalvasServidor.objects.create(
+                    # ID automático
                     nome_arquivo=self._nome_formatado,
-                    path_arquivo=path_arquivo_mp4,
+                    path_arquivo=self._path_arquivo_mp4,
                     duracao_midia=self._duracao,
-                    dados_youtube=dados_link,
                 )
 
                 # Salva as informações da miniatura no banco de dados.
-                movies.path_miniatura.save(
+                movie.path_miniatura.save(
                     f"{self._nome_formatado}.png",
                     ContentFile(response_miniature.content),
                     save=True  # **
                 )
-                dados_link.usuario.add(usuario_logado)
+                movie.usuario_movie.add(usuario_logado)
 
                 # ------------------------------------------------------------------------------------------------------
                 # Final do processo.
