@@ -27,6 +27,17 @@ from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
 
 from .utilitys import verificar_pasta_media
 
+import logging
+logging.basicConfig(
+    # level=logging.INFO, # Nível mínimo de log
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("log_events_views.log"), # Salva em arquivo
+        logging.StreamHandler(),  # Também mostra no console
+    ]
+)
+
+logger = logging.getLogger(__name__)
 
 class MinhaViewProtegida(APIView):
     permission_classes = [IsAuthenticated]  # só acessa se tiver token válido
@@ -417,12 +428,16 @@ def removendo_midias(request):
     erro_processo = None
     dados_json = json.loads(request.body)
 
+    logger.info('Dados JSON: ', dados_json)
+
     id_midia = dados_json['idMidia']
     tipo_midia = dados_json['tipoMidia']
 
     if tipo_midia == 'MP3':
 
         query_mp3_remove = MusicsSalvasServidor.objects.get(id_music=id_midia)
+
+
 
         query_mp3_remove.usuario_music.delete()
 
