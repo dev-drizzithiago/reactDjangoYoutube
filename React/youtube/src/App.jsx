@@ -282,7 +282,12 @@ function App() {
                 </div>                
             </div>
 
-            {configurarContaAtivo && <LoginUsuario dadosUsuario={logado}/>}
+            {configurarContaAtivo && 
+            <LoginUsuario 
+              dadosUsuario={logado}
+              infoDadosAtualizado={(dadosAtualizados) => setConfigurarContaAtivo(dadosAtualizados)}
+              AtivarLinksPosAtualizarDadosUser={(statusAtivarLinks) => setElementoLinks(statusAtivarLinks)}
+            />}
 
             {spinnerPlayer && 
 

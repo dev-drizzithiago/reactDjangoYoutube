@@ -23,7 +23,7 @@ import { toast } from 'react-toastify';
 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
+const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, AtivarLinksPosAtualizarDadosUser }) => {
 
   const [criarUser, setCriarUser] = useState(false)
   const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);  
@@ -53,7 +53,7 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
     }
   }, [logado])
 
-
+  // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
     console.log('Dados do usuário no componente de login: ', dadosUsuario)
     if (dadosUsuario) {
@@ -217,17 +217,32 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
 
   const atualizarCadastros = () => {
     console.log('Atualizar cadastro...')
+
+    setAtivaFormsLogin(false)
+    setCriarUser(false)
+    infoDadosAtualizado(false)
+    AtivarLinksPosAtualizarDadosUser(true)
   }
 
   const cancelar = () => {
-    console.log('Cancelar Processo...')
-    
-    // Reativa o botão para criar um novo usuário na página principal de login
-    setBtnCriarNovoUserAtivo(true) 
 
-    if (criarUser) {
+    console.log('Cancelar Processo...')
+    if (configurarConta) {
+
+      setAtivaFormsLogin(false)
       setCriarUser(false)
-    }
+      infoDadosAtualizado(false)
+
+      AtivarLinksPosAtualizarDadosUser(true)
+
+    } else {
+      // Reativa o botão para criar um novo usuário na página principal de login
+      setBtnCriarNovoUserAtivo(true) 
+
+      if (criarUser) {
+        setCriarUser(false)
+      }
+    }    
   }
 
   return (
@@ -238,8 +253,10 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
         <div className='login-divInputs'>
           {criarUser && (
             <>
+            
             {configurarConta ?
 
+            // Bloco para configurar os dados do usuário logado.
             <div className='login-divCriarLogin'>
               <h1> Configurar sua conta </h1>
               
@@ -332,13 +349,13 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
               <div className="login-divBtnsNovoUsuario">
                 <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
                 <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
-                <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
-                <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
+                <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar' onClick={atualizarCadastros}/>
               </div>
             </div>
 
           :
 
+          // Bloco para criar um novo usuário.
           <div className='login-divCriarLogin'>
 
             <h1> Cadastro </h1>
