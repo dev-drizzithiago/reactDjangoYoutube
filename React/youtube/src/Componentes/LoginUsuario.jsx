@@ -23,9 +23,13 @@ import { toast } from 'react-toastify';
 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const LoginUsuario = ({infoStatusLogin}) => {
+const LoginUsuario = ({ infoStatusLogin, dadosUsuario }) => {
 
   const [criarUser, setCriarUser] = useState(false)
+  const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);  
+
+  const [configurarConta, setConfigurarConta] = useState(false)
+
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
 
   const [ncNomeCompleto, setNcNomeCompleto] = useState('')
@@ -36,10 +40,10 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
-  const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);  
 
   const dispatch = useDispatch()
   const { logado, usuario } = useSelector((state) => state.session)
+
 
   useEffect(() => {
     if (usuario) {      
@@ -47,8 +51,18 @@ const LoginUsuario = ({infoStatusLogin}) => {
     } else {
       setAtivaFormsLogin(false)
     }
-
   }, [logado])
+
+
+  useEffect(() => {
+    console.log('Dados do usuário no componente de login: ', dadosUsuario)
+    if (dadosUsuario) {
+      setConfigurarConta(true)
+      setCriarUser(true)
+      setAtivaFormsLogin(false)
+    }
+  }, [dadosUsuario])
+
 
   // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
   const criarNovoUsuario = () => {
@@ -71,6 +85,7 @@ const LoginUsuario = ({infoStatusLogin}) => {
 
     if (ncPrimeiraSenha === ncConfirSenha) {
       const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+
       const PAYLOAD = {
         'tipoRequest': 'salvarCadastro',
         'dadosCredencial': {
@@ -79,9 +94,9 @@ const LoginUsuario = ({infoStatusLogin}) => {
           'emailUsuario': ncEmail,
           'passUsuario': ncConfirSenha,
         },
+
       }
-      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
-      console.log(responseDjango)
+      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)      
 
       if (responseDjango.erro_processo === 0) {
         // Geralmente o erro 0 é considerado normal.
@@ -218,98 +233,211 @@ const LoginUsuario = ({infoStatusLogin}) => {
   return (
 
     <div className='login-divPrincipal'>
+
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
-          {criarUser && <div className='login-divCriarLogin'>
-          <h1> Cadastro </h1>
-          <div className='login-divGridInputs'>
-            <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
-              Nome Completo
-              <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
-              value={ncNomeCompleto}
-              onChange={e => setNcNomeCompleto(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  salvarNovoUser();
-                  }
-                }
-              }
-              />
-            </label>
-          </div>
+          {criarUser && (
+            <>
+            {configurarConta ?
 
-          <div className='login-divGridInputs'>
-            <label htmlFor="nomeUserLogin" className='login-lblCadastro login-lblUsuarioLogin'>
-              Usuário Login
-              <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
-              value={ncUsuario}
-              onChange={e => setNcUsuario(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  salvarNovoUser();
-                  }
-                }
-              }
-              />
-            </label>              
-            
-          </div>
-          
-          <div className='login-divGridInputs' >
-            <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
-              E-mail
-              <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
-              value={ncEmail}
-              onChange={e => setNcEmail(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  salvarNovoUser();
-                  }
-                }
-              }
-              />
-            </label>
-          </div>
-          
-          <div className='login-divGridInputs'>
-            <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
-              Password
-              <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
-              value={ncPrimeiraSenha}
-              onChange={e => setNcPrimeiraSenha(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  salvarNovoUser();
-                  }
-                }
-              }
-              />
-            </label>
-          </div>          
-          
-          <div className='login-divGridInputs'>
-            <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
-              Confirmar Password
-              <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
-              value={ncConfirSenha}
-              onChange={e => setNcconfirSenha(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  salvarNovoUser();
-                  }
-                }
-              }
+            <div className='login-divCriarLogin'>
+              <h1> Configurar sua conta </h1>
               
-              />
-            </label>
+              {/* NOME COMPLETO */}
+              <div className='login-divGridInputs'>
+                <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
+                  Nome Completo
+                  <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
+                  value={ncNomeCompleto}
+                  onChange={e => setNcNomeCompleto(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      salvarNovoUser();
+                      }
+                    }
+                  }
+                  />
+                </label>
+              </div>
+              
+              {/* USUARIO */}
+              <div className='login-divGridInputs'>
+                <label htmlFor="nomeUserLogin" className='login-lblCadastro login-lblUsuarioLogin'>
+                  Usuário Login
+                  <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
+                  value={ncUsuario}
+                  onChange={e => setNcUsuario(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      salvarNovoUser();
+                      }
+                    }
+                  }
+                  />
+                </label>
+              </div>
+              
+              {/* E-MAIL */}
+              <div className='login-divGridInputs' >
+                <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
+                  E-mail
+                  <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
+                  value={ncEmail}
+                  onChange={e => setNcEmail(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      salvarNovoUser();
+                      }
+                    }
+                  }
+                  />
+                </label>
+              </div>
+              
+              {/* SENHA 1 */}
+              <div className='login-divGridInputs'>
+                <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
+                  Password
+                  <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
+                  value={ncPrimeiraSenha}
+                  onChange={e => setNcPrimeiraSenha(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      salvarNovoUser();
+                      }
+                    }
+                  }
+                  />
+                </label>
+              </div>
+              
+              {/* SENHA 2 */}
+              <div className='login-divGridInputs'>
+                <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
+                  Confirmar Password
+                  <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
+                  value={ncConfirSenha}
+                  onChange={e => setNcconfirSenha(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      salvarNovoUser();
+                      }
+                    }
+                  }
+                  />
+                </label>
+            </div>
+
+            {/* BOTOES */}
+              <div className="login-divBtnsNovoUsuario">
+                <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+                <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
+                <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
+                <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
+              </div>
+            </div>
+
+          :
+
+          <div className='login-divCriarLogin'>
+
+            <h1> Cadastro </h1>
+            <div className='login-divGridInputs'>
+
+              {/* NOME COMPLETO */}
+              <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
+                Nome Completo
+                <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 
+                value={ncNomeCompleto}
+                onChange={e => setNcNomeCompleto(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    salvarNovoUser();
+                    }
+                  }
+                }
+                />
+              </label>
+            </div>
+            
+            {/* USUÁRIO */}
+            <div className='login-divGridInputs'>
+              <label htmlFor="nomeUserLogin" className='login-lblCadastro login-lblUsuarioLogin'>
+                Usuário Login
+                <input type="text" name='nomeUserLogin' className='login-inputCadastro login-inputUserLogin' 
+                value={ncUsuario}
+                onChange={e => setNcUsuario(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    salvarNovoUser();
+                    }
+                  }
+                }
+                />
+              </label>
+            </div>
+            
+            {/* E-MAIL */}
+            <div className='login-divGridInputs' >
+              <label htmlFor='email' className='login-lblCadastro login-lblEmailLogin'>
+                E-mail
+                <input type="email" name='email' className='login-inputCadastro login-inputEmail' 
+                value={ncEmail}
+                onChange={e => setNcEmail(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    salvarNovoUser();
+                    }
+                  }
+                }
+                />
+              </label>
+            </div>
+            
+            {/* SENHA 1 */}
+            <div className='login-divGridInputs'>
+              <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
+                Password
+                <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
+                value={ncPrimeiraSenha}
+                onChange={e => setNcPrimeiraSenha(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    salvarNovoUser();
+                    }
+                  }
+                }
+                />
+              </label>
+            </div>
+            
+            {/* SENHA 2 */}
+            <div className='login-divGridInputs'>
+              <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
+                Confirmar Password
+                <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
+                value={ncConfirSenha}
+                onChange={e => setNcconfirSenha(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    salvarNovoUser();
+                    }
+                  }
+                }
+                />
+              </label>
+            </div>
+
+            {/* BOTOES */}
+            <div className="login-divBtnsNovoUsuario">
+              <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+              <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
+              <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
+              <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
+            </div>
           </div>
-          <div className="login-divBtnsNovoUsuario">
-            <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
-            <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
-            <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar'/>
-            <FaSave className="login-btnSaveNovoUser login-btnCadastrar" onClick={salvarNovoUser} />
-          </div>
-        </div>}
+          }</>)
+        }
 
         {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>

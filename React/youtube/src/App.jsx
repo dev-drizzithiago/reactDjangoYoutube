@@ -52,7 +52,8 @@ function App() {
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
 
-  const [abrirFormsAddLink, setAbrirFormsAddLink] = useState(false)
+  const [abrirFormsAddLink, setAbrirFormsAddLink] = useState(false);
+  const [configurarContaAtivo, setConfigurarContaAtivo] = useState(false);
   
   // - Cria dispatch para enviar ações.
   const dispatch = useDispatch()
@@ -210,6 +211,22 @@ function App() {
 
   }
 
+  const abrirFormsUsuario = () => {
+
+    if (!configurarContaAtivo) {
+      setConfigurarContaAtivo(true)
+      setElementoMp3(false);
+      setElementoMp4(false);
+      setElementoLinks(false);
+      setAtivarPlayer(false);
+    } else if (configurarContaAtivo) {
+      setElementoMp3(false);
+      setElementoLinks(false);
+      setAtivarPlayer(false);
+    }
+
+  }
+
   const deslogar = async () => {
 
     if (statusLogin) {
@@ -255,21 +272,22 @@ function App() {
                 <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms' />}
 
                 <div className='app-divBtnDeslogar'>
-                  <p className='app-userLogado'>Ola, {usuario} <FaRegUser /> </p>
+                  <p className='app-userLogado'>Ola, {usuario} <FaRegUser /></p>
                   <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
-
+                
+                {/* Abre o formulário para configurar conta. */}
                 <div >
-                  <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar'/>
+                  <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar' onClick={abrirFormsUsuario}/>
                 </div>                
             </div>
+
+            {configurarContaAtivo && <LoginUsuario dadosUsuario={logado}/>}
 
             {spinnerPlayer && 
 
               <div className="app-divImgLoading">
-
                   <p>Carregando mídia... </p>
-
                   <img
                     className="linkBancoDados-imgLoading" 
                     src="/img/imgBtns/spinner.gif" 
@@ -291,11 +309,14 @@ function App() {
             
               executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
               fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)} 
+
             />}
 
             {elementoMp4    && <PlayerMidiasMp4 
+
               executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
               fechaElementoMp4={(statusFechar) => setElementoMp4(statusFechar)} 
+
             />}
 
           </>)}
