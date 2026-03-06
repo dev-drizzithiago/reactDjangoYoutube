@@ -41,6 +41,23 @@
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.13);  
   }
 
+h1 {
+  color: #ffffff;
+  width: 30%;
+  
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  
+  padding-bottom: 5px;
+  border-radius: 10px;
+  
+  font: 18pt Arial, Helvetica, sans-serif;
+  
+  border-bottom: 1px solid #ffffff80;
+  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
+}
+
 /* h3 para titulos no elemento */
 h3 {
   color: #ffffff;

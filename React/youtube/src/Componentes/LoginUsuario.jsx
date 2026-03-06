@@ -458,10 +458,12 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, Ativ
 
         {/** Processo para logar o usuário */}
         {!criarUser && <div className='login-divLogin'>
-            <h1>Login</h1>
+            <h1> Login do usuário </h1>
 
-            {!ativaFormsLogin && <h3>{ msnAlerta }</h3> }
-            {ativaFormsLogin && <h3> Usuário logado: {usuario} direcionando aos links... </h3>}
+            {
+            !ativaFormsLogin ? <h3> { msnAlerta } </h3> :
+            ativaFormsLogin && <h3> Usuário logado: {usuario}... </h3>
+            }
 
             <div className='login-divGridInputs'>
               <label htmlFor="usuario" className='login-lblLoginPrincipal'>

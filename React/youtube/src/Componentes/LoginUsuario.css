@@ -5,7 +5,7 @@
   margin-top: 1%;
   padding: 20px;
   border-radius: 10px;
-  background-color: #cecece3f;  
+  background-color: #0000003f;  
 }
 
 /* Config para os label do cadastro */
@@ -19,7 +19,7 @@
   height: 100%;
   color: #fff;  
   border-radius: 10px;
-  background-color: #ffffff3f;
+  background-color: #747474;
 }
 
 /* configuração dos inputs */
@@ -36,7 +36,7 @@
   text-align: left;
   justify-content: right;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #747474;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
 
@@ -52,7 +52,7 @@
   padding: 20px;
   gap: 50px;
   border-radius: 10px;
-  background-color: #cecece3a;
+  background-color: #000000;
   box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
 }
 
