@@ -131,9 +131,9 @@ function App() {
         // - Se sim → dispara loginSuccess e atualiza Redux.
         dispatch(
           loginSuccess({
-            logado: responseDjango.usuario_logado,
-            nomeUsuario: responseDjango.nome_usuario,
-            usuario: responseDjango.usuario_login,
+            logado: responseStatusLogindjango.usuario_logado,
+            nomeUsuario: responseStatusLogindjango.nome_usuario,
+            usuario: responseStatusLogindjango.usuario_login,
           }));
 
       } else {

@@ -47,7 +47,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
 
   const dispatch = useDispatch()
-  const { logado, usuario } = useSelector((state) => state.session)
+  const { logado, usuario, nomeUsuario } = useSelector((state) => state.session)
 
   // Indentifica se o usuário está logado, se sim, encaminha para página principal do sistema. 
   // Se não, permanece na página de login.
@@ -62,7 +62,6 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
 
-    console.log(boolUserLogado)
     if (boolUserLogado) {
       setConfigurarConta(true)
       setCriarUser(true)
@@ -472,8 +471,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
             <h1> Login do usuário </h1>
 
             {
-            !ativaFormsLogin ? <h3> { msnAlerta } </h3> :
-            ativaFormsLogin && <h3> Usuário logado: {usuario}... </h3>
+              !ativaFormsLogin ? <h3> { msnAlerta } </h3> :
+              ativaFormsLogin && <h3> Usuário logado: {nomeUsuario}... </h3>
             }
 
             <div className='login-divGridInputs'>
