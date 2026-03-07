@@ -23,11 +23,9 @@ const useRequestDjango = (urlDjango, payload, trigger) => {
             if (data.erro_processo === 666 ) {
                 setDados(data.dados_django);
                 setCarregando(false);
-                setUsuarioLogado(false)
             } else {
                 setDados(data.dados_django);
                 setCarregando(false); 
-                setUsuarioLogado(true)
             }
         })
         .catch (error => {

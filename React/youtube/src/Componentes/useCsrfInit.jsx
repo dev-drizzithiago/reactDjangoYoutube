@@ -20,11 +20,12 @@ const useCsrfInit = () => {
         })
         .then(data => data.json())
         .then((data) => {
+            
             console.log('Cookies recebido com sucesso.')
 
             console.log('Dados recebidos: ', data)
         
-            if (data.user_logado) {
+            if (data.usuario_logado) {
                dispatch(loginSuccess({
                    usuario: data.usuario_login,
                    nomeUsuario: data.nome_usuario,
