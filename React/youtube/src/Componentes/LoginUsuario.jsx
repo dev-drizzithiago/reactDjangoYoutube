@@ -207,7 +207,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
               // Coloca na session o estado do login. 
               dispatch(loginSuccess({
-                userLogin: responseDjango.usuario_login,
+                loginUsuario: responseDjango.usuario_login,
                 logado: responseDjango.usuario_logado,
                 usuario: responseDjango.nome_usuario,
               }));
