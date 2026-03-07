@@ -1,6 +1,11 @@
 import './LoginUsuario.css';
 
 import sendRequestDjango from './sendRequestDjango';
+
+// Imports hooks personalizados
+import useRequestDjango from './useRequestDjango';
+
+// Import hooks do React
 import { useEffect, useState } from 'react';
 import {  logarUsuario } from './statusLoginDjango';
 
@@ -55,11 +60,18 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, Ativ
 
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
-    console.log('Dados do usuário no componente de login: ', dadosUsuario)
+    
     if (dadosUsuario) {
       setConfigurarConta(true)
       setCriarUser(true)
       setAtivaFormsLogin(false)
+
+      const payload = {
+        'tipoRequest': usuario,
+      }
+
+      const (dados, carregando) = useRequestDjango(`${urlDefaultDjango}/dados_usuario_logado/`, {}, 0)
+
     }
   }, [dadosUsuario])
 

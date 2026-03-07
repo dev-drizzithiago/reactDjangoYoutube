@@ -92,6 +92,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
             {dados && dados.length ? <>
             <h3>Lista MP3</h3>
             <div className="playerMidiasMp3-content">
+                
                 {dados.map((item) => (
                     <div className="playerMidiasMp3-playMidias"  key={item.id_music}>
                         <div className="playerMidiasMp3-div_paragraphTitulos">
