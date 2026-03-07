@@ -28,7 +28,7 @@ import { toast } from 'react-toastify';
 
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
-const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, AtivarLinksPosAtualizarDadosUser }) => {
+const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, AtivarLinksPosAtualizarDadosUser }) => {
 
   const [criarUser, setCriarUser] = useState(false)
   const [ativaFormsLogin, setAtivaFormsLogin] = useState(false);  
@@ -49,14 +49,25 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, Ativ
   const dispatch = useDispatch()
   const { logado, usuario } = useSelector((state) => state.session)
 
+
+  useEffect(() => {
+    if (usuario) {      
+      setAtivaFormsLogin(true)
+    } else {
+      setAtivaFormsLogin(false)
+    }
+  }, [logado])
+
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
-    if (dadosUsuario) {
+    
+    if (boolUserLogado) {
       setConfigurarConta(true)
       setCriarUser(true)
       setAtivaFormsLogin(false)
     }
-  }, [dadosUsuario])
+      
+  }, [boolUserLogado])
 
 
   // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
