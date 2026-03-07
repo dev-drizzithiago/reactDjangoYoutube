@@ -49,29 +49,12 @@ const LoginUsuario = ({ infoStatusLogin, dadosUsuario, infoDadosAtualizado, Ativ
   const dispatch = useDispatch()
   const { logado, usuario } = useSelector((state) => state.session)
 
-
-  useEffect(() => {
-    if (usuario) {      
-      setAtivaFormsLogin(true)
-    } else {
-      setAtivaFormsLogin(false)
-    }
-  }, [logado])
-
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
-    
     if (dadosUsuario) {
       setConfigurarConta(true)
       setCriarUser(true)
       setAtivaFormsLogin(false)
-
-      const payload = {
-        'tipoRequest': usuario,
-      }
-
-      const (dados, carregando) = useRequestDjango(`${urlDefaultDjango}/dados_usuario_logado/`, {}, 0)
-
     }
   }, [dadosUsuario])
 

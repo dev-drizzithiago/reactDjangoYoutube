@@ -91,6 +91,7 @@ def credenciais_login(request):
 
     mensagem_erro = None
     erro_processo = None
+    usuario_login = None
     usuario_logado = None
     nome_completo_usuario = None
 
@@ -152,6 +153,7 @@ def credenciais_login(request):
 
                 request.session['usuario_mail'] = user_auth.email
                 usuario_logado = request.user.is_authenticated
+                usuario_login = request.user
                 erro_processo = 0
             else:
                 # Quando entra com as credências invalidas.
@@ -176,6 +178,7 @@ def credenciais_login(request):
             nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
 
             usuario_logado = request.user.is_authenticated
+            usuario_login = request.user
             erro_processo = 0
         else:
             usuario_logado = request.user.is_authenticated
@@ -189,15 +192,11 @@ def credenciais_login(request):
         erro_processo = 0
         usuario_logado = False
 
-    print('---' * 20)
-    print('Usuário logado: ', request.user.is_authenticated)
-    print('Nome do usuário: ', nome_completo_usuario)
-    print()
-
     return JsonResponse({
         'mensagem_processo': mensagem_erro,
         'erro_processo': erro_processo,
         'nome_usuario': nome_completo_usuario,
+        'usuario_login': usuario_login,
         'usuario_logado': usuario_logado,
     })
 
