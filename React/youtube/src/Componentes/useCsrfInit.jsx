@@ -21,14 +21,15 @@ const useCsrfInit = () => {
         .then(data => data.json())
         .then((data) => {
             console.log('Cookies recebido com sucesso.')
+        
             if (data.user_logado) {
 
-                dispatch(loginSuccess({
-                    loginUsuario: data.user_login,
-                    logado: data.user_logado,
-                    usuario: data.nome_usuario,
-                }))
-                
+               dispatch(loginSuccess({
+                   usuario: responseDjango.usuario_login,
+                   nomeUsuario: responseDjango.nome_usuario,
+                   logado: responseDjango.usuario_logado,
+              }));
+
             } else {
                 dispatch(logout())
             }
