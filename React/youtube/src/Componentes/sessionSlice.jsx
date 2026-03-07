@@ -3,14 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const sessionSlice = createSlice({
     name: 'session',  // → dá um nome ao slice, usado internamente pelo Redux.
-    initialState: { usuario: null, logado: false },  // → estado inicial: nenhum usuário (null) e logado: false.
+    initialState: { userLogin: null,usuario: null, logado: false },  // → estado inicial: nenhum usuário (null) e logado: false.
 
     reducers: {  // → funções que alteram o estado:
         loginSuccess(state, action) {  // → recebe action.payload (o usuário logado) e atualiza o estado para logado: true.
+            
+            state.userLogin = action.payload.userLogin;
             state.usuario = action.payload.usuario;
             state.logado = action.payload.logado;
+
         },
+        
         logout(state) {  // logout → limpa o usuário e marca como deslogado.
+            state.userLogin = null;
             state.usuario = null;
             state.logado = false;
         },

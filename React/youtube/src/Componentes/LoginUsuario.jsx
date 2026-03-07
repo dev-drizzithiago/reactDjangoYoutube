@@ -61,7 +61,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
-    
+
     console.log(boolUserLogado)
     if (boolUserLogado) {
       setConfigurarConta(true)
@@ -207,6 +207,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
               // Coloca na session o estado do login. 
               dispatch(loginSuccess({
+                userLogin: responseDjango.usuario_login,
                 logado: responseDjango.usuario_logado,
                 usuario: responseDjango.nome_usuario
               }));

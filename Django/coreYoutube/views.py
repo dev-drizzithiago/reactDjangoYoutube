@@ -153,7 +153,7 @@ def credenciais_login(request):
 
                 request.session['usuario_mail'] = user_auth.email
                 usuario_logado = request.user.is_authenticated
-                usuario_login = request.user
+                usuario_login = str(request.user)
                 erro_processo = 0
             else:
                 # Quando entra com as credências invalidas.
@@ -178,7 +178,7 @@ def credenciais_login(request):
             nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
 
             usuario_logado = request.user.is_authenticated
-            usuario_login = request.user
+            usuario_login = str(request.user)
             erro_processo = 0
         else:
             usuario_logado = request.user.is_authenticated
