@@ -61,6 +61,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
+    
     console.log(boolUserLogado)
     if (boolUserLogado) {
       setConfigurarConta(true)
@@ -260,7 +261,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && (
-            
+
             <>
             
             {configurarConta ?

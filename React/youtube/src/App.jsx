@@ -280,10 +280,11 @@ function App() {
                   <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar' onClick={abrirFormsUsuario}/>
                 </div>                
             </div>
-
+            
+            {/* CONFIGURAR CONTA */}
             {configurarContaAtivo && 
             <LoginUsuario 
-              dadosUsuario={logado}
+              boolUserLogado={logado}
               infoDadosAtualizado={(dadosAtualizados) => setConfigurarContaAtivo(dadosAtualizados)}
               AtivarLinksPosAtualizarDadosUser={(statusAtivarLinks) => setElementoLinks(statusAtivarLinks)}
             />}
