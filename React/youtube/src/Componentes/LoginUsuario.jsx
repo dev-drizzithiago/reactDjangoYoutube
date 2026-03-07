@@ -209,7 +209,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               dispatch(loginSuccess({
                 userLogin: responseDjango.usuario_login,
                 logado: responseDjango.usuario_logado,
-                usuario: responseDjango.nome_usuario
+                usuario: responseDjango.nome_usuario,
               }));
             }
           } else {

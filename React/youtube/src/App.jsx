@@ -125,15 +125,17 @@ function App() {
 
       // - verificaLogin → chama o backend Django para saber se o usuário ainda está logado.
       const responseStatusLogindjango = await verificarUsuarioLogado(linkSendRequest, PAYLOAD)
-      console.log(responseStatusLogindjango)
 
       if (responseStatusLogindjango) {
 
         // - Se sim → dispara loginSuccess e atualiza Redux.
-        dispatch(loginSuccess(responseStatusLogindjango.usuario_logado))
+        dispatch(loginSuccess(
+          responseStatusLogindjango.usuario_login,
+          responseStatusLogindjango.nome_usuario,
+          responseStatusLogindjango.usuario_logado,
+        ))
 
       } else {
-
         // - Se não → dispara logout.
         setStatusLogin(responseStatusLogindjango)
         dispatch(logout())
