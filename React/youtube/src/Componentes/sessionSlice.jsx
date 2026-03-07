@@ -15,7 +15,7 @@ const sessionSlice = createSlice({
         },
 
         logout(state) {  // logout → limpa o usuário e marca como deslogado.
-            state.userLogin = null;
+            state.loginUsuario = null;
             state.usuario = null;
             state.logado = false;
         },
