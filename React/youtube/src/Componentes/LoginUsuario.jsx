@@ -49,7 +49,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   const dispatch = useDispatch()
   const { logado, usuario } = useSelector((state) => state.session)
 
-
+  // Indentifica se o usuário está logado, se sim, encaminha para página principal do sistema. 
+  // Se não, permanece na página de login.
   useEffect(() => {
     if (usuario) {      
       setAtivaFormsLogin(true)
@@ -60,7 +61,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   // Verifica se o usuário já está logado. Se sim, ativa o formulário para configurar os dados.
   useEffect(() => {
-    
+    console.log(boolUserLogado)
     if (boolUserLogado) {
       setConfigurarConta(true)
       setCriarUser(true)
@@ -222,12 +223,13 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   }
 
   const atualizarCadastros = () => {
-    console.log('Atualizar cadastro...')
+    console.log('Btn Atualizar cadastro...')
 
     setAtivaFormsLogin(false)
     setCriarUser(false)
     infoDadosAtualizado(false)
-    AtivarLinksPosAtualizarDadosUser(true)
+    AtivarLinksPosAtualizarDadosUser(true)  // Envia para o app
+
   }
 
   const cancelar = () => {
@@ -258,6 +260,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
           {criarUser && (
+            
             <>
             
             {configurarConta ?
