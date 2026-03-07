@@ -56,11 +56,13 @@ def csrf_token_view(request):
     :param request:
     :return: Retorna um aviso para o react.
     """
-    user_logado = request.user.is_authenticated
+    usuario_logado = request.user.is_authenticated
     nome_completo_usuario = None
     verificar_pasta_media()
 
-    if user_logado:
+    usuario_login = str(request.user)
+
+    if usuario_logado:
         user_logado_primeiro_nome = request.user.first_name
         user_logado_sobrenome = request.user.last_name
         nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
@@ -72,13 +74,15 @@ def csrf_token_view(request):
     print()
     print('Usuário Logado:')
     print('---' * 20)
-    print(user_logado, ' - ', nome_completo_usuario)
+    print(usuario_logado, ' - ', nome_completo_usuario)
     print()
 
     return JsonResponse({
         'mensagem_processo': 'Token CSRF enviado',
-        'user_logado': user_logado,
-        'nome_usuario': nome_completo_usuario
+
+        'nome_usuario': nome_completo_usuario,
+        'usuario_login': usuario_login,
+        'usuario_logado': usuario_logado,
     })
 
 @csrf_exempt
@@ -161,9 +165,19 @@ def credenciais_login(request):
                 mensagem_erro = 'Credenciais inválidas'
                 usuario_logado = False
                 erro_processo = 2
+        elif request.user.is_authenticated:
+            logger.warning('Usuário já esta logado. Por segurança será deslogado...')
+
+            try:
+                logout(request)
+            except Exception as error:
+                logger.error(f"Erro no sistema: {error}")
+
+            mensagem_erro = 'Erro no processo. Tente de novo...'
+            erro_processo = 1
         else:
             # Quando ocorre algum erro fora do padrão.
-            print('Processo invalido')
+            print(f'Processo invalido: {USER} - {PASS}')
             mensagem_erro = 'Processo invalido'
             nome_completo_usuario = '<desconhecido>'
             usuario_logado = request.user.is_authenticated
@@ -195,6 +209,7 @@ def credenciais_login(request):
     return JsonResponse({
         'mensagem_processo': mensagem_erro,
         'erro_processo': erro_processo,
+
         'nome_usuario': nome_completo_usuario,
         'usuario_login': usuario_login,
         'usuario_logado': usuario_logado,
