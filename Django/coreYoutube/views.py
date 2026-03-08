@@ -223,11 +223,16 @@ def credenciais_login(request):
         nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
 
         email_usuario = str(usuario.email)
-        password_usuario = "*************"   # Representação
 
         mensagem_processo = 'Informações do usuário'
         erro_processo = 0
 
+    # Processo para atualizar os dados do usuário
+    elif tipo_requisicao == 'atualizarCadastro':
+        print(dados_json)
+
+
+    # Retorno dos processos de usuários
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,

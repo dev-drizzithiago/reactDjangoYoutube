@@ -35,7 +35,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   const [configurarConta, setConfigurarConta] = useState(false)
 
-  const [dadosUsuario, setDadosUsuario] = useState({})
+  const [ativarAlterarSenha, setAtivarAlterarSenha] = useState(false)
+  
 
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
 
@@ -247,13 +248,53 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
       }, 30000);    
   }
 
-  const atualizarCadastros = () => {
+  const atualizarCadastros = async () => {
     console.log('Btn Atualizar cadastro...')
 
-    setAtivaFormsLogin(false)
-    setCriarUser(false)
-    infoDadosAtualizado(false)
-    AtivarLinksPosAtualizarDadosUser(true)  // Envia para o app
+    if (ncNomeCompleto === '' &&
+      ncUsuario === '' &&
+      ncEmail === '' &&
+      ncPrimeiraSenha === '' &&
+      ncConfirSenha === ''
+    ) {
+      toast.warning("Preencha todo o formulário...")
+      return
+    }
+
+
+    const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+
+      const PAYLOAD = {
+        'tipoRequest': 'atualizarCadastro',
+        'dadosCredencial': {
+          'nomeUsuario': ncNomeCompleto,
+          'userLogin': ncUsuario,
+          'emailUsuario': ncEmail,
+          'passUsuario': ncConfirSenha,
+        },
+
+      }
+      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)      
+
+      console.log(responseDjango)
+
+      if (responseDjango.erro_processo === 0) {
+        // Geralmente o erro 0 é considerado normal.
+        toast.success('Dados atualizados com sucesso...')
+        
+
+      } else if (responseDjango.erro_processo === 1) {
+
+        // Geralmente o erro 1 é considerado critico.
+        console.log(responseDjango.mensagem_processo)
+        toast.warning('Dados não foram atualizados')
+
+      }
+
+    // setAtivaFormsLogin(false)
+    // setCriarUser(false)
+    // infoDadosAtualizado(false)
+    // AtivarLinksPosAtualizarDadosUser(true)  // Envia para o app
 
   }
 
@@ -344,43 +385,48 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                 </label>
               </div>
               
-              {/* SENHA 1 */}
-              <div className='login-divGridInputs'>
-                <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
-                  Password
-                  <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
-                  value={ncPrimeiraSenha}
-                  onChange={e => setNcPrimeiraSenha(e.target.value)}
-                  onKeyDown={e => {
-                    if (e.key === "Enter") {
-                      salvarNovoUser();
+              {ativarAlterarSenha && 
+              <>(
+                {/* SENHA 1 */}
+                <div className='login-divGridInputs'>
+                  <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
+                    Password
+                    <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
+                    value={ncPrimeiraSenha}
+                    onChange={e => setNcPrimeiraSenha(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === "Enter") {
+                        salvarNovoUser();
+                        }
                       }
                     }
-                  }
-                  />
-                </label>
-              </div>
+                    />
+                  </label>
+                </div>
+                
+                {/* SENHA 2 */}
+                <div className='login-divGridInputs'>
+                  <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
+                    Confirmar Password
+                    <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
+                    value={ncConfirSenha}
+                    onChange={e => setNcconfirSenha(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === "Enter") {
+                        salvarNovoUser();
+                        }
+                      }
+                    }
+                    />
+                  </label>
+                </div>)
+              </>}
               
-              {/* SENHA 2 */}
-              <div className='login-divGridInputs'>
-                <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
-                  Confirmar Password
-                  <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
-                  value={ncConfirSenha}
-                  onChange={e => setNcconfirSenha(e.target.value)}
-                  onKeyDown={e => {
-                    if (e.key === "Enter") {
-                      salvarNovoUser();
-                      }
-                    }
-                  }
-                  />
-                </label>
-            </div>
 
             {/* BOTOES */}
               <div className="login-divBtnsNovoUsuario">
                 <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
+                
                 <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
                 <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar' onClick={atualizarCadastros}/>
               </div>
