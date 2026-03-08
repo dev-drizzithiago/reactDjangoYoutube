@@ -35,6 +35,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   const [configurarConta, setConfigurarConta] = useState(false)
 
+  const [dadosUsuario, setDadosUsuario] = useState({})
+
   const [btnCriarNovoUserAtivo, setBtnCriarNovoUserAtivo] = useState(true)
 
   const [ncNomeCompleto, setNcNomeCompleto] = useState('')
@@ -76,13 +78,23 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
           }
 
           const responseDjangoInfoCredencialUsuario = await sendRequestDjango(urlDjango, PLAYLOAD)
+
+          if (responseDjangoInfoCredencialUsuario.erro_processo === 0) {
+            const listaDadosUsuario = {
+              'nomeUsuario': responseDjangoInfoCredencialUsuario.nome_usuario,
+              'usuarioLogin': responseDjangoInfoCredencialUsuario.usuario_login,
+              'emailUsuario': responseDjangoInfoCredencialUsuario.email_usuario,
+              'passUsuario': responseDjangoInfoCredencialUsuario.password_usuario,
+            }
+            setDadosUsuario(listaDadosUsuario)
+          }
           console.log('Informações do usuário logado: ', responseDjangoInfoCredencialUsuario)
           
       }
 
       definirConfigurarConta()
     }
-  }, [boolUserLogado])
+  }, [])
 
 
   // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
@@ -285,7 +297,11 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               <h1> Configurar sua conta </h1>
               
               {/* NOME COMPLETO */}
+              
               <div className='login-divGridInputs'>
+
+                {listaDadosUsuario.map}
+                
                 <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
                   Nome Completo
                   <input type="text" name='nomeCompleto' className='login-inputCadastro login-inputNomecompleto' 

@@ -99,7 +99,7 @@ def credenciais_login(request):
     usuario_logado = None
     nome_completo_usuario = None
     email_usuario = None
-    password_usuario = None
+    password_usuario = "*************"
 
     dados_json = json.loads(request.body)
 
@@ -223,7 +223,7 @@ def credenciais_login(request):
         nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
 
         email_usuario = str(usuario.email)
-        password_usuario = "*************"
+        password_usuario = "*************"   # Representação
 
         mensagem_processo = 'Informações do usuário'
         erro_processo = 0
