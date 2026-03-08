@@ -118,7 +118,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
                             onClick={() => removeDeleteMidia(item.id_music)} />
                         </div>
                     </div>                     
-                ))}            
+                ))}  {/**Final MAP */}
             </div>
             </> : <h3> Você não possui nenhum MP3 baixado. </h3>}
         </div>

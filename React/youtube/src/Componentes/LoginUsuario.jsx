@@ -80,13 +80,11 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
           const responseDjangoInfoCredencialUsuario = await sendRequestDjango(urlDjango, PLAYLOAD)
 
           if (responseDjangoInfoCredencialUsuario.erro_processo === 0) {
-            const listaDadosUsuario = {
-              'nomeUsuario': responseDjangoInfoCredencialUsuario.nome_usuario,
-              'usuarioLogin': responseDjangoInfoCredencialUsuario.usuario_login,
-              'emailUsuario': responseDjangoInfoCredencialUsuario.email_usuario,
-              'passUsuario': responseDjangoInfoCredencialUsuario.password_usuario,
-            }
-            setDadosUsuario(listaDadosUsuario)
+            setNcNomeCompleto(responseDjangoInfoCredencialUsuario.nome_usuario)
+            setNcUsuario(responseDjangoInfoCredencialUsuario.usuario_login)
+            setNcEmail(responseDjangoInfoCredencialUsuario.email_usuario)
+            setNcPrimeiraSenha(responseDjangoInfoCredencialUsuario.password_usuario)
+            setNcconfirSenha(responseDjangoInfoCredencialUsuario.password_usuario)
           }
           console.log('Informações do usuário logado: ', responseDjangoInfoCredencialUsuario)
           
@@ -286,10 +284,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
         {/** PROCESSO PARA CRIAR UM NOVO LOGIN. */}
         <div className='login-divInputs'>
-          {criarUser && (
-
-            <>
-            
+          {criarUser && (            <>            
             {configurarConta ?
 
             // Bloco para configurar os dados do usuário logado.
@@ -299,8 +294,6 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               {/* NOME COMPLETO */}
               
               <div className='login-divGridInputs'>
-
-                {listaDadosUsuario.map}
                 
                 <label htmlFor="nomeCompleto" className='login-lblCadastro login-lblNomeCompleto'>
                   Nome Completo
