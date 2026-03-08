@@ -93,7 +93,7 @@ def credenciais_login(request):
             'erro_processo': 1,
         }, status=400)
 
-    mensagem_erro = None
+    mensagem_processo = None
     erro_processo = None
     usuario_login = None
     usuario_logado = None
@@ -103,6 +103,7 @@ def credenciais_login(request):
 
     tipo_requisicao = dados_json['tipoRequest']
 
+    # Salva um novo usuário
     if tipo_requisicao == 'salvarCadastro':
         dados_novo_cadastro = dados_json['dadosCredencial']
         NAME = dados_novo_cadastro['nomeUsuario']
@@ -206,8 +207,8 @@ def credenciais_login(request):
         erro_processo = 0
         usuario_logado = False
 
-    # Faz a busca das informações do usuário que esta logado.
-    elif tipo_requisicao == 'informacao_usuario':
+    # Faz a busca das informações do usuário que está logado.
+    elif tipo_requisicao == 'informacaoUsuario':
 
         user_logado_primeiro_nome = request.user.first_name
         user_logado_sobrenome = request.user.last_name
@@ -215,6 +216,13 @@ def credenciais_login(request):
         login_usuario = str(request.user)
         email_usuario = str(request.user.email)
         password_usuario = str(request.user.password)
+
+        mensagem_processo = {
+            'nome_completo_usuario': nome_completo_usuario,
+            'login_usuario': login_usuario,
+            'email_usuario': email_usuario,
+            'password_usuario': password_usuario,
+        }
 
 
 
