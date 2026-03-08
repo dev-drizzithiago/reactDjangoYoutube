@@ -84,8 +84,6 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
             setNcNomeCompleto(responseDjangoInfoCredencialUsuario.nome_usuario)
             setNcUsuario(responseDjangoInfoCredencialUsuario.usuario_login)
             setNcEmail(responseDjangoInfoCredencialUsuario.email_usuario)
-            setNcPrimeiraSenha(responseDjangoInfoCredencialUsuario.password_usuario)
-            setNcconfirSenha(responseDjangoInfoCredencialUsuario.password_usuario)
           }
           console.log('Informações do usuário logado: ', responseDjangoInfoCredencialUsuario)
           
@@ -319,9 +317,14 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     }    
   }
 
-  const ativarCamposAlterarSenha = () => [
+  const ativarCamposAlterarSenha = () => {
 
-  ]
+    if (ativarAlterarSenha) {
+      setAtivarAlterarSenha(false)
+    } else {
+      setAtivarAlterarSenha(true)
+    }
+  }
 
   return (
 
@@ -391,10 +394,28 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               
               {ativarAlterarSenha && 
               <>(
+                
+                {/* SENHA ATUAL */}
+                <div className='login-divGridInputs'>
+                  <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
+                    Senha atual
+                    <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
+                    value={ncPrimeiraSenha}
+                    onChange={e => setNcPrimeiraSenha(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === "Enter") {
+                        salvarNovoUser();
+                        }
+                      }
+                    }
+                    />
+                  </label>
+                </div>
+
                 {/* SENHA 1 */}
                 <div className='login-divGridInputs'>
                   <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
-                    Password
+                    Senha
                     <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
                     value={ncPrimeiraSenha}
                     onChange={e => setNcPrimeiraSenha(e.target.value)}
@@ -411,7 +432,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                 {/* SENHA 2 */}
                 <div className='login-divGridInputs'>
                   <label htmlFor='confirm-senha' className='login-lblCadastro login-lblConfirmSenha'>
-                    Confirmar Password
+                    Confirmar Senha
                     <input type="password" name='confirm-senha' className='login-inputCadastro login-inputConfirSenha' 
                     value={ncConfirSenha}
                     onChange={e => setNcconfirSenha(e.target.value)}
@@ -430,7 +451,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
             {/* BOTOES */}
               <div className="login-divBtnsNovoUsuario">
                 <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
-                <img src='/img/imgBtns/redefinir-senha.png' className='login-atualizar-ativarAlterarSenha'/>
+                <img src='/img/imgBtns/redefinir-senha.png' className='login-btnLogar' onClick={ativarCamposAlterarSenha}/>
                 <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
                 <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar' onClick={atualizarCadastros}/>
               </div>
