@@ -122,16 +122,16 @@ def credenciais_login(request):
                 email=MAIL,
                 password=PASS,
             )
-            mensagem_erro = 'Cadastro realizado com sucesso.'
+            mensagem_processo = 'Cadastro realizado com sucesso.'
             erro_processo = 0
         except Exception as error:
             print('Erro ao cadastrar usuário', error)
 
             if str(error) == "UNIQUE constraint failed: auth_user.username":
-                mensagem_erro = 'Usuário já esta cadastrado...'
+                mensagem_processo = 'Usuário já esta cadastrado...'
                 erro_processo = 5
             else:
-                mensagem_erro = 'Erro ao cadastrar usuário.'
+                mensagem_processo = 'Erro ao cadastrar usuário.'
                 erro_processo = 1
 
     # Processo para realizar o login do usuário quando entra com as credenciais.
@@ -162,7 +162,7 @@ def credenciais_login(request):
             else:
                 # Quando entra com as credências invalidas.
                 print('Credenciais inválidas')
-                mensagem_erro = 'Credenciais inválidas'
+                mensagem_processo = 'Credenciais inválidas'
                 usuario_logado = False
                 erro_processo = 2
         elif request.user.is_authenticated:
@@ -173,12 +173,12 @@ def credenciais_login(request):
             except Exception as error:
                 logger.error(f"Erro no sistema: {error}")
 
-            mensagem_erro = 'Erro no processo. Tente de novo...'
+            mensagem_processo = 'Erro no processo. Tente de novo...'
             erro_processo = 1
         else:
             # Quando ocorre algum erro fora do padrão.
             print(f'Processo invalido: {USER} - {PASS}')
-            mensagem_erro = 'Processo invalido'
+            mensagem_processo = 'Processo invalido'
             nome_completo_usuario = '<desconhecido>'
             usuario_logado = request.user.is_authenticated
             erro_processo = 1
@@ -202,12 +202,24 @@ def credenciais_login(request):
     # Processo para desconectar o utilizador
     elif tipo_requisicao == 'deslogarUsuario':
         logout(request)
-        mensagem_erro = 'Usuário deslogado'
+        mensagem_processo = 'Usuário deslogado'
         erro_processo = 0
         usuario_logado = False
 
+    # Faz a busca das informações do usuário que esta logado.
+    elif tipo_requisicao == 'informacao_usuario':
+
+        user_logado_primeiro_nome = request.user.first_name
+        user_logado_sobrenome = request.user.last_name
+        nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
+        login_usuario = str(request.user)
+        email_usuario = str(request.user.email)
+        password_usuario = str(request.user.password)
+
+
+
     return JsonResponse({
-        'mensagem_processo': mensagem_erro,
+        'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
 
         'nome_usuario': nome_completo_usuario,

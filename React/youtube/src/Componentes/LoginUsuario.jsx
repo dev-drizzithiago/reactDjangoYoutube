@@ -63,11 +63,21 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   useEffect(() => {
 
     if (boolUserLogado) {
-      setConfigurarConta(true)
       setCriarUser(true)
+      setConfigurarConta(true)
       setAtivaFormsLogin(false)
+
+        const definirConfigurarConta = async () => {
+          urloDjango = `${urlDefaultDjango}/credenciais_login/`
+          PLAYLOAD = {
+            'tipoRequest': 'informacao_usuario',
+          }
+          const responseDjangoInfoCredencialUsuario = await sendRequestDjango(`${urlDefaultDjango}/credenciais_login/`, PLAYLOAD)
+
+
+
+      }
     }
-      
   }, [boolUserLogado])
 
 
