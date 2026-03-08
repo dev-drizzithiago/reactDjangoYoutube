@@ -68,12 +68,14 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
       setAtivaFormsLogin(false)
 
         const definirConfigurarConta = async () => {
-          urloDjango = `${urlDefaultDjango}/credenciais_login/`
-          PLAYLOAD = {
+
+          const urlDjango = `${urlDefaultDjango}/credenciais_login/`
+
+          const PLAYLOAD = {
             'tipoRequest': 'informacaoUsuario',
           }
 
-          const responseDjangoInfoCredencialUsuario = await sendRequestDjango(`${urlDefaultDjango}/credenciais_login/`, PLAYLOAD)
+          const responseDjangoInfoCredencialUsuario = await sendRequestDjango(urlDjango, PLAYLOAD)
           console.log('Informações do usuário logado: ', responseDjangoInfoCredencialUsuario)
           
       }

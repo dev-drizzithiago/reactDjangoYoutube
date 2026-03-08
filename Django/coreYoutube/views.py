@@ -98,6 +98,8 @@ def credenciais_login(request):
     usuario_login = None
     usuario_logado = None
     nome_completo_usuario = None
+    email_usuario = None
+    password_usuario = None
 
     dados_json = json.loads(request.body)
 
@@ -209,22 +211,22 @@ def credenciais_login(request):
 
     # Faz a busca das informações do usuário que está logado.
     elif tipo_requisicao == 'informacaoUsuario':
+        login_usuario = request.user
+        usuario_logado = request.user.is_authenticated
 
-        user_logado_primeiro_nome = request.user.first_name
-        user_logado_sobrenome = request.user.last_name
+        usuario = User.objects.get(username=login_usuario)
+
+        usuario_login = usuario.username
+
+        user_logado_primeiro_nome = usuario.first_name
+        user_logado_sobrenome = usuario.last_name
         nome_completo_usuario = f'{user_logado_primeiro_nome} {user_logado_sobrenome}'
-        login_usuario = str(request.user)
-        email_usuario = str(request.user.email)
-        password_usuario = str(request.user.password)
 
-        mensagem_processo = {
-            'nome_completo_usuario': nome_completo_usuario,
-            'login_usuario': login_usuario,
-            'email_usuario': email_usuario,
-            'password_usuario': password_usuario,
-        }
+        email_usuario = str(usuario.email)
+        password_usuario = "*************"
 
-
+        mensagem_processo = 'Informações do usuário'
+        erro_processo = 0
 
     return JsonResponse({
         'mensagem_processo': mensagem_processo,
@@ -233,6 +235,8 @@ def credenciais_login(request):
         'nome_usuario': nome_completo_usuario,
         'usuario_login': usuario_login,
         'usuario_logado': usuario_logado,
+        'email_usuario': email_usuario,
+        'password_usuario': password_usuario
     })
 
 # @csrf_protect
