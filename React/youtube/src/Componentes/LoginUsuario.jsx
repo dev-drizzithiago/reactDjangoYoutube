@@ -452,7 +452,6 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               <div className="login-divBtnsNovoUsuario">
                 <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
                 <img src='/img/imgBtns/redefinir-senha.png' className='login-btnLogar' onClick={ativarCamposAlterarSenha}/>
-                <AiOutlineClear className="login-btnLimparforms login-btnCadastrar" title='Limpar Formulário' onClick={limparFormulario}/>
                 <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar' onClick={atualizarCadastros}/>
               </div>
             </div>
