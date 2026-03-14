@@ -73,8 +73,6 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
         const djangoUrlDownloads = `${urlDefaultDjango}/remove_link/`;
 
         const responseDjango = await sendRequestDjango(djangoUrlDownloads, dadosDelete);
-        
-        console.log(responseDjango)
 
         if (responseDjango.erro_processo === 0) {
             toast.success(responseDjango.mensagem_processo);
