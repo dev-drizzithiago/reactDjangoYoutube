@@ -351,6 +351,7 @@ def remove_link(request):
 
     mensagem_processo = retorno_processo
     return JsonResponse({
+        'erro_processo': 0,
         'mensagem_processo': mensagem_processo
     })
 
