@@ -45,6 +45,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   const [ncEmail, setNcEmail] = useState('')
   const [ncPrimeiraSenha, setNcPrimeiraSenha] = useState('')
   const [ncConfirSenha, setNcconfirSenha] = useState('')
+  const [ncSenhaAtual, setNcSenhaAtual] = useState('')
 
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
@@ -248,10 +249,11 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   const atualizarCadastros = async () => {
     console.log('Btn Atualizar cadastro...')
-
+    // Preciso pensar em uma regra
     if (ncNomeCompleto === '' &&
       ncUsuario === '' &&
       ncEmail === '' &&
+      ncSenhaAtual === '' &&
       ncPrimeiraSenha === '' &&
       ncConfirSenha === ''
     ) {
@@ -400,8 +402,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                   <label htmlFor='senha' className='login-lblCadastro login-lblSenhaLogin'>
                     Senha atual
                     <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
-                    value={ncPrimeiraSenha}
-                    onChange={e => setNcPrimeiraSenha(e.target.value)}
+                    value={ncSenhaAtual}
+                    onChange={e => setncSenhaAtual(e.target.value)}
                     onKeyDown={e => {
                       if (e.key === "Enter") {
                         salvarNovoUser();
