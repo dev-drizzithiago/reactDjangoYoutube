@@ -242,6 +242,12 @@ function App() {
       dispatch(logout())
       setStatusLogin(false)
       toast.success(responseDjango.mensagem_erro)
+
+      setConfigurarContaAtivo(false)
+      setElementoMp3(false);
+      setElementoMp4(false);
+      setElementoLinks(false);
+      setAtivarPlayer(false);
     }
 
   }

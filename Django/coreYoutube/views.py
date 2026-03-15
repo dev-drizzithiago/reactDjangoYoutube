@@ -229,7 +229,21 @@ def credenciais_login(request):
 
     # Processo para atualizar os dados do usuário
     elif tipo_requisicao == 'atualizarCadastro':
-        print(dados_json)
+        usuario_login = dados_json['dadosCredencial']['userLogin']
+        primeiro_nome = str(dados_json['dadosCredencial']['nomeUsuario']).split(' ')[0]
+        sobrenome = str(dados_json['dadosCredencial']['nomeUsuario']).split(' ')[:1]
+        email_usuario = str(dados_json['dadosCredencial']['emailUsuario'])
+        pass_usuario = str(dados_json['dadosCredencial']['passUsuario'])
+
+        query_usuario = User.objects.filter(username=usuario_login).first()
+
+        query_usuario.objects.update(
+            first_name=primeiro_nome,
+            last_name=sobrenome,
+            email=email_usuario,
+            password=pass_usuario,
+        )
+        query_usuario.save()
 
 
     # Retorno dos processos de usuários

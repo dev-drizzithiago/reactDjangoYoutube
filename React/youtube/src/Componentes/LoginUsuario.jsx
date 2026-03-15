@@ -250,7 +250,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   const atualizarCadastros = async () => {
     console.log('Btn Atualizar cadastro...')
     // Preciso pensar em uma regra
-    if (ncNomeCompleto === '' &&
+    if (
+      ncNomeCompleto === '' &&
       ncUsuario === '' &&
       ncEmail === '' &&
       ncSenhaAtual === '' &&
@@ -403,7 +404,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                     Senha atual
                     <input type="password" name='senha' className='login-inputCadastro login-inputSenha'
                     value={ncSenhaAtual}
-                    onChange={e => setncSenhaAtual(e.target.value)}
+                    onChange={e => setNcSenhaAtual(e.target.value)}
                     onKeyDown={e => {
                       if (e.key === "Enter") {
                         salvarNovoUser();
