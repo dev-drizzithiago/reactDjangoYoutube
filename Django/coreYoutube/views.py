@@ -111,7 +111,7 @@ def credenciais_login(request):
         NAME = dados_novo_cadastro['nomeUsuario']
 
         PRIMEIRO_NOME = NAME.split(' ')[0]
-        SOBRENOME = NAME.split(' ')[1]
+        SOBRENOME = NAME.split(' ')[1:]
 
         USER = dados_novo_cadastro['userLogin']
         MAIL = dados_novo_cadastro['emailUsuario']
@@ -231,19 +231,19 @@ def credenciais_login(request):
     elif tipo_requisicao == 'atualizarCadastro':
         usuario_login = dados_json['dadosCredencial']['userLogin']
         primeiro_nome = str(dados_json['dadosCredencial']['nomeUsuario']).split(' ')[0]
-        sobrenome = str(dados_json['dadosCredencial']['nomeUsuario']).split(' ')[:1]
+        sobrenome = str(dados_json['dadosCredencial']['nomeUsuario']).split(' ')[1:]
         email_usuario = str(dados_json['dadosCredencial']['emailUsuario'])
         pass_usuario = str(dados_json['dadosCredencial']['passUsuario'])
 
         query_usuario = User.objects.filter(username=usuario_login).first()
 
-        query_usuario.objects.update(
-            first_name=primeiro_nome,
-            last_name=sobrenome,
-            email=email_usuario,
-            password=pass_usuario,
-        )
-        query_usuario.save()
+        if query_usuario:
+            query_usuario.first_name=primeiro_nome
+            query_usuario.last_name=sobrenome
+            query_usuario.username=usuario_login
+            query_usuario.email=email_usuario
+            query_usuario.set_password(pass_usuario)
+            query_usuario.save()
 
 
     # Retorno dos processos de usuários
