@@ -247,7 +247,7 @@ function App() {
       setElementoMp3(false);
       setElementoMp4(false);
       setElementoLinks(false);
-      setAtivarPlayer(false);
+      setAtivarPlayer(false);karol813
     }
 
   }
