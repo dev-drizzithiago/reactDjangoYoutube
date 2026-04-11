@@ -40,3 +40,17 @@ class MusicsSalvasServidor(Base):
     # - ManyToManyField precisa que o objeto seja salvo primeiro e
     # depois você use métodos como .add(), .set() ou .remove() para manipular a relação.
     usuario_music = models.ManyToManyField(User, blank=True)
+
+
+class BaseQuestionarioCategoria(models.Model):
+    id_db = models.CharField(max_length=255, primary_key=True)
+    nome_categoria = models.CharField(max_length=255)
+    peso_categoria = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
+
+    class Meta:
+        abstract = True
+
+class QuestionarioCategoria(BaseQuestionarioCategoria):
+    class Meta:
+        managed = False
+        db_table = './questionarios/questionarios/CATEGORIAS'
