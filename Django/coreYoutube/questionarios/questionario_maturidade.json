@@ -1,0 +1,264 @@
+{
+  "categorias": [
+    {
+      "nome": "Conhecimento da Legislação",
+      "perguntas": [
+        {
+          "texto": "Como sua empresa acompanha mudanças na legislação fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não acompanha"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas quando há impacto direto percebido"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Possui equipe que monitora regularmente"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Usa sistemas automatizados e consultorias especializadas"
+            }
+          ]
+        },
+        {
+          "texto": "Há treinamentos sobre legislação para colaboradores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existem"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Ocasionalmente, sem padrão"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Treinamentos periódicos para áreas-chave"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Programa contínuo e estruturado para toda a organização"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratadas dúvidas sobre legislação fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há suporte"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Consultas informais entre colegas"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Consultoria externa quando necessário"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Equipe interna especializada com suporte contínuo"
+            }
+          ]
+        },
+        {
+          "texto": "Existe política formal de compliance fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas em documentos isolados"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Política definida e aplicada em áreas críticas"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Política integrada e auditada regularmente"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a atualização de processos frente a novas leis?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há atualização"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Atualização reativa e lenta"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Atualização planejada com cronograma"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Atualização imediata com processos automatizados"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "ERP e Tecnologia Fiscal",
+      "perguntas": [
+        {
+          "texto": "Qual o nível de integração do ERP com obrigações fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há integração"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Integração parcial e manual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração automatizada para principais obrigações"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e em tempo real"
+            }
+          ]
+        },
+        {
+          "texto": "Como são gerados relatórios fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Manual em planilhas"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Relatórios básicos no ERP"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Relatórios automatizados e customizáveis"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Relatórios inteligentes com análise preditiva"
+            }
+          ]
+        },
+        {
+          "texto": "Existe monitoramento de erros fiscais no sistema?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas quando identificados manualmente"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Alertas automáticos em casos críticos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Monitoramento contínuo com dashboards"
+            }
+          ]
+        },
+        {
+          "texto": "O ERP é atualizado conforme mudanças fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não é atualizado"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Atualizado apenas quando há falhas"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Atualizado regularmente por fornecedor"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Atualizado automaticamente com suporte proativo"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a integração com órgãos reguladores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há integração"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Envio manual de informações"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração parcial com sistemas oficiais"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e automatizada"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

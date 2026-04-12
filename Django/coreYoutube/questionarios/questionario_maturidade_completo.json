@@ -1,0 +1,914 @@
+{
+  "categorias": [
+    {
+      "nome": "Conhecimento da Legislação",
+      "perguntas": [
+        {
+          "texto": "Como sua empresa acompanha mudanças na legislação fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não acompanha"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas quando há impacto direto percebido"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Possui equipe que monitora regularmente"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Usa sistemas automatizados e consultorias especializadas"
+            }
+          ]
+        },
+        {
+          "texto": "Há treinamentos sobre legislação para colaboradores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existem"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Ocasionalmente, sem padrão"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Treinamentos periódicos para áreas-chave"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Programa contínuo e estruturado para toda a organização"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratadas dúvidas sobre legislação fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há suporte"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Consultas informais entre colegas"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Consultoria externa quando necessário"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Equipe interna especializada com suporte contínuo"
+            }
+          ]
+        },
+        {
+          "texto": "Existe política formal de compliance fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas em documentos isolados"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Política definida e aplicada em áreas críticas"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Política integrada e auditada regularmente"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a atualização de processos frente a novas leis?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há atualização"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Atualização reativa e lenta"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Atualização planejada com cronograma"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Atualização imediata com processos automatizados"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "ERP e Tecnologia Fiscal",
+      "perguntas": [
+        {
+          "texto": "Qual o nível de integração do ERP com obrigações fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há integração"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Integração parcial e manual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração automatizada para principais obrigações"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e em tempo real"
+            }
+          ]
+        },
+        {
+          "texto": "Como são gerados relatórios fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Manual em planilhas"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Relatórios básicos no ERP"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Relatórios automatizados e customizáveis"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Relatórios inteligentes com análise preditiva"
+            }
+          ]
+        },
+        {
+          "texto": "Existe monitoramento de erros fiscais no sistema?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas quando identificados manualmente"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Alertas automáticos em casos críticos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Monitoramento contínuo com dashboards"
+            }
+          ]
+        },
+        {
+          "texto": "O ERP é atualizado conforme mudanças fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não é atualizado"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Atualizado apenas quando há falhas"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Atualizado regularmente por fornecedor"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Atualizado automaticamente com suporte proativo"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a integração com órgãos reguladores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há integração"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Envio manual de informações"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração parcial com sistemas oficiais"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e automatizada"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Compras e Fornecedores",
+      "perguntas": [
+        {
+          "texto": "Como é feita a avaliação de fornecedores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há avaliação"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Avaliação básica de preço"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Avaliação de critérios técnicos e fiscais"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Avaliação contínua com indicadores de desempenho"
+            }
+          ]
+        },
+        {
+          "texto": "Existe política formal de compras?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas regras informais"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Política documentada e aplicada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Política integrada com auditoria periódica"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratados riscos fiscais de fornecedores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não são tratados"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Avaliados apenas em casos críticos"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Monitorados regularmente"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Gestão proativa com ferramentas de compliance"
+            }
+          ]
+        },
+        {
+          "texto": "Há integração entre compras e área fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Comunicação eventual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Processos integrados parcialmente"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração total com sistemas compartilhados"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a homologação de fornecedores?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há homologação"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas cadastro básico"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Homologação com critérios fiscais e técnicos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Homologação completa com auditoria contínua"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Cadastro de Produtos/Serviços",
+      "perguntas": [
+        {
+          "texto": "Como é feito o cadastro de produtos?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não há padrão"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Cadastro básico sem validação"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Cadastro estruturado com validação fiscal"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Cadastro automatizado com integração ERP"
+            }
+          ]
+        },
+        {
+          "texto": "Existe revisão periódica do cadastro?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Revisão eventual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Revisão programada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Revisão contínua com auditoria"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratados erros de cadastro?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não são tratados"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Corrigidos apenas quando identificados"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Corrigidos com processo formal"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Prevenção com sistemas de validação"
+            }
+          ]
+        },
+        {
+          "texto": "Há integração do cadastro com área fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Integração parcial"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração estruturada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e automatizada"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a classificação tributária de produtos?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não é feita"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Feita manualmente sem padrão"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Feita com apoio de consultoria"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Automatizada e auditada regularmente"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Estrutura Organizacional",
+      "perguntas": [
+        {
+          "texto": "Existe área dedicada à gestão fiscal?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Responsabilidade difusa"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Área definida com equipe dedicada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Estrutura robusta com especialistas"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a comunicação entre áreas?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Informal e eventual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Formalizada em processos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integrada com sistemas colaborativos"
+            }
+          ]
+        },
+        {
+          "texto": "Há definição clara de responsabilidades fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Definição parcial"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Definição formal em documentos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Definição clara com auditoria"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a gestão de riscos fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não é feita"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas em casos críticos"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Gestão estruturada com relatórios"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Gestão contínua com indicadores"
+            }
+          ]
+        },
+        {
+          "texto": "Existe comitê ou grupo de compliance?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Grupo informal"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Comitê formalizado"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Comitê ativo com reuniões periódicas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Formação de Preços",
+      "perguntas": [
+        {
+          "texto": "Como são definidos os preços?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Sem critérios claros"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Baseados apenas em custos diretos"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Consideram custos e tributos"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Estratégia completa com análise de mercado e fiscal"
+            }
+          ]
+        },
+        {
+          "texto": "Existe política formal de precificação?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas regras informais"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Política documentada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Política integrada com revisões periódicas"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratados impactos fiscais nos preços?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não são considerados"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Considerados apenas em casos críticos"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Considerados regularmente"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integrados automaticamente na formação de preços"
+            }
+          ]
+        },
+        {
+          "texto": "Há integração entre precificação e ERP?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Integração parcial"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Integração estruturada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Integração completa e automatizada"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a revisão de preços?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não é feita"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Revisão eventual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Revisão periódica"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Revisão contínua com análise de mercado"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Estratégia de Implantação",
+      "perguntas": [
+        {
+          "texto": "Existe plano formal de implantação de sistemas fiscais?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Plano básico sem cronograma"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Plano estruturado com etapas definidas"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Plano completo com gestão de riscos"
+            }
+          ]
+        },
+        {
+          "texto": "Como é feita a comunicação durante a implantação?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Comunicação eventual"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Comunicação estruturada"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Comunicação contínua com relatórios"
+            }
+          ]
+        },
+        {
+          "texto": "Há treinamento para usuários durante implantação?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Treinamento básico"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Treinamento estruturado"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Treinamento contínuo com suporte pós-implantação"
+            }
+          ]
+        },
+        {
+          "texto": "Como são tratados problemas durante implantação?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não são tratados"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Tratados de forma reativa"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Tratados com plano de contingência"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Tratados com gestão proativa e indicadores"
+            }
+          ]
+        },
+        {
+          "texto": "Existe acompanhamento pós-implantação?",
+          "alternativas": [
+            {
+              "nivel": "Inexistente",
+              "pontuacao": 0,
+              "descricao": "Não existe"
+            },
+            {
+              "nivel": "Inicial",
+              "pontuacao": 1,
+              "descricao": "Apenas em casos críticos"
+            },
+            {
+              "nivel": "Intermediário",
+              "pontuacao": 3,
+              "descricao": "Acompanhamento pontual"
+            },
+            {
+              "nivel": "Avançado",
+              "pontuacao": 5,
+              "descricao": "Acompanhamento contínuo com indicadores de sucesso"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
