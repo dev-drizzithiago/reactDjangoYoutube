@@ -29,7 +29,7 @@ class BaseDadosQuestionarios:
         comando_sql = """
             CREATE TABLE IF NOT EXISTS perguntas
             (
-                id INTEGER PRIMARY KEY ,
+                id INTEGER PRIMARY KEY,
                 questao TEXT, 
                 weight FLOAT,
                 categoria_id INTEGER, 
@@ -96,35 +96,46 @@ class InsertIntoQuestionarios:
                 # Categorias
                 comando_sql = rf"""
                     INSERT INTO categorias
-                    (nome, weight)
-                    VALUES ({item['nome']}, {'10'})
+                    (nome, weight) 
+                    VALUES (?, ?)
                 """
-                self.cursor_insert.execute(comando_sql)
+                self.cursor_insert.execute(comando_sql, (
+                        item['nome'],
+                        '10'
+                    ))
+
+                categoria_id = self.cursor_insert.lastrowid
 
                 for item_questao in item['perguntas']:
 
                     comando_sql = rf"""
                         INSERT INTO perguntas
                         (questao, weight, categoria_id)
-                        VALUES ({item_questao['texto']}, 10, {item['nome']})
+                        VALUES (?, ?, ?)                        
                     """
 
-                    self.cursor_insert.execute(comando_sql)
+                    self.cursor_insert.execute(comando_sql,(
+                            item_questao['texto'],
+                            10,
+                            categoria_id
+                        ))
+                    pergunta_id = self.cursor_insert.lastrowid
 
                     for item_alternativa in item_questao['alternativas']:
 
                         comando_sql = rf"""
-                            INSERT INTO perguntas
+                            INSERT INTO alternativas
                             (nivel, pontuacao, descricao, pergunta_id)
-                            VALUES (                                 
-                                {item_alternativa['nivel']}, 
-                                {item_alternativa['pontuacao']}, 
-                                {item_alternativa['descricao']},
-                                {item_questao['texto']}
-                                )
+                            VALUES (?, ?, ?, ?)                             
                         """
+                        self.cursor_insert.execute(comando_sql, (
+                                item_alternativa['nivel'],
+                                item_alternativa['pontuacao'],
+                                item_alternativa['descricao'],
+                                pergunta_id
+                            ))
 
-                        self.cursor_insert.execute(comando_sql)
+        self.conn_base_questionario.commit()
 
 
 if __name__ == '__main__':

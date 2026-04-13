@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import PROTECT
+from django.db.models import PROTECT, CASCADE
 from django.contrib.auth.models import User
 
 class Base(models.Model):
@@ -43,9 +43,9 @@ class MusicsSalvasServidor(Base):
 
 
 class BaseQuestionarioCategoria(models.Model):
-    id_db = models.CharField(max_length=255, primary_key=True)
-    nome_categoria = models.CharField(max_length=255)
-    peso_categoria = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
+    id = models.CharField(max_length=255, primary_key=True)
+    nome = models.CharField(max_length=255)
+    weight = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
 
     class Meta:
         abstract = True
@@ -53,4 +53,18 @@ class BaseQuestionarioCategoria(models.Model):
 class QuestionarioCategoria(BaseQuestionarioCategoria):
     class Meta:
         managed = False
-        db_table = './questionarios/questionarios/CATEGORIAS'
+        db_table = 'categorias'
+
+class BaseQuestionarioPerguntas(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    questao = models.CharField(max_length=255)
+    weight = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
+    categoria_id = models.ForeignKey(BaseQuestionarioCategoria, on_delete=CASCADE)
+
+    class Meta:
+        abstract = True
+
+class QuestionarioPerguntas(BaseQuestionarioCategoria):
+    class Meta:
+        managed = False
+        db_table = 'perguntas'
