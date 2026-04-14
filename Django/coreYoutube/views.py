@@ -10,9 +10,12 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import CategoriasSerializers
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.response import Response
 
 from django.views.decorators.csrf import (
     csrf_exempt, # Desativa a verificação de CSRF para aquela view
@@ -23,7 +26,12 @@ from django.views.decorators.csrf import (
 from DjangoYouTube import settings
 
 from .appYoutube import YouTubeDownload
-from .models import DadosYoutube, MoviesSalvasServidor, MusicsSalvasServidor
+from .models import (
+    DadosYoutube,
+    MoviesSalvasServidor,
+    MusicsSalvasServidor,
+    QuestionariosCategorias
+)
 
 from .utilitys import verificar_pasta_media
 
@@ -528,3 +536,16 @@ def removendo_midias(request):
         'mensagem_processo': mensagem_processo,
         'erro_processo': erro_processo,
     })
+
+
+# class CategoriaViewSet(viewset.ModelViewSet):
+#     queryset = QuestionariosCategorias.objects.all()
+#     serializer_class = CategoriasSerializers
+#     permission_classes = [IsAuthenticated]
+
+@api_view(['GET'])
+def janela_questionarios(request):
+    categorias = QuestionariosCategorias.objects.using('questionarios').all()
+    serializer = CategoriasSerializers(categorias, many=True)
+
+    return Response(serializer.data)

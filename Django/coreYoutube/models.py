@@ -42,29 +42,51 @@ class MusicsSalvasServidor(Base):
     usuario_music = models.ManyToManyField(User, blank=True)
 
 
-class BaseQuestionarioCategoria(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
+# bloco questionários
+class BaseQuestionariosCategorias(models.Model):
+    id = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=255)
-    weight = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
+    weight = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
 
     class Meta:
         abstract = True
 
-class QuestionarioCategoria(BaseQuestionarioCategoria):
+class QuestionariosCategorias(BaseQuestionariosCategorias):
     class Meta:
         managed = False
-        db_table = 'categorias'
+        db_table = "categorias"
+        app_label = 'questionarios'
 
-class BaseQuestionarioPerguntas(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    questao = models.CharField(max_length=255)
-    weight = models.DecimalField(decimal_places=2, max_digits=2, default=0.00)
-    categoria_id = models.ForeignKey(BaseQuestionarioCategoria, on_delete=CASCADE)
+# conexão perguntas
+class BaseQuestionariosPerguntas(models.Model):
+    id = models.IntegerField(primary_key=True)
+    questao = nome = models.CharField(max_length=255)
+    weight = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
+    categoria_id = models.ForeignKey(QuestionariosCategorias, on_delete=models.PROTECT, db_column='categoria_id')
 
     class Meta:
         abstract = True
 
-class QuestionarioPerguntas(BaseQuestionarioCategoria):
+class QuestionariosPerguntas(BaseQuestionariosPerguntas):
+
     class Meta:
         managed = False
         db_table = 'perguntas'
+        app_label = 'questionarios'
+
+# conexão alternativas
+class BaseQuestionariosAlternativas(models.Model):
+    id = models.IntegerField(primary_key=True)
+    nivel = models.CharField(max_length=255)
+    descricao = models.CharField(max_length=255)
+    pontuacao = models.IntegerField()
+    pergunta_id = models.ForeignKey(QuestionariosPerguntas, on_delete=models.PROTECT, db_column='pergunta_id')
+
+    class Meta:
+        abstract = True
+
+class QuestionariosAlternativas(BaseQuestionariosAlternativas):
+    class Meta:
+        managed = False
+        db_table = 'alternativas'
+        app_label = 'questionarios'

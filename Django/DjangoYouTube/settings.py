@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,17 +45,18 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # - Permitir que navegadores façam requisições cross-origin
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -68,14 +70,16 @@ CSRF_TRUSTED_ORIGINS = [
     "http://192.168.15.250:3000",  # IP da máquina na rede local
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = False
 CORS_ALLOW_HEADERS = [
-    'content-type',
-    'X-CSRFToken',
+    "accept",
+    "content-type",
+    "origin",
+    "authorization",
+    "x-csrftoken",
 ]
 
 # Para testes
-CORS_ALLOW_ALL_ORIGINS = False
 
 CSRF_COOKIE_HTTPONLY = False  # permite que o JS leia o cookie
 CSRF_COOKIE_SECURE = False  # em dev, pode ser False; em produção, True com HTTPS
@@ -90,6 +94,14 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+from datetime import timedelta
+
+# SIMPLE_JWT = {
+#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # token expira em 30 min
+#     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # refresh expira em 1 dia
+# }
+
 
 ROOT_URLCONF = "DjangoYouTube.urls"
 
@@ -122,7 +134,7 @@ DATABASES = {
     },
     "questionarios": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "questionarios/questionarios.sqlite3"
+        "NAME": os.path.join( BASE_DIR / "coreYoutube", "questionarios", "questionarios")
     }
 }
 
