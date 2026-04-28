@@ -89,11 +89,11 @@ SESSION_COOKIE_DOMAIN = '192.168.15.250'  # deixa o navegador definir para o hos
 CSRF_COOKIE_DOMAIN = '192.168.15.250'
 
 # Isso diz ao Django que vamos usar JWT para autenticação
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }
 
 from datetime import timedelta
 

@@ -14,10 +14,10 @@ from .views import (
     janela_questionarios,
 )
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,  # gera access + refresh
-    TokenRefreshView,     # renova access usando refresh
-)
+# from rest_framework_simplejwt.views import (
+#     TokenObtainPairView,  # gera access + refresh
+#     TokenRefreshView,     # renova access usando refresh
+# )
 
 
 from django.conf import settings
@@ -38,8 +38,8 @@ urlpatterns = [
 
     # - api/token/ → recebe usuário + senha e retorna access token e refresh token.
     # - api/token/refresh/ → recebe refresh token e retorna novo access token.
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/questionarios/', janela_questionarios)
 
