@@ -34,6 +34,8 @@ import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
 import PlayerMidias from './Componentes/PlayerMidias';
 import LoginUsuario from './Componentes/LoginUsuario';
 
+import Testes from './Componentes/Testes';
+
 const urlDefaultDjango = `http://192.168.15.250:8080`
 
 
@@ -255,14 +257,15 @@ function App() {
   const teste = async () => {
     const url = await fetch('http://192.168.15.250:8080/api/questionarios')
     const dados = await url.json()
-    console.log(dados)
-    
+    console.log(dados)    
   }
 
   return (
       <div className="App">
         <ToastContainer />
         <button onClick={teste}>Teste</button>
+
+        <Testes />
 
         {/** Se o usuário estiver deslogado */}
         {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}        
