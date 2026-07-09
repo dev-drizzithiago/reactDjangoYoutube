@@ -169,3 +169,16 @@
     transform: translateY(4px);
     border-bottom: #000000;
 }
+
+/* Link para abrir a recuperação de senha */
+.login-lnkEsqueciSenha {
+  margin: auto;
+  margin-top: 10px;
+  width: fit-content;
+  color: #ffffff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+  .login-lnkEsqueciSenha:hover {
+    color: #cccccc;
+}

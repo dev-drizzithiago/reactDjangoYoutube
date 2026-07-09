@@ -235,6 +235,40 @@ def credenciais_login(request):
         mensagem_processo = 'Informações do usuário'
         erro_processo = 0
 
+    # Processo para verificar a conta antes de liberar a redefinição de senha (recuperação de senha).
+    elif tipo_requisicao == 'verificarContaRecuperacao':
+        dados_recuperacao = dados_json['dadosCredencial']
+        usuario_login = dados_recuperacao['userLogin']
+        email_usuario = dados_recuperacao['emailUsuario']
+
+        conta_confere = User.objects.filter(username=usuario_login, email=email_usuario).exists()
+
+        if conta_confere:
+            mensagem_processo = 'Conta confirmada. Defina a nova senha.'
+            erro_processo = 0
+        else:
+            mensagem_processo = 'Não foi possível confirmar a conta. Verifique os dados informados.'
+            erro_processo = 1
+
+    # Processo para redefinir a senha após a confirmação da conta.
+    elif tipo_requisicao == 'redefinirSenha':
+        dados_recuperacao = dados_json['dadosCredencial']
+        usuario_login = dados_recuperacao['userLogin']
+        email_usuario = dados_recuperacao['emailUsuario']
+        nova_senha = dados_recuperacao['novaSenha']
+
+        query_usuario = User.objects.filter(username=usuario_login, email=email_usuario).first()
+
+        if query_usuario:
+            query_usuario.set_password(nova_senha)
+            query_usuario.save()
+
+            mensagem_processo = 'Senha redefinida com sucesso.'
+            erro_processo = 0
+        else:
+            mensagem_processo = 'Não foi possível confirmar a conta. Verifique os dados informados.'
+            erro_processo = 1
+
     # Processo para atualizar os dados do usuário
     elif tipo_requisicao == 'atualizarCadastro':
         usuario_login = dados_json['dadosCredencial']['userLogin']
