@@ -56,24 +56,26 @@ MIDDLEWARE = [
 ]
 
 # - Permitir que navegadores façam requisições cross-origin
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.15.250:80",  # IP da máquina na rede local
-    "http://192.168.15.250:88",  # IP da máquina na rede local
-    "http://192.168.15.250",  # IP da máquina na rede local
+    "http://192.168.15.250",      # sem porta
+    "http://192.168.15.250:3000",
+    "http://192.168.15.250:80",
+    "http://192.168.15.250:88",
 ]
 
 # - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.15.250:3000",  # IP da máquina na rede local
-    "http://192.168.15.250:80",  # IP da máquina na rede local
-    "http://192.168.15.250:88",  # IP da máquina na rede local
-    "http://192.168.15.250",  # IP da máquina na rede local
+    "http://192.168.15.250",      # sem porta
+    "http://192.168.15.250:3000",
+    "http://192.168.15.250:80",
+    "http://192.168.15.250:88",
 ]
+
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -86,7 +88,7 @@ CORS_ALLOW_HEADERS = [
 
 # Para testes
 
-CSRF_COOKIE_HTTPONLY = False  # permite que o JS leia o cookie
+CSRF_COOKIE_HTTPONLY = True  # permite que o JS leia o cookie
 CSRF_COOKIE_SECURE = False  # em dev, pode ser False; em produção, True com HTTPS
 
 SESSION_COOKIE_SAMESITE = None  # se precisar compartilhar cookies entre domínios
@@ -102,10 +104,10 @@ CSRF_COOKIE_DOMAIN = '192.168.15.250'
 
 from datetime import timedelta
 
-# SIMPLE_JWT = {
-#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # token expira em 30 min
-#     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # refresh expira em 1 dia
-# }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # token expira em 30 min
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # refresh expira em 1 dia
+}
 
 
 ROOT_URLCONF = "DjangoYouTube.urls"
