@@ -14,7 +14,7 @@ import { FaDownload } from "react-icons/fa6";
 // PADRÃO PARA A URL 
 import { urlDefaultDjango } from "../urls";
 
-const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) => {    
+const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3, fecharLinks }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`
     const payload = {tipoMidia: 'MP3'}
 
@@ -40,6 +40,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
 
         /** Envia os dados para o elemento principal (app) */
         executaMidia(linkMidia, 'audio/mp3');
+        fecharLinks("audio/mp3")
     }
 
     /**
