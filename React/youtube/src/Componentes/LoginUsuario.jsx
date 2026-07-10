@@ -26,7 +26,11 @@ import { AiOutlineClear } from "react-icons/ai";
 
 import { toast } from 'react-toastify';
 
+<<<<<<< HEAD
 import { urlDefaultDjango } from "../urls";
+=======
+const urlDefaultDjango = `http://192.168.15.250:8000`
+>>>>>>> ea5ab8b69e59f943b96300f8f27795ae15c0feb1
 
 const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, AtivarLinksPosAtualizarDadosUser }) => {
 
@@ -49,6 +53,13 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   const [dadosParaLogin, setDadosParaLogin] = useState([])
   const [msnAlerta, setMsgAlerta] = useState('Entre com suas credenciais')
+
+  const [recuperarSenha, setRecuperarSenha] = useState(false)
+  const [contaVerificada, setContaVerificada] = useState(false)
+  const [rsUsuario, setRsUsuario] = useState('')
+  const [rsEmail, setRsEmail] = useState('')
+  const [rsNovaSenha, setRsNovaSenha] = useState('')
+  const [rsConfirmarSenha, setRsConfirmarSenha] = useState('')
 
   const dispatch = useDispatch()
   const { logado, usuario, nomeUsuario } = useSelector((state) => state.session)
@@ -329,6 +340,88 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     }
   }
 
+  /** Abre o formulário de recuperação de senha a partir da tela de login. */
+  const abrirRecuperarSenha = () => {
+    setRecuperarSenha(true)
+    setContaVerificada(false)
+    setRsUsuario('')
+    setRsEmail('')
+    setRsNovaSenha('')
+    setRsConfirmarSenha('')
+  }
+
+  /** Fecha o formulário de recuperação de senha e volta para o login. */
+  const cancelarRecuperarSenha = () => {
+    setRecuperarSenha(false)
+    setContaVerificada(false)
+    setRsUsuario('')
+    setRsEmail('')
+    setRsNovaSenha('')
+    setRsConfirmarSenha('')
+  }
+
+  /** Confirma que o usuário e e-mail informados pertencem a uma conta existente. */
+  const verificarContaRecuperacao = async () => {
+
+    if (rsUsuario === '' || rsEmail === '') {
+      toast.warning('Informe o usuário e o e-mail da conta')
+      return
+    }
+
+    const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+
+    const PAYLOAD = {
+      'tipoRequest': 'verificarContaRecuperacao',
+      'dadosCredencial': {
+        'userLogin': rsUsuario,
+        'emailUsuario': rsEmail,
+      },
+    }
+
+    const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+
+    if (responseDjango.erro_processo === 0) {
+      toast.success('Conta confirmada. Defina sua nova senha.')
+      setContaVerificada(true)
+    } else {
+      toast.error(responseDjango.mensagem_processo)
+    }
+  }
+
+  /** Envia a nova senha para o backend após a conta ter sido confirmada. */
+  const redefinirSenha = async () => {
+
+    if (rsNovaSenha === '' || rsConfirmarSenha === '') {
+      toast.warning('Preencha a nova senha e a confirmação')
+      return
+    }
+
+    if (rsNovaSenha !== rsConfirmarSenha) {
+      toast.error('As senhas não conferem!')
+      return
+    }
+
+    const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
+
+    const PAYLOAD = {
+      'tipoRequest': 'redefinirSenha',
+      'dadosCredencial': {
+        'userLogin': rsUsuario,
+        'emailUsuario': rsEmail,
+        'novaSenha': rsNovaSenha,
+      },
+    }
+
+    const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)
+
+    if (responseDjango.erro_processo === 0) {
+      toast.success('Senha redefinida com sucesso. Faça login com a nova senha.')
+      cancelarRecuperarSenha()
+    } else {
+      toast.error(responseDjango.mensagem_processo)
+    }
+  }
+
   return (
 
     <div className='login-divPrincipal'>
@@ -563,7 +656,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
         }
 
         {/** Processo para logar o usuário */}
-        {!criarUser && <div className='login-divLogin'>
+        {!criarUser && !recuperarSenha && <div className='login-divLogin'>
             <h1> Login do usuário </h1>
 
             {
@@ -574,8 +667,8 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
             <div className='login-divGridInputs'>
               <label htmlFor="usuario" className='login-lblLoginPrincipal'>
                 Usuário
-                <input type="text" 
-                  name='usuario' 
+                <input type="text"
+                  name='usuario'
                   className='login-inputEntrar login-inputUsuario'
                   value={dadosParaLogin.userLogin}
                   onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
@@ -588,7 +681,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                 />
               </label>
             </div>
-            
+
             <div className='login-divGridInputs'>
               <label htmlFor="senha" className='login-lblLoginPrincipal'>
                 Password
@@ -602,18 +695,121 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                       eventoLogin();
                       }
                     }
-                  } 
+                  }
                   />
                 </label>
             </div>
-            
+
             <div className='login-divBtnLoginPrincipal'>
               <GiConfirmed className="login-btnLogar login-btnVerificar" title='Logar' onClick={eventoLogin}/>
               {
                 btnCriarNovoUserAtivo &&
-                <GrUserNew className="login-btnLogar login-btnCriarNovoUser" title='Criar Conta' onClick={criarNovoUsuario} /> 
+                <GrUserNew className="login-btnLogar login-btnCriarNovoUser" title='Criar Conta' onClick={criarNovoUsuario} />
               }
             </div>
+
+            {!ativaFormsLogin &&
+              <p className='login-lnkEsqueciSenha' onClick={abrirRecuperarSenha}>
+                Esqueci minha senha
+              </p>
+            }
+        </div>}
+
+        {/** Processo para recuperar a senha, mediante confirmação da conta. */}
+        {!criarUser && recuperarSenha && <div className='login-divLogin'>
+            <h1> Recuperar senha </h1>
+
+            {!contaVerificada ?
+              <>
+                <h3> Confirme os dados da sua conta </h3>
+
+                <div className='login-divGridInputs'>
+                  <label htmlFor="rsUsuario" className='login-lblLoginPrincipal'>
+                    Usuário
+                    <input type="text"
+                      name='rsUsuario'
+                      className='login-inputEntrar login-inputUsuario'
+                      value={rsUsuario}
+                      onChange={e => setRsUsuario(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") {
+                          verificarContaRecuperacao();
+                          }
+                        }
+                      }
+                    />
+                  </label>
+                </div>
+
+                <div className='login-divGridInputs'>
+                  <label htmlFor="rsEmail" className='login-lblLoginPrincipal'>
+                    E-mail cadastrado
+                    <input type="email"
+                      name='rsEmail'
+                      className='login-inputEntrar login-inputEmail'
+                      value={rsEmail}
+                      onChange={e => setRsEmail(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") {
+                          verificarContaRecuperacao();
+                          }
+                        }
+                      }
+                    />
+                  </label>
+                </div>
+
+                <div className='login-divBtnLoginPrincipal'>
+                  <GiConfirmed className="login-btnLogar login-btnVerificar" title='Confirmar conta' onClick={verificarContaRecuperacao}/>
+                  <FaBackspace className="login-btnLogar login-btnCancelar" title='Voltar' onClick={cancelarRecuperarSenha}/>
+                </div>
+              </>
+              :
+              <>
+                <h3> Defina sua nova senha </h3>
+
+                <div className='login-divGridInputs'>
+                  <label htmlFor="rsNovaSenha" className='login-lblLoginPrincipal'>
+                    Nova senha
+                    <input type="password"
+                      name='rsNovaSenha'
+                      className='login-inputEntrar login-inputSenha'
+                      value={rsNovaSenha}
+                      onChange={e => setRsNovaSenha(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") {
+                          redefinirSenha();
+                          }
+                        }
+                      }
+                    />
+                  </label>
+                </div>
+
+                <div className='login-divGridInputs'>
+                  <label htmlFor="rsConfirmarSenha" className='login-lblLoginPrincipal'>
+                    Confirmar nova senha
+                    <input type="password"
+                      name='rsConfirmarSenha'
+                      className='login-inputEntrar login-inputSenha'
+                      value={rsConfirmarSenha}
+                      onChange={e => setRsConfirmarSenha(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") {
+                          redefinirSenha();
+                          }
+                        }
+                      }
+                    />
+                  </label>
+                </div>
+
+                <div className='login-divBtnLoginPrincipal'>
+                  <GiConfirmed className="login-btnLogar login-btnVerificar" title='Redefinir senha' onClick={redefinirSenha}/>
+                  <FaBackspace className="login-btnLogar login-btnCancelar" title='Voltar' onClick={cancelarRecuperarSenha}/>
+                </div>
+              </>
+            }
         </div>}
       </div>
     </div>

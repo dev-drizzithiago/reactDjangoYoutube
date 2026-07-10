@@ -1,117 +1,108 @@
 
 /* Div principal para todos os blocos de login e cadastros.*/
 .login-divPrincipal{
-  /* border: 1px solid black; */
   margin-top: 1%;
   padding: 20px;
-  border-radius: 10px;
-  background-color: #0000003f;  
+  border-radius: var(--radius);
+  background-color: var(--bg-app);
 }
 
 /* Config para os label do cadastro */
 .login-lblCadastro {
-  /* border: 1px solid black; */
   margin: auto;
   padding: 10px;
   display: flex;
-  align-items: center;  
+  align-items: center;
   width: 50%;
   height: 100%;
-  color: #fff;  
-  border-radius: 10px;
-  background-color: #747474;
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  background-color: var(--bg-elevated);
 }
 
 /* configuração dos inputs */
 .login-inputCadastro{
-  border: 1px solid rgb(0, 0, 0);
   width: 75%;
   height: 50px;
   padding: 10px;
   margin: auto;
   margin-right: 0px;
   border: none;
-  font-size: 18pt;  
+  font-size: 18pt;
   display: flex;
   text-align: left;
   justify-content: right;
-  border-radius: 10px;
+  border-radius: var(--radius);
   background-color: #ffffff;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  box-shadow: var(--shadow-soft);
 }
 
 /*DIV dos inputs*/
 .login-divInputs{
-  /* border: 1px solid black; */
   width: 100%;
   height: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
-  align-items: flex-start;  
+  align-items: flex-start;
   padding: 20px;
   gap: 50px;
-  border-radius: 10px;
-  background-color: #000000;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  border-radius: var(--radius);
+  background-color: var(--bg-panel);
+  box-shadow: var(--shadow-inset);
 }
 
 .login-divGridInputs{
-    /* border: 1px solid black; */
   display: grid;
   margin-top: 2%;
 }
 
 /* conf inputs forms login */
 .login-inputEntrar {
-  /* border: 1px solid rgb(0, 0, 0); */
   width: 75%;
   height: 50px;
   padding: 5px;
   margin: auto;
   border: none;
+  color: black;
   font-size: 18pt;
   text-align: center;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
 }
 
 /* config do label de login */
 .login-lblLoginPrincipal {
-  /* border: 1px solid black; */
   margin: auto;
   padding: 10px;
   display: flex;
-  align-items: center;  
+  align-items: center;
   width: 50%;
   height: 100%;
-  color: #000000;  
-  border-radius: 10px;
-  background-color: #ffffff;
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  background-color: var(--bg-elevated);
 }
 
 /* Div do bloco de cadastro de usuario */
 .login-divCriarLogin{
-  /* border: 1px solid rgb(0, 0, 0); */
   width: 100%;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: var(--radius);
   box-sizing: border-box;
 }
 
 /* Div onde fica o formulário */
 .login-divLogin{
-  /* border: 1px solid black; */
   width: 100%;
   padding: 15px;
-  border-radius: 10px;
-  box-sizing: border-box;  
+  border-radius: var(--radius);
+  box-sizing: border-box;
 }
 
 /* div botoes cadastro */
 .login-divBtnsNovoUsuario {
-  /* border: 1px solid black; */
   margin: auto;
   margin-top: 1%;
   width: 50% ;
@@ -119,29 +110,31 @@
   gap: 10px;
   display: flex;
   align-items: center;
-  justify-content: right;  
-  border-radius: 10px;
-  background-color: #ffffff3f;
+  justify-content: right;
+  border-radius: var(--radius);
+  background-color: var(--bg-elevated);
 }
 
 /* config dos botões de cadastro */
 .login-btnCadastrar {
-  /* border: 1px solid black; */
   width: 60px;
   height: 60px;
   margin: 5px;
   padding: 10px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-} 
+  border-radius: var(--radius);
+  background-color: var(--bg-panel);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+  .login-btnCadastrar:hover {
+    color: var(--accent-orange);
+  }
   .login-btnCadastrar:active {
-    transform: translateY(4px);
-    border-bottom: #000000;
+    transform: translateY(2px);
 }
 
 .login-divBtnLoginPrincipal {
-  /* border: 1px solid black; */
   width: 50%;
   margin: auto;
   margin-top: 1%;
@@ -150,22 +143,38 @@
   display: flex;
   align-items: center;
   justify-content: right;
-  border-radius: 10px;
-  background-color: #ffffff; 
+  border-radius: var(--radius);
+  background-color: var(--bg-elevated);
 }
 
 /* Configuração dos botões do login principal */
 .login-btnLogar {
-  /* border: 1px solid black; */  
   width: 60px;
   height: 60px;
   margin: 5px;
   padding: 10px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.151);
-} 
+  border-radius: var(--radius);
+  background-color: var(--accent-orange);
+  color: #1b1b1e;
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+  .login-btnLogar:hover {
+    background-color: var(--accent-red);
+  }
   .login-btnLogar:active {
-    transform: translateY(4px);
-    border-bottom: #000000;
+    transform: translateY(2px);
+}
+
+/* Link para abrir a recuperação de senha */
+.login-lnkEsqueciSenha {
+  margin: auto;
+  margin-top: 10px;
+  width: fit-content;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+  .login-lnkEsqueciSenha:hover {
+    color: var(--accent-orange);
 }

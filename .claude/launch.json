@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "youtube-react",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "React/youtube", "run", "dev", "--", "--port", "5174"],
+      "port": 5174
+    }
+  ]
+}
