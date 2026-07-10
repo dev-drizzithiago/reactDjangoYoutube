@@ -6,6 +6,11 @@ import { loginSuccess, logout } from "./sessionSlice";
 
 import { urlDefaultDjango } from "../urls";
 
+/**
+ * Hook que, ao montar, faz um GET no Django para receber o cookie CSRF e
+ * verificar/atualizar no Redux se o usuário já está logado.
+ * @returns {JSX.Element} Não renderiza nada visível (retorna fragmento vazio).
+ */
 const useCsrfInit = () => {
 
     const urlDjango =`${urlDefaultDjango}/csrf_token_view/`    

@@ -51,10 +51,20 @@ class MinhaViewProtegida(APIView):
     permission_classes = [IsAuthenticated]  # só acessa se tiver token válido
 
     def get(self, request):
+        """
+        Endpoint de teste protegido por token.
+        :param request:
+        :return: Retorna uma mensagem confirmando que o usuário está autenticado.
+        """
         return Response({"mensagem": "Você está autenticado!", "usuario": str(request.user)})
 
 
 def index(request):
+    """
+    Renderiza a página inicial padrão do Django.
+    :param request:
+    :return: Retorna o template 'index.html'.
+    """
     return render(request, 'index.html')
 
 @ensure_csrf_cookie
@@ -95,6 +105,13 @@ def csrf_token_view(request):
 
 @csrf_exempt
 def credenciais_login(request):
+    """
+    Ponto único para todas as ações de conta do usuário (cadastro, login, logout,
+    recuperação de senha, atualização de cadastro e consulta de status), definidas
+    pelo campo 'tipoRequest' enviado no corpo da requisição.
+    :param request:
+    :return: Retorna os dados do usuário e o resultado do processo solicitado.
+    """
     if request.method != "POST":
         return JsonResponse({
             'mensagem_processo': 'É valido apenas POST',
@@ -345,6 +362,11 @@ def requestBaseDados(request):
 
 # @csrf_protect
 def requestAddLinks(request):
+    """
+    Recebe um link de vídeo do YouTube, valida e registra na base de dados.
+    :param request:
+    :return: Retorna a confirmação (ou erro) do registro do link.
+    """
     obj_app_youtube = YouTubeDownload()
     usuario_logado = request.user
 
@@ -376,6 +398,11 @@ def requestAddLinks(request):
     })
 
 def download_link(request):
+    """
+    Dispara o download da mídia (MP3 ou MP4) referente a um link já salvo.
+    :param request:
+    :return: Retorna o resultado do processo de download.
+    """
     resultado_download = None
     nome_usuario_logado = request.user
 
@@ -399,6 +426,11 @@ def download_link(request):
     })
 
 def remove_link(request):
+    """
+    Remove o vínculo do usuário logado com um link salvo na base de dados.
+    :param request:
+    :return: Retorna a confirmação da remoção do link.
+    """
     usuario_logado = str(request.user)
 
     dados_json = json.loads(request.body)
@@ -415,6 +447,11 @@ def remove_link(request):
 
 # Lista todas as midias salvas no servidor.
 def listagem_midias(request):
+    """
+    Lista as mídias (MP3 ou MP4) já salvas no servidor para o usuário logado.
+    :param request:
+    :return: Retorna a lista de mídias encontradas.
+    """
     lista_midias_django = []
     usuario_logado = request.user
 
@@ -477,6 +514,12 @@ def listagem_midias(request):
     })
 
 def preparar_midias_to_download(request):
+    """
+    Gera um token temporário associado ao caminho do arquivo de mídia,
+    para permitir o download seguro sem expor o caminho real no servidor.
+    :param request:
+    :return: Retorna a URL de download que usa o token gerado.
+    """
     if request.method != "POST":
         return JsonResponse({
             'mensagem_processo': 'Apenas POST é permitido',
@@ -505,6 +548,12 @@ def preparar_midias_to_download(request):
     })
 
 def download_da_midia(request):
+    """
+    Entrega o arquivo de mídia ao navegador a partir de um token válido
+    gerado por 'preparar_midias_to_download'.
+    :param request:
+    :return: Retorna o arquivo para download ou uma mensagem de erro se o token for inválido/expirado.
+    """
     token = request.GET.get('token')
     caminho_arquivo = cache.get(token)
 
@@ -519,6 +568,11 @@ def download_da_midia(request):
     return response
 
 def consultar_progresso(request):
+    """
+    Consulta o percentual de progresso de um download em andamento pelo token.
+    :param request:
+    :return: Retorna o valor do progresso salvo no cache.
+    """
     token = request.GET.get('token')
     progresso = cache.get(f"Progresso_{token}", 0)
     return JsonResponse({
@@ -526,6 +580,12 @@ def consultar_progresso(request):
     })
 
 def removendo_midias(request):
+    """
+    Remove o vínculo do usuário logado com uma mídia salva; se nenhum usuário
+    ficar vinculado, a mídia e o arquivo físico são apagados do servidor.
+    :param request:
+    :return: Retorna a confirmação da remoção da mídia.
+    """
     usuario_logado = request.user
     obj_usuario_logado = User.objects.filter(username=usuario_logado).first()
 
@@ -581,6 +641,11 @@ def removendo_midias(request):
 
 @api_view(['GET'])
 def janela_questionarios(request):
+    """
+    Lista as categorias de questionários cadastradas no banco 'questionarios'.
+    :param request:
+    :return: Retorna as categorias serializadas.
+    """
     categorias = QuestionariosCategorias.objects.using('questionarios').all()
     serializer = CategoriasSerializers(categorias, many=True)
 

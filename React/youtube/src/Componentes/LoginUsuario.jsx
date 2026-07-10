@@ -102,13 +102,19 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
   }, [])
 
 
-  // Quanto ativa o botão para criar novo usuário. Abre o bloco de formulário
+  /**
+   * Ativa o formulário de cadastro de um novo usuário.
+   * @returns {void}
+   */
   const criarNovoUsuario = () => {
     setBtnCriarNovoUserAtivo(false)
     setCriarUser(true)
   }
 
-  /** FUNÇÃO PARA SALVAR CREDENCIAIS. */
+  /**
+   * Valida o formulário de cadastro e envia os dados ao Django para criar o novo usuário.
+   * @returns {Promise<void>}
+   */
   const salvarNovoUser = async () => {
 
     if (ncNomeCompleto === '' &&
@@ -174,6 +180,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     
   }
 
+  /**
+   * Limpa os campos do formulário de cadastro/configuração de conta.
+   * @returns {void}
+   */
   const limparFormulario = () => {
     setNcNomeCompleto('')
     setNcUsuario('')
@@ -182,7 +192,11 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     setNcconfirSenha('')
   }
   
-  /** Função para o usuário se logar  */
+  /**
+   * Valida os campos de login e envia as credenciais para o Django autenticar o usuário.
+   * @param {Event} event - Evento do clique/tecla que disparou o login.
+   * @returns {Promise<void>}
+   */
   const eventoLogin = async (event) => {
 
     const linkSendRequest = `${urlDefaultDjango}/credenciais_login/`;
@@ -254,6 +268,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
       }, 30000);    
   }
 
+  /**
+   * Valida o formulário e envia ao Django os dados atualizados da conta do usuário logado.
+   * @returns {Promise<void>}
+   */
   const atualizarCadastros = async () => {
     console.log('Btn Atualizar cadastro...')
     // Preciso pensar em uma regra
@@ -306,6 +324,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
 
   }
 
+  /**
+   * Cancela o processo atual (cadastro, configuração de conta) e volta para a tela anterior.
+   * @returns {void}
+   */
   const cancelar = () => {
 
     console.log('Cancelar Processo...')
@@ -327,6 +349,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     }    
   }
 
+  /**
+   * Alterna a exibição dos campos de alteração de senha na tela de configurar conta.
+   * @returns {void}
+   */
   const ativarCamposAlterarSenha = () => {
 
     if (ativarAlterarSenha) {
@@ -336,7 +362,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     }
   }
 
-  /** Abre o formulário de recuperação de senha a partir da tela de login. */
+  /**
+   * Abre o formulário de recuperação de senha a partir da tela de login.
+   * @returns {void}
+   */
   const abrirRecuperarSenha = () => {
     setRecuperarSenha(true)
     setContaVerificada(false)
@@ -346,7 +375,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     setRsConfirmarSenha('')
   }
 
-  /** Fecha o formulário de recuperação de senha e volta para o login. */
+  /**
+   * Fecha o formulário de recuperação de senha e volta para o login.
+   * @returns {void}
+   */
   const cancelarRecuperarSenha = () => {
     setRecuperarSenha(false)
     setContaVerificada(false)
@@ -356,7 +388,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     setRsConfirmarSenha('')
   }
 
-  /** Confirma que o usuário e e-mail informados pertencem a uma conta existente. */
+  /**
+   * Confirma que o usuário e e-mail informados pertencem a uma conta existente.
+   * @returns {Promise<void>}
+   */
   const verificarContaRecuperacao = async () => {
 
     if (rsUsuario === '' || rsEmail === '') {
@@ -384,7 +419,10 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
     }
   }
 
-  /** Envia a nova senha para o backend após a conta ter sido confirmada. */
+  /**
+   * Envia a nova senha para o backend após a conta ter sido confirmada.
+   * @returns {Promise<void>}
+   */
   const redefinirSenha = async () => {
 
     if (rsNovaSenha === '' || rsConfirmarSenha === '') {

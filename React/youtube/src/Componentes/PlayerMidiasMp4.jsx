@@ -28,6 +28,11 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
     
+    /**
+     * Envia o link da mídia selecionada para o componente pai (App) tocar no player.
+     * @param {string} linkMidia - Caminho relativo do arquivo de vídeo.
+     * @returns {void}
+     */
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia..')
 
@@ -35,7 +40,11 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
         executaMidia(linkMidia, 'audio/mp4', true);
     }
 
-    /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
+    /**
+     * Solicita ao Django um link temporário de download e abre em uma nova janela.
+     * @param {string} midiaDownload - Caminho do arquivo MP4 a ser baixado.
+     * @returns {Promise<void>}
+     */
     const downloadMidia = async (midiaDownload) => {
         const payload = {
             'tipoDownload': 'mp4',
@@ -54,6 +63,11 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
         }
     }
 
+    /**
+     * Remove uma mídia MP4 salva no servidor e atualiza a lista exibida.
+     * @param {number} id_movie - ID da mídia a ser removida.
+     * @returns {Promise<void>}
+     */
     const removeDeleteMidia = async (id_movie) => {
         const payload = {
             tipoMidia: 'MP4',
@@ -77,6 +91,11 @@ const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) 
         }
     }
 
+    /**
+     * Converte a duração da mídia (em segundos) para o formato "minutos:segundos".
+     * @param {number} duracao - Duração da mídia em segundos.
+     * @returns {string} Retorna a duração formatada (ex: "3:05").
+     */
     function converterDuracao(duracao) {
         const minutos = Math.round(duracao / 60); // converte o valor inteiro para minutos.
         const segundos = duracao % 60;  // converte o valor inteiro para segundos.

@@ -57,6 +57,13 @@ logging.basicConfig(
 
 
 def on_progress_(stream, chunk, bytes_remaining):
+    """
+    Callback chamado pelo pytubefix durante o download, usada apenas para exibir o progresso no console.
+    :param stream: Stream do vídeo/áudio sendo baixado.
+    :param chunk: Pedaço de dados recebido.
+    :param bytes_remaining: Quantidade de bytes que ainda faltam baixar.
+    :return:
+    """
     total_size = stream.filesize
     bytes_download = total_size - bytes_remaining
     porcentagem = (bytes_download / total_size) * 100
@@ -83,6 +90,10 @@ def data_hora_certa():
 
 
 def data_timestamp():
+    """
+    Função pode ser chamada em qualquer lugar do projeto, não recebe nenhum valor, apenas retorna.
+    :return: Retorna a data atual convertida para timestamp (em string, sem casas decimais).
+    """
     data_stamtime = datetime.now()
     return str(data_stamtime.timestamp()).split('.')[0]
 
@@ -97,6 +108,10 @@ class YouTubeDownload:
     PATH_MIDIA_TEMP = path.join(settings.MEDIA_ROOT, 'temp')
 
     def __init__(self):
+        """
+        Inicializa os atributos internos usados durante o processo de download e conversão de mídias.
+        :return:
+        """
         self.link = None
         self.conexao_banco = None
         self.cursor = None
@@ -194,7 +209,13 @@ class YouTubeDownload:
 
     # Faz download do arquivo em MP3.
     def download_music(self, id_entrada: int, usuario_logado: str):
-
+        """
+        Faz o download da mídia em MP3. Se a mídia já existir no servidor, apenas
+        vincula o usuário a ela; caso contrário, baixa o áudio do YouTube e converte para MP3.
+        :param id_entrada: ID do link (DadosYoutube) que será baixado.
+        :param usuario_logado: Usuário que está solicitando o download.
+        :return: Retorna um dicionário com 'erro_processo' e 'mensagem_processo'.
+        """
         logging.info('Baixando mídia em MP3')
 
         logging.info(f"ID: {id_entrada}")
@@ -306,7 +327,13 @@ class YouTubeDownload:
 
     # Faz o download do arquivo em MP4
     def download_movie(self, id_entrada: int, usuario_logado: str):
-
+        """
+        Faz o download da mídia em MP4. Se a mídia já existir no servidor, apenas
+        vincula o usuário a ela; caso contrário, baixa o vídeo do YouTube na maior resolução disponível.
+        :param id_entrada: ID do link (DadosYoutube) que será baixado.
+        :param usuario_logado: Usuário que está solicitando o download.
+        :return: Retorna um dicionário com 'erro_processo' e 'mensagem_processo'.
+        """
         logging.info(f"ID: {id_entrada}")
         logging.info(f'Baixando mídia em MP4 para o usuário: {usuario_logado}')
 
@@ -403,6 +430,12 @@ class YouTubeDownload:
     # Processo para transformar o arquivo de mp4 em mp3
     # Esse problema não tem nenhum não pode ser chamado pelo usuário, apenas para uso internet do app
     def mp4_to_mp3(self, nome_midia):
+        """
+        Converte o áudio baixado (m4a) para MP3. Não deve ser chamado pelo usuário,
+        é de uso interno da classe (chamado por 'download_music').
+        :param nome_midia: Nome do arquivo m4a a ser convertido.
+        :return: Retorna True se a conversão foi feita com sucesso, ou False caso contrário.
+        """
         logging.info(f"Conversão de mídia >> {nome_midia}")
 
         # Busca a quantidade de midias que estão dentro da pasta temp
@@ -434,6 +467,11 @@ class YouTubeDownload:
 
     # Valida se o link é valido.
     def validar_link_youtube(self, link):
+        """
+        Valida (e corrige, se possível) se o link informado é um link válido do YouTube.
+        :param link: Link informado pelo usuário.
+        :return: Retorna True se o link é válido, ou False caso contrário.
+        """
         logging.info(f"Validando se link é YouTube")
 
         # Caso o link não esteja com 'https://', o próprio programa vai adicionar

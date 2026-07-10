@@ -28,7 +28,12 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
 
-    /** Função para preparar o download tanto em video como em musicas mp3 */
+    /**
+     * Prepara e dispara o download de um link salvo, tanto em vídeo (MP4) quanto em música (MP3).
+     * @param {number} id_dados - ID do link salvo que será baixado.
+     * @param {string} tipoMidia - Tipo da mídia desejada ('MP3' ou 'MP4').
+     * @returns {Promise<void>}
+     */
     const downloadVideoAndMusic = async (id_dados, tipoMidia) => {
 
         // Evita que o usuário inicie um novo download enquanto outro processo de download estiver em andamento.
@@ -59,6 +64,11 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
         setdownloadMidias(false)
     }
 
+    /**
+     * Remove um link salvo na base de dados e atualiza a lista exibida.
+     * @param {number} id_dados - ID do link a ser removido.
+     * @returns {Promise<void>}
+     */
     const removeLinkBaseDados = async (id_dados) => {
 
         // Eveita que o usuário inicie um novo processo de remoção enquanto outro processo de download ou remoção estiver em andamento.

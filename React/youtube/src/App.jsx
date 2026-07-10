@@ -148,13 +148,19 @@ function App() {
     }, 600000)
   }, [statusLogin])
 
-  /** Recebe o sinal de fechando do elementro de produzir player*/
+  /**
+   * Fecha o player de mídia e limpa o link em execução.
+   * @returns {void}
+   */
   const fecharPlayerMidia = () => {
     setAtivarPlayer(false);
     setLinkMidia([null, null]);
   }
 
-  /** Abre o elemento onde estão os link que estão salvos. */
+  /**
+   * Alterna a exibição do elemento com os links salvos, fechando os demais painéis.
+   * @returns {void}
+   */
   const linksSalvos = () => {
 
     if (!elementoLinks) {
@@ -170,7 +176,10 @@ function App() {
     }
   }
 
-  /** Abre o elemento onde estão as mídias MP3 salvas. */
+  /**
+   * Alterna a exibição do player de mídias MP3, fechando os demais painéis.
+   * @returns {void}
+   */
   const midiasMp3 = () => {
 
     if (!elementoMp3) {
@@ -186,7 +195,10 @@ function App() {
 
   }
 
-   /** Abre o elemento onde estão as mídias MP4 salvas. */
+  /**
+   * Alterna a exibição do player de mídias MP4, fechando os demais painéis.
+   * @returns {void}
+   */
   const midiasMp4 = () => {
 
     if (!elementoMp4) {
@@ -203,6 +215,10 @@ function App() {
 
   }
 
+  /**
+   * Alterna a exibição do formulário para adicionar um novo link.
+   * @returns {void}
+   */
   const defStatusFormsAddLinks = () => {
 
     if (abrirFormsAddLink) {
@@ -213,6 +229,10 @@ function App() {
 
   }
 
+  /**
+   * Alterna a exibição do formulário de configuração da conta do usuário.
+   * @returns {void}
+   */
   const abrirFormsUsuario = () => {
 
     if (!configurarContaAtivo) {
@@ -229,6 +249,10 @@ function App() {
 
   }
 
+  /**
+   * Solicita ao Django o logout do usuário e limpa o estado local/global da sessão.
+   * @returns {Promise<void>}
+   */
   const deslogar = async () => {
 
     if (statusLogin) {

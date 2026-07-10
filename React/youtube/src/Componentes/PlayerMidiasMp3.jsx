@@ -29,6 +29,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
            
     if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
 
+    /**
+     * Envia o link da mídia selecionada para o componente pai (App) tocar no player.
+     * @param {string} linkMidia - Caminho relativo do arquivo de áudio.
+     * @returns {void}
+     */
     const executarPlayerMidia = (linkMidia) => {
         console.log('Executando mídia...')
         toast.success('Executando mídia...')
@@ -37,7 +42,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
         executaMidia(linkMidia, 'audio/mp3');
     }
 
-    /** FUNÇÃO PARA DOWNLOAD DA MIDIA */
+    /**
+     * Solicita ao Django um link temporário de download e abre em uma nova janela.
+     * @param {string} midiaDownload - Caminho do arquivo MP3 a ser baixado.
+     * @returns {Promise<void>}
+     */
     const downloadMidia = async (midiaDownload) => {
         console.log('Download da mídia..')
         
@@ -56,6 +65,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
         }        
    }
 
+    /**
+     * Remove uma mídia MP3 salva no servidor e atualiza a lista exibida.
+     * @param {number} id_music - ID da mídia a ser removida.
+     * @returns {Promise<void>}
+     */
     const removeDeleteMidia = async (id_music) => {
         console.log('Removendo a mídia..')
 
@@ -81,6 +95,11 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
         }
     }
 
+    /**
+     * Converte a duração da mídia (em segundos) para o formato "minutos:segundos".
+     * @param {number} duracao - Duração da mídia em segundos.
+     * @returns {string} Retorna a duração formatada (ex: "3:05").
+     */
     function converterDuracao(duracao) {
         const minutos = Math.round(duracao / 60); // converte o valor inteiro para minutos.
         const segundos = duracao % 60;  // converte o valor inteiro para segundos.

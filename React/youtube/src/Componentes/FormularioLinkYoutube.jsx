@@ -14,7 +14,10 @@ const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk
 
     const refLink = useRef();
 
-    /** FUNÇÃO PARA ADICIONAR LINK */
+    /**
+     * Envia o link do YouTube digitado para o Django registrar na base de dados.
+     * @returns {Promise<void>}
+     */
     const useDefGravandoLink = async () => {
       const linkYoutube = "https://www.youtube.com/watch?v=QNAVrQ96mpA&list=RDQNAVrQ96mpA&start_radio=1" //refLink.current.value
       refLink.current.value = '';
@@ -39,7 +42,10 @@ const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk
       setCarregando(false) // Fecha o spinner
     }
     
-    /** FUNÇÃO PARA LIMPAR O CAMPO DE LINK */
+    /**
+     * Limpa o campo de texto onde o link do YouTube é digitado.
+     * @returns {void}
+     */
     const useDefBtnLimparInput = () => {
       if (refLink.current) {
         refLink.current.value = '';

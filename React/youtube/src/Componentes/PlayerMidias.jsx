@@ -4,6 +4,10 @@ import './PlayerMidias.css'
 import { urlDefaultDjango } from "../urls";
 
 const PlayerMidias = ({executandoMidia, fecharPlayer}) => {
+    /**
+     * Fecha o player de mídia, avisando o componente pai.
+     * @returns {void}
+     */
     const fecharPlayerMidia = () => {
       fecharPlayer()
     }

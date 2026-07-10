@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import getCookies from "./getCookies";
 
+/**
+ * Hook que busca dados no Django automaticamente sempre que a URL, o payload ou o trigger mudam.
+ * @param {string} urlDjango - URL do endpoint Django que será chamado.
+ * @param {*} payload - Dados enviados no corpo da requisição.
+ * @param {*} trigger - Valor que, ao mudar, força uma nova busca (ex: contador de atualização).
+ * @returns {{dados: Array, carregando: boolean}} Retorna os dados recebidos e o estado de carregamento.
+ */
 const useRequestDjango = (urlDjango, payload, trigger) => {
-   
+
     const payloadString = JSON.stringify(payload)
 
     const [dados, setDados] = useState([])
