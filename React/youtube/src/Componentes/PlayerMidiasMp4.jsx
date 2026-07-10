@@ -11,7 +11,7 @@ import { TbPlayerPlay } from "react-icons/tb";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaDownload } from "react-icons/fa6";
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+import { urlDefaultDjango } from "../urls";
 
 const PlayerMidiasMp4 = ({ effectAtualizacao, executaMidia, fechaElementoMp4 }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`

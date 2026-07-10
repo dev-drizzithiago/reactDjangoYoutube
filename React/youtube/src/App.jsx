@@ -36,8 +36,7 @@ import LoginUsuario from './Componentes/LoginUsuario';
 
 import Testes from './Componentes/Testes';
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
-
+import { urlDefaultDjango } from './urls';
 
 function App() {
 

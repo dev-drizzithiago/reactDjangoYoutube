@@ -12,7 +12,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaDownload } from "react-icons/fa6";
 
 // PADRÃO PARA A URL 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+import { urlDefaultDjango } from "../urls";
 
 const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) => {    
     const urlMiniatura = `${urlDefaultDjango}/media/`

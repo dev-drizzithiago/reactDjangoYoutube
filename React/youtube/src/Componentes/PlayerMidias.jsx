@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './PlayerMidias.css'
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+import { urlDefaultDjango } from "../urls";
 
 const PlayerMidias = ({executandoMidia, fecharPlayer}) => {
     const fecharPlayerMidia = () => {

@@ -13,7 +13,7 @@ import { BsFiletypeMp3 } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { SiYoutubekids } from "react-icons/si";
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+import { urlDefaultDjango } from "../urls";
 
 const LinkBancoDados = ({ propsStatusProcesso }) => {
 
