@@ -100,6 +100,8 @@ def credenciais_login(request):
             'mensagem_processo': 'É valido apenas POST',
             'erro_processo': 1,
         }, status=400)
+    
+    print('Logins')
 
     mensagem_processo = None
     erro_processo = None

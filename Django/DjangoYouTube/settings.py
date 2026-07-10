@@ -70,7 +70,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://192.168.15.250:3000",  # IP da máquina na rede local
 ]
 
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     "accept",
     "content-type",

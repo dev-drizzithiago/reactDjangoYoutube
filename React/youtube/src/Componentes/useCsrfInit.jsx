@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 // - Importa as actions criadas no slice.
 import { loginSuccess, logout } from "./sessionSlice";
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+const urlDefaultDjango = `http://192.168.15.250:8000`
 
 const useCsrfInit = () => {
 

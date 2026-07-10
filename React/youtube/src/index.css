@@ -1,11 +1,28 @@
 :root {
+  /* Paleta inspirada no dashboard: fundo grafite escuro, acentos laranja/vermelho, destaque amarelo. */
+  --bg-app: #1b1b1e;
+  --bg-panel: #232327;
+  --bg-elevated: #2a2a2f;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --accent-orange: #f0883e;
+  --accent-red: #e2574c;
+  --accent-yellow: #f2c811;
+
+  --text-primary: #f2f2f2;
+  --text-secondary: #a8a8ad;
+
+  --radius: 12px;
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-inset: inset 0 0 0 1px var(--border-subtle);
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #7c7c7c;
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-app);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,20 +30,19 @@
 
 html {
   padding: 20px;
+  background-color: var(--bg-app);
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  
+
   height: 95%;
   width: 95%;
   margin: auto;
-  border-radius: 10px;
-  
-  background-color: rgba(0, 0, 0, 0.541);
-  box-shadow: 5px 5px 10px 1px rgba(136, 136, 136, 0.151);
+  border-radius: var(--radius);
 
-  /* border: 1px solid black; */
+  background-color: var(--bg-panel);
+  box-shadow: var(--shadow-soft);
 }

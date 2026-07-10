@@ -26,7 +26,7 @@ import { AiOutlineClear } from "react-icons/ai";
 
 import { toast } from 'react-toastify';
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+const urlDefaultDjango = `http://192.168.15.250:8000`
 
 const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, AtivarLinksPosAtualizarDadosUser }) => {
 

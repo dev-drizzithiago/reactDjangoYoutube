@@ -1,19 +1,13 @@
 .App {
-  /* border: 1px solid rgb(255, 4, 4); */
-
   padding: 25px;
   text-align: center;
-  
-  background-color: #242424;
 
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13); 
+  background-color: var(--bg-app);
 
+  border-radius: var(--radius);
 }
 
 .app-divBtnImg{
-  /* border: 1px solid rgb(255, 4, 4); */
-
   width: 100%;
   height: 100px;
   margin-top: 1%;
@@ -25,101 +19,98 @@
   align-items: center;
   justify-content: space-between;
 
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
-}  
+  border-radius: var(--radius);
+  background-color: var(--bg-panel);
+  box-shadow: var(--shadow-soft), var(--shadow-inset);
+}
   .app-imgBtn {
     width: 80px;
     height: 80px;
     padding: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
+    border-radius: var(--radius);
+    background-color: var(--bg-elevated);
+    transition: background-color 0.15s ease, transform 0.15s ease;
   }
-  .app-imgBtn:active {    
-    transform: translateY(4px);
-    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.13);  
+  .app-imgBtn:hover {
+    background-color: var(--accent-orange);
+  }
+  .app-imgBtn:active {
+    transform: translateY(2px);
   }
 
 h1 {
-  color: #ffffff;
+  color: var(--text-primary);
   width: 30%;
-  
+
   margin: auto;
   margin-top: 1%;
   margin-bottom: 1%;
-  
+
   padding-bottom: 5px;
-  border-radius: 10px;
-  
+  border-radius: var(--radius);
+
   font: 18pt Arial, Helvetica, sans-serif;
-  
-  border-bottom: 1px solid #ffffff80;
-  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
+
+  border-bottom: 2px solid var(--accent-orange);
 }
 
 /* h3 para titulos no elemento */
 h3 {
-  color: #ffffff;
+  color: var(--text-secondary);
   width: 30%;
-  
+
   margin: auto;
   margin-top: 1%;
   margin-bottom: 1%;
-  
+
   padding-bottom: 5px;
-  border-radius: 10px;
-  
-  font: 18pt Arial, Helvetica, sans-serif;
-  
-  border-bottom: 1px solid #ffffff80;
-  box-shadow: 5px 5px 5px 1px rgba(255, 255, 255, 0.13);  
+  border-radius: var(--radius);
+
+  font: 14pt Arial, Helvetica, sans-serif;
+
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* DIV do botão de deslogar DA PÁGINA PRINCIPAL */
-.app-divBtnDeslogar{  
-  /* border: 1px solid rgb(255, 0, 0); */
-
+.app-divBtnDeslogar{
   display: flex;
   justify-content: right;
   flex: 1; /* Ocupa todo espaço disponível. Precisa esta dentro da div*/
 
   gap: 5px;
-  
+
 }
   /* Paragrafo contendo nome do usuário */
   .app-userLogado{
-    /* border: 1px solid rgb(0, 0, 0);  */
-
     font-size: 16pt;
+    color: var(--text-primary);
     text-align: center;
-    
+
     display: flex;
     align-items: center;
     gap: 15px;
-    
+
     padding: 5px;
-    
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.212);
+
+    border-radius: var(--radius);
   }
 
 .app-btnConfigurarConta{
-  /* border: 1px solid rgb(0, 0, 0); */
-
   display: flex;
-  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.13);
-
+  color: var(--text-secondary);
 }
+  .app-btnConfigurarConta:hover {
+    color: var(--accent-orange);
+  }
 .app-btnDeslogar{
-  /* border: 1px solid rgb(0, 0, 0); */
-  
   display: flex;
-  box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.13);
+  color: var(--text-secondary);
 }
+  .app-btnDeslogar:hover {
+    color: var(--accent-red);
+  }
 
 .app-divLinksMidias{
-  /* border: 1px solid rgb(255, 0, 0); */
   display: flex;
   width: 100%;
   height: 100%;
@@ -127,8 +118,9 @@ h3 {
   margin: auto;
   margin-top: 1%;
   box-sizing: border-box;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.13);
+  border-radius: var(--radius);
+  background-color: var(--bg-panel);
+  box-shadow: var(--shadow-inset);
 }
 
 .app-divImgLoading {
