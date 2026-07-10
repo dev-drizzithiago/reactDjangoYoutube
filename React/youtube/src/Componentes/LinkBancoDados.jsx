@@ -26,7 +26,7 @@ const LinkBancoDados = ({ propsStatusProcesso }) => {
 
     const {dados, carregando, usuarioLogado} = useRequestDjango(`${urlDefaultDjango}/requestBaseDados/`, 'Listar', atualizacaoBaseLinks)
 
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="linkBanco-loading"/>
+    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="loading-spinner"/>
 
     /**
      * Prepara e dispara o download de um link salvo, tanto em vídeo (MP4) quanto em música (MP3).

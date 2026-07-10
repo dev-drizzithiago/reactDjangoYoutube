@@ -27,7 +27,7 @@ const PlayerMidiasMp3 = ({ effectAtualizacao, executaMidia, fechaElementoMp3 }) 
 
     const { dados, carregando } = useRequestDjango(`${urlDefaultDjango}/listagem_midias/`, payload, atualizacaoModiaMp3);    
            
-    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..."/>;
+    if (carregando) return <img src="/img/imgBtns/loading.gif" alt="Carregando..." className="loading-spinner"/>;
 
     /**
      * Envia o link da mídia selecionada para o componente pai (App) tocar no player.

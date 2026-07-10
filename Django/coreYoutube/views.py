@@ -89,12 +89,6 @@ def csrf_token_view(request):
     print('Enviando cookies para o frontend...')
     print('---' * 20)
 
-    print()
-    print('Usuário Logado:')
-    print('---' * 20)
-    print(usuario_logado, ' - ', nome_completo_usuario)
-    print()
-
     return JsonResponse({
         'mensagem_processo': 'Token CSRF enviado',
 
@@ -169,12 +163,16 @@ def credenciais_login(request):
 
         dados_para_login = dados_json['dadosCredencial']
 
+        print(dados_para_login, request.user.is_authenticated)
+
         USER = dados_para_login['userLogin']
         PASS = dados_para_login['passUsuario']
 
         # Começa o processo para logar o usuario, caso ele ainda não esteja logado.
         if not request.user.is_authenticated:
             user_auth = authenticate(request, username=USER, password=PASS)
+
+            print(user_auth, request.user.is_authenticated)
 
             if user_auth is not None:
                 # Loga o usuário no sistema
@@ -189,6 +187,8 @@ def credenciais_login(request):
                 usuario_logado = request.user.is_authenticated
                 usuario_login = str(request.user)
                 erro_processo = 0
+
+                print(request.session['usuario_id'])
             else:
                 # Quando entra com as credências invalidas.
                 print('Credenciais inválidas')
@@ -341,7 +341,7 @@ def requestBaseDados(request):
         dados_json = json.loads(request.body)
 
         query_dados_youtube = DadosYoutube.objects.filter(usuario_dados=usuario_logado).order_by('-id_dados').values()
-        print(query_dados_youtube)
+
         for item in query_dados_youtube:
             lista_dados_django.append({
                 'id_dados': item['id_dados'],

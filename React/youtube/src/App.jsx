@@ -282,10 +282,10 @@ function App() {
         {/** Se o usuário estiver deslogado */}
         {!statusLogin && <LoginUsuario infoStatusLogin={(statusLogado) => setStatusLogin(statusLogado)}/>}        
         
-        {statusLogin && (          
-          <>
+        {statusLogin && (
+          <div className='app-mainLayout'>
             <div className='app-divBtnImg'>
-                  
+
                 <div>
                   <FaHome className='app-imgBtn'  onClick={linksSalvos} title='AbrirLinks Salvos'/>
                 </div>
@@ -298,65 +298,66 @@ function App() {
                   <BsFiletypeMp4 className='app-imgBtn' onClick={midiasMp4} title='Abrir Player MP4'/>
                 </div>
 
-                {abrirFormsAddLink ? 
-                <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms' /> : 
+                {abrirFormsAddLink ?
+                <MdOutlineCloseFullscreen className='app-imgBtn' onClick={defStatusFormsAddLinks} title='Abrir Forms' /> :
                 <MdOutlineOpenInFull className='app-imgBtn'  onClick={defStatusFormsAddLinks} title='Fechar Forms' />}
+
+                {/* Abre o formulário para configurar conta. */}
+                <div >
+                  <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar' onClick={abrirFormsUsuario}/>
+                </div>
 
                 <div className='app-divBtnDeslogar'>
                   <p className='app-userLogado'>Ola, {usuario} <FaRegUser /></p>
                   <IoMdLogOut className='app-imgBtn app-btnDeslogar' onClick={deslogar} title='Logout'/>
                 </div>
-                
-                {/* Abre o formulário para configurar conta. */}
-                <div >
-                  <IoSettings className='app-imgBtn app-btnConfigurarConta' title='Configurar' onClick={abrirFormsUsuario}/>
-                </div>                
             </div>
-            
-            {/* CONFIGURAR CONTA */}
-            {configurarContaAtivo && 
-            <LoginUsuario 
-              boolUserLogado={logado}
-              infoDadosAtualizado={(dadosAtualizados) => setConfigurarContaAtivo(dadosAtualizados)}
-              AtivarLinksPosAtualizarDadosUser={(statusAtivarLinks) => setElementoLinks(statusAtivarLinks)}
-            />}
 
-            {spinnerPlayer && 
+            <div className='app-content'>
+              {/* CONFIGURAR CONTA */}
+              {configurarContaAtivo &&
+              <LoginUsuario
+                boolUserLogado={logado}
+                infoDadosAtualizado={(dadosAtualizados) => setConfigurarContaAtivo(dadosAtualizados)}
+                AtivarLinksPosAtualizarDadosUser={(statusAtivarLinks) => setElementoLinks(statusAtivarLinks)}
+              />}
 
-              <div className="app-divImgLoading">
-                  <p>Carregando mídia... </p>
-                  <img
-                    className="linkBancoDados-imgLoading" 
-                    src="/img/imgBtns/spinner.gif" 
-                    alt="Carregando..."
-                  />
+              {spinnerPlayer &&
 
-              </div>
-            }
-            {abrirFormsAddLink && <FormularioLinkYoutube 
+                <div className="app-divImgLoading">
+                    <p>Carregando mídia... </p>
+                    <img
+                      className="linkBancoDados-imgLoading"
+                      src="/img/imgBtns/spinner.gif"
+                      alt="Carregando..."
+                    />
 
-              onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}
-              fecharFormularioAdicionarLonk={(fecharJanela) => setAbrirFormsAddLink(fecharJanela)}
-            />}
+                </div>
+              }
+              {abrirFormsAddLink && <FormularioLinkYoutube
 
-            {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-            {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+                onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}
+                fecharFormularioAdicionarLonk={(fecharJanela) => setAbrirFormsAddLink(fecharJanela)}
+              />}
 
-            {elementoMp3    && <PlayerMidiasMp3 
-            
-              executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
-              fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)} 
+              {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
+              {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
 
-            />}
+              {elementoMp3    && <PlayerMidiasMp3
 
-            {elementoMp4    && <PlayerMidiasMp4 
+                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
+                fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)}
 
-              executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])} 
-              fechaElementoMp4={(statusFechar) => setElementoMp4(statusFechar)} 
+              />}
 
-            />}
+              {elementoMp4    && <PlayerMidiasMp4
 
-          </>)}
+                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
+                fechaElementoMp4={(statusFechar) => setElementoMp4(statusFechar)}
+
+              />}
+            </div>
+          </div>)}
       </div>
   )
 }

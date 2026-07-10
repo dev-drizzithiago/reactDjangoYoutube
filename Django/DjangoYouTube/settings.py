@@ -91,23 +91,23 @@ CORS_ALLOW_HEADERS = [
 CSRF_COOKIE_HTTPONLY = False  # bloqueia o acesso via JavaScript (document.cookie)
 CSRF_COOKIE_SECURE = False  # em dev, pode ser False; em produção, True com HTTPS
 
-SESSION_COOKIE_SAMESITE = 'None'  # se precisar compartilhar cookies entre domínios
+# SESSION_COOKIE_SAMESITE = None  # se precisar compartilhar cookies entre domínios
 SESSION_COOKIE_DOMAIN = '192.168.15.250'  # deixa o navegador definir para o host atual
 CSRF_COOKIE_DOMAIN = '192.168.15.250'
 
 # Isso diz ao Django que vamos usar JWT para autenticação
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
-
-from datetime import timedelta
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # token expira em 30 min
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # refresh expira em 1 dia
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }
+#
+# from datetime import timedelta
+#
+# SIMPLE_JWT = {
+#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # token expira em 30 min
+#     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # refresh expira em 1 dia
+# }
 
 
 ROOT_URLCONF = "DjangoYouTube.urls"

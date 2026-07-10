@@ -33,6 +33,14 @@ html {
   background-color: var(--bg-app);
 }
 
+/* Spinner de carregamento usado enquanto o conteúdo de uma seção ainda não chegou do Django. */
+.loading-spinner {
+  display: block;
+  width: 65px;
+  height: 65px;
+  margin: 30px auto;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
