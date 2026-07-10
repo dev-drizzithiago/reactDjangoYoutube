@@ -324,7 +324,7 @@ def requestBaseDados(request):
         dados_json = json.loads(request.body)
 
         query_dados_youtube = DadosYoutube.objects.filter(usuario_dados=usuario_logado).order_by('-id_dados').values()
-
+        print(query_dados_youtube)
         for item in query_dados_youtube:
             lista_dados_django.append({
                 'id_dados': item['id_dados'],
