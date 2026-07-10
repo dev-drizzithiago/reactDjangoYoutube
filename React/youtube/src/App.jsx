@@ -340,20 +340,33 @@ function App() {
                 fecharFormularioAdicionarLonk={(fecharJanela) => setAbrirFormsAddLink(fecharJanela)}
               />}
 
-              {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} />}
-              {elementoLinks  && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+              {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} fecharLinks={(e) => {
+                if (e === 'audio/mp3'){
+                  setElementoMp3(false)
+                } else {
+                  setElementoMp4(false)
+                }
 
-              {elementoMp3    && <PlayerMidiasMp3
+                }}/>}
+              {elementoLinks && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
+
+              {elementoMp3 && <PlayerMidiasMp3
 
                 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
-                fechaElementoMp3={(statusFechar) => setElementoMp3(statusFechar)}
+                fechaElementoMp3={(statusFechar) => {
+                  setElementoMp3(statusFechar),
+                  setLinkMidia(!statusFechar)
+                }}
 
               />}
 
-              {elementoMp4    && <PlayerMidiasMp4
+              {elementoMp4 && <PlayerMidiasMp4
 
                 executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
-                fechaElementoMp4={(statusFechar) => setElementoMp4(statusFechar)}
+                fechaElementoMp4={(statusFechar) => {
+                  setElementoMp4(statusFechar),
+                  setLinkMidia(!statusFechar)
+                } }
 
               />}
             </div>
