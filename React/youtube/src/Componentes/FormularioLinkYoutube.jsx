@@ -7,7 +7,7 @@ import "./FormularioLinkYoutube.css"
 import { SiCcleaner } from "react-icons/si";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
-const urlDefaultDjango = `http://192.168.15.250:8080`
+import { urlDefaultDjango } from "../urls";
 
 const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk }) => {
     const [carregando, setCarregando] = useState(null)
@@ -16,14 +16,16 @@ const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk
 
     /** FUNÇÃO PARA ADICIONAR LINK */
     const useDefGravandoLink = async () => {
-      const linkYoutube = refLink.current.value
+      const linkYoutube = "https://www.youtube.com/watch?v=QNAVrQ96mpA&list=RDQNAVrQ96mpA&start_radio=1" //refLink.current.value
       refLink.current.value = '';
 
       setCarregando(true) // ínicia o spinner
 
       const responseDados = await sendRequestDjango(`${urlDefaultDjango}/requestAddLinks/`, {'link': linkYoutube})
 
-      if (responseDados.erro_processo === 0){
+      console.log(responseDados)
+
+      if (responseDados.erro_processo === 0 && responseDados){
         toast.success(responseDados.mensagem_processo);
 
         /** Comunica o app.js que deve atualizar os links. */

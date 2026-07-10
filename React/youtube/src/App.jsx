@@ -34,14 +34,7 @@ import PlayerMidiasMp4 from './Componentes/PlayerMidiasMp4';
 import PlayerMidias from './Componentes/PlayerMidias';
 import LoginUsuario from './Componentes/LoginUsuario';
 
-<<<<<<< HEAD
-import Testes from './Componentes/Testes';
-
 import { urlDefaultDjango } from './urls';
-=======
-const urlDefaultDjango = `http://192.168.15.250:8080`
-
->>>>>>> ea5ab8b69e59f943b96300f8f27795ae15c0feb1
 
 function App() {
 

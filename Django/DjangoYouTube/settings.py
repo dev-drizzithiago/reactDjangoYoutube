@@ -60,7 +60,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.15.250:3000",  # IP da máquina na rede local
+    "http://192.168.15.250:80",  # IP da máquina na rede local
+    "http://192.168.15.250:88",  # IP da máquina na rede local
+    "http://192.168.15.250",  # IP da máquina na rede local
 ]
 
 # - Permitir que o Django aceite requisições com cookies e tokens CSRF vindas de domínios confiáveis
@@ -68,6 +70,9 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://192.168.15.250:3000",  # IP da máquina na rede local
+    "http://192.168.15.250:80",  # IP da máquina na rede local
+    "http://192.168.15.250:88",  # IP da máquina na rede local
+    "http://192.168.15.250",  # IP da máquina na rede local
 ]
 
 CORS_ALLOW_CREDENTIALS = True
