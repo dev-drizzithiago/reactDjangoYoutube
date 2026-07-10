@@ -147,3 +147,45 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+/* Em telas de tablet/celular, a sidebar vira uma barra horizontal no topo em vez de coluna lateral fixa. */
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .app-mainLayout {
+    flex-direction: column;
+  }
+
+  .app-divBtnImg {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .app-imgBtn {
+    width: 56px;
+    height: 56px;
+    padding: 8px;
+  }
+
+  .app-divBtnDeslogar {
+    flex-direction: row;
+    margin-top: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .app-userLogado {
+    flex-direction: row;
+    font-size: 10pt;
+  }
+
+  h1, h3 {
+    width: 90%;
+  }
+}

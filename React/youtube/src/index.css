@@ -54,3 +54,15 @@ body {
   background-color: var(--bg-panel);
   box-shadow: var(--shadow-soft);
 }
+
+/* Em telas pequenas, reduz o respiro externo para aproveitar melhor a largura disponível. */
+@media (max-width: 768px) {
+  html {
+    padding: 8px;
+  }
+
+  body {
+    width: 100%;
+    height: auto;
+  }
+}

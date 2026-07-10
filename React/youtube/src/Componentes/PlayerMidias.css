@@ -56,3 +56,11 @@
   .play-midia_imgBtn:active {
     transform: translateY(2px);
 }
+
+/* Em telas menores, a altura fixa do player é grande demais; usa proporção de vídeo (16:9) em vez de altura fixa. */
+@media (max-width: 768px) {
+  .play-divPlayerMidias {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}

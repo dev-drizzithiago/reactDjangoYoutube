@@ -115,3 +115,26 @@
     justify-content: center;
     align-items: center;
   }
+
+/* Reduz o número de colunas da grade de links conforme a tela encolhe. */
+@media (max-width: 900px) {
+  .linkBancoDados-content {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .linkBancoDados-content {
+    grid-template-columns: 1fr;
+  }
+
+  .linkBancoDados-linksYoutube {
+    height: auto;
+  }
+
+  .linkBancoDados-div_paragraphTitulos {
+    height: auto;
+  }
+}

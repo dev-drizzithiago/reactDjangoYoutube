@@ -178,3 +178,30 @@
   .login-lnkEsqueciSenha:hover {
     color: var(--accent-orange);
 }
+
+/* Empilha os formulários e alarga os campos para telas de tablet/celular. */
+@media (max-width: 768px) {
+  .login-divInputs {
+    flex-direction: column;
+    gap: 20px;
+    padding: 12px;
+  }
+
+  .login-lblCadastro,
+  .login-lblLoginPrincipal {
+    width: 100%;
+  }
+
+  .login-inputCadastro,
+  .login-inputEntrar {
+    width: 100%;
+    font-size: 14pt;
+  }
+
+  .login-divBtnsNovoUsuario,
+  .login-divBtnLoginPrincipal {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

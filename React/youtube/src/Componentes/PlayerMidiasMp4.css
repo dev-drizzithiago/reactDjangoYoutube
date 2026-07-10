@@ -121,3 +121,26 @@
 
     border-radius: var(--radius);
   }
+
+/* Reduz o número de colunas da grade de mídias conforme a tela encolhe. */
+@media (max-width: 900px) {
+  .playerMidiasMp4-content {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .playerMidiasMp4-content {
+    grid-template-columns: 1fr;
+  }
+
+  .playerMidiasMp4-playMidias {
+    height: auto;
+  }
+
+  .playerMidiasMp4-div_paragraphTitulos {
+    height: auto;
+  }
+}

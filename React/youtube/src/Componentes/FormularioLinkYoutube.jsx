@@ -19,7 +19,7 @@ const FormularioLinkYoutube = ({ onLinkAdicionado, fecharFormularioAdicionarLonk
      * @returns {Promise<void>}
      */
     const useDefGravandoLink = async () => {
-      const linkYoutube = "https://www.youtube.com/watch?v=QNAVrQ96mpA&list=RDQNAVrQ96mpA&start_radio=1" //refLink.current.value
+      const linkYoutube = refLink.current.value
       refLink.current.value = '';
 
       setCarregando(true) // ínicia o spinner
