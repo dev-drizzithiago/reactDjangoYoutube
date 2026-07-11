@@ -274,16 +274,14 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
    */
   const atualizarCadastros = async () => {
     console.log('Btn Atualizar cadastro...')
+
     // Preciso pensar em uma regra
     if (
-      ncNomeCompleto === '' &&
-      ncUsuario === '' &&
-      ncEmail === '' &&
       ncSenhaAtual === '' &&
       ncPrimeiraSenha === '' &&
       ncConfirSenha === ''
     ) {
-      toast.warning("Preencha todo o formulário...")
+      toast.warning("É preciso digitar a senha para atualizar...")
       return
     }
 
@@ -300,7 +298,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
         },
 
       }
-      const responseDjango = await sendRequestDjango(linkSendRequest, PAYLOAD)      
+      const responseDjango = await sendRequestDjango('linkSendRequest', PAYLOAD)      
 
       console.log(responseDjango)
 
@@ -523,7 +521,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
               </div>
               
               {ativarAlterarSenha && 
-              <>(
+              <>
                 
                 {/* SENHA ATUAL */}
                 <div className='login-divGridInputs'>
@@ -574,15 +572,27 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                     }
                     />
                   </label>
-                </div>)
-              </>}
-              
+                </div>
+              </>}              
 
             {/* BOTOES */}
               <div className="login-divBtnsNovoUsuario">
-                <FaBackspace className="login-btnCancelar login-btnCadastrar" title='Cancelar' onClick={cancelar}/>
-                <img src='/img/imgBtns/redefinir-senha.png' className='login-btnLogar' onClick={ativarCamposAlterarSenha}/>
-                <GrUpdate className="login-btnAtualizar login-btnCadastrar" title='Cancelar' onClick={atualizarCadastros}/>
+                <FaBackspace 
+                className="login-btnCancelar login-btnCadastrar" 
+                title='Voltar' 
+                onClick={cancelar}/>
+
+                <img 
+                src='/img/imgBtns/redefinir-senha.png' 
+                className='login-btnLogar' 
+                title='Mudar senha' 
+                onClick={ativarCamposAlterarSenha}/>
+
+                <GrUpdate 
+                className="login-btnAtualizar login-btnCadastrar" 
+                title='Atualizar' 
+                onClick={atualizarCadastros}/>
+
               </div>
             </div>
 
@@ -705,6 +715,7 @@ const LoginUsuario = ({ infoStatusLogin, boolUserLogado, infoDadosAtualizado, At
                   name='usuario'
                   className='login-inputEntrar login-inputUsuario'
                   value={dadosParaLogin.userLogin}
+                  readOnly={true}
                   onChange={e => setDadosParaLogin({ ...dadosParaLogin, userLogin: e.target.value})}
                   onKeyDown={e => {
                     if (e.key === "Enter") {
