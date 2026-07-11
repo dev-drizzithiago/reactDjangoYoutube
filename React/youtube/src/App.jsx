@@ -50,6 +50,7 @@ function App() {
   const [elementoMp3, setElementoMp3] = useState(false);
   const [elementoMp4, setElementoMp4] = useState(false);
   const [spinnerPlayer, setSpinnerPlayer] = useState(false);
+  const [ tipoMidia, setTipoMidia ] = useState(null)
 
   const [abrirFormsAddLink, setAbrirFormsAddLink] = useState(false);
   const [configurarContaAtivo, setConfigurarContaAtivo] = useState(false);
@@ -80,7 +81,7 @@ function App() {
    * Se o link tiver algum valor o player é ativado */
   useEffect(() => {
     if (linkMidia[0] !== null) {
-
+      setTipoMidia(linkMidia[1])
       setSpinnerPlayer(true);
 
       if (ativarPlayer) {
@@ -88,14 +89,23 @@ function App() {
         setTimeout(() => {
           setSpinnerPlayer(false);
           setAtivarPlayer(true);
-          setElementoLinks(false)
+          setElementoLinks(false);
+          
         }, 1000);
       } else if (!ativarPlayer){
         setTimeout(() => {
           setAtivarPlayer(true);
           setSpinnerPlayer(false);
-          setElementoLinks(false)
+          setElementoLinks(false);
+          setElementoMp3(false);
+          setElementoMp4(false);
         }, 1000);
+      }
+    } else {
+      if (tipoMidia === 'audio/mp3') {
+        setElementoMp3(true);
+      } else {
+        setElementoMp4(true);        
       }
     }
   }, [linkMidia]);  
@@ -323,7 +333,6 @@ function App() {
               />}
 
               {spinnerPlayer &&
-
                 <div className="app-divImgLoading">
                     <p>Carregando mídia... </p>
                     <img
@@ -331,43 +340,22 @@ function App() {
                       src="/img/imgBtns/spinner.gif"
                       alt="Carregando..."
                     />
-
                 </div>
               }
               {abrirFormsAddLink && <FormularioLinkYoutube
-
                 onLinkAdicionado={(linkAdicionado) => setAtualizarBanco(linkAdicionado)}
                 fecharFormularioAdicionarLonk={(fecharJanela) => setAbrirFormsAddLink(fecharJanela)}
               />}
 
-              {ativarPlayer   && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()} fecharLinks={(e) => {
-                if (e === 'audio/mp3'){
-                  setElementoMp3(false)
-                } else {
-                  setElementoMp4(false)
-                }
-
-                }}/>}
+              {ativarPlayer && <PlayerMidias executandoMidia={linkMidia} fecharPlayer={() => fecharPlayerMidia()}/>}
               {elementoLinks && <LinkBancoDados propsStatusProcesso={atualizarBanco} />}
 
               {elementoMp3 && <PlayerMidiasMp3
-
-                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
-                fechaElementoMp3={(statusFechar) => {
-                  setElementoMp3(statusFechar),
-                  setLinkMidia(!statusFechar)
-                }}
-
+                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}               
               />}
 
               {elementoMp4 && <PlayerMidiasMp4
-
-                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}
-                fechaElementoMp4={(statusFechar) => {
-                  setElementoMp4(statusFechar),
-                  setLinkMidia(!statusFechar)
-                } }
-
+                executaMidia={(link, tipoMidia) => setLinkMidia([link, tipoMidia])}                
               />}
             </div>
           </div>)}
